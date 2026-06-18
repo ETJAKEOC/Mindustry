@@ -192,8 +192,8 @@ allprojects{
     }
 
     tasks.withType(JavaCompile){
-        targetCompatibility = JavaVersion.VERSION_17
-        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_21
         options.encoding = "UTF-8"
         options.compilerArgs += ["-Xlint:deprecation"]
         dependsOn clearCache
@@ -213,8 +213,8 @@ allprojects{
 
 configure(project(":annotations")){
     tasks.withType(JavaCompile){
-        targetCompatibility = JavaVersion.VERSION_17
-        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_21
         options.fork = true
 
         options.compilerArgs.addAll([
@@ -238,13 +238,13 @@ configure(project(":annotations")){
 //compile with java 8 compatibility for everything except the annotation project
 configure(subprojects - project(":annotations") - project(":tests")){
     tasks.withType(JavaCompile){
-        options.compilerArgs.addAll(['--release', '17'])
+        options.compilerArgs.addAll(['--release', '21'])
     }
 
     tasks.withType(Javadoc){
         options{
             addStringOption('Xdoclint:none', '-quiet')
-            addStringOption('-release', '17')
+            addStringOption('-release', '21')
             encoding('UTF-8')
         }
     }
@@ -277,8 +277,8 @@ project(":core"){
 
     kapt{
         javacOptions{
-            option("-source", "17")
-            option("-target", "17")
+            option("-source", "21")
+            option("-target", "21")
         }
     }
 
@@ -441,9 +441,9 @@ project(":tests"){
     }
 
     tasks.withType(JavaCompile){
-        targetCompatibility = JavaVersion.VERSION_17
-        sourceCompatibility = JavaVersion.VERSION_17
-        options.compilerArgs.addAll(['--release', '17'])
+        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_21
+        options.compilerArgs.addAll(['--release', '21'])
     }
 
     test{

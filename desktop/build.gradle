@@ -134,19 +134,20 @@ platforms.each{ platform ->
             }
 
             args += "Dhttps.protocols=TLSv1.2,TLSv1.1,TLSv1"
-            args += "XX:+ShowCodeDetailsInExceptionMessages"
-            args += "XX:+UseCompactObjectHeaders"
             args += "enable-native-access=ALL-UNNAMED"
-            args += "XX:+UseStringDeduplication"
             args += "Xms6G"
             args += "Xmx6G"
             args += "XX:+AlwaysPreTouch"
-            args += "XX:+UseG1GC"
+            args += "XX:ConcGCThreads=2"
             args += "XX:G1NewSizePercent=20"
-            args += "XX:G1ReservePercent=15"
             args += "XX:MaxGCPauseMillis=25"
             args += "XX:ParallelGCThreads=6"
-            args += "XX:ConcGCThreads=2"
+            args += "XX:+ShowCodeDetailsInExceptionMessages"
+            args += "XX:+UseCompactObjectHeaders"
+            args += "XX:+UseG1GC"
+            args += "XX:+UseZGC"
+            args += "XX:+UseStringDeduplication"
+	    args += "XX:+UnlockExperimentalVMOptions"
 
             project.services.get(ExecOperations).exec{
                 commandLine args.toList()

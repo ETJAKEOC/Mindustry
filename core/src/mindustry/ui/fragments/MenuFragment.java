@@ -60,10 +60,6 @@ public class MenuFragment{
             }).grow();
         });
 
-        parent.fill(c -> c.bottom().right().button(Icon.discord, new ImageButtonStyle(){{
-            up = discordBanner;
-        }}, ui.discord::show).visible(() -> !ui.consolefrag.shown()).marginTop(9f).marginLeft(10f).tooltip("@discord").size(84, 45).name("discord"));
-
         //info icon
         if(mobile){
             //left/right gutter areas

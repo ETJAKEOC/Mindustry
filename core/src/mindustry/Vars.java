@@ -77,8 +77,6 @@ public class Vars implements Loadable{
     public static final String appName = "Mindustry";
     /** Github API URL. */
     public static final String ghApi = "https://api.github.com";
-    /** URL for discord invite. */
-    public static final String discordURL = "https://discord.gg/mindustry";
     /** Link to the wiki's modding guide.*/
     public static final String modGuideURL = "https://mindustrygame.github.io/wiki/modding/1-modding/";
     /** Link to the wiki's patch guide.*/

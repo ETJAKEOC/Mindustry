@@ -122,30 +122,6 @@ public class NetClient implements ApplicationListener{
             net.send(c, true);
         });
 
-        net.handleClient(Disconnect.class, packet -> {
-            if(quietReset) return;
-
-            connecting = false;
-            logic.reset();
-            platform.updateRPC();
-            player.name = Core.settings.getString("name");
-            player.color.set(Core.settings.getInt("color-0"));
-
-            if(quiet) return;
-
-            Time.runTask(3f, ui.loadfrag::hide);
-
-            if(packet.reason != null){
-                ui.showSmall(switch(packet.reason){
-                    case "closed" -> "@disconnect.closed";
-                    case "timeout" -> "@disconnect.timeout";
-                    default -> "@disconnect.error";
-                }, "@disconnect.closed");
-            }else{
-                ui.showErrorMessage("@disconnect");
-            }
-        });
-
         net.handleClient(WorldStream.class, data -> {
             Log.info("Received world data: @", Strings.formatByteCount(data.stream.available()));
             NetworkIO.loadWorld(new InflaterInputStream(data.stream));
@@ -686,7 +662,6 @@ public class NetClient implements ApplicationListener{
         ui.join.hide();
         net.setClientLoaded(true);
         Core.app.post(Call::connectConfirm);
-        Time.runTask(40f, platform::updateRPC);
         Core.app.post(ui.loadfrag::hide);
         lastSnapshotTimestamp = Time.millis();
     }

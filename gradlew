@@ -44,7 +44,7 @@ APP_NAME="Gradle"
 APP_BASE_NAME=`basename "$0"`
 
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
+DEFAULT_JVM_OPTS='"-Xmx6G" "-Xms6G" "-XX:+ShowCodeDetailsInExceptionMessages" "-XX:+UnlockExperimentalVMOptions" "-XX:+UseCompactObjectHeaders" "-XX:+UseStringDeduplication" "--enable-native-access=ALL-UNNAMED" "-XX:+AlwaysPreTouch" "-XX:+UseG1GC" "-XX:G1NewSizePercent=20" "-XX:G1ReservePercent=15" "-XX:MaxGCPauseMillis=25" "-XX:ParallelGCThreads=6" "-XX:ConcGCThreads=2"'
 
 # Use the maximum available, or set MAX_FD != -1 to use that value.
 MAX_FD="maximum"
@@ -89,7 +89,7 @@ if [ -n "$JAVA_HOME" ] ; then
         # IBM's JDK on AIX uses strange locations for the executables
         JAVACMD="$JAVA_HOME/jre/sh/java"
     else
-        JAVACMD="$JAVA_HOME/bin/java"
+        JAVACMD="/usr/lib/jvm/java-25-openjdk/bin/java"
     fi
     if [ ! -x "$JAVACMD" ] ; then
         die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME

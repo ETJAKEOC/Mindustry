@@ -81,12 +81,6 @@ public class Control implements ApplicationListener, Loadable{
             checkAutoUnlocks();
         });
 
-        Events.on(StateChangeEvent.class, event -> {
-            if((event.from == State.playing && event.to == State.menu) || (event.from == State.menu && event.to != State.menu)){
-                Time.runTask(5f, platform::updateRPC);
-            }
-        });
-
         Events.on(PlayEvent.class, event -> {
             player.team(netServer.assignTeam(player));
             player.add();
@@ -628,44 +622,6 @@ public class Control implements ApplicationListener, Loadable{
     }
 
     @Override
-    public void init(){
-        platform.updateRPC();
-
-        //display UI scale changed dialog
-        if(Core.settings.getBool("uiscalechanged", false)){
-            Core.app.post(() -> Core.app.post(() -> {
-                BaseDialog dialog = new BaseDialog("@confirm");
-                dialog.setFillParent(true);
-
-                float[] countdown = {60 * 11};
-                Runnable exit = () -> {
-                    Core.settings.put("uiscale", 100);
-                    Core.settings.put("uiscalechanged", false);
-                    dialog.hide();
-                    Core.app.exit();
-                };
-
-                dialog.cont.label(() -> {
-                    if(countdown[0] <= 0){
-                        exit.run();
-                    }
-                    return Core.bundle.format("uiscale.reset", (int)((countdown[0] -= Time.delta) / 60f));
-                }).pad(10f).expand().center();
-
-                dialog.buttons.defaults().size(200f, 60f);
-                dialog.buttons.button("@uiscale.cancel", exit);
-
-                dialog.buttons.button("@ok", () -> {
-                    Core.settings.put("uiscalechanged", false);
-                    dialog.hide();
-                });
-
-                dialog.show();
-            }));
-        }
-    }
-
-    @Override
     public void update(){
         //this happens on Android and nobody knows why
         if(assets == null) return;
@@ -700,11 +656,6 @@ public class Control implements ApplicationListener, Loadable{
             input.updateSelectQuadtree();
             if(!state.isPaused()){
                 indicators.update();
-            }
-
-            //auto-update rpc every 5 seconds
-            if(timer.get(0, 60 * 5)){
-                platform.updateRPC();
             }
 
             //unlock core items

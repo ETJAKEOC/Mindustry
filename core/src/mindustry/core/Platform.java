@@ -81,10 +81,6 @@ public interface Platform{
         return context;
     }
 
-    /** Update discord RPC. */
-    default void updateRPC(){
-    }
-
     /** Must be a base64 string 8 bytes in length. */
     default String getUUID(){
         String uuid = Core.settings.getString("uuid", "");

@@ -190,8 +190,6 @@ public class Net{
         provider.hostServer(port);
         active = true;
         server = true;
-
-        Time.runTask(60f, platform::updateRPC);
     }
 
     /**

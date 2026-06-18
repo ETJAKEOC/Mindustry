@@ -300,13 +300,10 @@ public class MapEditorDialog extends Dialog implements Disposable{
                 editor.beginEdit(200, 200);
             }
             shownWithMap = false;
-
-            Time.runTask(10f, platform::updateRPC);
         });
 
         hidden(() -> {
             editor.clearOp();
-            platform.updateRPC();
             if(!Core.settings.getBool("landscape")) platform.endForceLandscape();
         });
 

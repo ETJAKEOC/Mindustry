@@ -308,8 +308,6 @@ public class NetServer implements ApplicationListener{
 
             sendWorldAndAssets(player);
 
-            platform.updateRPC();
-
             Events.fire(new PlayerConnect(player));
         });
 

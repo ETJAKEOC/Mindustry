@@ -56,7 +56,6 @@ public class UI implements ApplicationListener, Loadable{
     public CustomGameDialog custom;
     public EditorMapsDialog maps;
     public LoadDialog load;
-    public DiscordDialog discord;
     public JoinDialog join;
     public HostDialog host;
     public PausedDialog paused;
@@ -200,7 +199,6 @@ public class UI implements ApplicationListener, Loadable{
         controls = new KeybindDialog();
         restart = new GameOverDialog();
         join = new JoinDialog();
-        discord = new DiscordDialog();
         load = new LoadDialog();
         custom = new CustomGameDialog();
         language = new LanguageDialog();

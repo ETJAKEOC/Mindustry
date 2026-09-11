@@ -1,0 +1,32 @@
+{
+	"type":"BuildTurret",
+	"category":"effect",
+	"health":1280,
+	"size":3,
+	"range":200,
+	"buildSpeed":0.8,
+	"canOverdrive":false,
+
+	"consumes":{"power":15,
+	"liquid":{
+	"liquid":"nitrogen",
+	"amount":0.05
+	}	},
+
+	"research":{
+	"parent":"repair-projector",
+	"requirements":[
+	"chromium/3000",
+	"uranium/1000",
+	"silicon/2000"
+	],
+	"objectives":[
+	"oil"
+	]	},
+
+	"requirements":[
+	"chromium/30",
+	"uranium/20",
+	"silicon/20"
+	]
+}

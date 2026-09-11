@@ -1,0 +1,15 @@
+captureWave: 24
+difficulty: 6
+planet: frostnova
+sector: 65
+research: {
+  parent: 19s-06-botanical-garden
+  objectives: [
+    09i-02-f-elixir-autofreezer,
+    {
+      type: SectorComplete
+      preset: 19s-06-botanical-garden
+    }
+  ]
+}
+outline: false

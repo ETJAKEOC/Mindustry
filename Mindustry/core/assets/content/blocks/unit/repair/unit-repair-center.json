@@ -1,0 +1,38 @@
+{
+	"squareSprite":false,
+	"category":"units",
+	"type":"RepairTower",
+
+	"size":2,
+	"health":900,
+	"liquidCapacity":30,
+
+	"research":{
+	"parent":"unit-repair-node",
+	"requirements":[
+	"chromium/4500",
+	"graphite/1800",
+	"silicon/1800"
+	]	},
+
+	"requirements":[
+	"chromium/150",
+	"graphite/60",
+	"silicon/80"
+	],
+
+	"consumes":{
+	"power":5,
+	"liquid":{
+	"liquid":"ozone","amount":0.2
+	}	},
+
+	"range":120,
+	"healAmount":2,
+	"circleColor":"73FFAE",
+	"glowColor":"73FFAE7B",
+	"circleSpeed":60,
+	"circleStroke":3,
+	"squareRad":2,
+	"squareSpinScl":1.2
+}

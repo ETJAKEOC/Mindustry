@@ -1,0 +1,135 @@
+{
+	"type":"tank",
+	"template":"ErekirUnitType",
+	"squareShape":true,
+	"treadFrames":14,
+	"treadPullOffset":1,
+	"treadRects":[
+	{"x":30,"y":-49,
+	"width":21,"height":111
+	}	],
+
+	"omniMovement":false,
+	"outlineColor":"2E2F34FF",
+	"crushDamage":2,
+	"dpsEstimate":200,
+
+	"research":{
+	"parent":"wulfrum-mech",
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"itemCapacity":80,
+	"armor":7,
+	"hitSize":30,
+	"rotateSpeed":1.3,
+	"speed":1.4,
+	"flying":false,
+	"health":2400,
+	"range":320,
+
+	"weapons":[
+	{"name":"wulfrum-tank-weapon",
+	"mirror":false,
+	"x":0,"y":0,
+	"rotate":true,
+	"inaccuracy":5,
+	"rotateSpeed":2,
+	"cooldownTime":210,
+	"shootY":16,
+	"reload":210,
+	"recoil":1.5,
+	"shootSound":"shockBlast",
+
+	"shootStatus":"unmoving",
+	"shootStatusDuration":120,
+
+	"shoot":{
+	"firstShotDelay":40,
+	"shots":3,
+	"shotDelay":4
+	},
+
+	"bullet":{
+		"type":"BasicBulletType",
+		"spawnUnit":"calamity-wulfrum-missile",
+
+	"chargeEffect":{
+		"type":"multiEffect",
+		"followParent":true,
+		"rotWithParent":true,
+		"effects":[
+		"lancerLaserCharge",
+		"lancerLaserChargeBegin"
+	]	},
+
+	"shootEffect":"lancerLaserShoot",
+
+	"hitEffect":{
+	"type":"multiEffect",
+	"effects":[
+	{"type":"WaveEffect",
+	"lifetime":15,
+	"sizeFrom":0,
+	"sizeTo":30,
+	"strokeFrom":7.5,
+	"strokeTo":0,
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":20,
+	"length":50,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":5,
+	"lenTo":5,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":25,
+	"length":30,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":7,
+	"lenTo":7,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	}	]	}
+	}	},
+		{"shootOnDeath":true,
+	"controllable":false,
+	"shootSound":"none",
+	"shootCone":360,
+		"bullet":{
+		"collidesAir":false,
+		"collides":false,
+		"instantDisappear":true,
+		"hittable":false,
+		"absorbable":false,
+		"splashDamageRadius":24,
+		"splashDamage":30,
+		"hitSound":"WulfrumDeath",
+		"hitSoundVolume":5,
+		"keepVelocity":false,
+		"despawnHit":true,
+		"shootEffect":"none",
+		"hitEffect":"none"
+	}	}	]
+}

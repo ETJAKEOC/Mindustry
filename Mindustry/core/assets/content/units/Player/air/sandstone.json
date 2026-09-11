@@ -1,0 +1,111 @@
+{
+	"type":"hover",
+	"flying":false,
+	"hovering":true,
+	"accel":0.07,"drag":0.06,
+	"faceTarget":true,
+	"useEngineElevation":false,
+	"canDrown":false,
+	"lowAltitude":false,
+	"outlineColor":"2E2F34FF",
+
+	"engineSize":3,
+	"engineOffset":7,
+	"trailLength":7,
+
+	"parts":[
+	{"type":"HoverPart",
+	"mirror":false,
+	"x":0,"y":0,
+	"radius":20,
+	"phase":90,
+	"stroke":3,
+	"layerOffset":-0.001,
+	"color":"C2FF43FF"
+	}	]
+
+	"hitSize":16,
+	"rotateSpeed":5,
+	"itemCapacity":0,
+	"speed":1,
+	"health":1250,
+	"armor":5,
+	"range":120,
+
+	"research":{
+	"parent":"dust",
+	"requirements":[
+	"chromium/1500",
+	"silicon/1200"
+	],
+	"objectives":[
+	"elementary-refabricator"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+		{"name":"sandstone-weapon",
+		"top":true,
+		"mirror":true,
+		"alternate":true,
+		"x":6,"y":-4,
+		"shootSound":"missile",
+		"reload":40,
+		"recoil":2,
+
+		"shoot":{
+		"type":"ShootHelix",
+		"scl":2,
+		"mag":2,
+		"shots":2
+		},
+
+		"bullet":{
+		"damage":24,
+		"width":12,"height":12,
+		"speed":6,"lifetime":20,
+		"frontColor":"84F491FF",
+		"backColor":"64CF8DAA",
+
+		"hitSound":"explosion",
+
+		"trailParam":2,
+		"trailWidth":3,"trailLength":10,
+		"trailEffect":"none",
+		"trailColor":"64CF8DAA",
+
+		"shootEffect":{
+		"type":"WaveEffect",
+		"lifetime":10,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"colorFrom":"84F491FF",
+		"colorTo":"64CF8DAA",
+		"strokeFrom":1.5,
+		"strokeTo":0},
+
+	"hitEffect":{
+		"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"colorFrom":"84F491FF",
+		"colorTo":"64CF8DAA",
+		"strokeFrom":3.5,
+		"strokeTo":0
+		},
+
+	"despawnEffect":{
+		"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"colorFrom":"84F491FF",
+		"colorTo":"64CF8DAA",
+		"strokeFrom":3.5,
+		"strokeTo":0
+		}	}	}	]
+}

@@ -1,0 +1,28 @@
+{
+	"type":"UnitAssemblerModule",
+	"category":"units",
+
+	"health":3750,
+	"regionSuffix":"-dark",
+	"size":5,
+	"tier":2,
+
+	"consumes":{
+	"power":10
+	},
+
+	"research":{"parent":"rudiment-assembler-module",
+	"requirements":[
+	"phase-fabric/50000",
+	"plutonium/50000",
+	"iridium/50000",
+	"silicon/80000"
+	]	},
+
+	"requirements":[
+	"phase-fabric/500",
+	"plutonium/500",
+	"iridium/500",
+	"silicon/800"
+	]
+}

@@ -1,0 +1,18 @@
+{
+	"type":"junction",
+	"category":"distribution",
+
+	"research":{
+	"parent":"secure-conveyor"
+	},
+
+	"requirements":[
+	"nickel/5"
+	],
+
+	"size":1,
+	"health":100,
+	"solid":false,
+	"underBullets":true,
+	"speed":2.5,
+}

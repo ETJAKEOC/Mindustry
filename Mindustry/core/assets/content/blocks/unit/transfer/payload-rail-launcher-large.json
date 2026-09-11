@@ -1,0 +1,28 @@
+{
+//	"type":"PayloadMassDriver",
+	"category":"units",
+
+	"research":{"parent":"payload-rail-launcher",
+	"requirements":[
+	"uranium/6000",
+	"silicon/7500",
+	"plastanium/5000"
+	]	},
+
+	"requirements":[
+	"uranium/120",
+	"silicon/150",
+	"plastanium/100"
+	],
+
+	"consumes":{"power":10},
+	"hasPower":true,
+
+	"size":5,
+	"reload":120,
+	"chargeTime":180,
+	"range":1200,
+	"maxPayloadSize":4.5,
+	"fogRadius":7,
+	"regionSuffix":"-dark"
+}

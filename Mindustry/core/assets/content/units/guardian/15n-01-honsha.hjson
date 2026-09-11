@@ -1,0 +1,113 @@
+type: tank
+hitSize: 19
+singleTarget: false
+omniMovement: false
+faceTarget: false
+health: 2500
+armor: 8
+template: TankUnitType
+speed: 0.624
+rotateSpeed: 1.5
+itemCapacity: 0
+outlineColor: 26262F
+treadFrames: 16
+floorMultiplier: 0.65
+drownTimeMultiplier: 1.2
+tankMoveVolume: 0.6
+tankMoveSound: tankMove
+crushFragile: true
+treadRects: [
+  {
+    x: -33
+    y: -47
+    width: 66
+    height: 91
+  }
+]
+weapons: [
+  {
+    x: 0
+    y: -4
+    name: honsha-mountmissile
+    reload: 227
+    recoil: 2
+    mirror: false
+    rotate: true
+    targetSwitchInterval: 35
+    targetInterval: 20
+    rotateSpeed: 0.95
+    shootStatus: slow
+    shootStatusDuration: 235
+    rotationLimit: 45
+    shoot: {
+      barrels: [
+      -3, -0.75, 0,
+      -1, 0.75, 0 
+      1, 0.75, 0, 
+      3, -0.75, 0
+      ]
+      type: ShootBarrel
+      shots: 18
+      shotDelay: 7.5
+    }
+    shootSound: shootMissileLong
+    shootSoundVolume: 1
+    bullet: {
+      frontColor: 9EB6EB
+      trailColor: 9EB6EB
+      backColor: 9EB6EB
+      hitColor: 9EB6EB
+      type: MissileBulletType
+      width: 7
+      height: 9
+      homingPower: 0.03
+      homingDelay: 20
+      homingRange: 240
+      speed: 3.5
+      lifetime: 80
+      hitEffect: blastExplosion
+      despawnHit: true
+      damage: 12
+      splashDamage: 36
+      splashDamageRadius: 24
+    }
+  }
+  {
+    x: 10
+    y: 3
+    name: honsha-12mm
+    reload: 20
+    recoil: 1.25
+    mirror: true
+    rotate: true
+    alternate: true
+    rotateSpeed: 1.4
+    shootSound: shootPierce
+    shootSoundVolume: 0.8
+    bullet: {
+      type: BasicBulletType
+      height: 8
+      width: 5
+      lifetime: 40
+      damage: 25.55
+      speed: 5
+      pierce: true
+      smokeEffect: colorSpark
+      trailColor: 9EB6EB
+      trailWidth: 1.5
+      trailLength: 2
+      backColor: 9EB6EB
+      hitColor: 9EB6EB
+    }
+  }
+]
+databaseTag: guardian
+research: {
+  parent: 0011-guardian
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-02-mountain-ridge
+    }
+  ]
+}

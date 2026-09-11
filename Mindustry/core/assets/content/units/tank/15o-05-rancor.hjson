@@ -1,0 +1,191 @@
+type: tank
+hitSize: 35
+singleTarget: false
+omniMovement: false
+faceTarget: false
+health: 38500
+crushDamage: 6
+armor: 38
+speed: 0.46
+rotateSpeed: 0.6
+itemCapacity: 110
+outlineColor: 26262F
+crushFragile: true
+tankMoveVolume: 1.5
+tankMoveSound:tankMoveHeavy
+floorMultiplier: 0.3
+treadFrames: 32
+treadRects: [
+  {
+    x: 24
+    y: -78
+    width: 37
+    height: 171
+  }
+  {
+    x: 0
+    y: -83
+    width: 16
+    height: 40
+  }
+]
+weapons: [
+  {
+  x: 18.25
+  y: 8.5
+  name: rancor-minigun
+  reload: 6
+  mirror: true
+  rotate: true
+  rotateSpeed: 1.5
+  shootSound: shootPierce
+  shootSoundVolume: 0.4
+  bullet: {
+    type: BasicBulletType
+    speed: 8
+    backColor: 9EB6EB
+    frontColor: 9EB6EB
+    hitColor: 9EB6EB
+    width: 10
+    height: 14
+    lifetime: 20
+    damage: 55
+    pierce: true
+    pierceCap: 5
+    trailColor: 9EB6EB
+    trailLength: 4
+    trailWidth: 1.25
+    shootEffect: colorSpark
+    despawnEffect: {
+      type: WaveEffect
+      rotWithParent: true
+      followParent: true
+      lifetime: 9
+      sizeFrom: 0
+      sizeTo: 20
+      colorFrom: ffffff
+      colorTo: feb380
+      }
+    }
+  }
+  {
+    x: 0
+    y: 1.55
+    name: rancor-weapon
+    reload: 120
+    mirror: false
+    shake: 6
+    rotate: true
+    rotateSpeed: 0.75
+    shootSound: shootRancor
+    shootSoundVolume: 0.5
+    recoil: 4.5
+    parts: [
+      {
+        y: -12
+        type: HaloPart
+        color: 9EB6EB
+        layer: 110
+        radius: 4
+        shapes: 6
+        sides: 4
+        stroke: 0.75
+        haloRadius: 0
+        haloRadiusTo: 6.5
+        haloRotateSpeed: 0.5
+      }
+    ]
+    bullet: {
+      type: ArtilleryBulletType
+      collidesAir: true
+      collidesTiles: true
+      collides: true
+      width: 16
+      height: 16
+      sprite: large-orb
+      frontColor: 9EB6EB
+      backColor: 9EB6EB
+      trailColor: 9EB6EB
+      hitColor: 9EB6EB
+      trailWidth: 6
+      trailLength: 32
+      trailRotation: true
+      trailEffect: colorSpark
+      spin: 0
+      shrinkY: 0
+      shrinkX: 0
+      trailInterval: 3
+      speed: 5.5
+      lifetime: 52.4
+      damage: 380
+      hitEffect: [
+        titanExplosionSmall,
+        titanSmokeSmall
+      ]
+      shootEffect: {
+        type: ExplosionEffect
+        lifetime: 60
+        waveStroke: 4
+        waveColor: 6B78B0
+        sparkColor: 6B78B0
+        smokeColor: 6B78B0
+        waveRad: 25
+        smokeSize: 9
+        smokes: 10
+        smokeSizeBase: 0
+        sparks: 7
+        sparkRad: 25
+        sparkLen: 4
+        sparkStroke: 2
+      }
+      despawnSound: explosionPlasmaSmall
+      despawnShake: 6
+      despawnEffect: [
+        titanExplosionSmall,
+        titanSmokeSmall
+      ]
+      hitEffect: massiveExplosion
+      splashDamage: 775
+      splashDamageRadius: 48
+      hitSound: explosionPlasmaSmall
+      fragOnHit: true
+      fragBullets: 8
+      fragRandomSpread: 0
+      fragLifeMin: 1
+      fragLifeMax: 1
+      fragVelocityMin: 1
+      fragVelocityMax: 1
+      fragSpread: 45
+      fragAngle: 45
+      fragOnAbsorb: true
+      fragBullet: {
+        type: ArtilleryBulletType
+        frontColor: 9EB6EB
+        backColor: 9EB6EB
+        hitColor: 9EB6EB
+        width: 0
+        height: 0
+        speed: 0.3
+        lifetime: 40
+        splashDamage: 165
+        splashDamageRadius: 24
+        despawnShake: 2
+        despawnEffect: hitBulletColor
+        despawnSound: explosionNavanax
+        hitEffect: titanExplosionFrag
+        pierce: true
+        pierceArmor: true
+      }
+    }
+  }
+]
+researchCostMultiplier: 3
+research: {
+  parent: 15o-04-siphon
+  objectives: [
+    {
+      type: Research
+      content: 10j-11-advanced-module-a
+    }
+  ]
+}

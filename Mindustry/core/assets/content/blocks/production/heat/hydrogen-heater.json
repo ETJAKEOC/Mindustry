@@ -1,0 +1,46 @@
+{
+	"type":"HeatProducer",
+	"category":"crafting",
+
+	"research":{
+	"parent":"electrolytic-chamber",
+	"requirements":[
+	"tungsten/2500",
+	"plastanium/1000",
+	"silicon/1500"
+	]	},
+
+
+	"requirements":[
+	"tungsten/50",
+	"plastanium/20",
+	"silicon/30"
+	],
+
+	"consumes":{"power":2,
+	"liquid":{
+	"liquid":"hydrogen","amount":0.16666666666666666
+	}	},
+	"heatOutput":6,
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	{"type":"DrawLiquidTile",
+	"drawLiquid":"hydrogen"
+	},
+	"DrawDefault",
+	"DrawHeatOutput",
+	{"type":"DrawHeatInput",
+	"suffix":"-heat"
+	}	]	},
+
+	"size":3,
+	"health":1055,
+	"hasPower":true,
+	"liquidCapacity":100,
+	"ambientSound":"hum",
+	"ambientSoundVolume":0.002
+}

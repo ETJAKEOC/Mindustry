@@ -1,0 +1,217 @@
+type: ItemTurret
+size: 4
+health: 4150
+armor: 6
+shootSound: shootReign
+shootSoundVolume: 1.7
+requirements: [
+  01a-05-item-aluminium/660
+  01a-06-item-chromium/350
+  01a-07-item-clevorite/125
+  01a-08-item-petal/280
+]
+category: turret
+coolant: {
+  type: ConsumeLiquid
+  liquid: 02b-02-a-purified-elixir
+  amount: 0.5
+}
+coolantMultiplier: 1.25
+minWarmup: 0.55
+warmupMaintainTime: 160
+shootWarmupSpeed: 0.08
+shoot: {
+shots: 2
+shotDelay: 10
+firstShotDelay: 15
+}
+newTargetInterval: 40
+shake: 8
+recoil: 2.5
+outlineColor: 2C2A36
+targetAir: false
+targetGround: true
+rotateSpeed: 1.25
+reload: 195
+range: 390
+shootY: 7
+ammoPerShot: 3
+ammoTypes: {
+  01a-08-item-petal: {
+    type: BasicBulletType
+    buildingDamageMultiplier: 0.2
+    despawnShake: 10
+    ammoMultiplier: 1
+    hitColor: FF91B3
+    damage: 80
+    splashDamage: 280
+    splashDamageRadius: 64
+    width: 14
+    height: 12
+    speed: 8
+    lifetime: 50
+    despawnHit: true
+    despawnEffect: titanSmoke
+    hitEffect: titanExplosionFrag
+    hitSound: explosionTitan
+    pierceCap: 2
+    pierce: true
+    collidesAir: false
+    collidesGround: true
+    collides: true
+    collidesTiles: true
+    trailColor: FF91B3
+    trailEffect: none
+    trailChance: 0.6
+    trailInterval: 1
+    trailRotation: true
+    trailLength: 18
+    trailWidth: 2.8
+  }
+  01a-09-item-morphite: {
+    type: BasicBulletType
+    rangeChange: -80
+    buildingDamageMultiplier: 0.2
+    despawnShake: 8
+    ammoMultiplier: 1
+    hitColor: 51C59C
+    damage: 120
+    splashDamage: 390
+    splashDamageRadius: 64
+    width: 14
+    height: 12
+    speed: 8
+    lifetime: 40
+    despawnHit: true
+    despawnEffect: titanSmoke
+    hitEffect: titanExplosionFrag
+    hitSound: explosionTitan
+    status: 13m-03-hsos6
+    statusDuration: 90
+    pierceCap: 4
+    pierce: true
+    collidesAir: false
+    collidesGround: true
+    collides: true
+    collidesTiles: true
+    trailColor: 51c59c
+    trailEffect: none
+    trailChance: 0.6
+    trailInterval: 1
+    trailRotation: true
+    trailLength: 18
+    trailWidth: 2.8
+    fragRandomSpread: 0
+    fragSpread: 90
+    fragLifeMin: 1
+    fragLifeMax: 1
+    fragVelocityMin: 1
+    fragVelocityMax: 1
+    fragBullets: 4
+    fragBullet: {
+      type: LightningBulletType
+      despawnSound: shockBullet
+      damage: 25
+      lightningLength: 10
+      lightningLengthRand: 4
+      lightningColor: 51c59c
+      status: shocked
+      collidesAir: false
+      }
+  }
+  01a-10-item-bethine: {
+    type: BasicBulletType
+    buildingDamageMultiplier: 0.2
+    despawnShake: 10
+    ammoMultiplier: 1
+    hitColor: bf97d6
+    damage: 180
+    splashDamage: 570
+    splashDamageRadius: 96
+    width: 14
+    height: 12
+    speed: 8
+    lifetime: 50
+    despawnHit: true
+    despawnEffect: titanSmoke
+    hitEffect: titanExplosionFrag
+    hitSound: explosionTitan
+    pierceCap: 4
+    pierce: true
+    collidesAir: false
+    collidesGround: true
+    collides: true
+    collidesTiles: true
+    trailColor: bf97d6
+    trailEffect: none
+    trailChance: 0.6
+    trailInterval: 1
+    trailRotation: true
+    trailLength: 18
+    trailWidth: 2.8
+  }
+}
+drawer: {
+  type: DrawTurret
+  basePrefix: preject-
+  parts: [
+    {
+      type: RegionPart
+      suffix: -side
+      mirror: true
+      progress: warmup
+      heatProgress: warmup
+      moveY: -1.5
+      moveX: 0.5
+      moveRot: -1.5
+      under: false
+      heatColor: bc496790
+    }
+    {
+      type: RegionPart
+      suffix: -barrel
+      mirror: false
+      progress: recoil
+      heatProgress: recoil
+      moveY: -1.75
+      under: true
+    }
+    {
+      type: RegionPart
+      suffix: -barrel-glow
+      progress: recoil
+      heatProgress: recoil
+      moveY: -1.75
+      drawRegion: false
+      heatColor: bc4967aa
+    }
+    {
+      type: RegionPart
+      suffix: -hand
+      progress: warmup
+      heatProgress: warmup
+      moveX: 4.5
+      moveY: -0.25
+      moveRot: -45
+      mirror: true
+      under: false
+      heatColor: bc496799
+    }
+  ]
+}
+research: {
+  #TODO - change to proper sector
+  parent: 03c-04-ox
+  objectives: [
+    {
+      type: OnSector
+      preset: 20t-15-isolated-canyon
+    }
+  ]
+}
+researchCost: [
+  01a-05-item-aluminium/8000
+  01a-06-item-chromium/4000
+  01a-07-item-clevorite/1500
+  01a-08-item-petal/900
+]

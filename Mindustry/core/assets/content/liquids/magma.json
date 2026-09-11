@@ -1,0 +1,9 @@
+{
+	"name":"岩浆",
+	"description":"从地下深处喷涌而出。",
+	"color":"FF5547FF",
+	"viscosity":0.5,
+	"temperature":5,
+	"lightColor": "FF5547FF",
+	"effect": "melting"
+}

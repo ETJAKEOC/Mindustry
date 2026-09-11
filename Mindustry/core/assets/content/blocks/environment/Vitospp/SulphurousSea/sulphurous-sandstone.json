@@ -1,0 +1,7 @@
+{
+"type": "Floor",
+"variants": 3,
+"wall": "sulphurous-sandstone-wall",
+"statusDuration":3600,
+"status":"sulphurous-radiation"
+}

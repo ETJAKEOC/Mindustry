@@ -1,0 +1,51 @@
+{
+	"type":"HeatCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		{"type":"DrawLiquidTile",
+		"drawLiquid":"helium"
+		},
+		"DrawRegion",
+		"DrawLiquidOutputs",
+		"DrawHeatInput"
+		]	},
+
+	"consumes":{
+	"power":3,
+	"liquids":[
+	"hydrogen/0.166666666666666"
+	]	},
+	"heatRequirement":10,
+
+	"outputLiquids":[
+	"helium/0.083333333333333"
+	],
+
+	"research":{
+//	"parent":"atmospheric-separator",
+	"requirements":[
+	"uranium/7000",
+	"iridium/3000",
+	"silicon/12000"
+	]	},
+
+	"requirements":[
+	"uranium/70",
+	"iridium/30",
+	"silicon/120"
+	],
+
+	"health":1240,
+	"size":3,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemCapacity":20,
+	"liquidCapacity":100,
+	"craftTime":60
+}

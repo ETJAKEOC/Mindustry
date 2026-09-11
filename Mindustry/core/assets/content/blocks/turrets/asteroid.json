@@ -1,0 +1,256 @@
+{
+//	"type":"ItemTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-",
+	"parts":[
+		{"type":"RegionPart",
+		"suffix":"-side",
+		"heatProgress":"warmup",
+		"mirror":true,
+		"under":true,
+		"moveX":2,
+		"moveY":-0.5,
+		"moveRot":-15
+		}	]	},
+
+	"research":{
+	"parent":"impact",
+	"requirements":[
+	"nickel/2500",
+	"tungsten/750",
+	"graphite/2000",
+	"silicon/2500"
+	]	},
+
+	"requirements":[
+	"nickel/100",
+	"tungsten/50",
+	"graphite/80",
+	"silicon/100"
+	],
+
+	"consumes":{
+	"coolant":{"amount":0.1,"optional":true}	},
+
+	"shoot":{"shots":4,
+	"shotDelay":3},
+
+	"size":3,
+	"health":1865,
+	"rotateSpeed":2,
+	"reload":60,
+	"ammoPerShot":3,
+	"maxAmmo":45,
+	"liquidCapacity":30,
+	"range":200,
+	"inaccuracy":3,
+
+	"ammoTypes":{
+	"nickel":{
+		"frontColor":"B5FFECFF",
+		"backColor":"74E8E1FF",
+		"width":15,"height":15,
+		"shrinkY":0,"shrinkX":0,
+		"speed":8,
+		"lifetime":25,
+		"damage":40,
+		"splashDamageRadius":16,
+		"splashDamage":10,
+		"pierceCap":3,
+		"pierce":true,
+		"pierceBuilding":true,
+		"buildingDamageMultiplier":0.2,
+
+		"trailColor":"B5FFECFF",
+		"trailParam":2,
+		"trailWidth":2,"trailLength":5,
+		"trailRotation":true,
+		"trailInterval":2,
+		"trailEffect":"disperseTrail",
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":2,
+		"length":50,
+		"lifetime":20,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":35,
+		"colorFrom":"B5FFECFF",
+		"colorTo":"74E8E1FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		},
+
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+	{"type":"WaveEffect",
+		"lifetime":15,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"strokeFrom":7.5,
+		"strokeTo":0,
+		"colorFrom":"B5FFECFF",
+		"colorTo":"74E8E1FF"
+	},
+	{"type":"ParticleEffect",
+		"offset":30,
+		"particles":3,
+		"lifetime":20,
+		"length":50,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":75,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":5,
+		"lenTo":0,
+		"colorFrom":"B5FFECFF",
+		"colorTo":"74E8E1FF"
+	}	]	}
+		},
+
+	"tungsten":{
+		"frontColor":"BFC8E2FF",
+		"backColor":"929DB5FF",
+		"width":15,"height":15,
+		"shrinkY":0,"shrinkX":0,
+		"speed":8,
+		"lifetime":27,
+		"rangeChange":16,
+		"damage":52,
+		"splashDamageRadius":24,
+		"splashDamage":18,
+		"pierceCap":3,
+		"pierce":true,
+		"pierceBuilding":true,
+		"buildingDamageMultiplier":0.2,
+
+		"trailColor":"BFC8E2FF",
+		"trailParam":2,
+		"trailWidth":2,"trailLength":7,
+		"trailRotation":true,
+		"trailInterval":2,
+		"trailEffect":"disperseTrail",
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":2,
+		"length":50,
+		"lifetime":20,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":35,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		},
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+	{"type":"WaveEffect",
+		"lifetime":15,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"strokeFrom":7.5,
+		"strokeTo":0,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF"
+	},
+	{"type":"ParticleEffect",
+		"offset":30,
+		"particles":3,
+		"lifetime":20,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":75,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":5,
+		"lenTo":0,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF"
+	}	]	}
+		},
+
+	"chromium":{
+		"frontColor":"BFC8E2FF",
+		"backColor":"929DB5FF",
+		"width":15,"height":15,
+		"shrinkY":0,"shrinkX":0,
+		"speed":8,
+		"lifetime":29,
+		"rangeChange":32,
+		"damage":65,
+		"splashDamageRadius":32,
+		"splashDamage":25,
+		"pierceCap":3,
+		"pierce":true,
+		"pierceBuilding":true,
+		"reloadMultiplier":0.8,
+		"buildingDamageMultiplier":0.2,
+
+		"trailColor":"BFC8E2FF",
+		"trailParam":2,
+		"trailWidth":2,"trailLength":7,
+		"trailRotation":true,
+		"trailInterval":2,
+		"trailEffect":"disperseTrail",
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":2,
+		"length":50,
+		"lifetime":20,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":35,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		},
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+	{"type":"WaveEffect",
+		"lifetime":15,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"strokeFrom":7.5,
+		"strokeTo":0,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF"
+	},
+	{"type":"ParticleEffect",
+		"offset":30,
+		"particles":3,
+		"lifetime":20,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":75,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":5,
+		"lenTo":0,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF"
+	}	]	}
+		}	}
+}

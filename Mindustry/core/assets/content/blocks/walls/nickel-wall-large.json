@@ -1,0 +1,17 @@
+{
+//	"type": "Wall",
+	"category": "defense",
+
+	"research": {
+	"parent": "nickel-wall",
+	"requirements": [
+	"nickel/240"
+	]	},
+
+	"requirements": [
+	"nickel/24"],
+
+	"health":2560,
+	"armor":5,
+	"size":2
+}

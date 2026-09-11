@@ -1,0 +1,97 @@
+{
+	"type":"ConsumeGenerator",
+	"category":"power",
+
+	"squareSprite":false,
+	"size":5,
+	"armor":20,
+	"health":6000,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemDuration":300,
+	"powerProduction":255,
+	"itemCapacity":80,
+	"warmupSpeed":0.0001,
+	"liquidCapacity":100,
+	"consumeEffect":"shieldWave",
+	"generateEffect":"none",
+	"generateEffectRange":-0.1,
+	"effectChance":0.1,
+
+	"consumes":{
+		"items":[
+		"phase-fabric/5",
+		"resonant-crystal/3"
+		],
+		"liquid":{
+		"liquid":"cryofluid","amount":2.5
+		}	},
+
+	"research":{
+//	"parent":"deflagration-reactor",
+	"requirements":[
+	"tungsten/6000",
+	"plastanium/3000",
+	"graphite/2000",
+	"silicon/3000"
+	]	},
+
+	"requirements":[
+	"tungsten/6000",
+	"plastanium/3000",
+	"graphite/2000",
+	"silicon/3000"
+	],
+
+	"drawer":{"type":"DrawMulti",
+		"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		{"type":"DrawLiquidRegion",
+		"drawLiquid":"cryofluid"
+		},
+		{"type":"DrawPlasma",
+		"suffix":"-plasma-",
+		"plasmas":4,
+		"plasma1":"5a58c4",
+		"plasma2":"7382f0"
+		},
+		"DrawDefault",
+		{"type":"DrawRegion",
+		"suffix":"-top"
+		},
+		{"type":"DrawGlowRegion",
+		"suffix":"-glow",
+		"glowScale":2,
+		"glowIntensity":0.5,
+		"color":"F0F5FFFF"
+		}	]	},
+
+	"destroyBullet":{
+		"type":"BasicBulletType",
+		"sprite":"clear",
+		"smokeEffect":"none",
+		"trailEffect":"none",
+		"lifetime":0,
+		"speed":0,
+		"splashDamageRadius":2000,
+		"splashDamage":1000000,
+		"trailChance":0,
+		"despawnEffect":"none",
+
+		"hitEffect":{
+		"type":"MultiEffect",
+		"effects":[
+		{"type":"ParticleEffect",
+		"particles":1,
+		"sizeFrom":2000,
+		"sizeTo":0,
+		"length":0,
+		"lifetime":900,
+		"colorFrom":"FFFFFF",
+		"colorTo":"00000000",
+		"cone":360
+		}	]	}
+	}
+}

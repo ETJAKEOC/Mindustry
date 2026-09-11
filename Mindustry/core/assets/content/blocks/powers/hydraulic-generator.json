@@ -1,0 +1,40 @@
+{
+//	"type":"ThermalGenerator",
+	"category":"power",
+
+	"ambientSound":"hum",
+	"ambientSoundVolume":0.06,
+	"effectChance":0.04,
+
+	"size":3,
+	"fogRadius":3,
+	"health":1420,
+	"powerProduction":4,
+	"placeableLiquid":true,
+	"requiresWater":true,
+
+	"research":{
+	"parent":"origin-core",
+	"requirements":[
+	"nickel/50",
+	"graphite/30"
+	]	},
+
+	"requirements":[
+	"nickel/50",
+	"graphite/30"
+	],
+
+	"consumes":{"powerBuffered":20000},
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		{"type":"DrawBlurSpin",
+		"suffix":"-rotator"
+		},
+		"DrawDefault"
+		]	}
+}

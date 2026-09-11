@@ -1,0 +1,14 @@
+type: LiquidJunction
+size: 1
+solid: false
+underBullets: true
+category: liquid
+squareSprite: false
+research: 24d-01-chute
+health: 75
+requirements: [
+  01a-21-item-gryphic/3
+]
+researchCost: [
+  01a-21-item-gryphic/10
+]

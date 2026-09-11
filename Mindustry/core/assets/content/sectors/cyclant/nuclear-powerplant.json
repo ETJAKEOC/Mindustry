@@ -1,0 +1,28 @@
+{
+  "planet": "cyclant",
+  "sector": 228,
+  "difficulty": 10,
+  "research": {
+    "parent": "thorium-hacienda",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "thorium-hacienda"
+      },
+      {
+        "type": "OnSector",
+        "preset": "tutorial-assemble-selector"
+      }
+    ]
+  },
+  "overrideLaunchDefaults": false,
+  "captureWave": 0,
+  "addStartingItems": false,
+  "isLastSector": false,
+  "allowLaunchSchematics": true,
+  "allowLaunchLoadout": true,
+  "generateIcons": false
+}
+
+
+

@@ -1,0 +1,24 @@
+{
+	"type":"PowerNode",
+	"category":"power",
+
+	"size":2,
+	"health":600,
+	"maxNodes":10,
+	"laserRange":16,
+
+	"research":{
+	"parent":"energy-node",
+	"requirements":[
+	"tungsten/400",
+	"plastanium/200"
+	]	},
+
+	"requirements":[
+	"tungsten/20",
+	"plastanium/10"
+	],
+
+	"hasPower":true,
+	"outputsPower":true
+}

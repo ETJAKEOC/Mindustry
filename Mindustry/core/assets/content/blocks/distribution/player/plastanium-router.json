@@ -1,0 +1,33 @@
+{
+	"type":"StackRouter",
+	"category":"distribution",
+	"name":"塑钢路由器",
+	"description":"从塑钢轨道上的物品平均分配到三个方向。",
+
+	"research":{
+	"parent":"plastanium-track",
+	"requirements":[
+	"silicon/300",
+	"plastanium/300",
+	"metaglass/200"
+	]	},
+
+	"requirements":[
+	"silicon/3",
+	"plastanium/3",
+	"metaglass/2"
+	],
+
+	"hasPower":true,
+	"consumes":{"power":0.1
+	},
+
+	"health":300,
+	"speed":0.0444444444444444,
+	"itemCapacity":15,
+	"solid":false,
+	"underBullets":true,
+	"consumesPower":true,
+	"conductivePower":true,
+	"baseEfficiency":1
+}

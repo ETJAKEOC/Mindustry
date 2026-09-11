@@ -1,0 +1,192 @@
+{
+	"type":"naval",
+	"health":8540,
+	"armor":16,
+	"speed":0.48,
+	"outlineColor":"2E2F34FF",
+	"faceTarget":false,
+	"rotateSpeed":0.8,
+	"trailLength":24,
+	"waveTrailX":10,
+	"waveTrailY":-20,
+	"trailScl":2,
+	"hitSize":40,
+	"range":296,
+	"itemCapacity":120,
+	"dpsEstimate":320,
+
+	"research":{
+	"parent":"wulfrum-assembler(frigate)",
+	"requirements":[
+		"wulfrum-steel/30000",
+		"graphite/20000",
+		"silicon/20000"
+	],
+	"objectives":[
+		"wulfrum-core"
+	]	},
+
+	"abilities":[
+		{"type":"ShieldRegenFieldAbility",
+		"amount":80,
+		"max":800,
+		"reload":120,
+		"range":80
+		}	],
+
+	"weapons":[
+		{"name":"wulfrum-frigate-artillery",
+		"layerOffset":1,
+		"mirror":false,
+		"top":true,
+		"reload":10,
+		"x":0,"y":-1.5,
+		"shootY":6,
+		"shake":2,
+		"rotate":true,
+		"rotateSpeed":5,
+		"recoils":2,
+
+	"parts":[
+		{"type":"RegionPart",
+		"suffix":"-barrel-l",
+		"mirror":false,
+		"moveY":-4,
+		"progress":"recoil",
+		"recoilIndex":1,
+		"heatProgress":{
+		"type":"recoil",
+		"op":"blend",
+		"amount":0,
+		"other":0,
+		"recoilIndex":1
+		}	},
+		{"type":"RegionPart",
+		"suffix":"-barrel-r",
+		"mirror":false,
+		"moveY":-4,
+		"progress":"recoil",
+		"recoilIndex":0,
+		"heatProgress":{
+		"type":"recoil",
+		"op":"blend",
+		"amount":0,
+		"other":0,
+		"recoilIndex":0
+		}	}	],
+
+	"shoot":{
+		"type":"ShootAlternate",
+		"firstShotDelay":30,
+		"barrels":2,
+		"shots":1,
+		"spread":6
+		},
+
+		"shootSound":"explosion",
+		"shootCone":45,
+
+	"bullet":{
+		"sprite":"missile-large",
+		"damage":70,
+		"height":16,
+		"width":9,
+		"shrinkX":0,
+		"shrinkY":0,
+		"splashDamageRadius":16,
+		"splashDamage":60,
+		"speed":8,"lifetime":35,
+		"frontColor":"36B1DDFF",
+		"backColor":"BAFFF9FF",
+		"keepVelocity":false,
+		"scaleLife":true,
+
+		"hitSound":"explosion",
+
+		"trailColor":"BAFFF9FF",
+		"trailParam":2,
+		"trailWidth":2,"trailLength":4,
+		"trailRotation":true,
+		"trailInterval":1,
+		"trailEffect":"disperseTrail",
+
+		"shootEffect":"lancerLaserShoot",
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+	{"type":"WaveEffect",
+		"lifetime":15,
+		"sizeFrom":0,
+		"sizeTo":30,
+		"strokeFrom":7.5,
+		"strokeTo":0,
+		"colorFrom":"36B1DDFF",
+		"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":20,
+		"length":50,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":75,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":5,
+		"lenTo":0,
+		"lightColor":"BAFFF9FF",
+		"colorFrom":"36B1DDFF",
+		"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":25,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":75,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":7,
+		"lenTo":0,
+		"lightColor":"BAFFF9FF",
+		"colorFrom":"36B1DDFF",
+		"colorTo":"BAFFF9FF"
+	}	]	}
+		}	},
+
+		{"name":"wulfrum-repair",
+		"type":"RepairBeamWeapon",
+		"x":5.75,"y":-12.5,
+		"shootY":2.5,
+		"beamWidth":0.5,
+		"mirror":true,
+		"repairSpeed":2,
+		"bullet":{
+		"maxRange":120
+		}	},
+		{"shootOnDeath":true,
+	"controllable":false,
+	"shootSound":"none",
+	"shootCone":360,
+		"bullet":{
+		"collidesAir":false,
+		"collides":false,
+		"instantDisappear":true,
+		"hittable":false,
+		"absorbable":false,
+		"splashDamageRadius":24,
+		"splashDamage":30,
+		"hitSound":"WulfrumDeath",
+		"hitSoundVolume":8,
+		"keepVelocity":false,
+		"despawnHit":true,
+		"shootEffect":"none",
+		"hitEffect":"none"
+	}	}	]
+}

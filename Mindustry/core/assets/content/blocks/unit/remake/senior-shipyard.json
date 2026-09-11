@@ -1,0 +1,40 @@
+{
+//	"type":"Reconstructor",
+	"category":"units",
+
+	"research":{"parent":"second-shipyard",
+	"requirements":[
+	"iridium/2500",
+	"uranium/6000",
+	"silicon/10000",
+	"metaglass/6000"
+	]	},
+
+	"requirements":[
+	"iridium/200",
+	"uranium/120",
+	"silicon/150",
+	"metaglass/300"
+	],
+
+	"constructTime":6000,
+	"health":1360,
+	"size":8,
+
+	"consumes":{
+		"power":12,
+		"items":{
+		"items":[
+		"osmium/300",
+		"phase-fabric/400",
+		"metaglass/500",
+		"silicon/900"
+		]	},
+		"liquid":{
+		"liquid":"hydrogen","amount":0.1
+		}	},
+
+	"upgrades":[
+	["lakes","river"]
+	]
+}

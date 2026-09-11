@@ -1,0 +1,52 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"consumes":{
+	"power":2,
+	"items":{"items":[
+	"coal/5"
+	]	},
+	"liquid":{
+	"liquid":"water","amount":0.166666666666666
+	}	},
+
+	"outputItems":[
+	"graphite/4"
+	],
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	{"type":"DrawPistons",
+	"sinMag":1
+	},
+	{"type":"DrawLiquidRegion",
+	"drawLiquid":"water"
+	},
+	"DrawDefault"
+	]	},
+
+	"research":{
+	"parent":"glass-furnace",
+	"requirements":[
+	"nickel/1500",
+	"graphite/1000"
+	]	},
+
+	"requirements":[
+	"nickel/30",
+	"graphite/20"
+	],
+
+	"health":1240,
+	"size":3,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemCapacity":30,
+	"liquidCapacity":100,
+	"craftTime":90
+}

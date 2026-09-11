@@ -1,0 +1,7 @@
+research: {
+  parent: 26z-05-item-tablet-red-sand
+  objectives: [
+    01a-06-item-lodestone
+  ]
+}
+databaseCategory: lore-tablets

@@ -1,0 +1,26 @@
+{
+	"damageMultiplier":0.3,
+	"healthMultiplier":0.4,
+	"speedMultiplier":0.3,
+	"damage":3,
+	"color":"C2FF43FF",
+	"effect": {
+		"type": "ParticleEffect",
+		"particles":3,
+		"length":10,
+		"lifetime":40,
+		"interp": "circleOut",
+		"sizeInterp": "pow5Out",
+		"cone":360,
+		"colorFrom": "8CEA57FF",
+		"colorTo": "F8FF6DFF",
+		"sizeFrom":5,
+		"sizeTo":0
+		},
+	"transitionDamage":250,
+	"affinities":[
+		"shocked"
+		],
+
+	"effectChance":0.1
+}

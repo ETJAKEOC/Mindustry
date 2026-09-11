@@ -1,0 +1,66 @@
+{
+	"speed":0.68,
+	"hitSize":10.75,
+	"health":1420,
+	"armor":6,
+	"type":"mech",
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"current",
+	"requirements":[
+	"chromium/1500",
+	"silicon/1200"
+	],
+	"objectives":[
+	"elementary-refabricator"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+		{"name":"lighting-weapon",
+		"reload":25,
+		"x":8.375,"y":0,
+		"mirror":true,
+		"top":false,
+		"alternate":true,
+		"layerOffset":-0.001,
+		"rotationLimit":35,
+		"rotateSpeed":1,
+		"rotate":true,
+		"shootCone":45,
+		"shootSound":"spark",
+		"shootY":10,
+
+		"shoot":{
+		"shots":3,
+		"shotDelay":0.2
+			},
+
+		"bullet":{
+		"type":"LightningBulletType",
+		"damage":15,
+		"lightningColor":"FCF387FF",
+		"hitColor":"FCF387FF",
+		"lightningLength":9,
+		"lightningLengthRand":8,
+		"speed":6,
+		"lifetime":40,
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":3,
+		"lifetime":12,
+		"offset":50,
+		"length":32,
+		"cone":-45,
+		"lenFrom":5,
+		"lenTo":1,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		}	}	}	]
+}

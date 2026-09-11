@@ -1,0 +1,191 @@
+{
+	"type":"tank",
+	"template":"ErekirUnitType",
+
+	"squareShape":true,
+	"treadPullOffset":11,
+	"treadRects":[
+	{"x":31,"y":-66,
+	"width":35,"height":132
+	}	],
+	"singleTarget":false,
+	"omniMovement":false,
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"puncture",
+	"requirements":[
+	"plastanium/1600",
+	"silicon/2600"
+	],
+	"objectives":[
+	"second-refabricator"
+	]	},
+
+	"armor":20,
+	"hitSize":38.5,
+	"rotateSpeed":1.2,
+	"speed":0.63,
+	"flying":false,
+	"health":6380,
+	"range":264,
+	"immunities":[
+	"wulfrum-amplify"
+],
+
+	"weapons":[
+	{"name":"ionize-weapon",
+	"mirror":false,
+	"x":0,"y":0,
+	"rotate":true,
+	"inaccuracy":1,
+	"rotateSpeed":2,
+	"cooldownTime":150,
+	"shootY":18,
+	"reload":150,
+	"recoil":1.5,
+	"top":true,
+	"shootSound":"artillery",
+	"heatColor":"FCF387FF",
+
+	"parts":[
+	{"type":"RegionPart",
+	"suffix":"-wing",
+	"heatColor":"FCF387FF",
+	"under":true,
+	"mirror":true,
+	"blending":"additive",
+	"color":"D99F6BFF",
+	"colorTo":"FCF387FF",
+	"moveX":4,
+	"moveY":-4,
+	"moves":[
+	{"type":"PartMove",
+	"progress":"recoil",
+	"rot":-4,
+	"y":-2
+	}	],
+	"progress":"warmup"
+	}	],
+
+		"bullet":{
+		"type":"basicBulletType",
+		"sprite":"missile-large",
+		"damage":180,
+		"height":16,
+		"width":9,
+		"shrinkX":0,
+		"shrinkY":0,
+		"speed":8,
+		"splashDamage":35,
+		"splashDamageRadius":48,
+		"lifetime":35,
+		"hitSound":"explosion",
+		"status":"empI",
+		"statusDuration":120,
+
+		"lightning":5,
+		"lightningDamage":16,
+		"lightningLength":4,
+		"lightningAngle":180,
+		"lightningLengthRand":5,
+
+		"intervalRandomSpread":0,
+		"intervalBullets":1,
+		"bulletInterval":1,
+		"intervalAngle":180,
+		"intervalSpread":0,
+		"fragVelocityMin":8,
+		"fragVelocityMax":8,
+		"despawnEffect":"none",
+		"intervalBullet":{
+		"damage":12,
+		"type":"LightningBulletType",
+		"lightningLength":3,
+		"lightningLengthRand":4,
+		"lightningColor":"F3E979FF",
+		"lightColor":"FFFFFFFF",
+		"status":"shocked",
+		"statusDuration":30,
+		"collidesAir":false,
+		"hittable":false,
+		"ammoMultiplier":1,
+		"lifetime":5,
+		"hitEffect":"none"
+		},
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"ParticleEffect",
+		"line":true,
+		"particles":15,
+		"lifetime":30,
+		"interp":"circleOut",
+		"offset":30,
+		"length":50,
+		"lightColor":"ff7048",
+		"strokeFrom":4,
+		"strokeTo":0,
+		"lenFrom":10,
+		"lenTo":10,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		},
+		{"type":"ParticleEffect",
+		"particles":16,
+		"length":55,
+		"baseLength":10,
+		"lifetime":100,
+		"lightColor":"FCF387FF",
+		"interp":"circleOut",
+		"cone":360,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":6,
+		"sizeTo":2
+		},
+		{"type":"WaveEffect",
+		"lifetime":30,
+		"sizeFrom":0,
+		"sizeTo":40,
+		"strokeFrom":3,
+		"strokeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		}	]	},
+
+		"despawnHit":true,
+		"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"ParticleEffect",
+		"particles":15,
+		"length":80,
+		"lifetime":36,
+		"lightColor":"ff7048",
+		"cone":20,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":3,
+		"sizeTo":0
+		},
+		{"type":"ParticleEffect",
+		"particles":1,
+		"lifetime":10,
+		"length":0,
+		"region":"calamity-tall",
+		"sizeFrom":36,
+		"sizeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		}	]	},
+
+		"trailParam":5,
+		"trailLength":19,
+		"trailWidth":2.6,
+		"trailColor":"D99F6BFF",
+		"frontColor":"D99F6BFF",
+		"backColor":"FCF387FF"
+		}	}	]
+}

@@ -1,0 +1,57 @@
+{
+	"type":"ForceProjector",
+	"category":"effect",
+
+	"health":1850,
+	"size":3,
+	"radius":120,
+	"shieldHealth":4000,
+	"cooldownNormal":3,
+	"cooldownLiquid":1,
+	"liquidCapacity":400,
+	"cooldownBrokenBase":4,
+	"coolantConsumption":0.5,
+	"hasPower":true,
+	"hasLiquids":true,
+
+	"phaseRadiusBoost":90,
+	"phaseShieldBoost":2000,
+	"phaseUseTime":300,
+
+	"absorbEffect":{
+		"type":"ParticleEffect",
+		"particles":1,
+		"sizeFrom":5,
+		"sizeTo":0,
+		"length":0,
+		"baseLength":0,
+		"lifetime":180,
+		"colorFrom":"FEEBB3FF",
+		"colorTo":"FEEBB300"
+		},
+
+	"consumes":{"power":5,
+	"items":{
+	"items":["phase-fabric/1"
+	],
+	"optional":true,
+	"booster":true
+	},
+	"coolant":{"amount":0.1,"optional":true
+	}
+	},
+
+	"research":{
+	"parent":"repair-projector",
+	"requirements":[
+	"plastanium/1500",
+	"graphite/2000",
+	"silicon/3000"
+	]	},
+
+	"requirements":[
+	"plastanium/30",
+	"graphite/40",
+	"silicon/60"
+	]
+}

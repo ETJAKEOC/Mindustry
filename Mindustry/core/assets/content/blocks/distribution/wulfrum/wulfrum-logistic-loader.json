@@ -1,0 +1,32 @@
+{
+	"type":"UnitCargoLoader",
+	"category":"distribution",
+	"health":1540,
+	"size":3,
+	"itemCapacity":200,
+	"hasPower":true,
+	"buildTime":480,
+	"conductivePower":true,
+	"squareSprite":false,
+	"unitType":"wulfrum-manifold",
+	"armor":4,
+
+	"research":{
+	"parent":"wulfrum-core",
+	"requirements":[
+	"chromium/8000",
+	"wulfrum-steel/6000",
+	"energy-core/3000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"chromium/80",
+	"wulfrum-steel/60",
+	"energy-core/300"
+	],
+
+	"consumes":{"power":0.2}
+}

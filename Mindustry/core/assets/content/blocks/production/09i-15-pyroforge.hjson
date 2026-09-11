@@ -1,0 +1,79 @@
+type: GenericCrafter
+liquidCapacity: 180
+size: 4
+health: 1250
+category: crafting
+consumes: {
+  items: [
+    01a-04-item-tantra-sand/24
+    01a-10-item-bethine/3
+  ]
+  liquid: 02b-03-necroplasm/1
+  power: 12
+}
+outputItems: [
+  01a-11-item-pyroxene/6
+]
+itemCapacity: 50
+researchCost: [
+  01a-06-item-chromium/7500
+  01a-07-item-clevorite/3800
+  01a-08-item-petal/1200
+  01a-10-item-bethine/180
+]
+research: {
+  #TODO - change to proper sector
+  parent: 09i-12-gravitix-chamber-core
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-23-eridanus
+    }
+  ]
+}
+requirements: [
+  01a-06-item-chromium/375
+  01a-07-item-clevorite/180
+  01a-08-item-petal/300
+  01a-10-item-bethine/85
+]
+craftTime: 180
+craftEffect: none
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-03-necroplasm
+      padding: 2
+    }
+    {
+      type: DrawParticles
+      color: 60c9ad
+      particleSize: 2
+      particleRad: 15
+      particleLife: 60
+      particles: 52
+      reverse: true
+    }
+    {
+     type: DrawCrucibleFlame
+     particleRad: 12
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawHeatInput
+      heatColor: fd898c
+    }
+  ]
+}
+ambientSound: loopSmelter
+ambientSoundVolume: 0.12
+squareSprite: false
+fogRadius: 4

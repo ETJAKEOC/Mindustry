@@ -1,0 +1,43 @@
+{
+	"name": "Disconsolate Pass",
+	"description": "This passage is treacherous and unforgiving. Collect what you can and leave immediately. All known threats are on assault, motherships included. Radars detect a different breed of ships and giant anomalous entities on the way. LEAVE BEFORE WAVE 275",
+	"loadout": "basicNucleus",
+	    	
+	"baseLaunchCost": [
+    	{"item": "copper", "amount": 200},
+    	{"item": "lead", "amount": 200},
+    	{"item": "silicon", "amount": 200},
+    ],
+	"launchCost": [	
+	{"item": "copper", "amount": 1200},
+    	{"item": "lead", "amount": 1200},
+    	{"item": "silicon", "amount": 250},
+    	{"item": "graphite", "amount": 250},
+    	{"item": "metaglass", "amount": 500},
+        ],
+    "startingItems": [	       
+	{"item": "copper", "amount": 1200},
+    	{"item": "lead", "amount": 1200},
+    	{"item": "silicon", "amount": 250},
+    	{"item": "graphite", "amount": 250},
+    	{"item": "metaglass", "amount": 500},     	
+    ],
+    "configureObjective": {
+    "type": "zoneWave",
+      "zone": "Disconsolate_Pas",
+      "wave": 10,
+    },
+     "conditionWave": 5,
+    "launchPeriod": 5,
+    "requirements": [
+    	
+    		
+   
+    	{
+    	  "type": "zoneWave",
+    	  "zone": "desolateRift",
+    	  "wave": "20",
+        },
+    ],
+    "resources": ["copper", "lead", "coal", "sand", "titanium",  "thorium", "obsidian"]
+}

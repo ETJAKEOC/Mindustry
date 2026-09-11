@@ -1,0 +1,90 @@
+type: ConsumeGenerator
+size: 5
+health: 3500
+category: power
+squareSprite: false
+requirements: [
+  01a-05-item-aluminium/400
+  01a-06-item-chromium/250
+  01a-09-item-morphite/230
+  01a-10-item-bethine/135
+]
+hasLiquids: true
+consumes: {
+  liquid: 02b-03-necroplasm/2
+}
+outputLiquid: 02b-07-ectoplasm/1.3333333333333
+powerProduction: 103.333333
+explodeOnFull: true
+generateEffect: generatespark
+ambientSound: loopNecroplasm
+ambientSoundVolume: 0.12
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-03-necroplasm
+      padding: 3
+      alpha: 0.9
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-07-ectoplasm
+      padding: 3
+    }
+    {
+      type: DrawRegion
+      suffix: -center
+    }
+    {
+      type: DrawCells
+      color: 60c9ad
+      particleColorFrom: ffffff
+      particleColorTo: 869cbe
+      particles: 50
+      range: 8
+    }
+    {
+      type: DrawParticles
+      color: ffffff
+      particleSize: 1.5
+      particleRad: 20
+      particleLife: 60
+      particles: 50
+      reverse: true
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawGlowRegion
+      suffix: -glow
+      color: 60c9ad
+    }
+  ]
+}
+research: {
+  #TODO - change to proper sector
+  parent: 07g-05-tokamak-reactor
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-23-eridanus
+    }
+  ]
+}
+researchCostMultiplier: 0.75
+liquidCapacity: 160
+explosionRadius: 45
+explosionDamage: 2000
+explosionPuddles: 15
+explosionPuddleRange: 16
+explosionPuddleAmount: 200
+explosionPuddleLiquid: 02b-07-ectoplasm
+explosionShake: 15
+explodeEffect: [scatheExplosion, impactReactorExplosion]

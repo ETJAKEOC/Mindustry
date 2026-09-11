@@ -1,0 +1,219 @@
+{
+	"type":"ItemTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"wulfrum-lab-turret-"
+	},
+
+	"research":{
+	"parent":"wulfrum-core",
+	"requirements":[
+	"wulfrum-steel/10000",
+	"graphite/12000",
+	"silicon/9000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/100",
+	"graphite/120",
+	"silicon/90"
+	],
+
+	"consumes":{
+	"power":6,
+	"coolant":{"amount":0.1,"optional":true}	},
+
+	"size":3,
+	"health":2065,
+	"armor":4,
+	"rotateSpeed":2,
+	"liquidCapacity":20,
+	"range":224,
+	"squareSprite":false,
+
+	"targetAir":true,
+	"targetGround":true,
+	"moveWhileCharging":false,
+	"accurateDelay":false,
+	"shootSound":"shockBlast",
+	"shake":1,
+	"reload":80,
+	"ammoPerShot":6,
+	"maxAmmo":50,
+	"inaccuracy":3,
+
+	"shoot":{
+	"shots":3,
+	"shotDelay":4
+	},
+
+	"ammoTypes":{
+	"wulfrum-steel":{
+	"type":"basicBulletType",
+	"sprite":"large-orb",
+		"damage":46,
+		"splashDamageRadius":12,
+		"splashDamage":28,
+		"speed":8,
+		"lifetime":27,
+		"status":"shocked",
+		"shrinkY":0,"shrinkX":0,
+		"width":12,"height":12,
+		"frontColor":"36B1DDFF",
+		"backColor":"BAFFF9FF",
+
+		"trailColor":"BAFFF9FF",
+		"trailParam":2,
+		"trailWidth":3,"trailLength":4,
+		"trailRotation":true,
+		"trailInterval":1,
+		"trailEffect":"disperseTrail",
+
+	"shootEffect":"lancerLaserShoot",
+
+	"hitEffect":{
+	"type":"multiEffect",
+	"effects":[
+	{"type":"WaveEffect",
+	"lifetime":15,
+	"sizeFrom":0,
+	"sizeTo":30,
+	"strokeFrom":7.5,
+	"strokeTo":0,
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":20,
+	"length":50,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":5,
+	"lenTo":0,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":25,
+	"length":30,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":7,
+	"lenTo":0,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	}	]	}
+	},
+
+	"energy-core":{
+		"type":"EmpBulletType",
+		"sprite":"large-orb",
+		"damage":40,
+		"splashDamageRadius":12,
+		"splashDamage":34,
+		"speed":8,
+		"lifetime":27,
+		"status":"shocked",
+		"shrinkY":0,"shrinkX":0,
+		"width":12,"height":12,
+		"frontColor":"36B1DDFF",
+		"backColor":"BAFFF9FF",
+
+		"trailColor":"BAFFF9FF",
+		"trailParam":2,
+		"trailWidth":3,"trailLength":4,
+		"trailRotation":true,
+		"trailInterval":1,
+		"trailEffect":"disperseTrail",
+
+		"scaleLife":true,
+		"collides":false,
+		"hitShake":2,
+		"radius":16,
+		"timeIncrease":0,
+		"powerDamageScl":1,
+		"powerSclDecrease":1,
+		"unitDamageScl":0.3,
+	"chainEffect":"chainLightning",
+	"applyEffect":"none",
+	"hitPowerEffect":{
+		"type":"ParticleEffect",
+		"particles":5,
+		"baseLength":35,
+		"length":35,
+		"lifetime":11,
+		"sizeFrom":2,
+		"sizeTo":0,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"FCF387FF",
+		"cone":360
+		},
+	"shootEffect":"lancerLaserShoot",
+
+	"hitEffect":{
+	"type":"multiEffect",
+	"effects":[
+	{"type":"WaveEffect",
+	"lifetime":15,
+	"sizeFrom":0,
+	"sizeTo":30,
+	"strokeFrom":7.5,
+	"strokeTo":0,
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":20,
+	"length":50,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":5,
+	"lenTo":0,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":25,
+	"length":30,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":7,
+	"lenTo":0,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	}	]	}
+	}	}
+}

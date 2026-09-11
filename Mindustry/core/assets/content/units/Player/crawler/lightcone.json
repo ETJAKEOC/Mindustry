@@ -1,0 +1,114 @@
+{
+	"type":"legs",
+	"legCount":6,
+	"legMoveSpace":1,
+	"legLength":21,
+	"legExtension":-10,
+	"legBaseOffset":10,
+	"legSpeed":0.2,
+	"legLengthScl":0.96,
+	"rippleScale":2,
+	"legContinuousMove":true,
+	"legSplashDamage":15,
+	"legSplashRange":20,
+	"allowLegStep":true,
+	"hovering":true,
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"aggregation",
+	"requirements":[
+	"forgotten-crystals/2600",
+	"plastanium/1600",
+	"silicon/2600"
+	],
+	"objectives":[
+	"second-refabricator"
+	]	},
+
+	"immunities":[
+	"sapped",
+	"wulfrum-amplify"
+	],
+
+	"speed":0.7,
+	"rotateSpeed":2,
+	"hitSize":30,
+	"health":3460,
+	"faceTarget":true,
+	"armor":12,
+	"drag":0.4,
+	"range":200,
+	"maxRange":130,
+	"aimDst":130,
+	"rotateSpeed":2,
+
+	"weapons":[
+		{"name":"lightcone-weapon",
+		"x":0,"y":0,
+		"shootY":11,
+		"mirror":false,
+		"rotate":false,
+		"recoil":0,
+		"recoilTime":100,
+		"cooldownTime":240,
+		"shake":1,
+		"shootSound":"flux",
+		"alwaysContinuous":true,
+		"heatColor":"BF92F9FF",
+
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-blade",
+		"mirror":true,
+		"moveX":2.75,
+		"heatColor":"BF92F9FF",
+		"progress":{
+		"type":"warmup",
+		"op":"blend",
+		"other":"reload",
+		"amount":0.5
+		}	},
+		{"type":"FlarePart",
+		"rotation":86,
+		"color1":"BF92F9FF",
+		"y":9,
+		"stroke":4.5,
+		"radius":0,
+		"radiusTo":20,
+		"progress":{
+		"type":"warmup",
+		"op":"blend",
+		"other":"reload",
+		"amount":0.5
+	}	}	],
+
+		"bullet":{
+		"type":"ContinuousFlameBulletType",
+		"colors":["EB7ABE","E189F5","907EF7","91A4FF","FFFFFF"],
+		"damage":36,
+		"width":6.5,"length":170,
+		"drawFlare":false,
+		"drawSize":200,
+		"pierceCap":4,
+		"pierce":true,
+		"pierceBuilding":true,
+		"status":"shadowflame",
+		"statusDuration":240,
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":7,
+		"lifetime":15,
+		"length":65,
+		"cone":-360,
+		"strokeFrom":2.5,
+		"strokeTo":0,
+		"lenFrom":8,
+		"lenTo":0,
+		"colorFrom":"907EF7",
+		"colorTo":"91A4FF"
+		}
+	}	}	]
+}

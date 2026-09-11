@@ -1,0 +1,37 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"research":{
+	"parent":"oil-desulfurizer",
+	"requirements":[
+	"chromium/2000",
+	"graphite/3000",
+	"silicon/2500"
+	]	},
+
+	"requirements":[
+	"chromium/40",
+	"graphite/60",
+	"silicon/50"
+	],
+
+	"consumes":{"power":4,
+	"items":{
+	"items":[
+	"pyratite/3",
+	"spore-pod/2"
+	]	}	},
+
+	"outputItems":[
+	"blast-compound/3"
+	],
+
+	"size":3,
+	"health":960,
+	"itemCapacity":20,
+	"hasPower":true,
+	"hasItems":true,
+	"craftTime":90,
+	"craftEffect":"flakExplosionBig"
+}

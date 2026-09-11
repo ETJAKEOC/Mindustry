@@ -1,0 +1,19 @@
+{
+	"type":"Conveyor",
+	"category":"distribution",
+
+	"health":60,
+	"displayedSpeed":5,
+
+	"research":{
+	"parent":"primary-core",
+	"requirements":[
+	"chromium/100"
+	]	},
+
+	"requirements":[
+	"chromium/1"
+	],
+	"bridgeReplacement":"secure-bridge",
+	"junctionReplacement":"secure-junction"
+}

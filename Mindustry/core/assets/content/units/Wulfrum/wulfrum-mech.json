@@ -1,0 +1,124 @@
+{
+	"speed":0.72,
+	"rotateSpeed":0.72,
+	"hitSize":27,
+	"health":1800,
+	"armor":5,
+	"type":"mech",
+	"outlineColor":"2E2F34FF",
+	"dpsEstimate":160,
+	"range":190,
+	"itemCapacity":80,
+	"targetAir":false,
+
+	"research":{
+	"parent":"wulfrum-machine-manufacturer",
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"weapons":[
+		{"name":"wulfrum-mech-weapon",
+		"reload":60,
+		"x":12.5,"y":0,
+		"mirror":true,
+		"top":false,
+		"alternate":true,
+		"layerOffset":-0.001,
+		"rotationLimit":45,
+		"rotateSpeed":1,
+		"rotate":true,
+		"shootSound":"laser",
+		"shootY":12.125,
+		"shootCone":45,
+		"cooldownTime":120,
+
+		"bullet":{
+		"type":"LaserBulletType",
+		"length":176,
+		"width":20,
+		"damage":126,
+		"hitSize":10,
+		"shootEffect":"lancerLaserShoot",
+		"smokeEffect":"none",
+		"colors":["74E8E1FF","B5FFECFF","F2FFF3FF"],
+		"pierceCap":3,
+		"pierceDamageFactor":0.2,
+		"sideAngle":120,
+		"sideLength":0,
+		"sideWidth":0,
+
+	"chargeEffect":{
+		"type":"multiEffect",
+		"effects":[
+		"lancerLaserCharge",
+		"lancerLaserChargeBegin"
+		]	},
+
+	"hitEffect":{
+	"type":"multiEffect",
+	"effects":[
+	{"type":"WaveEffect",
+	"lifetime":15,
+	"sizeFrom":0,
+	"sizeTo":30,
+	"strokeFrom":7.5,
+	"strokeTo":0,
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":20,
+	"length":50,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+		"cone":-75,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":5,
+	"lenTo":0,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":25,
+	"length":30,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+		"cone":-75,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":7,
+	"lenTo":0,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	}	]	}
+	}	},
+		{"shootOnDeath":true,
+	"controllable":false,
+	"shootSound":"none",
+	"shootCone":360,
+		"bullet":{
+		"collidesAir":false,
+		"collides":false,
+		"instantDisappear":true,
+		"hittable":false,
+		"absorbable":false,
+		"splashDamageRadius":24,
+		"splashDamage":30,
+		"hitSound":"WulfrumDeath",
+		"hitSoundVolume":5,
+		"keepVelocity":false,
+		"despawnHit":true,
+		"shootEffect":"none",
+		"hitEffect":"none"
+	}	}	]
+}

@@ -1,0 +1,29 @@
+{
+	"type":"payload",
+	"payloadCapacity":2048,
+	"rotateSpeed":0.75,
+	"flying":true,
+	"accel":0.3,"drag":0.1,
+	"faceTarget":false,
+	"useEngineElevation":false,
+	"lowAltitude":true,
+	"outlineColor":"252529FF",
+	"isEnemy":false,
+
+	"engineSize":8.5,
+	"engineOffset":23.75,
+	"engines":[
+	{"x":14.75,"y":-19.5,
+	"radius":7
+	},
+	{"x":-14.75,"y":-19.5,
+	"radius":7
+	}	],
+
+	"hitSize":62.5,
+	"itemCapacity":1200,
+	"speed":2,
+	"health":96890,
+	"armor":97,
+
+}

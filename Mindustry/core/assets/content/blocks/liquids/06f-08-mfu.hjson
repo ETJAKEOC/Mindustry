@@ -1,0 +1,71 @@
+type: GenericCrafter
+size: 3
+liquidCapacity: 180
+hasLiquids: true
+health: 850
+category: liquid
+research: {
+  parent: 06f-05-jet-pump
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-15-bioproject-core
+    }
+  ]
+}
+itemCapacity: 20
+researchCostMultiplier: 0.5
+requirements: [
+  01a-05-item-aluminium/130
+  01a-06-item-chromium/70
+  01a-07-item-clevorite/50
+]
+craftTime: 90
+craftEffect: none
+outputLiquids: [
+  02b-01-bioliquid/1.5
+]
+consumes: {
+  items: [
+    01a-04-item-tantra-sand/2
+  ]
+  liquids: [
+    02b-04-miasma/0.33333333333
+  ]
+  power: 1.5
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-04-miasma
+      padding: 2
+    }
+    {
+      type: DrawBubbles
+      color: FFE4FA
+      sides: 10
+      recurrence: 3
+      spread: 7
+      radius: 1.5
+      amount: 36
+    }
+    {
+      type: DrawRegion
+      suffix: -rotator
+      spinSprite: true
+      rotateSpeed: 1.25
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+ambientSound: loopCultivator
+ambientSoundVolume: 0.055
+squareSprite: false

@@ -1,0 +1,54 @@
+{
+//	"type":"BurstDrill",
+	"category":"production",
+
+	"research":{
+	"parent":"electromagnetic-drill",
+	"requirements":[
+	"nickel/900",
+	"silicon/600",
+	"graphite/800"
+	],
+	"objectives":[
+	{"type":"SectorComplete",
+	"preset":"TurbulentValley"}
+	]	},
+
+	"requirements":[
+	"nickel/90",
+	"silicon/60",
+	"graphite/60"
+	],
+
+	"consumes":{
+	"power":2,
+	"liquids":[
+	"water/0.25"
+	],
+	"liquid":{
+	"liquid":"hydrogen",
+	"amount":0.033333333333333,
+	"liquidBoostIntensity":2,
+	"optional":true,
+	"booster":true
+	}	},
+
+	"drillEffect":[
+	"mineImpact","drillSteam",
+	{"type":"WrapEffect",
+	"effect":"mineImpact",
+	"color":"EDF3A9FF"
+	}	],
+
+	"drillTime":150,
+
+	"size":4,
+	"tier":5,
+	"health":2370,
+	"hasItems":true,
+	"itemCapacity":40,
+	"liquidCapacity":30,
+	"shake":4,
+	"fogRadius":4,
+	"squareSprite":false
+}

@@ -1,0 +1,69 @@
+{
+	"type":"HeatCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	{"type":"DrawSpikes",
+	"color":"FFD59E",
+	"stroke":1.5,
+	"layers":2,
+	"amount":12,
+	"rotateSpeed":0.5,
+	"layerSpeed":-0.9
+	},
+	{"type":"DrawMultiWeave",
+	"glowColor":"FFD59E"
+	},
+	{"type":"DrawHeatRegion",
+	"suffix":"-vents",
+	"color":"FF6060FF"
+	},
+	"DrawWeave",
+	"DrawDefault",
+	"DrawHeatInput"]	},
+
+	"research":{
+	"parent":"alloy-cast-furnace",
+	"requirements":[
+	"uranium/6000",
+	"plastanium/6000",
+	"silicon/4000"
+	]	},
+
+	"requirements":[
+	"uranium/60",
+	"plastanium/60",
+	"silicon/40"
+	],
+
+	"consumes":{"power":1,
+	"items":{
+	"items":[
+	"uranium/3",
+	"sand/8"
+	]	},
+	"liquid":{
+	"liquid":"ozone","amount":0.2
+	}	},
+	"heatRequirement":10,
+
+	"outputItems":[
+	"phase-fabric/2"
+	],
+
+	"size":3,
+	"health":360,
+	"itemCapacity":40,
+	"hasPower":true,
+	"hasLiquids":true,
+	"liquidCapacity":100,
+	"hasItems":true,
+	"craftTime":160,
+	"updateEffect":"none",
+	"ambientSound":"respawning",
+	"ambientSoundVolume":0.09
+}

@@ -1,0 +1,136 @@
+{
+	"type":"PowerTurret",
+	"category":"turret",
+	"name":"侵蚀",
+	"description":"快速对敌人发射穿透型子弹，当穿透一个敌人时伤害会下降，造成电磁干扰buff。",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"draedon-",
+	"parts":[
+		{"type":"RegionPart",
+		"suffix":"-barrel-1",
+		"under":true,
+		"recoilIndex":1,
+		"progress":"recoil"
+		"heatProgress":{
+		"type":"recoil",
+		"op":"blend",
+		"other":"heat",
+		"amount":0.2,
+		"cooldownTime":80,
+		"other":0,
+		"recoilIndex":1
+		},
+		"moveY":-2
+		}
+		{"type":"RegionPart",
+		"suffix":"-barrel-2",
+		"under":true,
+		"recoilIndex":0,
+		"progress":"recoil"
+		"heatProgress":{
+		"type":"recoil",
+		"op":"blend",
+		"other":"heat",
+		"amount":0.2,
+		"cooldownTime":80,
+		"other":0,
+		"recoilIndex":0
+		},
+		"moveY":-2
+		}	]	},
+
+	"research":{
+	"parent":"primary-core",
+	"requirements":[
+	"chromium/900",
+	"silicon/3000"
+	]	},
+
+	"requirements":[
+	"chromium/90",
+	"silicon/300"
+	],
+
+	"consumes":{
+	"power":6,
+	"coolant":{"amount":0.1,"optional":true}	},
+
+	"shoot":{
+	"type":"ShootBarrel"
+	"barrels":[
+	5,8.5,0,
+	-5,8.5,0
+	]	}
+
+	"size":3,
+	"health":1065,
+	"rotateSpeed":2,
+	"reload":6,
+	"liquidCapacity":100,
+	"range":280,
+	"inaccuracy":2,
+	"squareSprite":false,
+	"cooldownTime":90,
+	"recoil":1,
+	"shootSound":"shootBig",
+	"ammoUseEffect":"casing3",
+	"shake":2,
+	"velocityRnd":0.11,
+	"consumeAmmoOnce":true,
+	"recoils":2,
+
+	"shootType":{
+		"width":9,"height":12,
+		"frontColor":"EDF3A9FF",
+		"backColor":"CBD97FFF",
+		"shrinkY":0,"shrinkX":0,
+		"speed":6,
+		"lifetime":36,
+		"damage":60,
+		"splashDamageRadius":16,
+		"splashDamage":10,
+		"pierceCap":3,
+		"pierce":true,
+		"pierceBuilding":false,
+		"buildingDamageMultiplier":0.3,
+
+		"status":"electrified",
+		"statusDuration":300,
+
+		"trailColor":"CBD97FFF",
+		"trailParam":2,
+		"trailWidth":3,"trailLength":6,
+		"trailRotation":true,
+		"trailInterval":2,
+		"trailEffect":"disperseTrail",
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":2,
+		"lifetime":12,
+		"offset":50,
+		"length":18,
+		"cone":-60,
+		"lenFrom":11,
+		"lenTo":11,
+		"colorFrom":"CBD97FFF",
+		"colorTo":"EDF3A9FF",
+		},
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":2,
+		"lifetime":12,
+		"offset":50,
+		"length":18,
+		"cone":-60,
+		"lenFrom":11,
+		"lenTo":11,
+		"colorFrom":"CBD97FFF",
+		"colorTo":"EDF3A9FF",
+		}	},
+}

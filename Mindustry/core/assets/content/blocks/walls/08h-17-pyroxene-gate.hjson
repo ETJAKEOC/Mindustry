@@ -1,0 +1,31 @@
+type: AutoDoor
+size: 2
+health: 4400
+armor: 15
+absorbLasers: true
+requirements: [
+  01a-09-item-morphite/24
+  01a-11-item-pyroxene/24
+]
+research: 08h-15-pyroxene-wall-small
+researchCostMultiplier: 0.5
+category: defense
+destroyBullet: {
+  instantDisappear: true
+  damage: 0
+  speed: 0
+  fragBullets: 5
+  fragBullet: {
+    type: BasicBulletType
+    speed: 4
+    lifetime: 30
+    pierce: true
+    width: 6
+    height: 7
+    pierceCap: 1
+    homingPower: 0.1
+    damage: 80
+    mixColorFrom: 21cee5
+    mixColorTo: 9af6ff
+  }
+}

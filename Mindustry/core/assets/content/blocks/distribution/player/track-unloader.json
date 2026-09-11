@@ -1,0 +1,24 @@
+{
+//	"type":"DirectionalUnloader",
+	"category":"distribution",
+
+	"research":{
+	"parent":"underflow-track",
+	"requirements":[
+	"chromium/400",
+	"graphite/600",
+	"silicon/600"
+	]	},
+
+	"requirements":[
+	"chromium/4",
+	"graphite/6",
+	"silicon/6"
+	],
+
+	"size":1,
+	"health":100,
+	"solid":false,
+	"underBullets":true,
+	"allowCoreUnload":true
+}

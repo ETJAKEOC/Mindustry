@@ -1,0 +1,148 @@
+{
+	"type":"flying",
+	"flying":true,
+	"faceTarget":true,
+	"rotateSpeed":8,
+	"speed":3.6,
+	"accel":0.04,"drag":0.016,
+	"dpsEstimate":160,
+	"range":208,
+	"lowAltitude":true,
+	"forceMultiTarget":true,
+
+	"research":{
+	"parent":"wulfrum-bomber",
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"itemCapacity":80,
+	"ammoCapacity":100,
+	"hitSize":17,
+	"health":1300,
+	"armor":3,
+	"outlineColor":"2E2F34FF",
+
+	"engineSize":0,
+	"engines":[
+	{"x":-7,"y":-10,
+	"radius":3,
+	"rotation":135
+	},
+	{"x":7,"y":-10,
+	"radius":3,
+	"rotation":45
+	}	],
+
+	"weapons":[
+		{"name":"wulfrum-surrounder-weapon",
+		"reload":10,
+		"x":0,"y":0,
+		"mirror":true,
+		"top":false,
+		"rotate":false,
+		"inaccuracy":2,
+		"shootSound":"shockBlast",
+		"shootCone":360,
+		"ignoreRotation":true,
+
+		"shoot":{
+		"type":"ShootBarrel",
+		"barrels":[
+		-5,0,25,
+		5,0,-25,
+		-4,0,15,
+		4,0,-15
+		]	},
+
+	"bullet":{
+	"type":"basicBulletType",
+	"sprite":"large-orb",
+		"damage":40,
+		"speed":8,
+		"lifetime":26,
+		"status":"shocked",
+		"shrinkY":0,"shrinkX":0,
+		"width":10,"height":10,
+		"frontColor":"36B1DDFF",
+		"backColor":"BAFFF9FF",
+		"homingRange":180,
+		"homingDelay":0,
+		"homingPower":0.2,
+
+		"trailColor":"BAFFF9FF",
+		"trailParam":2,
+		"trailWidth":2,"trailLength":4,
+		"trailRotation":true,
+		"trailInterval":1,
+		"trailEffect":"disperseTrail",
+
+	"shootEffect":"lancerLaserShoot",
+
+	"hitEffect":{
+	"type":"multiEffect",
+	"effects":[
+	{"type":"WaveEffect",
+	"lifetime":15,
+	"sizeFrom":0,
+	"sizeTo":30,
+	"strokeFrom":7.5,
+	"strokeTo":0,
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":20,
+	"length":50,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":5,
+	"lenTo":0,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":25,
+	"length":30,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":7,
+	"lenTo":0,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	}	]	}
+	}	},
+		{"shootOnDeath":true,
+	"controllable":false,
+	"shootSound":"none",
+	"shootCone":360,
+		"bullet":{
+		"collidesAir":false,
+		"collides":false,
+		"instantDisappear":true,
+		"hittable":false,
+		"absorbable":false,
+		"splashDamageRadius":24,
+		"splashDamage":30,
+		"hitSound":"WulfrumDeath",
+		"hitSoundVolume":5,
+		"keepVelocity":false,
+		"despawnHit":true,
+		"shootEffect":"none",
+		"hitEffect":"none"
+	}	}	]
+}

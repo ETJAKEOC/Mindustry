@@ -1,0 +1,75 @@
+type: AttributeCrafter
+size: 3
+attribute: tantraf
+baseEfficiency: 0
+minEfficiency: 6.7499
+boostScale: 0.1111111111111111
+displayEfficiencyScale: 1
+liquidCapacity: 120
+health: 650
+category: crafting
+research: {
+  parent: 04d-04-a-wall-extractor
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-07-escarpment
+    }
+  ]
+}
+itemCapacity: 30
+researchCost: [
+  01a-02-item-nickel/600
+  01a-05-item-aluminium/400
+  01a-06-item-chromium/250
+]
+requirements: [
+  01a-02-item-nickel/90
+  01a-05-item-aluminium/75
+  01a-06-item-chromium/45
+]
+craftTime: 120
+craftEffect: none
+outputItem: 01a-04-item-tantra-sand/18
+consumes: {
+  items: [
+    01a-02-item-nickel/2
+    01a-03-item-anthracite/1
+  ]
+  liquids: [
+    02b-01-bioliquid/0.5
+  ]
+  power: 2
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-01-bioliquid
+      padding: 1.5
+    }
+    {
+      type: DrawRegion
+      suffix: -mid
+    }
+    {
+      type: DrawCrucibleFlame
+      flameRad: 0.6
+      circleSpace: 0.6
+      particleRad: 10
+      particleSize: 1.8
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+fogRadius: 3
+ambientSound: loopSmelter
+ambientSoundVolume: 0.07
+squareSprite: false

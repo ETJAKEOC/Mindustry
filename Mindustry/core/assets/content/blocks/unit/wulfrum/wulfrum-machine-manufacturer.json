@@ -1,0 +1,72 @@
+{
+	"type":"UnitFactory",
+	"category":"units",
+
+	"research":{
+	"parent":"wulfrum-core",
+	"requirements":[
+	"wulfrum-steel/10000",
+	"graphite/15000",
+	"silicon/15000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/100",
+	"graphite/150",
+	"silicon/150"
+	],
+
+	"consumes":{"power":10},
+
+	"health":2060,
+	"armor":4,
+	"size":4,
+
+	"plans":[
+		{"unit":"wulfrum-mech",
+		"time":2400,
+		"requirements":[
+		"wulfrum-steel/100",
+		"graphite/100",
+		"silicon/90"
+		]	},
+		{"unit":"wulfrum-tank",
+		"time":3000,
+		"requirements":[
+		"wulfrum-steel/120",
+		"graphite/80",
+		"silicon/80"
+		]	},
+		{"unit":"wulfrum-crawler",
+		"time":3600,
+		"requirements":[
+		"wulfrum-steel/100",
+		"graphite/100",
+		"silicon/100"
+		]	},
+		{"unit":"wulfrum-bomber",
+		"time":3600,
+		"requirements":[
+		"wulfrum-steel/90",
+		"graphite/80",
+		"silicon/100"
+		]	},
+		{"unit":"wulfrum-surrounder",
+		"time":3000,
+		"requirements":[
+		"wulfrum-steel/90",
+		"graphite/60",
+		"silicon/80"
+		]	},
+		{"unit":"wulfrum-frigate",
+		"time":4200,
+		"requirements":[
+		"wulfrum-steel/150",
+		"graphite/100",
+		"silicon/100"
+		]	}
+		]
+}

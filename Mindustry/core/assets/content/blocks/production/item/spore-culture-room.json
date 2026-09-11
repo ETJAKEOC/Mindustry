@@ -1,0 +1,40 @@
+{
+	"type":"AttributeCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	"DrawCultivator",
+	{"type":"DrawRegion",
+	"suffix":"-top"
+	}	]	},
+
+	"research":{
+	"parent":"glass-furnace",
+	"requirements":[
+	"nickel/500",
+	"tungsten/500",
+	"silicon/700"
+	]	},
+
+	"requirements":[
+	"nickel/50",
+	"tungsten/50",
+	"silicon/70"
+	],
+
+	"consumes":{
+		"power":3,
+		"liquid":{"liquid":"water","amount":0.4}
+	},
+	"outputItem":"spore-pod/2",
+
+	"health":960,
+	"attribute":"spores",
+	"itemCapacity":30,
+	"liquidCapacity":100,
+	"size":3,
+	"craftTime":90,
+	"maxBoost":5
+}

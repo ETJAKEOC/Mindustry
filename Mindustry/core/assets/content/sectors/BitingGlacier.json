@@ -1,0 +1,11 @@
+{
+"planet":"Vitospp",
+"sector":646,
+"captureWave":0,
+"difficulty":2,
+"research": {
+"parent": "FloatingIceBay",
+"objectives": [
+"spore-stamp-machine",
+	]	}
+}

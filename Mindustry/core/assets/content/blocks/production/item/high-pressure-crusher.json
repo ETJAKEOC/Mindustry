@@ -1,0 +1,48 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"research":{
+	"parent":"glass-furnace",
+	"requirements":[
+	"tungsten/100",
+	"graphite/150",
+	"silicon/100"
+	]	},
+
+	"requirements":[
+	"tungsten/20",
+	"graphite/30",
+	"silicon/20"
+	],
+
+	"outputItems":[
+	"sand/3"
+	],
+
+	"size":2,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"craftTime":10,
+	"itemCapacity":20,
+	"updateEffect":"pulverizeSmall",
+	"ambientSound":"grinding",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	{"type":"DrawRegion",
+	"suffix":"-rotator",
+	"spinSprite":true,
+	"rotateSpeed":12
+	},
+	{"type":"DrawRegion",
+	"suffix":"-top"
+	}	]	},
+
+	"consumes":{"power":0.8333,
+	"items":[
+	"scrap/2"
+	]	}
+}

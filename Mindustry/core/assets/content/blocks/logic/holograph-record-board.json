@@ -1,0 +1,21 @@
+{
+	"type":"MessageBlock",
+	"category":"logic",
+
+	"research":{
+	"parent":"energy-node",
+	"requirements":[
+	"nickel/120",
+	"graphite/100",
+	"silicon/80"
+	]	},
+
+	"requirements":[
+	"nickel/12",
+	"graphite/10",
+	"silicon/8"
+	],
+
+	"health":260,
+	"size":1
+}

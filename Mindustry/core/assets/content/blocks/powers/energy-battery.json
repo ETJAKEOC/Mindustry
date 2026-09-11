@@ -1,0 +1,32 @@
+{
+//	"type":"battery",
+	"category":"power",
+	"size":2,
+	"health":200,
+
+	"drawer":{
+	"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	{"type":"DrawPower",
+	"emptyLightColor":"F8C266",
+	"fullLightColor":"FB9567"
+	},
+	{"type":"DrawRegion",
+	"suffix":"-top"
+	}	]	},
+
+	"research":{
+	"parent":"energy-node",
+	"requirements":[
+	"nickel/800",
+	"plastanium/100"
+	]	},
+
+	"requirements":[
+	"nickel/80",
+	"plastanium/10"
+	],
+
+	"consumes":{"powerBuffered":50000}
+}

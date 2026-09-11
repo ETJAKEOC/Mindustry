@@ -1,0 +1,19 @@
+{
+	"type":"Sorter",
+	"size":1,
+	"invert":false,
+	"category":"distribution",
+
+	"research":{
+	"parent":"secure-router",
+	"requirements":[
+	"chromium/300"
+	]	},
+
+	"requirements":[
+	"chromium/3"
+	],
+
+	"health":250,
+	"solid":false
+}

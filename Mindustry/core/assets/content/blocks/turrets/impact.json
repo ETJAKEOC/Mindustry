@@ -1,0 +1,267 @@
+{
+//	"type":"ItemTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-",
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-barrel-l",
+		"mirror":false,
+		"recoilIndex":0,
+		"moveY":-2,
+		"progress":"recoil",
+	"heatProgress":{
+		"type":"recoil",
+		"op":"blend",
+		"amount":0,
+		"other":0,
+		"recoilIndex":0
+		}	},
+		{"type":"RegionPart",
+		"suffix":"-barrel-r",
+		"mirror":false,
+		"recoilIndex":1,
+		"moveY":-2,
+		"progress":"recoil",
+	"heatProgress":{
+		"type":"recoil",
+		"op":"blend",
+		"amount":0,
+		"other":0,
+		"recoilIndex":1
+		}	}	]	},
+
+	"research":{
+	"parent":"origin-core",
+	"requirements":[
+	"nickel/130",
+	"graphite/110",
+	"silicon/80"
+	]	},
+
+	"requirements":[
+	"nickel/130",
+	"graphite/110",
+	"silicon/80"
+	],
+
+	"consumes":{
+	"coolant":{"amount":0.1,"optional":true}	},
+
+	"shoot":{
+		"type":"ShootAlternate",
+		"barrels":2,
+		"spread":5.5
+	},
+
+	"size":3,
+	"health":1865,
+	"rotateSpeed":3,
+	"reload":60,
+	"ammoPerShot":1,
+	"maxAmmo":20,
+	"liquidCapacity":20,
+	"range":240,
+	"inaccuracy":1,
+	"squareSprite":false,
+	"recoils":2,
+
+	"ammoTypes":{
+	"nickel":{
+		"frontColor":"B5FFECFF",
+		"backColor":"74E8E1FF",
+		"width":15,"height":15,
+		"shrinkY":0,"shrinkX":0,
+		"speed":8,
+		"lifetime":28,
+		"damage":74,
+		"pierceCap":3,
+		"pierce":true,
+		"pierceBuilding":true,
+		"buildingDamageMultiplier":0.2,
+
+		"trailColor":"B5FFECFF",
+		"trailParam":2,
+		"trailWidth":2,"trailLength":7,
+		"trailRotation":true,
+		"trailInterval":1,
+		"trailEffect":"disperseTrail",
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":5,
+		"length":50,
+		"lifetime":20,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":35,
+		"colorFrom":"B5FFECFF",
+		"colorTo":"74E8E1FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		},
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+	{"type":"WaveEffect",
+		"lifetime":15,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"strokeFrom":7.5,
+		"strokeTo":0,
+		"colorFrom":"B5FFECFF",
+		"colorTo":"74E8E1FF"
+	},
+	{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":20,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":75,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":5,
+		"lenTo":0,
+		"colorFrom":"B5FFECFF",
+		"colorTo":"74E8E1FF"
+	}	]	}
+		},
+
+	"tungsten":{
+		"frontColor":"BFC8E2FF",
+		"backColor":"929DB5FF",
+		"width":15,"height":15,
+		"shrinkY":0,"shrinkX":0,
+		"speed":8,
+		"lifetime":33,
+		"damage":82,
+		"pierceCap":3,
+		"pierce":true,
+		"pierceBuilding":true,
+		"buildingDamageMultiplier":0.2,
+
+		"trailColor":"BFC8E2FF",
+		"trailParam":2,
+		"trailWidth":2,"trailLength":7,
+		"trailRotation":true,
+		"trailInterval":1,
+		"trailEffect":"disperseTrail",
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":5,
+		"length":50,
+		"lifetime":20,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":35,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		},
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+	{"type":"WaveEffect",
+		"lifetime":15,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"strokeFrom":7.5,
+		"strokeTo":0,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF"
+	},
+	{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":20,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":75,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":5,
+		"lenTo":0,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF"
+	}	]	}
+		},
+
+	"chromium":{
+		"frontColor":"BFC8E2FF",
+		"backColor":"929DB5FF",
+		"width":15,"height":15,
+		"shrinkY":0,"shrinkX":0,
+		"speed":8,
+		"lifetime":33,
+		"rangeChange":40,
+		"damage":100,
+		"pierceCap":3,
+		"pierce":true,
+		"pierceBuilding":true,
+		"buildingDamageMultiplier":0.2,
+
+		"trailColor":"BFC8E2FF",
+		"trailParam":2,
+		"trailWidth":2,"trailLength":7,
+		"trailRotation":true,
+		"trailInterval":1,
+		"trailEffect":"disperseTrail",
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":5,
+		"length":50,
+		"lifetime":20,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":35,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		},
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+	{"type":"WaveEffect",
+		"lifetime":15,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"strokeFrom":7.5,
+		"strokeTo":0,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF"
+	},
+	{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":20,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":75,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":5,
+		"lenTo":0,
+		"colorFrom":"BFC8E2FF",
+		"colorTo":"929DB5FF"
+	}	]	}
+		}	}
+}

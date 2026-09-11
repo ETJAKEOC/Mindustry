@@ -1,0 +1,11 @@
+type: Junction
+size: 3
+customShadow: true
+placeablePlayer: false
+requirements: [
+  01a-05-item-aluminium/65
+  01a-06-item-chromium/45
+]
+databaseTag: unitpart
+research: 10j-10-unitassembler-mech
+researchCostMultiplier: 0.5

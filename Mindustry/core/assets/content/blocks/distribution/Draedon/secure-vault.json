@@ -1,0 +1,23 @@
+{
+	"type":"StorageBlock",
+	"category":"distribution",
+
+	"research":{
+	"parent":"secure-container",
+	"requirements":[
+	"chromium/11000",
+	"graphite/10000",
+	"plastanium/8000"
+	]	},
+
+	"requirements":[
+	"chromium/110",
+	"graphite/100",
+	"plastanium/80"
+	],
+
+	"size":3,
+	"health":2140,
+	"itemCapacity":900,
+	"coreMerge":true
+}

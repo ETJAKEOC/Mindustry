@@ -1,0 +1,21 @@
+{
+//	"type":"StorageBlock",
+	"category":"distribution",
+
+	"research":{
+	"parent":"track-unloader",
+	"requirements":[
+	"chromium/800",
+	"graphite/700"
+	]	},
+
+	"requirements":[
+	"chromium/80",
+	"graphite/70"
+	],
+
+	"size":2,
+	"health":1025,
+	"itemCapacity":200,
+	"coreMerge":true
+}

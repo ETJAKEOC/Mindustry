@@ -1,0 +1,55 @@
+{
+//	"type":"AttributeCrafter",
+	"category":"crafting",
+
+	"research":{
+//	"parent":"glass-furnace",
+	"requirements":[
+	"chromium/3000",
+	"silicon/1000",
+	"metaglass/1750"
+	]	},
+
+	"requirements":[
+		"chromium/60",
+		"silicon/20",
+		"metaglass/35"
+		],
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	{"type":"DrawLiquidRegion",
+	"drawLiquid":"nitrogen"
+	},
+	{"type":"DrawRegion",
+	"suffix":"-cap"
+	},
+		{"type":"DrawGlowRegion",
+		"alpha":1,
+		"glowScale":5,
+		"color":"EBF4FFFF"
+		}	]	},
+
+	"consumes":{"power":4,
+	"liquid":{
+	"liquid":"water","amount":0.2,
+	"liquid":"nitrogen","amount":0.1
+	}	},
+
+	"outputItems":[
+	"lithium/2"
+	],
+
+	"size":3,
+	"health":1160,
+	"hasLiquids":true,
+	"liquidCapacity":120,
+	"itemCapacity":30,
+	"fogRadius":3,
+	"craftEffect":"turbinegenerate",
+	"craftTime":60,
+	"floating":true,
+	"baseEfficiency":0,
+	"minEfficiency":0.1
+}

@@ -1,0 +1,139 @@
+{
+	"speed":0.75,
+	"hitSize":10.25,
+	"health":710,
+	"armor":4,
+	"range":168,
+	"type":"mech",
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"mech-manufacturer",
+	"requirements":[
+		"graphite/30",
+		"silicon/40"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+		{"name":"current-weapon",
+		"reload":35,
+		"x":6.5,"y":0,
+		"mirror":true,
+		"top":false,
+		"alternate":true,
+		"shootCone":45,
+		"layerOffset":-0.001,
+		"rotationLimit":25,
+		"rotateSpeed":1,
+		"rotate":true,
+
+		"bullet":{
+		"type":"basicBulletType",
+		"sprite":"missile-large",
+		"shrinkY":0,"shrinkX":0,
+		"width":8,"height":12,
+		"damage":26,
+		"speed":9.6,
+		"lifetime":20,
+		"status":"shocked",
+		"shrinkY":0,"shrinkX":0,
+		"frontColor":"D99F6BFF",
+		"backColor":"FCF387FF",
+		"pierceCap":1,
+		"pierce":true,
+		"pierceBuilding":true,
+
+		"lightning":2,
+		"lightningDamage":5,
+		"lightningLength":3,
+		"lightningCone":5,
+		"lightningLengthRand":5,
+
+/*		"intervalRandomSpread":0,
+		"intervalBullets":1,
+		"bulletInterval":1,
+		"intervalAngle":180,
+		"intervalSpread":0,
+		"fragVelocityMin":8,
+		"fragVelocityMax":8,
+		"despawnEffect":"none",
+		"intervalBullet":{
+		"damage":5,
+		"type":"LightningBulletType",
+		"lightningLength":2,
+		"lightningLengthRand":2,
+		"lightningColor":"F3E979FF",
+		"lightColor":"FFFFFFFF",
+		"status":"shocked",
+		"statusDuration":30,
+		"collidesAir":false,
+		"hittable":false,
+		"ammoMultiplier":1,
+		"lifetime":5,
+		"hitEffect":"hitLancer",
+		"hitEffect":"none"
+		},*/
+
+		"trailColor":"D99F6BFF",
+		"trailParam":2,
+		"trailWidth":2,"trailLength":8,
+		"trailEffect":"none",
+
+		"despawnHit":true,
+
+	"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":10,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"strokeFrom":1.5,
+		"strokeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"},
+		{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":3,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		}	]	},
+	"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"strokeFrom":3.5,
+		"strokeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"},
+		{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":9,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		}	]	}
+		}	}	]
+}

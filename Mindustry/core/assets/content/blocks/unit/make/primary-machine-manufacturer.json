@@ -1,0 +1,43 @@
+{
+	"type":"UnitFactory",
+	"category":"units",
+
+	"research":{
+	"parent":"primary-core",
+	"requirements":[
+	"tungsten/2400",
+	"graphite/2700",
+	"silicon/3000"
+	]	},
+
+	"requirements":[
+	"tungsten/80",
+	"graphite/90",
+	"silicon/100"
+	],
+
+	"consumes":{"power":6},
+
+	"health":1290,
+	"size":3,
+
+	"plans":[
+		{"unit":"divergence",
+		"time":1660,
+		"requirements":[
+		"tungsten/30",
+		"silicon/40"
+		]	},
+		{"unit":"trochilus",
+		"time":1660,
+		"requirements":[
+		"tungsten/30",
+		"silicon/40"
+		]	},
+		{"unit":"lark",
+		"time":1660,
+		"requirements":[
+		"tungsten/30",
+		"silicon/40"
+		]	}	]
+}

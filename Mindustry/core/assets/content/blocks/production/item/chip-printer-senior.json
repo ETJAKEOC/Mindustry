@@ -1,0 +1,48 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	"DrawArcSmelt",
+	"DrawDefault"
+	]	},
+
+	"research":{
+//	"parent":"chip-printer-junior",
+	"requirements":[
+	"plastanium/4500",
+	"graphite/4000",
+	"silicon/4500"
+	]	},
+
+	"requirements":[
+	"plastanium/90",
+	"graphite/80",
+	"silicon/90"
+	],
+
+	"consumes":{"power":8,
+	"items":{
+	"items":[
+	"silicon/3",
+	"processor-junior/3"
+	]	}	},
+
+	"outputItems":[
+	"processor-senior/3"
+	],
+
+	"size":3,
+	"health":960,
+	"itemCapacity":30,
+	"hasPower":true,
+	"hasLiquids":false,
+	"hasItems":true,
+	"craftTime":60,
+	"craftEffect":"none",
+	"updateEffect":"none"
+}

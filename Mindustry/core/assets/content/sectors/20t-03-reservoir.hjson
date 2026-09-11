@@ -1,0 +1,14 @@
+difficulty: 4
+planet: frostnova
+#placeholder - move to 66 once SunkenFarmfields release
+sector: 126
+research: {
+  parent: 19s-05-crest
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-06-botanical-garden
+    }
+  ]
+}
+outline: false

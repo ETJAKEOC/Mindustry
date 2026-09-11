@@ -1,0 +1,29 @@
+{
+	"type":"BeamNode",
+	"category":"power",
+
+	"research":{
+	"parent":"wulfrum-core",
+	"requirements":[
+	"wulfrum-steel/800"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/8"
+	],
+
+	"consumes":{"powerBuffered":5000},
+
+	"size":1,
+	"health":250,
+	"armor":3,
+	"range":12,
+	"fogRadius":1,
+	"hasPower":true,
+	"outputsPower":true,
+	"consumesPower":true,
+	"laserColor2":"FFD37FFF"
+}

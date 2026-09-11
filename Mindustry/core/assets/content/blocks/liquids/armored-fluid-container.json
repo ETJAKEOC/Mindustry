@@ -1,0 +1,23 @@
+{
+	"type":"LiquidRouter",
+	"category":"liquid",
+
+	"research":{
+	"parent":"fluid-pipeline-bridge",
+	"requirements":[
+	"nickel/400",
+	"tungsten/200",
+	"metaglass/200"
+	]	},
+
+	"requirements":[
+	"nickel/20",
+	"tungsten/10",
+	"metaglass/10"
+	],
+
+	"size":2,
+	"health":300,
+	"liquidCapacity":1200,
+	"liquidPadding":2
+}

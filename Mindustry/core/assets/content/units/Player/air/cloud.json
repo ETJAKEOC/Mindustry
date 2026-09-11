@@ -1,0 +1,117 @@
+{
+	"type":"flying",
+	"faceTarget":true,
+	"lowAltitude":true,
+
+	"flying":true,
+	"accel":0.5,"drag":0.01,
+
+	"research":{
+//	"parent":"gather",
+	"requirements":[
+	"chromium/300",
+	"silicon/250"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"hitSize":10,
+	"engineSize":4,
+	"engineOffset":5,
+	"trailLength":4,
+	"speed":1.2,
+	"rotateSpeed":5,
+	"health":650,
+	"armor":3,
+	"itemCapacity":10,
+	"outlineColor":"2E2F34FF",
+
+	"weapons":[
+	{"name":"cloud-weapon",
+		"shootCone":15,
+		"mirror":false,
+		"top":true,
+		"x":0,"y":0,
+		"rotate":false,
+		"reload":90,
+		"shootSound":"shockBlast",
+
+		"shoot":{
+		"type":"ShootHelix",
+		"shots":10,
+		"shotDelay":2,
+		"firstShotDelay":25,
+		"scl":2,
+		"mag":2
+		},
+
+		"bullet":{
+		"keepVelocity":false,
+		"type":"BasicBulletType",
+		"sprite":"calamity-pointy-bullet",
+		"damage":20,
+		"width":5,"height":8,
+		"speed":6,
+		"lifetime":29,
+		"weaveScale":1,
+		"weaveMag":2,
+		"frontColor":"8598BFFF",
+		"backColor":"DEEDFFFF",
+		"recoil":0.1,
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":2,
+		"lifetime":12,
+		"offset":50,
+		"length":18,
+		"cone":-60,
+		"lenFrom":8,
+		"lenTo":0,
+		"sizeInterp":"circleOut",
+		"interp":"pow3Out",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+		},
+
+	"despawnEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":2,
+		"lifetime":12,
+		"offset":50,
+		"length":18,
+		"cone":-45,
+		"lenFrom":8,
+		"lenTo":0,
+		"sizeInterp":"circleOut",
+		"interp":"pow3Out",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+		},
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":3,
+		"lifetime":20,
+		"offset":50,
+		"length":32,
+		"cone":-45,
+		"lenFrom":8,
+		"lenTo":0,
+		"sizeInterp":"circleOut",
+		"interp":"pow3Out",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+		},
+
+		"trailParam":2,
+		"trailWidth":2,"trailLength":5,
+		"trailEffect":"none",
+		"trailColor":"8598BFFF"
+		}	}	]
+}

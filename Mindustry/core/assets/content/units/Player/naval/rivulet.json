@@ -1,0 +1,117 @@
+{
+	"type":"naval",
+	"health":3640,
+	"armor":18,
+	"speed":0.9,
+	"outlineColor":"2E2F34FF",
+	"faceTarget":false,
+	"rotateSpeed":1.8,
+	"trailLength":24,
+	"waveTrailX":14,
+	"waveTrailY":-6,
+	"trailScl":2,
+	"hitSize":20,
+	"itemCapacity":350,
+
+	"research":{
+	"parent":"dew",
+	"requirements":[
+	"metaglass/1600",
+	"plastanium/400",
+	"silicon/4000"
+	],
+	"objectives":[
+	"elementary-shipyard"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+	{"name":"rivulet-weapon",
+	"mirror":false,
+	"reload":12,
+	"x":0,"y":-1,
+	"rotate":true,
+	"rotateSpeed":5,
+	"shootCone":15,
+	"shootSound":"missile",
+	"cooldownTime":20,
+	"restitution":0.009,
+
+	"bullet":{
+		"type":"PointBulletType",
+		"damage":40,
+		"speed":340,"lifetime":0.6,
+
+		"hitSound":"explosion",
+		"despawnEffect":"flakExplosionBig",
+
+		"trailSpacing":3,
+		"trailEffect":{
+		"type":"ParticleEffect",
+		"particles":1,
+		"length":0,
+		"baseLength":1,
+		"lifetime":7.5,
+		"line":true,
+		"randLength":false,
+		"lenFrom":5,
+		"lenTo":5,
+		"strokeFrom":1.2,
+		"strokeTo":0,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF",
+		"cone":0
+		},
+
+		"shootEffect":{
+		"type":"ParticleEffect",
+		"offset":30,
+		"particles":5,
+		"lifetime":15,
+		"length":24,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":50,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":5,
+		"lenTo":0,
+		"lightColor":"DEEDFFFF",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+		},
+	"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF",
+		"strokeFrom":3.5,
+		"strokeTo":0
+		},
+		{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":25,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":75,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":7,
+		"lenTo":0,
+		"lightColor":"DEEDFFFF",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+		}	]	}
+		}	}	]
+}

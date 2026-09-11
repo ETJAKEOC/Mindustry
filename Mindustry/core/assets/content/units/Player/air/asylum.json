@@ -1,0 +1,202 @@
+{
+	"type":"payload",
+	"payloadCapacity":576,
+	"flying":true,
+	"accel":0.3,"drag":0.1,
+	"faceTarget":true,
+	"useEngineElevation":false,
+	"lowAltitude":true,
+	"outlineColor":"2E2F34FF",
+
+	"engineSize":8,
+	"engineOffset":21.25,
+	"trailLength":10,
+
+	"abilities":[
+	{"type":"ForceFieldAbility",
+	"sides":6,
+	"radius":108,
+	"regen":1,
+	"max":6000,
+	"cooldown":1000
+	},
+	{"type":"EnergyFieldAbility",
+	"x":0,"y":3,
+	"damage":30,
+	"reload":10,
+	"range":144,
+	"status":"electrified",
+	"statusDuration":180,
+	"hitBuildings":true,
+	"hitUnits":true,
+	"healPercent":0.5,
+	"maxTargets":8,
+	"useAmmo":false,
+	"color":"84F491FF"
+	}	],
+
+	"hitSize":47.5,
+	"rotateSpeed":1,
+	"itemCapacity":120,
+	"speed":0.6,
+	"health":8610,
+	"armor":12,
+
+	"research":{
+	"parent":"bless",
+	"requirements":[
+	"chromium/60000",
+	"iridium/30000",
+	"osmium/30000",
+	"metaglass/50000",
+	"silicon/13000",
+	"plastanium/50000"
+	],
+	"objectives":[
+	"senior-refabricator"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify",
+	"empI"
+	],
+
+	"weapons": [
+		{"name": "bless-weapon",
+		"type":"RepairBeamWeapon",
+		"x":17.75,"y":-8,
+		"shootY":6.5,
+		"beamWidth":0.8,
+		"mirror": true,
+		"repairSpeed":2,
+		"bullet": {
+		"maxRange":144
+		}	},
+
+		{"name":"asylum-weapon",
+		"shootCone":5,
+		"mirror":false,
+		"top":true,
+		"x":0,"y":0,
+		"reload":180,
+		"recoil":0.5,
+		"rotate":false,
+		"shootSound":"laser",
+
+		"bullet":{
+		"keepVelocity":false,
+		"type":"basicBulletType",
+		"sprite":"mine-bullet",
+		"damage":50,
+		"width":18,
+		"height":18,
+		"speed":8,
+		"lifetime":36,
+		"homingDelay":6,
+		"homingPower":1,
+		"homingRange":90,
+		"splashDamageRadius":8,
+		"splashDamage":70,
+		"shrinkX":0,"shrinkY":0,
+
+	"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WrapEffect",
+		"effect":"dynamicSpikes",
+		"color":"84F491FF",
+		"rotation":72
+		},
+		{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":30,
+		"length":50,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":-360,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":14,
+		"lenTo":0,
+		"lightColor":"84F491FF",
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF"
+		},
+		{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":30,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":-360,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":7,
+		"lenTo":0,
+		"lightColor":"84F491FF",
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF"
+		}	]	},
+
+	"despawnEffect":"smokeCloud",
+	"smokeEffect":"smokeCloud",
+
+	"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":80,
+		"sizeFrom":0,
+		"sizeTo":60,
+		"strokeFrom":3.5,
+		"strokeTo":0,
+		"colorFrom":"787878",
+		"colorTo":"787878"
+		},
+		{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":30,
+		"length":50,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":-360,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":14,
+		"lenTo":0,
+		"lightColor":"84F491FF",
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF"
+		},
+		{"type":"ParticleEffect",
+		"offset":30,
+		"particles":10,
+		"lifetime":30,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":-360,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":7,
+		"lenTo":0,
+		"lightColor":"84F491FF",
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF"
+		}	]	},
+
+		"frontColor":"84F491FF",
+		"backColor":"F2FFF3FF",
+		"trailColor":"84F491FF",
+		"trailEffect":"none",
+		"trailLength":28,
+		"trailWidth":5
+		}	}	]
+}

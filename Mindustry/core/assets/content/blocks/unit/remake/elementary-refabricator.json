@@ -1,0 +1,45 @@
+{
+//	"type":"Reconstructor",
+	"category":"units",
+
+	"research":{"parent":"mech-manufacturer",
+	"requirements":[
+	"tungsten/4000",
+	"chromium/3500",
+	"silicon/6000",
+	"graphite/2500"
+	]	},
+
+	"requirements":[
+	"tungsten/80",
+	"chromium/70",
+	"silicon/120",
+	"graphite/50"
+	],
+
+	"constructTime":1200,
+	"health":1360,
+	"size":3,
+
+	"consumes":{
+		"power":8,
+		"items":{
+		"items":[
+		"chromium/50",
+		"silicon/40"
+		]	},
+		"liquid":{
+		"liquid":"hydrogen","amount":0.1
+		}	},
+
+	"upgrades":[
+	["current","lighting"],
+	["gmecht1","gmecht2"],
+//	["claw","spike"],
+	["electron","puncture"],
+	["accretion","aggregation"],
+	["dust","sandstone"],
+	["cloud","accumulation"],
+	["gather","patrol"]
+	]
+}

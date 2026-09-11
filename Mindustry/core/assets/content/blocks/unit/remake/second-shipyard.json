@@ -1,0 +1,39 @@
+{
+//	"type":"Reconstructor",
+	"category":"units",
+
+	"research":{"parent":"elementary-shipyard",
+	"requirements":[
+	"uranium/2400",
+	"silicon/8400",
+	"metaglass/6400",
+	"plastanium/4800"
+	]	},
+
+	"requirements":[
+	"uranium/90",
+	"silicon/240",
+	"metaglass/160",
+	"plastanium/120"
+	],
+
+	"constructTime":3000,
+	"health":1360,
+	"size":6,
+
+	"consumes":{
+		"power":12,
+		"items":{
+		"items":[
+		"uranium/120",
+		"metaglass/90",
+		"silicon/150"
+		]	},
+		"liquid":{
+		"liquid":"nitrogen","amount":0.2
+		}	},
+
+	"upgrades":[
+	["rivulet","lakes"]
+	]
+}

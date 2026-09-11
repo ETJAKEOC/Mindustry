@@ -1,0 +1,25 @@
+{
+	"type":"Radar",
+	"category":"effect",
+
+	"research":{
+	"parent":"hydraulic-generator",
+	"requirements":[
+	"nickel/30",
+	"graphite/30",
+	"silicon/60"
+	]	},
+
+	"requirements":[
+	"nickel/10",
+	"graphite/10",
+	"silicon/20"
+	],
+
+	"consumes":{"power":0.6
+	},
+
+	"size":1,
+	"health":250,
+	"fogRadius":35
+}

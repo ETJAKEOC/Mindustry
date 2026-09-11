@@ -1,0 +1,86 @@
+{
+	"type":"ItemTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-"
+	},
+
+	"research":{
+	"parent":"rapids",
+	"requirements":[
+	"nickel/80",
+	"graphite/50",
+	"silicon/30"
+	]	},
+
+	"requirements":[
+	"nickel/80",
+	"graphite/50",
+	"silicon/30"
+	],
+
+	"size":3,
+	"health":1865,
+	"rotateSpeed":3.5,
+	"reload":19,
+	"ammoPerShot":2,
+	"maxAmmo":21,
+	"liquidCapacity":20,
+	"range":216,
+	"inaccuracy":1,
+	"squareSprite":false,
+	"shootSound":"mineDeploy",
+	"heatColor":"63E9FCFF",
+
+	"ammoTypes":{
+	"snow(item)":{
+		"type":"basicBulletType",
+		"sprite":"calamity-plasma",
+		"damage":8,
+		"width":8,
+		"height":16,
+		"speed":6,
+		"lifetime":36,
+		"status":"wet",
+		"statusDuration":80,
+		"buildingDamageMultiplier":0.3,
+		"knockback":1,
+
+		"hitSound":"rockBreak",
+
+	"shootEffect":"none",
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"particles":9,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"B8DFE5FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		},
+
+	"despawnEffect":{
+		"type":"ParticleEffect",
+		"particles":9,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"B8DFE5FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		},
+
+	"frontColor":"FFFFFFFF",
+	"backColor":"B8DFE5FF"
+	}	}
+}

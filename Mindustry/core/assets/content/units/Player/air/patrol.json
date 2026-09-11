@@ -1,0 +1,60 @@
+{
+	"type":"flying",
+	"controller":"BuilderAI",
+	"flying":true,
+	"accel":0.02,"drag":0.04,
+
+	"research":{
+	"parent":"gather",
+	"requirements":[
+	"chromium/1500",
+	"silicon/1200"
+	],
+	"objectives":[
+	"elementary-refabricator"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"mineItems":["nickel","tungsten","chromium"],
+
+	"hitSize":8.875,
+	"engineSize":3,
+	"engineOffset":6,
+	"trailLength":5,
+	"speed":3.75,
+	"health":1085,
+	"itemCapacity":40,
+	"mineSpeed":1.1,
+	"mineTier":5,
+	"armor":5,
+	"outlineColor":"2E2F34FF",
+
+	"weapons":[
+		{"name":"patrol-weapon",
+		"type":"RepairBeamWeapon",
+		"top":false,
+		"x":0,"y":4,
+		"shootY":3,
+		"rotationLimit":30,
+		"rotate": true,
+		"rotateSpeed":6,
+		"mirror":false,
+		"widthSinMag":0.11,
+		"reload":25,
+		"beamWidth":0.7,
+		"shootCone":40,
+		"repairSpeed":1,
+		"fractionRepairSpeed":0.05,
+		"laserColor":"84F491FF",
+		"healColor":"84F491FF",
+		"targetUnits":false,
+		"targetBuildings":true,
+		"autoTarget":false,
+		"controllable":true,
+		"bullet":{
+		"maxRange":50
+	}	}	]
+}

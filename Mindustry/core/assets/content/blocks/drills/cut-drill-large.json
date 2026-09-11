@@ -1,0 +1,40 @@
+{
+	"type":"BeamDrill",
+	"category":"production",
+
+	"research":{
+	"parent":"cut-drill",
+	"requirements":[
+	"chromium/1000",
+	"silicon/750",
+	"plastanium/500"
+	]	},
+
+	"requirements":[
+	"chromium/40",
+	"silicon/30",
+	"plastanium/20"
+	],
+
+	"consumes":{
+	"power":0.5,
+	"liquids":[
+	"hydrogen/0.016666666666666"
+	],
+	"liquid":{
+	"liquid":"nitrogen",
+	"amount":0.033333333333333,
+	"liquidBoostIntensity":1.5,
+	"optional":true,
+	"booster":true
+	}	},
+
+	"itemCapacity":20,
+	"liquidCapacity":20,
+	"size":3,
+	"health":1060,
+	"tier":5,
+	"range":6,
+	"fogRadius":3,
+	"drillTime":60
+}

@@ -1,0 +1,65 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"research":{
+	"parent":"spore-culture-room",
+	"requirements":[
+	"nickel/1000",
+	"tungsten/1200",
+	"silicon/1800"
+	],
+	"objectives":[
+	{"type":"SectorComplete",
+	"preset":"HazeRavine"}
+	]	},
+
+	"requirements":[
+	"nickel/50",
+	"tungsten/60",
+	"silicon/90"
+	],
+
+	"consumes":{"power":3,
+	"items":{
+	"items":[
+	"spore-pod/3"
+	]	}	},
+	"outputLiquid":"oil/0.3",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	{"type":"DrawPistons",
+	"sinMag":1
+	},
+	"DrawDefault",
+	{"type":"DrawLiquidRegion",
+	"drawLiquid":"oil"
+	},
+	{"type":"DrawRegion",
+	"suffix":"-top"
+	}	]	},
+
+	"updateEffect":{
+		"type":"ParticleEffect",
+		"particles":3,
+		"sizeFrom":3,
+		"sizeTo":0,
+		"length":15,
+		"baseLength":10,
+		"lifetime":10,
+		"colorFrom":"E3E3E390",
+		"colorTo":"ffffff"
+	},
+
+	"size":3,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"craftTime":40,
+	"itemCapacity":30,
+	"liquidCapacity":100
+}

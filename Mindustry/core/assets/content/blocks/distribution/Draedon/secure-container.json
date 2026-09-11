@@ -1,0 +1,21 @@
+{
+	"type":"StorageBlock",
+	"category":"distribution",
+
+	"research":{
+	"parent":"secure-bridge",
+	"requirements":[
+	"chromium/8000",
+	"graphite/7000"
+	]	},
+
+	"requirements":[
+	"chromium/80",
+	"graphite/70"
+	],
+
+	"size":2,
+	"health":1025,
+	"itemCapacity":200,
+	"coreMerge":true
+}

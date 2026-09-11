@@ -1,0 +1,154 @@
+{
+	"type":"naval",
+	"health":1410,
+	"armor":10,
+	"speed":1.2,
+	"outlineColor":"2E2F34FF",
+	"faceTarget":false,
+	"rotateSpeed":1.2,
+	"trailLength":24,
+	"waveTrailX":11.75,"waveTrailY":-6,
+	"trailScl":2,
+	"hitSize":19,
+	"itemCapacity":200,
+
+	"research":{
+//	"parent":"dew",
+	"requirements":[
+	"chromium/500",
+	"silicon/300",
+	"metaglass/200"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"abilities":[
+	{"type": "ShieldRegenFieldAbility",
+	"amount":80,
+	"max":300,
+	"reload":180,
+	"range":60,
+	"activeEffect":{
+	"type":"WaveEffect",
+	"lifetime":20,
+	"sizeFrom":0,
+	"sizeTo":60,
+	"colorFrom":"FFD37FFF",
+	"colorTo":"FFD37FFF"
+	}	}	],
+
+	"weapons":[
+	{"name":"gboat1-weapon",
+	"mirror":false,
+	"reload":120,
+	"x":0,"y":-6,
+	"shootSound":"shockBlast",
+	"rotate":true,
+	"rotateSpeed":5,
+	"inaccuracy":12,
+	"top":true,
+	"layerOffset":1,
+
+	"shoot":{
+	"shots":3,
+	"shotDelay":5},
+
+	"parts":[
+	{"type":"RegionPart",
+	"suffix":"-blade",
+	"under":true,
+	"mirror":true,
+	"moveRot":-25,
+	"moves":[
+	{"type":"PartMove",
+	"progress":"reload",
+	"rot":-1
+	}	]	},
+	{"type":"RegionPart",
+	"suffix":"-blade",
+	"under":true,
+	"mirror":true,
+	"moveRot":-50,
+	"moves":[
+	{"type":"PartMove",
+	"progress":"reload",
+	"rot":-1
+	}	]	}	],
+
+	"bullet":{
+		"sprite":"mine-bullet",
+		"height":14,"width":14,
+		"damage":30,
+		"shrinkY":0,
+		"absorbable":false,
+		"homingDelay":10,
+		"homingPower":0.08,
+		"homingRange":30,
+		"healPercent":0.5,
+		"speed":4,
+		"lifetime":48,
+		"splashDamageRadius":55,
+		"splashDamage":45,
+		"collidesTeam":true,
+		"frontColor":"97FFA8",
+		"backColor":"97FFA8",
+		"trailLength":16,
+		"trailWidth":4,
+		"trailColor":"97FFA8",
+
+		"hitSound":"explosion",
+
+		"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"ParticleEffect",
+		"particles":15,
+		"length":80,
+		"lifetime":36,
+		"lightColor":"ff7048",
+		"cone":20,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF",
+		"sizeFrom":3,
+		"sizeTo":0
+		},
+		{"type":"ParticleEffect",
+		"particles":1,
+		"lifetime":10,
+		"length":0,
+		"region":"calamity-tall",
+		"sizeFrom":36,
+		"sizeTo":0,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF"
+		}	]	},
+
+	"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF",
+		"strokeFrom":3.5,
+		"strokeTo":0},
+		{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":9,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		}	]	}
+		}	}	]
+}

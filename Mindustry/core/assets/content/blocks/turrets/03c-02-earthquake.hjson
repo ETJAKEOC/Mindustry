@@ -1,0 +1,149 @@
+type: ItemTurret
+size: 3
+squareSprite: false
+health: 1800
+armor: 3
+shootSound: earthquake
+shootSoundVolume: 0.8
+requirements: [
+  01a-02-item-nickel/300
+  01a-05-item-aluminium/120
+  01a-06-item-chromium/50
+]
+category: turret
+coolant: {
+  type: ConsumeLiquid
+  liquid: 02b-02-a-purified-elixir
+  amount: 0.0833333333
+}
+coolantMultiplier: 7.5
+recoil: 0
+outlineColor: 2C2A36
+targetAir: false
+targetGround: true
+rotateSpeed: 0
+reload: 90
+range: 150
+shootCone: 360
+shootY: 0
+shootX: 0
+shake: 7
+maxAmmo: 15
+ammoTypes: {
+  01a-06-item-chromium: {
+    instantDisappear: true
+    ammoMultiplier: 1
+    damage: 6
+    splashDamage: 20
+    splashDamageRadius: 148
+    status: slow
+    statusDuration: 30
+    despawnEffect: none
+    hitEffect: none
+    collidesAir: false
+    shootEffect: {
+      type: WaveEffect
+      sizeFrom: 0
+      sizeTo: 152
+      strokeFrom: 3
+      strokeTo: 0
+      colorFrom: BCA49F
+      colorTo: BCA49F
+     }
+  }
+  01a-03-item-lamine: {
+    instantDisappear: true
+    ammoMultiplier: 1
+    damage: 8
+    splashDamage: 56
+    splashDamageRadius: 220
+    status: 13m-01-breached
+    statusDuration: 30
+    despawnEffect: none
+    hitEffect: none
+    rangeChange: 40
+    collidesAir: false
+    shootEffect: {
+      type: WaveEffect
+      sizeFrom: 0
+      sizeTo: 202
+      strokeFrom: 3
+      strokeTo: 0
+      colorFrom: ff8167
+      colorTo: ff8167
+    }
+  }
+}
+heatColor: 6d555980
+drawer: {
+  type: DrawTurret
+  basePrefix: earthquake-
+  parts: [
+      {
+      type: RegionPart
+      suffix: -a
+      x: 7.5
+      y: 7.5
+      rotation: -45
+      progress: recoil
+      heatProgress: warmup
+      moveY: -0.75
+      moveX: -0.75
+      under: true
+      heatColor: 6d555990
+      }
+      {
+      type: RegionPart
+      suffix: -a
+      x: -7.5
+      y: -7.5
+      progress: recoil
+      heatProgress: warmup
+      rotation: 135
+      moveY: 0.75
+      moveX: 0.75
+      under: true
+      heatColor: 6d555990
+      }
+      {
+      type: RegionPart
+      suffix: -a
+      rotation: -135
+      x: -7.5
+      y: 7.5
+      progress: recoil
+      heatProgress: warmup
+      moveY: -0.75
+      moveX: 0.75
+      under: true
+      heatColor: 6d555990
+      }
+      {
+      type: RegionPart
+      suffix: -a
+      rotation: 45
+      x: 7.5
+      y: -7.5
+      progress: recoil
+      heatProgress: warmup
+      moveY: 0.75
+      moveX: -0.75
+      under: true
+      heatColor: 6d555990
+    }
+  ]
+}
+research: {
+  parent: 03c-02-calamity
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-05-crest
+    }
+  ]
+}
+researchCost: [
+  01a-02-item-nickel/3000
+  01a-05-item-aluminium/1600
+  01a-06-item-chromium/600
+]

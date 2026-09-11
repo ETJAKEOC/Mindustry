@@ -1,0 +1,96 @@
+type: mech
+hovering: true
+hoverable: true
+faceTarget: false
+shadowElevation: 0.1
+mechFrontSway: 0
+mechSideSway: 0
+mechStride: 0
+drag: 0.075
+outlineColor: 26262f
+speed: 1.75
+rotateSpeed: 4.5
+accel: 0.1
+groundLayer: 60
+health: 660
+armor: 1
+hitSize: 8
+itemCapacity: 0
+useEngineElevation: false
+lowAltitude: false
+canDrown: false
+targetAir: false
+moveSound: loopExtract
+moveSoundVolume: 0.15
+moveSoundPitchMin: 0.5
+moveSoundPitchMax: 1.2
+parts: [
+  {
+    type: HoverPart
+    x: 4
+    y: 3
+    mirror: true
+    radius: 4
+    phase: 90
+    stroke: 2
+    layerOffset: -0.001
+    color: d8f18c
+  }
+  {
+    type: HoverPart
+    x: 4
+    y: -4
+    mirror: true
+    radius: 4
+    phase: 90
+    stroke: 2
+    layerOffset: -0.001
+    color: d8f18c
+  }
+]
+abilities: [
+  {
+    type: MoveEffectAbility
+    effect: missileTrailShort
+    minVelocity: 0.1
+    teamColor: true
+    effectParam: 3
+    interval: 3
+    x: 0
+    y: -4
+  }
+]
+weapons: [
+  {
+    x: 0
+    y: 1
+    name: codex-weapon
+    reload: 24
+    rotate: true
+    mirror: false
+    shootSound: shootElectric
+    shootSoundVolume: 0.3
+    rotateSpeed: 2.75
+    bullet: {
+      type: LightningBulletType
+      lightningLength: 12
+      damage: 14.5
+      pierce: false
+      pierceBuilding: false
+      lightningColor: e9c574
+      status: shocked
+    }
+  }
+]
+trailColor: d8f18c
+trailLength: 12
+research: {
+  parent: 0010-fabricator
+  objectives: [
+    {
+      type: Research
+      content: 10j-02-unitconstructor-ship
+    }
+  ]
+}
+researchCostMultiplier: 0

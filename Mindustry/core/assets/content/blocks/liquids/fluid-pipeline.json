@@ -1,0 +1,22 @@
+{
+	"type":"Conduit",
+	"category":"liquid",
+
+	"research":{
+	"parent":"hydraulic-generator",
+	"requirements":[
+	"nickel/20",
+	"metaglass/20"
+	]	},
+
+	"requirements":[
+	"nickel/1",
+	"metaglass/1"
+	],
+
+	"health":150,
+	"liquidCapacity":20,
+	"liquidPressure":1,
+	"bridgeReplacement":"fluid-pipeline-bridge",
+	"junctionReplacement":"fluid-pipeline-connector"
+}

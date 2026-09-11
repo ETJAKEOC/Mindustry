@@ -1,0 +1,219 @@
+{
+//	"type":"ItemTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-",
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-barrel",
+		"mirror":false,
+		"moveX":0,
+		"heatColor":"84F491FF",
+		"moveY":-8,
+		"progress":{
+		"type":"recoil",
+		"op":"curve",
+		"interp":"pow2In"
+		}	},
+		{"type":"RegionPart",
+		"mirror":true,
+		"moveRot":-30,
+		"suffix":"-side",
+		"progress":{
+		"type":"warmup",
+		"op":"blend",
+		"other":"heat",
+		"amount":0.45
+		}	},
+	{"type":"RegionPart",
+	"suffix":"-wing",
+	"under":true,
+	"mirror":true,
+	"blending":"additive",
+	"heatColor":"EDF3A9FF",
+	"color":"EDF3A9FF",
+	"colorTo":"EDF3A9FF",
+	"moveX":4,
+	"moveY":-4,
+	"moves":[
+	{"type":"PartMove",
+	"progress":"recoil",
+	"rot":-4,
+	"y":-2
+	}	],
+	"progress":"warmup"
+	}	]	},
+
+	"research":{
+	"parent":"erupt",
+	"requirements":[
+	"tungsten/900",
+	"chromium/1500",
+	"plastanium/1800",
+	"silicon/3000"
+	]	},
+
+
+	"requirements":[
+	"tungsten/90",
+	"chromium/150",
+	"plastanium/180",
+	"silicon/300"
+	],
+
+	"consumes":{
+	"liquids":[
+	"hydrogen/0.1"
+	],
+	"coolant":{
+	"liquid":"cryofluid",
+	"amount":0.06,
+	"liquidBoostIntensity":1.5,
+	"optional":true,
+	"booster":true
+	}	},
+
+	"shoot":{
+	"shots":2,
+	"shotDelay":3
+	},
+
+	"size":4,
+	"scaledHealth":250,
+	"rotateSpeed":2,
+	"reload":90,
+	"ammoPerShot":5,
+	"maxAmmo":20,
+	"liquidCapacity":20,
+	"range":360,
+	"squareSprite":false,
+	"shootWarmupSpeed":0.07,
+	"targetAir":false,
+	"recoil":3,
+	"minWarmup":0.85,
+	"shootSound":"mediumCannon",
+
+	"ammoTypes":{
+	"plastanium":{
+		"type":"ArtilleryBulletType",
+		"speed":5,
+		"lifetime":72,
+		"splashDamageRadius":64,
+		"splashDamage":284,
+		"sprite":"shell",
+		"height":19,"width":15,
+		"backColor":"CBD97FFF",
+		"frontColor":"EDF3A9FF",
+		"despawnShake":6,
+		"shrinkX":0.2,"shrinkY":0.1,
+		"buildingDamageMultiplier":0.3,
+	"hitSound":"titanExplosion",
+
+		"trailColor":"EDF3A9FF",
+		"trailLength":20,"trailWidth":3,
+		"trailSinScl":2.5,
+		"trailSinMag":0.5,
+		"trailEffect":"none",
+
+		"despawnEffect":"none",
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"particles":7,
+		"length":50,
+		"lifetime":80,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":45,
+		"colorFrom":"CBD97FFF",
+		"colorTo":"EDF3A9FF",
+		"sizeFrom":7,
+		"sizeTo":0
+		},
+
+	"hitEffect":{
+	"type":"multiEffect",
+	"effects":[
+	{"type":"WaveEffect",
+	"lifetime":15,
+	"sizeFrom":0,
+	"sizeTo":60,
+	"strokeFrom":7.5,
+	"strokeTo":0,
+	"colorFrom":"CBD97FFF",
+	"colorTo":"EDF3A9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":20,
+	"length":50,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":14,
+	"lenTo":5,
+	"lightColor":"EDF3A9FF",
+	"colorFrom":"CBD97FFF",
+	"colorTo":"EDF3A9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":25,
+	"length":30,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":7,
+	"lenTo":7,
+	"lightColor":"EDF3A9FF",
+	"colorFrom":"CBD97FFF",
+	"colorTo":"EDF3A9FF"
+	},
+	{"type":"ParticleEffect",
+		"particles":5,
+		"length":45,
+		"lifetime":240,
+		"interp":"pow3Out",
+		"sizeInterp":"pow5In",
+		"offset":30,
+	"colorFrom":"EDF3A9A0",
+	"colorTo":"EDF3A960",
+		"sizeFrom":8,
+		"sizeTo":0
+		},
+		{"type":"ParticleEffect",
+		"particles":4,
+		"length":55,
+		"lifetime":180,
+		"interp":"pow3Out",
+		"sizeInterp":"pow5In",
+		"offset":30,
+	"colorFrom":"EDF3A9A0",
+	"colorTo":"EDF3A960",
+		"sizeFrom":18,
+		"sizeTo":0
+		},
+	{"type":"ParticleEffect",
+		"particles":5,
+		"length":35,
+		"lifetime":180,
+		"interp":"pow3Out",
+		"sizeInterp":"pow5In",
+		"offset":30,
+		"colorFrom":"787878",
+		"colorTo":"787878",
+		"sizeFrom":10,
+		"sizeTo":0
+		}	]	}
+		}	}
+}

@@ -1,0 +1,46 @@
+type: tank
+name: Trigon
+description: Quick and durable. Equipped with a rocket launcher.
+hitSize: 19
+treadRects: [
+  {
+    x: -31
+    y: -42
+    width: 16
+    height: 84
+  }
+]
+singleTarget: false
+omniMovement: false
+faceTarget: false
+health: 710
+armor: 4
+speed: 1
+rotateSpeed: 4.5
+itemCapacity: 0
+outlineColor: 44413c
+research: {
+  parent: 15o-01-shennong
+  objectives: [ 
+    10j-04-basic-assembler-constituent
+  ]
+}
+tankMoveVolume: 0.55
+tankMoveSound: tankMove
+weapons: [
+  {
+    x: 0
+    y: -1
+    name: trigon-weapon
+    reload: 90
+    mirror: false
+    rotate: true
+    shootSound: shoot-big-artillery
+    bullet: {
+      instantDisappear: true
+      damage: 0
+      spawnUnit: asthosus-18r-03-smol-missile
+    }
+  }
+]
+researchCostMultiplier: 3

@@ -1,0 +1,15 @@
+captureWave: 20
+difficulty: 10
+planet: frostnova
+sector: 19
+research: {
+  #TODO - optional - need replacement
+  parent: 19s-13-marshlands
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-13-marshlands
+    }
+  ]
+}
+outline: false

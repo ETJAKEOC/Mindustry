@@ -1,0 +1,10 @@
+type: Radar
+size: 2
+health: 450
+squareSprite: false
+category: effect
+outlineColor: 2C2A36
+fogRadius: 2000
+ambientSound: loopRadarPulse
+ambientSoundVolume: 0.1
+buildVisibility: sandboxOnly

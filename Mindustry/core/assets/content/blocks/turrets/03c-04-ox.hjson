@@ -1,0 +1,178 @@
+type: ItemTurret
+size: 3
+health: 2600
+armor: 3
+shootSound: shootBreach
+shootSoundVolume: 0.9
+requirements: [
+  01a-02-item-nickel/350
+  01a-05-item-aluminium/200
+  01a-07-item-clevorite/80
+  01a-08-item-petal/120
+]
+category: turret
+coolant: {
+  type: ConsumeLiquid
+  liquid: 02b-02-a-purified-elixir
+  amount: 0.25
+}
+coolantMultiplier: 2.5
+recoil: 1
+shake: 1
+outlineColor: 2C2A36
+targetAir: true
+targetGround: true
+rotateSpeed: 1.95
+reload: 135
+range: 250
+shootY: 6
+shoot: {
+  firstShotDelay: 35
+  shotDelay: 5
+  shots: 10
+}
+maxAmmo: 60
+ammoPerShot: 6
+ammoTypes: {
+  01a-08-item-petal: {
+      type: BasicBulletType
+      buildingDamageMultiplier: 0.3
+      width: 12
+      height: 12
+      pierceCap: 3
+      lifetime: 40
+      damage: 78.45
+      speed: 7
+      ammoMultiplier: 2
+      shootEffect: colorSpark
+      smokeEffect: colorSpark
+      trailColor: FF91B3
+      trailWidth: 1.5
+      trailLength: 6
+      backColor: FF91B3
+      hitColor: FF91B3
+      despawnEffect: {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 8
+        sizeFrom: 0
+        sizeTo: 18
+        colorFrom: ffffff
+        colorTo: feb380
+    }
+  }
+  01a-09-item-morphite: {
+      type: BasicBulletType
+      buildingDamageMultiplier: 0.3
+      width: 12
+      height: 12
+      pierceCap: 7
+      lifetime: 39
+      damage: 67.25
+      speed: 8
+      ammoMultiplier: 4
+      shootEffect: colorSpark
+      smokeEffect: colorSpark
+      trailColor: 51C59C
+      trailWidth: 1.5
+      trailLength: 8
+      backColor: 51C59C
+      hitColor: 51C59C
+      shootSound: shootBreachCarbide
+      fragRandomSpread: 0
+      fragSpread: 90
+      fragLifeMin: 1
+      fragLifeMax: 1
+      fragVelocityMin: 1
+      fragVelocityMax: 1
+      fragBullets: 4
+      fragBullet: {
+        type: LightningBulletType
+        lightningLength: 6
+        lightningLengthRand: 3
+        lightningColor: 51c59c
+        status: shocked
+        damage: 12.5
+        despawnSound: explosionArtilleryShock
+      }
+      despawnEffect: {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 8
+        sizeFrom: 0
+        sizeTo: 18
+        colorFrom: ffffff
+        colorTo: feb380
+    }
+  }
+}
+heatColor: bc4967aa
+drawer: {
+  type: DrawTurret
+  basePrefix: ox-
+  parts: [
+    {
+      type: RegionPart
+      suffix: -ammo
+      mirror: true
+      progress: warmup
+      moveY: 0.5
+      moveX: -0.5
+      under: true
+    }
+    {
+      type: RegionPart
+      suffix: -case
+      mirror: false
+      progress: warmup
+      moveY: -5
+      under: true
+    }
+    {
+      type: RegionPart
+      suffix: -arm
+      mirror: true
+      progress: warmup
+      heatProgress: recoil
+      moveX: -0.3
+      moveY: -0.3
+      under: true
+    }
+    {
+      type: RegionPart
+      suffix: -arm-glow
+      mirror: true
+      progress: warmup
+      heatProgress: recoil
+      moveY: -0.3
+      moveX: -0.3
+      drawRegion: false
+      heatColor: bc496790
+    }
+    {
+      type: RegionPart
+      suffix: -glow
+      heatProgress: warmup
+      drawRegion: false
+      heatColor: bc496790
+    }
+  ]
+}
+research: {
+  #TODO - change to proper sector
+  parent: 03c-04-b-subsonic
+  objectives: [
+    {
+      type: OnSector
+      preset: 20t-15-isolated-canyon
+    }
+  ]
+}
+researchCost: [
+  01a-02-item-nickel/8000
+  01a-05-item-aluminium/5000
+  01a-07-item-clevorite/2500
+  01a-08-item-petal/750
+]

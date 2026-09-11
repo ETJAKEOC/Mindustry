@@ -1,0 +1,14 @@
+captureWave: 20
+difficulty: 7
+planet: frostnova
+sector: 142
+research: {
+  parent: 19s-10-precipice
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-10-precipice
+    }
+  ]
+}
+outline: false

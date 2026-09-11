@@ -1,0 +1,137 @@
+type: legs
+controller: BuilderAI
+legCount: 4
+lockLegBase: true
+legContinuousMove: true
+legExtension: -4
+legBaseOffset: 3
+legLength: 12
+legMaxLength: 1.1
+legMinLength: 0.2
+legSpeed: 0.12
+legGroupSize: 3
+legForwardScl: 1.05
+legLengthScl: 0.95
+legPhysicsLayer: false
+legStraightness: 0.3
+hovering: true
+faceTarget: true
+hitSize: 9
+health: 300
+armor: 2
+speed: 1.2
+mineWalls: true
+mineSpeed: 12
+mineTier: 1
+buildSpeed: 1.9
+accel: 0.09
+drag: 0.08
+groundLayer: 60
+shadowElevation: 0.1
+rotateSpeed: 4
+itemCapacity: 15
+outlineColor: 26262f
+fogRadius: 15
+isEnemy: false
+range: 104
+stepShake: 0
+stepSound: walkerStepSmall
+stepSoundVolume: 0.4
+abilities: [
+  {
+    type: ShieldRegenFieldAbility
+    reload: 300
+    range: 20
+    amount: 20
+    max: 200
+    soundVolume: 0.2
+  }
+]
+weapons: [
+  {
+    x: -3.5
+    y: 6.5
+    name: sepia-weapon
+    reload: 30
+    recoil: 1.5
+    mirror: true
+    rotate: false
+    alternate: false
+    shootSound: shootLaser
+    layerOffset: -0.002
+      bullet: { 
+      type: BasicBulletType
+      damage: 10
+      width: 4
+      splashDamageRadius: 8
+      splashDamage: 10
+      lifetime: 30
+      speed: 3.5
+      smokeEffect: shootSmokeSquare
+      trailColor: d8f18c
+      trailWidth: 2
+      trailLength: 3
+      trailParam: 1.6
+      trailInterval: 6
+      trailEffect: missileTrail
+      backColor: d8f18c
+      hitColor: d8f18c
+      buildingDamageMultiplier: 0.01
+      collidesTeam: true
+      healPercent: 4.5
+      shootEffect: { 
+        type: MultiEffect
+        effects: [
+          {
+            type: WaveEffect
+            colorFrom: d8f18c
+            colorTo: d8f18cf9
+            sizeFrom: 0
+            sizeTo: 3.75
+            lifetime: 9
+            strokeFrom: 0.2
+            strokeTo: 0.8
+            sides: 4
+            rotation: 0
+            offsetX: -0.25
+          }
+        ]
+      }
+      hitEffect: hitBulletColor
+      despawnEffect: {
+        type: MultiEffect
+        effects: [
+          {
+            type: particleEffect
+            colorFrom: d8f18c
+            colorTo: d8f18c
+            sizeFrom: 1.8
+            sizeTo: 0
+            lifetime: 8
+            strokeFrom: 1.6
+            strokeTo: 0.4
+          }
+          {
+            type: WaveEffect
+            colorFrom: d8f18c
+            colorTo: d8f18c
+            sizeFrom: 0
+            sizeTo: 9
+            lifetime: 9
+            strokeFrom: 0.8
+            strokeTo: 0.2
+          }
+        ]
+      }
+    }
+  }
+]
+research: {
+  parent: 0016-unit
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-06-botanical-garden
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+type: flying
+flying: true
+faceTarget: true
+groundLayer: 40
+shadowElevation: 0.1
+drag: 0.07
+outlineColor: 26262F
+speed: 1.8
+rotateSpeed: 2.1
+accel: 0.1
+health: 2570
+armor: 6
+hitSize: 21
+researchCostMultiplier: 2
+loopSound: loopHover
+loopSoundVolume: 0.38
+research: {
+  parent: 17q-02-calaust
+  objectives: [
+    {
+      type: Research
+      content: 10j-09-unitassembler-ship
+    }
+  ]
+}
+engines: [
+  {
+    x: 0
+    y: -13
+    radius: 4
+    rotation: -90
+  }
+  {
+    x: 8.5
+    y: -8.5
+    radius: 2.5
+    rotation: -90
+  }
+  {
+    x: -8.5
+    y: -8.5
+    radius: 2.5
+    rotation: -90
+  }
+]
+itemCapacity: 30
+lowAltitude: false
+parts: [
+ {
+  suffix: -blade
+  type: RegionPart
+  moveRot: 0
+  moveX: 0
+  moveY: 0
+  mirror: true
+  heatProgress: reload
+  moves: [
+   {
+    type: PartMove
+    progress: reload
+    x: 0.9
+    y: 0.5
+    rot: -2
+   }
+  ]
+ }
+]
+weapons: [
+  {
+    x: 0
+    y: 1
+    reload: 91
+    rotate: false
+    mirror: false
+    minWarmup: 0.55
+    shootY: -1
+    shoot: {
+      type: ShootHelix
+      mag: 1
+      scl: 3
+    }
+    shootSound: explosionObviate
+    bullet: {
+    type: BasicBulletType
+      damage: 72.5
+      width: 10
+      height: 15
+      hitSize: 6
+      speed: 6
+      shootEffect: shootTitan
+      smokeEffect: shootSmokeTitan
+      lifetime: 32
+      pierce: true
+      pierceBuilding: false
+      despawnSound: explosionArtilleryShock
+      hitColor: d8f18c
+      trailColor: d8f18c
+      backColor: d8f18c
+      frontColor: d8f18c
+      trailLength: 10
+      trailWidth: 3
+      fragBullets: 2
+      fragBullet: {
+        type: LightningBulletType
+        damage: 28.5
+        lightningLength: 2.5
+        lightningLengthRand: 4.5
+        lightningColor: d8f18c
+        status: shocked
+      }
+    }
+  }
+]

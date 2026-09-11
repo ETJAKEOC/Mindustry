@@ -1,0 +1,194 @@
+{
+//	"type":"ContinuousLiquidTurret",
+	"category":"turret",
+
+	"drawer":{
+		"type":"drawTurret",
+		"basePrefix":"vitospp-",
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-barrel",
+		"moveX":2,"moveY":2,
+		"mirror":true,
+		"layerOffset":-0.003,
+		"progress":{
+		"type":"recoil",
+		"op":"blend",
+		"other":"heat",
+		"amount":0
+		},
+		"heatProgress":"recoil"
+		},
+		{"type":"RegionPart",
+		"mirror":true,
+		"layerOffset":-0.003,
+		"moveX":1.2,
+		"moveY":-1.2,
+		"suffix":"-below",
+		"progress":{
+		"type":"recoil",
+		"op":"blend",
+		"other":"heat",
+		"amount":0
+		},
+		"heatProgress":"recoil"
+		}	]	},
+
+	"research":{
+	"parent":"laser",
+	"requirements":[
+	"tungsten/330",
+	"plastanium/60",
+	"silicon/450"
+	]	},
+
+	"requirements":[
+	"tungsten/110",
+	"plastanium/20",
+	"silicon/150"
+	],
+
+	"size":3,
+	"squareSprite":false,
+	"health":1820,
+	"range":160,
+	"liquidConsumed":0.5,
+
+	"liquidCapacity":300,
+	"outlineColor":"36363CFF",
+	"update":true,
+	"recoilTime":100,
+	"cooldownTime":240,
+	"shootY":6,
+	"hasPower":true,
+
+	"loopSound":"torch",
+	"loopSoundVolume":2.5,
+
+	"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"ParticleEffect",
+		"particles":12,
+		"length":100,
+		"lifetime":55,
+		"line":true,
+		"cone":40,
+		"lenFrom":8,
+		"lenTo":2,
+		"strokeFrom":3,
+		"strokeTo":0.5,
+		"colorFrom":"8ca9e8",
+		"colorTo":"6a72f6"
+		},
+		{"type":"ParticleEffect",
+		"particles":21,
+		"length":100,
+		"lifetime":35,
+		"line":true,
+		"cone":70,
+		"lenFrom":8,
+		"lenTo":5,
+		"strokeFrom":3,
+		"strokeTo":0.5,
+		"colorFrom":"8ca9e8",
+		"colorTo":"6a72f6"
+		},
+		{"type":"ParticleEffect",
+		"particles":24,
+		"length":140,
+		"lifetime":25,
+		"line":true,
+		"cone":40,
+		"lenFrom":10,
+		"lenTo":10,
+		"strokeFrom":3,
+		"strokeTo":0.5,
+		"colorFrom":"8ca9e8",
+		"colorTo":"6a72f6"
+	}	]	},
+
+	"shake":2,
+	"shootSound":"shockBlast",
+	"recoil":1,
+	"rotateSpeed":2,
+
+	"ammoTypes":{
+	"hydrogen":{
+		"type":"ContinuousFlameBulletType",
+		"colors":["5040D260","597CFFAA","8CA9E8","AEC6FF","FFFFFFFF"],
+		"damage":22,
+		"knockback":1,
+		"buildingDamageMultiplier":0.2,
+		"width":5,"length":160,
+		"drawFlare":false,
+		"lifetime":60,
+		"drawSize":200,
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":7,
+		"lifetime":15,
+		"length":65,
+		"cone":-360,
+		"strokeFrom":2.5,
+		"strokeTo":0,
+		"lenFrom":8,
+		"lenTo":0,
+		"colorFrom":"8ca9e8",
+		"colorTo":"6a8ef6"
+		}	},
+
+	"ozone":{
+		"type":"ContinuousFlameBulletType",
+		"colors":["EB7ABE","E189F5","907EF7","91A4FF","FFFFFF"],
+		"damage":15,
+		"knockback":1,
+		"buildingDamageMultiplier":0.2,
+		"width":5,"length":160,
+		"drawFlare":false,
+		"lifetime":60,
+		"drawSize":200,
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":7,
+		"lifetime":15,
+		"length":65,
+		"cone":-360,
+		"strokeFrom":2.5,
+		"strokeTo":0,
+		"lenFrom":8,
+		"lenTo":0,
+		"colorFrom":"907EF7",
+		"colorTo":"91A4FF"
+		}	},
+
+	"cyanogen":{
+		"type":"ContinuousFlameBulletType",
+		"colors":["465AB8","66A6D2","89E8B6","CAFCBE","FFFFFF"],
+		"damage":30,
+		"knockback":1,
+		"buildingDamageMultiplier":0.2,
+		"width":5,"length":160,
+		"drawFlare":false,
+		"lifetime":60,
+		"drawSize":200,
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":7,
+		"lifetime":15,
+		"length":65,
+		"cone":-360,
+		"strokeFrom":2.5,
+		"strokeTo":0,
+		"lenFrom":8,
+		"lenTo":0,
+		"colorFrom":"89E8B6",
+		"colorTo":"CAFCBE"
+		}	}	}
+}

@@ -1,0 +1,21 @@
+{
+	"type":"SwitchBlock",
+	"category":"logic",
+
+	"research":{
+	"parent":"holograph-record-board",
+	"requirements":[
+	"nickel/500",
+	"graphite/500",
+	"silicon/400"
+	]	},
+
+	"requirements":[
+	"nickel/10",
+	"graphite/10",
+	"silicon/8"
+	],
+
+	"health":260,
+	"size":1
+}

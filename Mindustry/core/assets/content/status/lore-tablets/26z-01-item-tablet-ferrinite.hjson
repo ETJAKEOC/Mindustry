@@ -1,0 +1,8 @@
+research: {
+  parent: 11k-01-core-essence
+  objectives: [
+    01a-01-item-ferrinite
+  ]
+}
+alwaysUnlocked: true
+databaseCategory: lore-tablets

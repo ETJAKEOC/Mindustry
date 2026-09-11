@@ -1,0 +1,26 @@
+{
+	"type":"LogicBlock",
+	"category":"logic",
+
+	"research":{
+	"parent":"holograph-record-board",
+	"requirements":[
+	"chromium/6000",
+	"graphite/2000",
+	"silicon/8000"
+	]	},
+
+	"requirements":[
+	"chromium/60",
+	"graphite/20",
+	"silicon/40"
+	],
+
+	"consumes":{"power":10
+	},
+
+	"health":1160,
+	"size":2,
+	"instructionsPerTick":15,
+	"range":200
+}

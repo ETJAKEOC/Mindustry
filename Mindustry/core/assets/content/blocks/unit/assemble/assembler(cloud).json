@@ -1,0 +1,38 @@
+{
+	"type":"UnitAssembler",
+	"category":"units",
+
+	"health":2430,
+	"size":5,
+	"dronesCreated":4,
+	"areaSize":21,
+
+	"consumes":{"power":18,
+	"liquid":{
+	"liquid":"cyanogen","amount":0.2
+	}	},
+
+	"research":{"parent":"assembler(gather)",
+	"requirements":[
+	"iridium/2500",
+	"uranium/6000",
+	"silicon/10000",
+	"plastanium/8000"
+	]	},
+
+	"requirements":[
+	"iridium/200",
+	"uranium/120",
+	"silicon/150",
+	"plastanium/100"
+	],
+	"plans":[
+		{"unit":"thunder",
+		"time":6000,
+		"requirements":[
+			"calamity-cloud/8",
+			"calamity-chromium-wall-large/10"
+		]
+		}
+		]
+	}

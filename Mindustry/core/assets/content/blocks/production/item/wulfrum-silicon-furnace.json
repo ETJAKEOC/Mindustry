@@ -1,0 +1,44 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":["DrawDefault",
+	{"type":"DrawFlame"
+	}	]	},
+
+	"research":{
+	"parent":"wulfrum-graphite-stamp-furnace",
+	"requirements":[
+	"wulfrum-steel/3000",
+	"graphite/2000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/30",
+	"graphite/20"
+	],
+
+	"consumes":{"power":4,
+	"items":[
+	"graphite/1",
+	"sand/4"
+	]	},
+	"craftTime":60,
+
+	"outputItems":[
+	"silicon/3"
+	],
+
+	"size":3,
+	"health":960,
+	"armor":4,
+	"itemCapacity":20,
+	"hasPower":true,
+	"hasLiquids":false,
+	"hasItems":true,
+	"updateEffect":"none"
+}

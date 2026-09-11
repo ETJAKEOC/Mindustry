@@ -1,0 +1,21 @@
+{
+	"type":"Wall",
+	"category":"defense",
+	"health":3200,
+	"size":2,
+	"armor":8,
+	"insulated":true,
+	"absorbLasers":true,
+
+	"research":{
+	"parent":"armored-insulated-wall",
+	"requirements":[
+	"chromium/1200",
+	"plastanium/1200"
+	]	},
+
+	"requirements":[
+	"chromium/24",
+	"plastanium/24"
+	]
+}

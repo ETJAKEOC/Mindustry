@@ -1,0 +1,76 @@
+type: tank
+hitSize: 17
+singleTarget: false
+omniMovement: false
+faceTarget: false
+health: 2200
+armor: 6
+template: TankUnitType
+speed: 0.83
+rotateSpeed: 1.7
+itemCapacity: 0
+outlineColor: 26262F
+treadFrames: 12
+floorMultiplier: 0.8
+tankMoveVolume: 0.55
+tankMoveSound: tankMove
+crushFragile: true
+treadRects: [
+  {
+    x: 8
+    y: -39
+    width: 19
+    height: 73
+  }
+]
+weapons: [
+  {
+    x: 0
+    y: 0
+    name: oktarav-weapon
+    reload: 20
+    recoil: 1.5
+    mirror: false
+    rotate: true
+    rotateSpeed: 1.25
+    shootSound: shootPierce
+    shootSoundVolume: 0.4
+      bullet: { 
+      type: BasicBulletType
+      sprite: missile-large
+      width: 6
+      splashDamageRadius: 16
+      splashDamage: 4
+      pierce: true
+      lifetime: 32
+      damage: 42
+      speed: 6
+      smokeEffect: colorSpark
+      trailColor: 9EB6EB
+      trailWidth: 1.5
+      trailLength: 5
+      backColor: 9EB6EB
+      hitColor: 9EB6EB
+      despawnEffect: {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 9
+        sizeFrom: 0
+        sizeTo: 20
+        colorFrom: ffffff
+        colorTo: feb380
+      }
+    }
+  }
+]
+researchCostMultiplier: 1.5
+research: {
+  parent: 15o-01-mason
+  objectives: [
+    {
+      type: Research
+      content: 10j-04-unitreconstructor-tank
+    }
+  ]
+}

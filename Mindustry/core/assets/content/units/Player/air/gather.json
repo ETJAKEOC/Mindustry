@@ -1,0 +1,33 @@
+{
+	"type":"flying",
+	"defaultController":"minerAI",
+	"flying":true,
+	"accel":0.1,"drag":0.1,
+
+	"research":{
+	"parent":"dust",
+	"requirements":[
+	"nickel/3000",
+	"chromium/1500",
+	"silicon/3000"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"mineItems":["nickel","tungsten"],
+
+	"hitSize":7.3,
+	"mineWalls":true,
+	"engineSize":3,
+	"engineOffset":5,
+	"trailLength":5,
+	"speed":4,
+	"health":250,
+	"itemCapacity":20,
+	"mineSpeed":1.6,
+	"mineTier":4,
+	"armor":2,
+	"outlineColor":"2E2F34FF"
+}

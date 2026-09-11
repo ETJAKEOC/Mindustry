@@ -1,0 +1,173 @@
+type: ItemTurret
+size: 4
+squareSprite: false
+health: 3900
+armor: 6
+shootSound: shootSmite
+loopSound: loopMalign
+loopSoundVolume: 1.5
+requirements: [
+  01a-01-item-cobalt/600
+  01a-05-item-aluminium/300
+  01a-06-item-chromium/200
+  01a-07-item-clevorite/200
+  01a-09-item-morphite/150
+]
+researchCost: [
+  01a-01-item-cobalt/8000
+  01a-05-item-aluminium/5000
+  01a-06-item-chromium/3500
+  01a-07-item-clevorite/1000
+  01a-09-item-morphite/750
+]
+research: {
+  #TODO - change to proper sector
+  parent: 03c-04-b-subsonic
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-14-pier
+    }
+  ]
+}
+consumes: {
+  power: 11
+}
+category: turret
+recoil: 1.5
+minWarmup: 0.95
+warmupMaintainTime: 30
+shootWarmupSpeed: 0.05
+outlineColor: 2C2A36
+targetAir: true
+targetGround: true
+rotateSpeed: 1.4
+reload: 40
+range: 315
+shootY: 9
+shake: 8
+shoot: {
+  type: ShootMulti
+  source: {
+    type: ShootAlternate
+    barrels: 3
+    shots: 3
+    }
+  dest: [
+    {
+    type: ShootHelix
+    scl: 3
+    mag: 2
+    }
+  ]
+}
+maxAmmo: 12
+ammoPerShot: 2
+ammoTypes: {
+  01a-09-item-morphite: {
+    type: BasicBulletType
+    sprite: large-orb
+    buildingDamageMultiplier: 0.2
+    ammoMultiplier: 1
+    hitColor: 6eefc0
+    damage: 130
+    width: 8
+    height: 14
+    hitSize: 6
+    speed: 6
+    lifetime: 52.5
+    pierceCap: 4
+    pierce: true
+    pierceBuilding: true
+    backColor: 6eefc0
+    frontColor: ffffff
+    trailColor: 479075
+    trailChance: -1
+    trailEffect: [colorSpark, disperseTrail
+    ]
+    trailInterval: 3
+    trailRotation: true
+    trailLength: 7
+    trailWidth: 2
+    intervalBullet: {
+      type: LightningBulletType
+      damage: 25.75
+      lightningLength: 2
+      lightningLengthRand: 4
+      lightningColor: 6eefc0
+    }
+    bulletInterval: 5
+  }
+}
+drawer: {
+  type: DrawTurret
+  basePrefix: equinox-
+    parts: [
+    {
+      type: RegionPart
+      suffix: -barrel
+      progress: recoil
+      heatProgress: warmup
+      moveY: -2
+      heatColor: 47907590
+    }
+    {
+      type: RegionPart
+      suffix: -side
+      progress: warmup
+      heatProgress: warmup
+      mirror: true
+      moveX: 1.5
+      heatColor: 47907590
+    }
+    {
+      type: RegionPart
+      suffix: -corner
+      progress: warmup
+      heatProgress: warmup
+      moveX: 2.5
+      moveY: -0.5
+      mirror: true
+      heatColor: 479075aa
+    }
+    {
+      type: ShapePart
+      y: -9.5
+      radius: 0
+      radiusTo: 4
+      stroke: 0
+      strokeTo: 1
+      layer: 110
+      circle: true
+      hollow: true
+      color: 6EEFC0
+    }
+    {
+      type: HaloPart
+      layer: 110
+      color: 6EEFC0
+      y: -9.5
+      haloRotateSpeed: 1
+      sides: 3
+      shapes: 5
+      haloRadius: 2
+      haloRadiusTo: 8
+      radius: 0
+      radiusTo: 3.5
+      hollow: false
+    }
+    {
+      type: ShapePart
+      rotation: 270
+      color: 6EEFC0
+      sides: 3
+      hollow: true
+      stroke: 0
+      strokeTo: 0.8
+      radius: 0
+      radiusTo: 1.5
+      layer: 110
+      y: -9.5
+    }
+  ]
+}

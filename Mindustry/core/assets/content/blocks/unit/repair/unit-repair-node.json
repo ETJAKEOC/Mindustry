@@ -1,0 +1,37 @@
+{
+	"type":"RepairTurret",
+	"category":"units",
+
+	"research":{
+	"parent":"mech-manufacturer",
+	"requirements":[
+	"chromium/2700",
+	"graphite/1800",
+	"silicon/2400"
+	]	},
+
+	"requirements":[
+	"chromium/90",
+	"graphite/60",
+	"silicon/80"
+	],
+
+	"powerUse":5,
+	"consumes":{
+	"liquid":{
+	"liquid":"ozone","amount":0.2
+	}	},
+
+	"health":900,
+	"size":2,
+	"liquidCapacity":30,
+	"length":6,
+	"repairSpeed":2.666666666666666,
+	"repairRadius":180,
+	"beamWidth":1,
+	"pulseRadius":2,
+	"coolantUse":0.16,
+	"coolantMultiplier":1.6,
+	"acceptCoolant":true,
+	"squareSprite":false
+}

@@ -1,0 +1,15 @@
+{
+"type":"Floor",
+"variants":0,
+"speedMultiplier":0.7,
+"status":"calamity-icy",
+"statusDuration":90,
+"cacheLayer":"water",
+"albedo":0.9,
+"shallow":true,
+"isLiquid":true,
+"liquidDrop":"water",
+"liquidMultiplier":1,
+"placeableOn":true,
+"supportsOverlay":true
+}

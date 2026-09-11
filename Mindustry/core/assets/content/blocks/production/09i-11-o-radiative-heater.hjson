@@ -1,0 +1,57 @@
+type: HeatProducer
+size: 3
+heatOutput: 12
+health: 650
+craftTime: 180
+researchCostMultiplier: 0.5
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-08-nucliogen
+      padding: 1
+    }
+    {
+      type: DrawCrucibleFlame
+      particles: 25
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawHeatOutput
+    }
+  ]
+}
+consumes: {
+  items: [
+    01a-03-item-lamine/1
+  ]
+  liquids: [
+    02b-08-nucliogen/0.125
+  ]
+}
+liquidCapacity: 60
+ambientSound: loopHum
+ambientSoundVolume: 0.04
+category: crafting
+research: {
+  #TODO - change to proper sector
+  parent: 09i-04-laminator
+  objectives: [
+    {
+      type: OnSector
+      preset: 20t-15-isolated-canyon
+    }
+  ]
+}
+requirements: [
+  01a-06-item-chromium/85
+  01a-07-item-clevorite/75
+  01a-08-item-petal/50
+]

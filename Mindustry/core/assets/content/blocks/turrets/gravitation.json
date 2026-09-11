@@ -1,0 +1,30 @@
+{
+//	"type":"TractorBeamTurret",
+	"category":"turret",
+	"size":3,
+	"health":1280,
+
+	"force":45,
+	"scaledForce":6,
+	"range":360,
+	"damage":0.2,
+	"rotateSpeed":12,
+	"targetAir":true,
+	"targetGround":false,
+
+	"consumes":{"power":3},
+	"status":"slow",
+	"statusDuration":30,
+
+	"research":{
+	"parent":"fissure",
+	"requirements":[
+	"chromium/1500",
+	"silicon/1000"
+	]	},
+
+	"requirements":[
+	"chromium/150",
+	"silicon/100"
+	]
+}

@@ -1,0 +1,15 @@
+{
+  //"type": "Floor",
+  "variants": 6,
+  "attributes": {
+    "water": 1,
+    "melon": 0.25,
+    "spore": 0
+  },
+  "mapColor": "70ae4c",
+  "hasColor": true,
+  "useColor": false,
+  "dragMultiplier": 0.9,
+  "albedo": 0.3,
+  "wall": "melon-shell-wall"
+}

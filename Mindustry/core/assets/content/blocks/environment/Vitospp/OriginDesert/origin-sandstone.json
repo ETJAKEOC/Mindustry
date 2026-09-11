@@ -1,0 +1,12 @@
+{
+"type":"Floor",
+"variants":3,
+"wall":"origin-sandstone-wall",
+"attributes":{
+"heat":0,
+"spores":0,
+"water":-1,
+"oil":0,
+"sand":0.5
+},
+}

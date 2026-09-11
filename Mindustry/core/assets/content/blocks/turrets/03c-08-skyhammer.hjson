@@ -1,0 +1,202 @@
+type: PowerTurret
+size: 4
+squareSprite: false
+health: 6300
+armor: 10
+shootSound: shootMissilePlasma
+shootSoundVolume: 2.3
+loopSound: loopMalign
+loopSoundVolume: 1.5
+requirements: [
+  01a-01-item-cobalt/1100
+  01a-05-item-aluminium/675
+  01a-08-item-petal/450
+  01a-10-item-bethine/150
+  01a-11-item-pyroxene/75
+]
+category: turret
+consumes: {
+  power: 12
+}
+minWarmup: 0.95
+warmupMaintainTime: 100
+shootWarmupSpeed: 0.05
+heatRequirement: 12
+maxHeatEfficiency: 3
+recoil: 2
+outlineColor: 2C2A36
+targetAir: true
+targetGround: true
+rotateSpeed: 1.5
+reload: 165
+range: 435
+shootY: 6
+shootType: {
+  type: ArtilleryBulletType
+  buildingDamageMultiplier: 0.1
+  collidesAir: true
+  width: 16
+  height: 16
+  sprite: large-orb
+  frontColor: edc66c
+  backColor: baa164
+  trailColor: baa164
+  trailWidth: 6
+  trailLength: 32
+  trailRotation: true
+  trailEffect: [
+  colorSpark
+  ]
+  spin: 0
+  shrinkY: 0
+  shrinkX: 0
+  trailInterval: 3
+  speed: 6
+  lifetime: 72.5
+  damage: 850
+  despawnSound: explosionQuad
+  despawnEffect: {
+    type: MultiEffect
+    effects: [
+      {
+        type: WaveEffect
+        sides: 10
+        sizeFrom: 0
+        sizeTo: 50
+        cone: 360
+        colorFrom: edc66c
+        colorTo: baa164
+        lifetime: 20
+        strokeFrom: 8
+        strokeTo: 0
+        followParent: true
+      }
+      {
+        followParent: false
+        randLength: false
+        length: 2
+        lifetime: 25
+        particles: 1
+        cone: 0
+        region: exoprosopa-needle
+        sizeFrom: 55
+        sizeTo: 0
+        colorFrom: edc66c
+        colorTo: baa164
+        baseRotation: 0
+        useRotation: false
+      }
+      {
+        followParent: false
+        randLength: false
+        length: 2
+        lifetime: 25
+        particles: 1
+        cone: 0
+        region: exoprosopa-needle
+        sizeFrom: 55
+        sizeTo: 0
+        colorFrom: edc66c
+        colorTo: baa164
+        baseRotation: 90
+        useRotation: false
+      }
+      {
+        followParent: false
+        randLength: false
+        length: 2
+        lifetime: 25
+        particles: 1
+        cone: 0
+        region: exoprosopa-needle
+        sizeFrom: 55
+        sizeTo: 0
+        colorFrom: edc66c
+        colorTo: baa164
+        baseRotation: -90
+        useRotation: false
+      }
+      {
+        followParent: false
+        randLength: false
+        length: 2
+        lifetime: 25
+        particles: 1
+        cone: 0
+        region: exoprosopa-needle
+        sizeFrom: 55
+        sizeTo: 0
+        colorFrom: edc66c
+        colorTo: baa164
+        baseRotation: 180
+        useRotation: false
+      }
+    ]
+  }
+  hitEffect: massiveExplosion
+  splashDamage: 1700
+  splashDamageRadius: 56
+  ammoMultiplier: 1
+  pierceArmor: true
+}
+drawer: {
+  type: DrawTurret
+  basePrefix: skyhammer-
+  parts: [
+    {
+      type: RegionPart
+      suffix: -arm
+      mirror: true
+      progress: warmup
+      heatProgress: warmup
+      moveX: 0.75
+      heatColor: FFD27E82
+    }
+    {
+      type: ShapePart
+      y: -3.5
+      radius: 5
+      stroke: 0
+      strokeTo: 1
+      layer: 110
+      circle: true
+      hollow: true
+      color: FFD27E
+    }
+    {
+      type: HaloPart
+      layer: 110
+      color: FFD27E
+      y: -3.5
+      tri: true
+      triLength: 0
+      triLengthTo: 6
+      shapes: 2
+      haloRotateSpeed: 1
+      haloRadius: 5
+      radius: 3
+      hollow: false
+    }
+    {
+      type: ShapePart
+      rotateSpeed: 1.5
+      color: FFD27E
+      hollow: true
+      sides: 6
+      stroke: 0
+      strokeTo: 0.8
+      radius: 0
+      radiusTo: 2.75
+      layer: 110
+      y: -3.5
+    }
+  ]
+}
+research: 03c-06-continuum
+researchCost: [
+  01a-01-item-cobalt/20000
+  01a-05-item-aluminium/15000
+  01a-08-item-petal/8000
+  01a-10-item-bethine/3000
+  01a-11-item-pyroxene/1200
+]

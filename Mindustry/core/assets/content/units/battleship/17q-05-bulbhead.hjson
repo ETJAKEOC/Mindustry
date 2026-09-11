@@ -1,0 +1,60 @@
+type: naval
+speed: 0.8
+health: 950
+armor: 2
+aimDst: 10
+range: 90
+drag: 0.1
+accel: 0.8
+hitSize: 10
+rotateSpeed: 2.5
+trailLength: 15
+outlineColor: 0C0E29
+moveSoundVolume: 0.34
+moveSound: shipMove
+itemCapacity: 10
+weapons: [
+  {
+    mirror: false
+    rotate: true
+    name: freesia-autocannon
+    rotateSpeed: 2
+    x: 0
+    y: -2
+    reload: 34.2
+    recoil: 1
+    shootSound: shootPlasma
+    shootSoundVolume: 0.09
+    bullet: {
+      type: BasicBulletType
+      sprite: missile-large
+      width: 5
+      splashDamageRadius: 20
+      splashDamage: 15
+      lifetime: 32
+      damage: 45
+      speed: 3
+      smokeEffect: colorSpark
+      trailColor: E3EBFB
+      trailWidth: 1.5
+      trailLength: 5
+      backColor: E3EBFB
+      hitColor: E3EBFB
+      despawnEffect: {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 8
+        sizeFrom: 0
+        sizeTo: 15
+        colorFrom: ffffff
+        colorTo: feb380
+        }
+      }
+  }
+]
+immunities: [
+  13m-06-contaminated
+]
+research: 000012-anchor
+researchCostMultiplier: 0.5

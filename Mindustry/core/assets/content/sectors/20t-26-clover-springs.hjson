@@ -1,0 +1,13 @@
+difficulty: 8
+planet: frostnova
+sector: 67
+research: {
+  parent: 19s-23-eridanus
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-23-eridanus
+    }
+  ]
+}
+outline: false

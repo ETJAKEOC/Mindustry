@@ -1,0 +1,13 @@
+{
+"planet":"Vitospp",
+"sector":351,
+"captureWave":0,
+"difficulty":1,
+"research": {
+"parent": "TurbulentValley",
+"objectives": [
+"water-extractor-large",
+"bombardment-drill",
+"oil-rig-deep"
+	]	}
+}

@@ -1,0 +1,27 @@
+type: CoreBlock
+size: 4
+health: 5500
+armor: 5
+unitType: 14n-04-coronis
+requirements: [
+ 01a-01-item-cobalt/1000
+ 01a-02-item-nickel/700
+ 01a-05-item-aluminium/700
+]
+requiresCoreZone: true
+incinerateNonBuildable: true
+category: effect
+isFirstTier: true
+squareSprite: false
+itemCapacity: 2500
+unitCapModifier: 15
+research: {
+  parent: 11k-01-core-apex
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-05-crest
+    }
+  ]
+}
+researchCostMultiplier: 0.8

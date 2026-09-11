@@ -1,0 +1,76 @@
+{
+	"type":"payload",
+	"payloadCapacity":256,
+	"pickupUnits":false,
+	"vulnerableWithPayloads":true,
+
+	"controller":"BuilderAI",
+	"flying":true,
+	"accel":0.1,"drag":0.05,
+	"engineSize":2.75,
+	"engineOffset":7.5,
+	"trailLength":4,
+	"faceTarget":true,
+	"outlineColor":"2E2F34FF",
+
+	"research":"axis-core",
+
+	"fogRadius":0,
+	"isEnemy":false,
+	"targetable":false,
+	"hittable":false,
+	"rotateSpeed":6,
+	"speed":7.0,
+	"lowAltitude":true,
+	"health":1530,
+	"hitSize":11,
+	"itemCapacity":80,
+	"coreUnitDock":true,
+
+	"mineWalls":true,
+	"mineFloor":true,
+	"mineSpeed":16,
+	"mineTier":4,
+
+	"buildSpeed":2,
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+	{"name":"axis-heal-weapon",
+		"type":"RepairBeamWeapon",
+		"x":-8,"y":0,
+		"shootY":6,
+		"rotationLimit":30,
+		"rotateSpeed":1,
+		"rotate":true,
+		"rotateSpeed":8,
+		"mirror":false,
+		"layerOffset":-0.001,
+		"widthSinMag":0.11,
+		"reload":20,
+		"beamWidth":0.7,
+		"shootCone":40,
+		"repairSpeed":6,
+		"fractionRepairSpeed":0.15,
+		"laserColor":"FFD37FFF",
+		"healColor":"FFD37FFF",
+		"targetUnits":false,
+		"targetBuildings":true,
+		"autoTarget":false,
+		"controllable":true,
+		"bullet":{
+		"maxRange":70
+	}	},
+	{"name":"axis-build-weapon",
+		"type":"BuildWeapon",
+		"x":8,"y":0,
+		"shootY":6,
+		"rotate":true,
+		"rotateSpeed":8,
+		"mirror":false,
+		"layerOffset":-0.001
+		}	]
+}

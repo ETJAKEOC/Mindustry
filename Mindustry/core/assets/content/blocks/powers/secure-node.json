@@ -1,0 +1,21 @@
+{
+	"type":"PowerNode",
+	"category":"power",
+
+	"size":1,
+	"health":200,
+	"maxNodes":12,
+	"laserRange":12,
+	"laserColor1":"99F8FFFF",
+	"laserColor2":"74C2E8FF",
+
+	"research":{
+	"parent":"secure-hydraulic-generator",
+	"requirements":[
+	"nickel/20"
+	]	},
+
+	"requirements":[
+	"nickel/8"
+	]
+}

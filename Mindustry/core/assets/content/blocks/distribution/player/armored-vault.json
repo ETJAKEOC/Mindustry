@@ -1,0 +1,23 @@
+{
+//	"type":"StorageBlock",
+	"category":"distribution",
+
+	"research":{
+	"parent":"armored-container",
+	"requirements":[
+	"chromium/1100",
+	"graphite/800",
+	"plastanium/800"
+	]	},
+
+	"requirements":[
+	"chromium/110",
+	"graphite/80",
+	"plastanium/80"
+	],
+
+	"size":3,
+	"health":2140,
+	"itemCapacity":900,
+	"coreMerge":true
+}

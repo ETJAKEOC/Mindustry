@@ -1,0 +1,79 @@
+{
+	"speed":0.45,
+	"rotateSpeed":0.56,
+	"hitSize":57,
+	"health":42290,
+	"armor":30,
+	"range":280,
+	"type":"mech",
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"reign",
+	"requirements":[
+	"chromium/60000",
+	"iridium/30000",
+	"osmium/30000",
+	"metaglass/50000",
+	"silicon/13000",
+	"plastanium/50000"
+	],
+	"objectives":[
+	"rudiment-assembler-module",
+	"senior-refabricator"
+		]	},
+
+	"immunities":[
+	"wulfrum-amplify",
+	"empI",
+	"empII"
+	],
+
+		"weapons":[
+		{"name":"castle-weapon",
+		"reload":9,
+		"shake":2,
+		"recoil":5,
+		"x":29,"y":-7,
+		"shootY":33,
+		"rotationLimit":35,
+		"rotateSpeed":1,
+		"rotate":true,
+		"top":false,
+		"shootSound":"bang",
+		"ejectEffect":"casing4",
+		"bullet":{
+		"fragVelocityMin":0.4,
+		"status":"blasted",
+		"damage":80,
+		"splashDamage":18,
+		"splashDamageRadius":13,
+		"pierceArmor":true,
+		"pierce":true,
+		"pierceCap":10,
+		"speed":13,
+		"lifetime":15,
+		"shootEffect":"shootBig",
+		"smokeEffect":"shootBigSmoke",
+		"width":14,"height":33,
+		"hitSound":"explosion",
+		"hitEffect":"blastExplosion",
+
+		"fragBullets":4,
+		"fragLifeMin":0,
+		"fragRandomSpread":30,
+		"fragBullet":{
+		"damage":33,
+		"width":10,"height":10,
+		"pierce":true,
+		"pierceBuilding":true,
+		"pierceCap":3,
+		"speed":9,
+		"lifetime":20,
+		"hitSound":"explosion",
+		"hitEffect":"flakExplosion",
+		"splashDamage":15,
+		"splashDamageRadius":10
+		}	}
+		}	]
+}

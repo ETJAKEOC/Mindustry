@@ -1,0 +1,20 @@
+{
+	"type":"LiquidJunction",
+	"category":"liquid",
+
+	"research":{
+	"parent":"fluid-pipeline",
+	"requirements":[
+	"nickel/30",
+	"metaglass/30"
+	]	},
+
+	"requirements":[
+	"nickel/3",
+	"metaglass/3"
+	],
+
+	"health":250,
+	"liquidCapacity":20,
+	"liquidPressure":1
+}

@@ -1,0 +1,216 @@
+{
+	"speed":0.45,
+	"rotateSpeed":0.56,
+	"hitSize":57,
+	"health":42290,
+	"armor":30,
+	"range":280,
+	"type":"mech",
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"malfunction",
+	"requirements":[
+	"chromium/60000",
+	"iridium/30000",
+	"osmium/30000",
+	"metaglass/50000",
+	"silicon/13000",
+	"plastanium/50000"
+	],
+	"objectives":[
+	"rudiment-assembler-module",
+	"senior-refabricator"
+		]	},
+
+	"immunities":[
+	"wulfrum-amplify",
+	"empI",
+	"empII"
+	],
+
+	"weapons":[
+		{"name":"pulse-weapon",
+		"reload":180,
+		"x":35.5,"y":0,
+		"shootY":20,
+		"mirror":true,
+		"top":false,
+		"alternate":true,
+		"layerOffset":-0.001,
+		"rotationLimit":35,
+		"rotateSpeed":1,
+		"rotate":true,
+		"shootCone":45,
+		"shootSound":"malignShoot",
+		"inaccuracy":8,
+		"heatColor":"FCF387FF",
+		"cooldownTime":180,
+
+	"shoot":{
+	"shots":4,
+	"shotDelay":5},
+
+	"parts":[
+	{"type":"RegionPart",
+	"suffix":"-blade",
+	"x":0,"y":20,
+	"mirror":true,
+	"moveRot":-25,
+	"heatColor":"FCF387FF",
+	"moves":[
+	{"type":"PartMove",
+	"progress":"reload",
+	"rot":-1
+	}	]	},
+	{"type":"RegionPart",
+	"suffix":"-blade",
+	"x":0,"y":20,
+	"mirror":true,
+	"moveRot":-50,
+	"heatColor":"FCF387FF",
+	"moves":[
+	{"type":"PartMove",
+	"progress":"reload",
+	"rot":-1
+	}	]	}	],
+
+		"bullet":{
+		"type":"BasicBulletType",
+		"width":12,
+		"height":23,
+		"sprite":"calamity-pointy-bullet",
+		"frontColor":"FCF387FF",
+		"backColor":"D99F6BFF",
+		"hitSound":"spark",
+		"hitShake":1,
+		"lifetime":38,
+		"damage":560,
+		"speed":8,
+		"shrinkX":0,"shrinkY":0,
+		"status":"empII",
+		"statusDuration":240,
+		"despawnShake":3,
+
+		"lightning":1,
+		"lightningDamage":60,
+		"lightningLength":20,
+		"lightningCone":15,
+		"lightningLengthRand":20,
+
+	"shootEffect":"shootSmokeSquareBig",
+	"smokeEffect":"shootSmokeDisperse",
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":4,
+		"lifetime":30,
+		"offset":50,
+		"length":22,
+		"cone":-45,
+		"lenFrom":8,
+		"lenTo":8,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		},
+		"homingPower":0.2,
+		"homingRange":280,
+		"homingDelay":10,
+		"trailColor":"FCF387FF",
+		"trailParam":6,
+		"trailLength":12,
+		"trailWidth":2.5,
+
+		"fragSpread":0,
+		"fragRandomSpread":0,
+		"fragBullets":1,
+		"fragBullet":{
+		"type":"LaserBulletType",
+		"length":180,
+		"width":12,
+		"damage":210,
+		"colors":["D99F6BFF","FCF387FF","FFFFFFFF"],
+		"sideAngle":25,
+		"sideLength":8,
+		"sideWidth":2,
+		"recoil":0.3
+
+	}	}	},
+
+	{"name":"pulse-mount",
+		"shootCone":15,
+		"mirror":true,
+		"rotate":true,
+		"rotateSpeed":6,
+		"x":21.5,"y":-11.5,
+		"shootY":9.5,
+		"reload":20,
+		"shootSound":"laser",
+		"recoil":1,
+		"layerOffset":0.003,
+
+		"bullet":{
+		"type":"LaserBulletType",
+		"length":180,
+		"width":10,
+		"damage":100,
+
+	"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":10,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"strokeFrom":1.5,
+		"strokeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		},
+		{"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":3,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		}	]	},
+
+	"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"strokeFrom":3.5,
+		"strokeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		},
+		{"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":3,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		}	]	},
+
+		"colors":["D99F6BFF","FCF387FF","FFFFFFFF"],
+		"sideAngle":25,
+		"sideLength":0,
+		"sideWidth":0
+		}	}	]
+}

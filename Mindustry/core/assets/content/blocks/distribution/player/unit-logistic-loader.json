@@ -1,0 +1,31 @@
+{
+//	"type":"UnitCargoLoader",
+	"category":"distribution",
+	"health":1540,
+	"size":3,
+	"itemCapacity":300,
+	"hasPower":true,
+	"buildTime":480,
+	"conductivePower":true,
+	"squareSprite":false,
+	"unitType":"manifold",
+
+	"research":{
+	"parent":"track-unloader",
+	"requirements":[
+	"chromium/4000",
+	"surge-alloy/3000",
+	"silicon/6000"
+	]	},
+
+	"requirements":[
+	"chromium/80",
+	"surge-alloy/60",
+	"silicon/120"
+	],
+
+	"consumes":{"power":0.2,
+	"liquids":[
+	"nitrogen/0.125"
+	]	}
+}

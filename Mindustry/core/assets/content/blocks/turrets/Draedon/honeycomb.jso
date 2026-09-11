@@ -1,0 +1,138 @@
+{
+	"type":"ItemTurret",
+	"category":"turret",
+	"health":1850,
+	"size":3,
+	"reload":150,
+	"range":760,
+	"customShadow":false,
+	"fogRadiusMultiplier":0.21,
+	"maxAmmo":32,
+	"recoil":0,
+	"shootY":0,
+	"cooldownTime":110,
+	"minWarmup":0.8,
+	"shootWarmupSpeed":0.055,
+	"warmupMaintainTime":120,
+	"solid":false,
+	"underBullets":true,
+	"elevation":0,
+	"unitSort":"weakest",
+
+	"drawer":{
+		"type":"DrawTurret",
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":-1,
+		"progress":"warmup",
+		"moveX":-6
+		},
+		{"type":"RegionPart",
+		"suffix":-2,
+		"progress":"warmup",
+		"moveY":6
+		},
+		{"type":"RegionPart",
+		"suffix":-3,
+		"progress":"warmup",
+		"moveX":6
+		},
+		{"type":"RegionPart",
+		"suffix":-4,
+		"progress":"warmup",
+		"moveY":-6
+		}	]	},
+
+	"research":{
+	"parent":"erosion",
+	"requirements":[
+	"chromium/900",
+	"silicon/3000"
+	]	},
+
+	"requirements":[
+	"chromium/90",
+	"silicon/300"
+	],
+
+	"consumes":{
+	"power":6,
+	"coolant":{"amount":0.1,"optional":true}	},
+
+	"shoot":{
+		"shots":8,
+		"shotDelay":6,
+		"type":"ShootBarrel",
+		"barrels":[
+		0,6,0,
+		-6,0,90,
+		0,-6,180,
+		6,0,-90
+		],
+	},
+	"ammoUseEffect":{
+		"type":"MultiEffect",
+		"effects":[
+		{"type":"ParticleEffect",
+		"particles":8,
+		"sizeFrom":4,
+		"sizeTo":1,
+		"length":45,
+		"lifetime":40,
+		"lightOpacity":0,
+		"colorFrom":"FFFFFF80",
+		"colorTo":"78787870",
+		"cone":80
+		},
+		{"type":"WaveEffect",
+		"lifetime":10,
+		"sizeFrom":0,
+		"sizeTo":28,
+		"strokeFrom":2,
+		"strokeTo":0,
+		"colorFrom":"EEC59180",
+		"colorTo":"FFFFFF"
+		}	]
+	}
+
+	"shootSound":"DD1",
+	"targetGround":true,
+	"targetAir":true,
+	"inaccuracy":5,
+	"shootCone":360,
+	"shake":1,
+	"rotateSpeed":0,
+	"ammoPerShot":8,
+	"ammoTypes":{
+		"graphite":{
+		"type":"MissileBulletType",
+		"buildingDamageMultiplier":0.3,
+		"splashDamageRadius":32,
+		"splashDamage":28,
+		"knockback":0.7,
+		"speed":5,
+		"damage":22,
+		"lifetime":200,
+		"homingPower":0.15,
+		"sprite":"饱和火力-导弹",
+		"backColor":"B0C4DE",
+		"frontColor":"E3E3E3",
+		"trailLength":15,
+		"trailWidth":1.5,
+		"trailColor":"FFFFFF80",
+		"trailEffect":"none",
+		"homingDelay":10,
+		"homingRange":800,
+		"status":"freezing",
+		"statusDuration":300,
+		"width":10,
+		"height":40,
+		"hitShake":1,
+		"ammoMultiplier":1,
+		"smokeEffect":"shootSmallFlame",
+		"hitEffect":"flakExplosionBig"
+		},
+
+	}
+
+}

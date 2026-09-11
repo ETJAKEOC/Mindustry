@@ -1,0 +1,18 @@
+{
+//	"type": "Wall",
+	"category": "defense",
+
+	"research": {
+	"parent": "impact",
+	"requirements":[
+	"nickel/60"
+	]	},
+
+	"requirements": [
+	"nickel/6"
+	],
+
+	"health":640,
+	"armor":5,
+	"size":1
+}

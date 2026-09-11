@@ -1,0 +1,21 @@
+{
+//	"type":"UnitCargoUnloadPoint",
+	"category":"distribution",
+	"health":440,
+	"size":2,
+	"itemCapacity":100,
+
+	"research":{
+	"parent":"unit-logistic-loader",
+	"requirements":[
+	"tungsten/4000",
+	"graphite/3000",
+	"silicon/4000"
+	]	},
+
+	"requirements":[
+	"tungsten/80",
+	"graphite/60",
+	"silicon/80"
+	]
+}

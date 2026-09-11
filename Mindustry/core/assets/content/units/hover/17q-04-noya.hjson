@@ -1,0 +1,121 @@
+type: flying
+immunities: [shocked
+]
+flying: true
+faceTarget: true
+shadowElevation: 0.1
+drag: 0.07
+outlineColor: 26262F
+speed: 1.2
+rotateSpeed: 1.7
+accel: 0.1
+health: 8000
+armor: 9
+hitSize: 27
+researchCostMultiplier: 2.5
+loopSound: loopHover
+loopSoundVolume: 0.5
+research: {
+  parent: 17q-03-syntaxe
+  objectives: [
+    {
+      type: Research
+      content: 10j-11-a-basic-module
+    }
+  ]
+}
+engineOffset: 8
+engines: [
+  {
+    x: 0
+    y: -17
+    radius: 6
+    rotation: -90
+  }
+  {
+    x: 10
+    y: -15
+    radius: 3.5
+    rotation: -90
+  }
+  {
+    x: -10
+    y: -15
+    radius: 3.5
+    rotation: -90
+  }
+]
+itemCapacity: 80
+lowAltitude: false
+abilities: [
+    {
+    type: ShieldArcAbility
+    radius: 28
+    angle: 220
+    width: 6
+    y: 2
+    cooldown: 900
+    regen: 6
+    max: 1200
+  }
+]
+weapons: [
+  {
+    x: 0
+    y: -4
+    reload: 170
+    rotate: false
+    mirror: false
+    shootSound: shootEmp
+    shake: 5
+    bullet: {
+      type: BasicBulletType
+      damage: 625
+      recoil: 1.65
+      splashDamage: 80.75
+      splashDamageRadius: 28
+      speed: 10
+      lifetime: 36
+      pierce: true
+      pierceCap: 5
+      trailEffect: shootSmokeTitan
+      trailColor: d8f18c
+      trailChance: -1
+      trailParam: 4
+      trailInterval: 2.5
+      trailRotation: true
+      trailLength: 8
+      trailWidth: 4
+    }
+  }
+  {
+    x: 10.25
+    y: -8
+    reload: 60
+    rotate: true
+    rotateSpeed: 0.75
+    mirror: true
+    alternate: true
+    shootSound: shootLaserBeam
+    shootSoundVolume: 0.2
+    shake: 1
+    shootY: -3.5
+    recoil: 2
+    name: noya-weapon
+    parentizeEffects: true
+    bullet: {
+      layer: 116
+      type: LaserBulletType
+      colors: [
+        d8f18c,
+        ffffff
+      ]
+      damage: 77.5
+      sideAngle: 45
+      sideLength: 35
+      sideWidth: 1
+      pierce: true
+      pierceBuilding: true
+    }
+  }
+]

@@ -1,0 +1,77 @@
+type: GenericCrafter
+size: 4
+liquidCapacity: 160
+hasLiquids: true
+health: 1000
+category: crafting
+research: {
+  parent: 04d-04-b-aqua-dregder
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-11-glistening-straits
+    }
+  ]
+}
+itemCapacity: 40
+researchCostMultiplier: 0.5
+requirements: [
+  01a-02-item-nickel/75
+  01a-05-item-aluminium/125
+  01a-06-item-chromium/100
+]
+craftTime: 60
+craftEffect: none
+outputItems: [
+  01a-05-item-raw-nichrome/4
+  01a-01-item-cobalt/4
+]
+consumes: {
+  items: [
+    01a-03-item-aquashard/6
+  ]
+  liquids: [
+    02b-05-hydrowater/1.33333333333
+  ]
+  power: 2
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-05-hydrowater
+      padding: 3
+      alpha: 0.9
+    }
+    {
+    type: DrawBubbles
+    color: 72ccbd
+    sides: 10
+    recurrence: 3
+    spread: 12
+    radius: 1.5
+    amount: 46
+    }
+    {
+      type: DrawParticles
+      color: 72ccbd
+      alpha: 0.85
+      particleSize: 1.5
+      particles: 12
+      particleRad: 15
+      particleLife: 60
+      reverse: true
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+ambientSound: loopCultivator
+ambientSoundVolume: 0.055
+squareSprite: false

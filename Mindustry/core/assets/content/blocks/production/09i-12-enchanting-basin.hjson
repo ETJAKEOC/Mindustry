@@ -1,0 +1,87 @@
+type: GenericCrafter
+size: 3
+liquidCapacity: 60
+hasLiquids: true
+health: 1000
+category: crafting
+research: {
+  parent: 04d-06-nucrid-crusher
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-16-waterfall
+    }
+  ]
+}
+itemCapacity: 20
+researchCost: [
+  01a-02-item-nickel/7500
+  01a-05-item-aluminium/5000
+  01a-06-item-chromium/4000
+  01a-07-item-clevorite/750
+]
+requirements: [
+  01a-02-item-nickel/200
+  01a-05-item-aluminium/150
+  01a-06-item-chromium/125
+  01a-07-item-clevorite/75
+]
+craftTime: 120
+craftEffect: {
+  type: MultiEffect
+  effects: [
+  {
+    type: particleEffect
+    particles: 6
+    length: 10
+    lifetime: 30
+    interp: pow2Out
+    sizeInterp: pow5In
+    sizeFrom: 3
+    sizeTo: 0
+    colorFrom: ffc2d6
+    colorTo: fe97ba
+    region: exoprosopa-spark-drill
+  }
+ ]
+}
+outputItems: [
+  01a-08-item-petal/4
+]
+consumes: {
+  items: [
+    01a-08-item-petal-flower/3
+    01a-08-item-nucrid/5
+  ]
+  liquids: [
+    02b-08-nucliogen/0.25
+  ]
+  power: 3.5
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-08-nucliogen
+      padding: 3
+    }
+    {
+      type: DrawCrucibleFlame
+      flameRad: 0.5
+      circleSpace: 0.5
+      particleRad: 12.0
+      particleSize: 1.5
+    }
+    {
+      type: DrawRegion
+    }
+  ]
+}
+ambientSound: loopSmelter
+ambientSoundVolume: 0.07
+squareSprite: false

@@ -1,0 +1,105 @@
+type: legs
+legCount: 6
+lockLegBase: true
+legContinuousMove: true
+legExtension: -4
+legBaseOffset: 5
+legLength: 26
+legMaxLength: 1.1
+legGroupSize: 3
+legForwardScl: 0.95
+legPhysicsLayer: false
+legStraightness: 0.4
+baseLegStraightness: 0.5
+rippleScale: 2
+stepShake: 0.5
+drownTimeMultiplier: 0.5
+hovering: true
+groundLayer: 60
+health: 9800
+armor: 13
+allowLegStep: true
+legSplashDamage: 30
+legSplashRange: 20
+speed: 0.65
+hitSize: 21
+drag: 0.1
+itemCapacity: 20
+outlineColor: 26262f
+targetAir: false
+stepSound: walkerStep
+stepSoundVolume: 0.85
+stepSoundPitch: 1.1
+research: {
+  parent: 16p-03-sender
+  objectives: [
+    {
+      type: Research
+      content: 10j-11-a-basic-module
+    }
+  ]
+}
+researchCostMultiplier: 2.5
+abilities: [
+  {
+    type: MoveEffectAbility
+    minVelocity: 1.1
+    x: 0
+    y: -2.4
+    effect: artilleryTrailSmoke
+    teamColor: true
+    interval: 3
+  }
+]
+weapons: [
+  {
+    x: 15.5
+    y: 3.5
+    shootX: -1.5
+    mirror: true
+    alternate: true
+    layerOffset: -0.001
+    reload: 45.5
+    shootSound: shootToxopidShotgun
+    shootSoundVolume: 0.8
+    name: carragher-weapon
+    shootStatusDuration: 60
+    bullet: {
+        type: ShrapnelBulletType
+        length: 92
+        width: 5.5
+        damage: 270
+        pierce: true
+        pierceBuilding: true
+        lifetime: 60
+        fromColor: fca988
+        toColor: d77751
+        status: 13m-01-breached
+        statusDuration: 180
+      }
+  }
+      {  
+      x: 0
+      y: 0
+      display: false
+      rotate: false
+      mirror: false
+      reload: 91
+      shootCone: 5
+      shootSound: none
+      bullet: {
+        width: 0
+        speed: 8
+        lifetime: 10
+        despawnEffect: none
+        hitEffect: none
+        height: 0
+        collides: false
+        damage: 0
+        pierce: true
+        pierceBuilding: true
+        recoil: -8
+        impact: true
+      }
+    }
+]

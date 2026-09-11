@@ -1,0 +1,243 @@
+type: ItemTurret
+size: 3
+squareSprite: false
+health: 2200
+armor: 3
+shootSound: shootArtillerySmall
+shootSoundVolume: 1.85
+requirements: [
+  01a-01-item-cobalt/175
+  01a-02-item-nickel/300
+  01a-06-item-chromium/250
+  01a-07-item-clevorite/90
+]
+category: turret
+coolant: {
+  type: ConsumeLiquid
+  liquid: 02b-02-a-purified-elixir
+  amount: 0.25
+}
+coolantMultiplier: 2.5
+recoil: 1
+minWarmup: 0.70
+shootWarmupSpeed: 0.08
+warmupMaintainTime: 50
+outlineColor: 2c2a36
+targetAir: false
+targetGround: true
+rotateSpeed: 1.5
+reload: 130
+range: 260
+shootY: 7
+ammoPerShot: 2
+ammoTypes: {
+  01a-03-item-lamine: {
+    type: ArtilleryBulletType
+    damage: 200
+    buildingDamageMultiplier: 0.1
+    lifetime: 65
+    speed: 3.8
+    width: 18
+    height: 23
+    backColor: ff8167
+    frontColor: ff8167
+    hitColor: ff8167
+    trailColor: ff8167
+    fragLifeMin: 0.4
+    fragVelocityMin: 0.4
+    fragBullets: 6
+    hitEffect: blastExplosion
+    hitShake: 1.5
+    collidesGround: true
+    collidesAir: false
+    collidesTiles: true
+    collides: true
+    ammoMultiplier: 1
+    fragBullet: {
+      status: 13m-01-breached
+      statusDuration: 30
+      despawnSound: explosion
+      speed: 3.5
+      damage: 45
+      buildingDamageMultiplier: 0.1
+      lifetime: 12
+      splashDamage: 15
+      splashDamageRadius: 16
+      collidesAir: false
+      hitEffect: explosion
+    }
+  }
+  01a-07-item-clevorite: {
+    type: ArtilleryBulletType
+    damage: 240
+    buildingDamageMultiplier: 0.1
+    lifetime: 65
+    speed: 4
+    width: 18
+    height: 23
+    backColor: d8f18c
+    frontColor: d8f18c
+    hitColor: d8f18c
+    trailColor: d8f18c
+    fragLifeMin: 0.4
+    fragVelocityMin: 0.5
+    fragBullets: 8
+    hitEffect: blastExplosion
+    hitShake: 1.5
+    collidesGround: true
+    collidesAir: false
+    collidesTiles: true
+    collides: true
+    ammoMultiplier: 1
+    fragBullet: {
+      type: LiquidBulletType
+      liquid: slag
+      status: melting
+      statusDuration: 120
+      puddleSize: 40
+      despawnHit: true
+      despawnSound: shootRetusa
+      speed: 3.5
+      damage: 40
+      buildingDamageMultiplier: 0.1
+      lifetime: 12
+      splashDamage: 20
+      splashDamageRadius: 16
+      collidesAir: false
+      hitEffect: explosion
+    }
+  }
+  01a-09-item-morphite: {
+    type: ArtilleryBulletType
+    damage: 300
+    buildingDamageMultiplier: 0.1
+    lifetime: 65
+    speed: 4
+    width: 18
+    height: 23
+    backColor: 51c59c
+    frontColor: 51c59c
+    hitColor: 51c59c
+    trailColor: 51c59c
+    fragLifeMin: 0.4
+    fragVelocityMin: 0.5
+    fragBullets: 12
+    hitEffect: blastExplosion
+    hitShake: 1.5
+    collidesGround: true
+    collidesAir: false
+    collidesTiles: true
+    collides: true
+    ammoMultiplier: 2
+    despawnSound: shockBulletSyntax
+    fragBullet: {
+      type: LiquidBulletType
+      liquid: 02b-06-morphitix-plasma
+      status: 13m-03-hsos6
+      statusDuration: 240
+      puddleSize: 40
+      despawnHit: true
+      despawnSound: shootRetusa
+      speed: 3
+      damage: 65
+      buildingDamageMultiplier: 0.1
+      lifetime: 10
+      splashDamage: 15
+      splashDamageRadius: 16
+      collidesAir: false
+      hitEffect: explosion
+      fragBullets: 4
+      fragBullet: {
+        type: LightningBulletType
+        status: shocked
+        damage: 5
+        buildingDamageMultiplier: 0.1
+        collidesAir: false
+        lightningLength: 2
+        lightningLengthRand: 2
+        lightningColor: 51c59c
+        hitColor: 51c59c
+        lightColor: 51c59c
+        despawnHit: true
+        despawnSound: explosionArtilleryShock
+        speed: 1
+        lifetime: 6
+      }
+    }
+  }
+  01a-08-item-petal-flower: {
+    type: ArtilleryBulletType
+    damage: 180
+    buildingDamageMultiplier: 0.1
+    lifetime: 65
+    speed: 3
+    width: 18
+    height: 23
+    backColor: ff89af
+    frontColor: ff89af
+    hitColor: ff89af
+    trailColor: ff89af
+    fragLifeMin: 0.4
+    fragVelocityMin: 0.5
+    fragBullets: 15
+    hitEffect: blastExplosion
+    hitShake: 1.5
+    collidesGround: true
+    collidesAir: false
+    collidesTiles: true
+    collides: true
+    ammoMultiplier: 1
+    fragBullet: {
+      speed: 3.5
+      damage: 40
+      buildingDamageMultiplier: 0.1
+      lifetime: 12
+      width: 11
+      height: 14
+      splashDamage: 15
+      splashDamageRadius: 16
+      collidesAir: false
+      shrinkY: 0
+      hitEffect: explosion
+      despawnSound: explosion
+    }
+  }
+}
+drawer: {
+  type: DrawTurret
+  basePrefix: canace-
+    parts: [
+    {
+      type: RegionPart
+      suffix: -glow
+      heatColor: a55c3565
+      drawRegion: false
+      progress: warmup
+      heatProgress: warmup
+    }
+    {
+      type: RegionPart
+      suffix: -barrel
+      mirror: false
+      y: 1.5
+      moveY: -1.5
+      progress: recoil
+      under: false
+    }
+  ]
+}
+research: {
+  parent: 03c-03-vulcan
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-11-station-annex
+    }
+  ]
+}
+researchCost: [
+  01a-01-item-cobalt/6000
+  01a-02-item-nickel/5000
+  01a-06-item-chromium/3000
+  01a-07-item-clevorite/1400
+]

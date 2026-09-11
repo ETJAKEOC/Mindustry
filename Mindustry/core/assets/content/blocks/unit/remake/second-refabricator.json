@@ -1,0 +1,43 @@
+{
+//	"type":"Reconstructor",
+	"category":"units",
+
+	"research":{"parent":"elementary-refabricator",
+	"requirements":[
+	"chromium/5000",
+	"silicon/6000",
+	"metaglass/6000",
+	"plastanium/4000"
+	]	},
+
+	"requirements":[
+	"chromium/300",
+	"silicon/250",
+	"metaglass/100",
+	"plastanium/80"
+	],
+
+	"constructTime":2400,
+	"health":3650,
+	"size":5,
+	"consumes":{
+		"power":15,
+		"items":{
+		"items":[
+		"plastanium/80",
+		"silicon/130"
+		]	},
+		"liquid":{
+		"liquid":"nitrogen","amount":0.2
+		}	},
+	"upgrades":[
+	["lighting","superheat"],
+	["gmecht2","gmecht3"],
+/*	["spike","thump"],*/
+	["puncture","ionize"],
+	["aggregation","lightcone"],
+	["sandstone","massif"],
+	["accumulation","downpour"],
+	["patrol","bless"]
+	]
+}

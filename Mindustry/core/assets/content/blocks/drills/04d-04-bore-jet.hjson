@@ -1,0 +1,73 @@
+type: BurstDrill
+size: 4
+health: 650
+category: production
+research: {
+  parent: 04d-03-ore-extractor
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-03-hostile-outpost
+    }
+  ]
+}
+drillMultipliers: {
+  01a-03-item-anthracite: 1.1
+}
+hasLiquids: true
+drillTime: 578
+drillEffect: {
+  type: MultiEffect
+  effects: [
+  {
+    type: particleEffect
+    particles: 12
+    length: 10
+    lifetime: 40
+    interp: circleOut
+    sizeInterp: pow5In
+    sizeFrom: 2.2 
+    sizeTo: 0.1
+    region: exoprosopa-spark-drill
+  }
+  {
+    type: WaveEffect
+    sizeFrom: 0.1
+    sizeTo: 24
+    strokeFrom: 2
+    strokeTo: 0.1
+    colorFrom: f5c2fa
+    colorTo: ad6767
+    lifetime: 16
+  }
+ ]
+}
+tier: 2
+shake: 4
+arrows: 1
+squareSprite: false
+fogRadius: 4
+itemCapacity: 40
+researchCost: [
+  01a-01-item-cobalt/400
+  01a-02-item-nickel/300
+  01a-05-item-aluminium/250
+]
+consumes: {
+  liquid: 02b-01-bioliquid/0.5
+  power: 1
+  liquids: {
+    liquids: [
+      02b-05-hydrowater/0.25
+    ]
+    optional: true
+    booster: true
+  }
+}
+liquidBoostIntensity: 1.67
+liquidCapacity: 30
+requirements: [
+  01a-01-item-cobalt/90
+  01a-02-item-nickel/60
+  01a-05-item-aluminium/70
+]

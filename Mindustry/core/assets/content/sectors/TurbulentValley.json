@@ -1,0 +1,11 @@
+{
+"planet":"Vitospp",
+"sector":350,
+"captureWave":0,
+"difficulty":1,
+"research": {
+"parent": "FogOutpost",
+"objectives": [
+"impact"
+	]	}
+}

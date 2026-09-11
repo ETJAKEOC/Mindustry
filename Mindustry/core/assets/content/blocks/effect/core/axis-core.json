@@ -1,0 +1,28 @@
+{
+	"type":"CoreBlock",
+	"category":"effect",
+	"buildVisibility":"shown",
+
+	"research":{
+//	"parent":"origin-core",
+	"requirements":[
+	"chromium/3000",
+	"uranium/1000",
+	"silicon/2000"
+	]	},
+
+	"requirements":[
+	"chromium/3000",
+	"uranium/2000",
+	"silicon/2000"
+	],
+
+	"buildCostMultiplier":0.107,
+	"size":6,
+	"health":14000,
+	"armor":24,
+	"itemCapacity":10000,
+	"unitCapModifier":20,
+	"unitType":"axis",
+	"squareSprite":false
+}

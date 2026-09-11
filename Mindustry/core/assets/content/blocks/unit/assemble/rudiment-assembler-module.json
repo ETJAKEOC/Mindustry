@@ -1,0 +1,26 @@
+{
+//	"type": "UnitAssemblerModule",
+	"category":"units",
+
+	"health": 3750,
+	"regionSuffix": "-dark",
+	"size": 5,
+	"tier": 1,
+
+	"consumes": {
+	"power": 5
+	},
+
+	"research": {"parent": "senior-refabricator",
+	"requirements": [
+	"phase-fabric/50000",
+	"iridium/50000",
+	"silicon/80000"
+	]	},
+
+	"requirements": [
+	"phase-fabric/500",
+	"iridium/500",
+	"silicon/800"
+	]
+}

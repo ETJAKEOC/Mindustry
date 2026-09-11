@@ -1,0 +1,9 @@
+{
+"type":"SteamVent",
+//"hasShadow":true,
+//"lightRadius": 5,
+//"lightColor": "A9D8FFFF",
+"attributes":{"steam":1,"heat":0,"spores":0,"water":0,"oil":0,},
+"parent":"cinerite",
+"blendGroup":"cinerite"
+}

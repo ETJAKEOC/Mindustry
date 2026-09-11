@@ -1,0 +1,291 @@
+{
+	"type":"tank",
+	"template":"ErekirUnitType",
+	"name":"偏差",
+	"description":"向目标发射多枚放电穿透弹，搭载解裂系统。\n可以碾压建筑。",
+
+	"squareShape":true,
+	"treadPullOffset":11,
+	"treadRects":[
+	{"x":78,"y":-134,
+	"width":46,"height":273
+	}	],
+	"crushDamage":2,
+	"singleTarget":false,
+	"omniMovement":false,
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"disintegration",
+	"requirements":[
+	"chromium/60000",
+	"iridium/30000",
+	"osmium/30000",
+	"metaglass/50000",
+	"silicon/13000"
+	"plastanium/50000",
+	]
+	"objectives":[
+	"rudiment-assembler-module",
+	"senior-refabricator",
+	]	},
+
+	"armor":39,
+	"hitSize":70,
+	"rotateSpeed":1,
+	"speed":0.5,
+	"flying":false,
+	"health":25380,
+	"range":360,
+	"immunities":[
+	"wulfrum-amplify",
+	"empI",
+	"empII"
+],
+
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-glow",
+		"layer":-1,
+		"mirror":true,
+		"blending":"additive",
+		"color":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"outline":false,
+		"progress":"warmup"
+		}	],
+
+	"weapons":[
+	{"name":"deviation-weapon",
+	"mirror":false,
+	"x":0,"y":-1.5,
+	"rotate":true,
+	"inaccuracy":1,
+	"rotateSpeed":1.1,
+	"cooldownTime":150,
+	"shootY":45,
+	"reload":210,
+	"recoil":2.25,
+	"top":true,
+	"heatColor":"FCF387FF",
+	"layerOffset":2,
+	"top":true,
+	"minWarmup":0.85,
+	"smoothReloadSpeed":0.08,
+	"shootWarmupSpeed":0.02,
+	"shake":2,
+
+		"shootSound":"largeCannon",
+		"velocityRnd":0.06,
+		"shake":3,
+		"shoot":{
+		"type":"shootPattern",
+		"shots":3,
+		"shotDelay":3
+		},
+
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-glow",
+		"layer":-1,
+		"mirror":true,
+		"blending":"additive",
+		"color":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"outline":false,
+		"progress":"warmup"
+		},
+		{"type":"RegionPart",
+		"suffix":"-blade",
+		"under":true,
+		"mirror":false,
+		"moveY":-4,
+		"heatColor":"FCF387FF",
+		"progress":{
+		"type":"recoil",
+		"op":"curve",
+		"interp":"pow2In"
+		}	},
+		{"type":"RegionPart",
+		"suffix":"-spine",
+		"mirror":true,
+		"moveRot":-44,
+		"moveX":5,
+		"layerOffset":-0.001,
+		"heatColor":"FCF387FF",
+		"y":-3,
+		"x":6,
+		"moves":[
+		{"type":"PartMove",
+		"progress":"recoil",
+		"rot":-9
+		}	],
+		"progress":"warmup",
+		"heatProgress":{
+		"blending":"additive",
+		"type":"warmup",
+		"other":{
+		"type":"warmup",
+		"op":"min",
+		"other":"heat"
+		}	}	},
+
+		{"type":"RegionPart",
+		"suffix":"-spine",
+		"mirror":true,
+		"moveRot":-74,
+		"moveX":8,
+		"layerOffset":-0.001,
+		"heatColor":"FCF387FF",
+		"x":6,"y":-6,
+		"moves":[
+		{"type":"PartMove",
+		"progress":{
+		"type":"warmup",
+		"op":"blend",
+		"other":"recoil",
+		"amount":1.15
+		},
+		"rot":-9
+		}	],
+		"progress":"warmup",
+		"heatProgress":{
+		"blending":"additive",
+		"type":"warmup",
+		"other":{
+		"type":"warmup",
+		"op":"min",
+		"other":"heat"
+		}	}	},
+
+		{"type":"RegionPart",
+		"suffix":"-spine",
+		"mirror":true,
+		"moveRot":-104,
+		"moveX":5,
+		"layerOffset":-0.001,
+		"heatColor":"FCF387FF",
+		"y":-9,
+		"x":6,
+		"moves":[
+		{"type":"PartMove",
+		"progress":{
+		"type":"warmup",
+		"op":"blend",
+		"other":"recoil",
+		"amount":1.25
+		},
+		"rot":-9
+		}	],
+		"progress":"warmup",
+		"heatProgress":{
+		"blending":"additive",
+		"type":"warmup",
+		"other":{
+		"type":"warmup",
+		"op":"min",
+		"other":"heat"
+		}	}	}	],
+
+		"bullet":{
+		"spawnBullets":[
+		{"fragBullets":7,
+		"fragRandomSpread":20,
+		"fragBullet":{
+		"type":"ArtilleryBulletType",
+		"width":9,
+		"height":13,
+		"frontColor":"FFFFFF",
+		"backColor":"FCF387FF",
+		"lifetime":30,
+		"speed":6.5,
+		"damage":40,
+		"shrinkX":0,"shrinkY":0,
+		"recoil":2.25,
+
+		"hitColor":"D99F6BFF",
+		"status":"empI",
+		"statusDuration":100,
+
+		"shootEffect": {
+		"type": "MultiEffect",
+		"effects": ["shootBig2", "shootBigSmoke"]
+		},
+
+		"despawnHit":true,
+		"hitEffect":"massiveExplosion",
+		"trailColor":"D99F6BFF",
+		"trailLength":10,
+		"trailWidth":3
+		},
+		"type":"BulletType",
+		"lifetime":0
+		}	],
+
+		"type":"EmpBulletType",
+		"width":12,
+		"height":30,
+		"frontColor":"FCF387FF",
+		"backColor":"D99F6BFF",
+		"sprite":"missile-large-back",
+		"status":"empII",
+		"statusDuration":60,
+		"lifetime":36,
+		"speed":10,
+		"damage":180,
+		"shrinkX":0,"shrinkY":0,
+		"radius":72,
+		"lightning":5,
+		"lightningDamage":13,
+		"lightningColor":"FCF387FF",
+		"lightningLength":6,
+		"lightningCone":360,
+		"lightningLengthRand":10,
+		"absorbable":false,
+		"hittable":false,
+		"hitShake":2,
+
+		"hitPowerEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":6,
+		"lifetime":22,
+		"length":80,
+		"cone":-360,
+		"lenFrom":6,
+		"lenTo":6,
+		"colorFrom":"FFFFFFF",
+		"colorTo":"D99F6BFF"
+		},
+
+		"hitColor":"D99F6BFF",
+		"timeIncrease":0.5,
+		"powerDamageScl":0.3,
+		"powerSclDecrease":0.1,
+		"unitDamageScl":0.3,
+		"pierceCap":2,
+		"pierce":true,
+		"pierceBuilding":true,
+		"status":"freezing",
+		"statusDuration":100,
+
+		"shootEffect": "bigShockwave",
+		"smokeEffect": "shootBigSmoke",
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WrapEffect",
+		"effect":"dynamicSpikes",
+		"color":"FCF387FF",
+		"rotation":72
+		}	]	}
+
+		"trailEffect":"none",
+		"trailChance":1,
+		"trailParam":5,
+		"trailLength":12,
+		"trailColor":"FCF387FF",
+		"trailWidth":2.5
+		}	}	]
+}

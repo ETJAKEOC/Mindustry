@@ -1,0 +1,40 @@
+{
+	"type":"Constructor",
+	"category":"units",
+
+	"research":{
+	"parent":"payload-track",
+	"requirements":[
+	"chromium/1600",
+	"plastanium/1200",
+	"silicon/3000"
+	]	},
+
+	"requirements":[
+	"chromium/80",
+	"plastanium/60",
+	"silicon/150"
+	],
+
+	"consumes":{"power":3.333333333333333},
+
+	"health":1290,
+	"size":3,
+	"breakable":false,
+	"canOverdrive":false,
+	"minBlockSize":2,
+	"maxBlockSize":2,
+	"buildSpeed":1.2,
+	"filter":[
+	"nickel-wall",
+	"nickel-wall-large",
+	"chromium-wall",
+	"chromium-wall-large",
+	"wulfrum-armored-wall",
+	"wulfrum-armored-wall-large",
+	"armored-insulated-wall",
+	"armored-insulated-wall-large",
+	"iridium-wall",
+	"iridium-wall-large"
+	]
+}

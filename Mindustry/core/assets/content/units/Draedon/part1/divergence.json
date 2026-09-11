@@ -1,0 +1,66 @@
+{
+	"type":"mech",
+	"name":"分歧",
+	"description":"向敌人发射闪电",
+	"details":"低级嘉登造物，它们仅在一些小型而无关紧要的工厂或实验室担任防御任务。",
+
+	"health":1540,
+	"speed":0.78,
+	"hitSize":15,
+	"armor":5,
+	"itemCapacity":20,
+
+	"research":{
+	"parent":"primary-machine-manufacturer",
+	"requirements":[
+	"chromium/5000"
+	"silicon/4000",
+	]
+	"objectives":[
+	"tank-manufacturer",
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+		{"name":"divergence-shotgun",
+		"reload":30,
+		"shootY":6.25,
+		"x":6.25,"y":0,
+		"shake":2.2,
+		"recoil":2,
+		"top":false,
+		"shootSound":"spark",
+		"alternate":true,
+		"shootCone":45,
+		"inaccuracy":1,
+
+		"shoot":{
+		"shots":4,
+		"shotDelay":0.2
+			},
+
+		"bullet":{
+		"type":"LightningBulletType",
+		"damage":18,
+		"lightningColor":"DEEDFFFF",
+		"hitColor":"DEEDFFFF",
+		"lightningLength":9,
+		"lightningLengthRand":8,
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":3,
+		"lifetime":12,
+		"offset":50,
+		"length":32,
+		"cone":-45,
+		"lenFrom":5,
+		"lenTo":1,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+		}	}	}	]
+}

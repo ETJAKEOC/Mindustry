@@ -1,0 +1,30 @@
+{
+	"type":"LogicBlock",
+	"category":"logic",
+
+	"research":{
+	"parent":"wulfrum-node",
+	"requirements":[
+	"wulfrum-steel/5000",
+	"energy-core/5000",
+	"silicon/6000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/50",
+	"energy-core/50",
+	"silicon/60"
+	],
+
+	"consumes":{"power":7
+	},
+
+	"health":1160,
+	"armor":4,
+	"size":2,
+	"instructionsPerTick":10,
+	"range":160
+}

@@ -1,0 +1,45 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	{"type":"DrawFlame"
+	}	]	},
+
+	"research":{
+	"parent":"wulfrum-graphite-stamp-furnace",
+	"requirements":[
+	"tungsten/3000",
+	"graphite/2000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"tungsten/30",
+	"graphite/20"
+	],
+
+	"consumes":{"power":6,
+	"items":[
+	"tungsten/2",
+	"graphite/3"
+	]	},
+	"craftTime":60,
+
+	"outputItems":[
+	"wulfrum-steel/3"
+	],
+
+	"size":3,
+	"health":1360,
+	"armor":4,
+	"itemCapacity":30,
+	"hasPower":true,
+	"hasLiquids":false,
+	"hasItems":true,
+	"updateEffect":"none"
+}

@@ -1,0 +1,23 @@
+{
+	"type": "Wall",
+	"category": "defense",
+
+	"research": {
+	"parent": "primary-core",
+	"requirements": [
+	"chromium/800",
+	"nickel/600"
+	]
+	},
+
+	"requirements": [
+	"chromium/8",
+	"nickel/6"
+	],
+
+	"health":700,
+	"armor":10,
+	"size":1,
+	"insulated":true,
+	"absorbLasers":true,
+}

@@ -1,0 +1,65 @@
+{
+//	"type":"PowerTurret",
+	"category":"turret",
+
+	"hasPower":true,
+	"health":2500,
+	"size":3,
+	"targetGround":true,
+	"targetAir":false,
+
+	"research":{
+	"parent":"asteroid",
+	"requirements":[
+	"chromium/80",
+	"graphite/330",
+	"silicon/390"
+	]	},
+
+	"requirements":[
+	"chromium/80",
+	"graphite/110",
+	"silicon/130"
+	],
+
+	"consumes":{
+	"power":10
+	},
+
+	"shootSound":"spark",
+	"reload":15,
+	"rotateSpeed":5,
+	"range":144,
+	"shoot":{
+	"shots":3
+	},
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-"
+	},
+
+	"shootEffect":{
+	"type":"ParticleEffect",
+	"line":true,
+	"particles":5,
+	"lifetime":10,
+	"length":35,
+	"cone":-360,
+	"lenFrom":1,
+	"lenTo":5,
+	"colorFrom":"B5FFECFF",
+	"colorTo":"B5FFECFF"
+	},
+
+	"shootType":{
+	"type":"LightningBulletType",
+	"status":"shocked",
+	"lightningColor":"B5FFECFF",
+	"lightningCone":1,
+	"damage":36,
+	"lightningLength":24,
+	"collidesAir":false,
+	"buildingDamageMultiplier":0.2
+	}
+}

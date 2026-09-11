@@ -1,0 +1,7 @@
+research: {
+  parent: 26z-12-item-tablet-barite
+  objectives: [
+    01a-12-item-crosium
+  ]
+}
+databaseCategory: lore-tablets

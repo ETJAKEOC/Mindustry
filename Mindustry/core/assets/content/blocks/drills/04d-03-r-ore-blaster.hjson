@@ -1,0 +1,33 @@
+type: beamDrill
+health: 1000
+range: 7
+tier: 3
+size: 4
+optionalBoostIntensity: 1.9375
+drillTime: 60
+ambientSound: loopMineBeam
+ambientSoundVolume: 0.06
+hasLiquids: true
+consumes: {
+  liquid: 02b-02-a-purified-elixir/0.0833333333
+  power: 1.5
+  liquids: {
+    liquids: [
+      02b-02-ichor/0.25
+    ]
+    optional: true
+    booster: true
+  }
+}
+liquidCapacity: 60
+itemCapacity: 30
+fogRadius: 5
+category: production
+research: 04d-04-bore-jet
+researchCostMultiplier: 0.5
+requirements: [
+  01a-01-item-cobalt/150
+  01a-05-item-aluminium/100
+  01a-06-item-chromium/80
+  01a-07-item-clevorite/30
+]

@@ -1,0 +1,72 @@
+{
+	"type":"regenProjector",
+	"category":"effect",
+
+	"size":3,
+	"health":1200,
+	"healPercent":0.083333333333333,
+	"squareSprite":false,
+
+	"drawer":
+	{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawLiquidTile",
+	"drawLiquid":"hydrogen"
+	},
+	{"type":"DrawGlowRegion",
+	"color":"73FFAEFF"
+	},
+	{"type":"DrawPulseShape",
+	"layer":1,
+	"color":"73FFAEFF"
+	},
+	{"type":"DrawShape",
+	"layer":1,
+	"radius":3.5,
+	"useWarmupRadius":true,
+	"timeScl":2,
+	"color":"73FFAEFF"
+	},
+	"DrawDefault",
+	{"type":"DrawRegion",
+	"suffix":"-cap"
+	}	]	},
+
+	"effect":{
+	"type":"multiEffect",
+	"effects":[
+	{"type":"ParticleEffect",
+	"region":"calamity-repair-effect",
+	"particles":3,
+	"length":12,
+	"lifetime":96,
+	"sizeFrom":4,
+	"sizeTo":0,
+	"colorFrom":"73FFAEFF",
+	"colorTo":"57D993FF"
+	}	]	},
+
+	"range":30,
+	"hasLiquids":true,
+	"hasItems":true,
+
+	"consumes":{"power":6,
+	"liquid":{
+	"liquid":"hydrogen",
+	"amount":0.033333333333333
+	}	},
+
+	"research":{
+	"parent":"exploration-radar",
+	"requirements":[
+	"tungsten/3000",
+	"plastanium/2000",
+	"silicon/2000"
+	]	},
+
+	"requirements":[
+	"tungsten/90",
+	"plastanium/20",
+	"silicon/20"
+	]
+}

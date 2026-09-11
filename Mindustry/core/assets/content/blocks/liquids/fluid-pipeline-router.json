@@ -1,0 +1,23 @@
+{
+	"type":"LiquidRouter",
+	"category":"liquid",
+
+	"research":{
+	"parent":"fluid-pipeline-connector",
+	"requirements":[
+	"nickel/60",
+	"metaglass/60"
+	]	},
+
+	"requirements":[
+	"nickel/3",
+	"metaglass/3"
+	],
+
+	"health":350,
+	"liquidCapacity":30,
+	"solid":false,
+	"underBullets":true,
+	"liquidPadding":1,
+	"liquidPressure":1
+}

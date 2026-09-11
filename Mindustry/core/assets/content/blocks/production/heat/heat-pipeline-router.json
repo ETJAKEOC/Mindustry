@@ -1,0 +1,31 @@
+{
+	"type":"HeatConductor",
+	"category":"crafting",
+
+	"size":1,
+	"regionRotated1":1,
+	"splitHeat":true,
+
+	"research":{
+	"parent":"heat-pipeline",
+	"requirements":[
+	"nickel/300",
+	"tungsten/600"
+	]	},
+
+	"requirements":[
+	"nickel/3",
+	"tungsten/6"
+	],
+
+	"health":300,
+
+	"drawer":{
+	"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	"DrawHeatOutput",
+	{"type":"DrawHeatInput",
+	"suffix":"-heat"
+	}	]	}
+}

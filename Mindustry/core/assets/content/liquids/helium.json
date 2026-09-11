@@ -1,0 +1,11 @@
+{
+	"color":"F2A470FF",
+	"barColor":"F2A470FF",
+	"lightColor":"F2A470FF",
+	"gas": true,
+	"flammability":0,
+	"temperature":0.3,
+	"heatCapacity":0.8,
+	"viscosity":0,
+	"explosiveness":0
+}

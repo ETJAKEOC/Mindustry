@@ -1,0 +1,39 @@
+type: HeatProducer
+size: 2
+heatOutput: 3
+health: 250
+craftTime: 90
+researchCostMultiplier: 0.5
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawHeatOutput
+    }
+  ]
+}
+consumes: {
+  items: [
+    01a-03-item-anthracite/1
+  ]
+}
+ambientSound: loopHum
+ambientSoundVolume: 0.04
+category: crafting
+research: {
+  parent: 09i-11-p-heat-redirector
+  objectives: [
+    {
+      type: Research
+      content: 07g-05-tokamak-reactor
+    }
+  ]
+}
+requirements: [
+  01a-06-item-chromium/30
+  01a-07-item-clevorite/20
+]
+group: heat

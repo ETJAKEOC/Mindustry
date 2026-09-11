@@ -1,0 +1,76 @@
+type: mech
+flying: false
+hitSize: 14
+health: 1950
+armor: 5
+speed: 0.474
+rotateSpeed: 3
+itemCapacity: 40
+outlineColor: 26262F
+mechLegColor: 26262F
+research: {
+  parent: 18r-01-byte
+  objectives: [
+    {
+      type: Research
+      content: 10j-06-v-unitreconstructor-legs
+    }
+  ]
+}
+stepSound: mechStepSmall
+stepSoundVolume: 0.5
+researchCostMultiplier: 0
+abilities: [
+    {
+    type: ShieldArcAbility
+    radius: 34
+    angle: 50
+    width: 2
+    y: -26
+    cooldown: 450
+    regen: 0.5
+    max: 250
+    chanceDeflect: 0.25
+  }
+]
+weapons: [
+  {
+    x: 10
+    y: 0
+    shootY: 4
+    name: syntax
+    reload: 45.5
+    recoil: 1.25
+    mirror: true
+    alternate: true
+    rotate: false
+    shootSound: shootDuo
+    shootSoundVolume: 1.1
+    ejectEffect: casing2
+    top: false
+    bullet: {
+      type: BasicBulletType
+      sprite: large-orb
+      speed: 1.75
+      lifetime: 110
+      damage: 60.35
+      width: 15
+      height: 15
+      shootEffect: colorSpark
+      status: 13m-07-stunned
+      statusDuration: 30
+      backColor: c59ae9
+      frontColor: ffffff
+      bulletInterval: 4
+      intervalBullet: {
+        type: LightningBulletType
+        lightningColor: c59ae9aa
+        damage: 14.65
+        lightningLength: 1.5
+        lightningLengthRand: 3
+        status: shocked
+        despawnSound: shockBulletSyntax
+      }
+    }
+  }
+]

@@ -1,0 +1,34 @@
+{
+	"type": "groundUnit",
+	"name": "Thorium Crawler",
+	"description": "Large crawlers with mounted thorium reactors. Explodes violently near foreign structures.",
+	"maxVelocity": 0.5,
+	"speed": 0.15,
+	"drag": 0.05,
+	"mass": 10,
+	"hitsize": 25,
+	"shootCone": 360,
+	"rotatespeed": 0.1,
+	"health": 1200,
+	"range": 60,
+	"weapon": {
+		"name": "nothing",
+	"range": 60,
+		"length": 13, 
+		"shootcone": 360,
+		"width": 0.1,
+		"reload": 5,
+		"alternate": true,
+		"shootSound": "shootBig",
+		"bullet":{
+             "lifetime": 40,
+             "instantDisappear": true,
+             "killShooter": true,
+             "speed": 1.5,
+             "splashDamageRadius": 120,
+             "splashDamage": 1800,
+             "hitEffect": "commandSend",
+             "despawnEffect": "commandSend"   
+		}
+	}
+}

@@ -1,0 +1,14 @@
+captureWave: 24
+difficulty: 7
+planet: frostnova
+sector: 215
+research: {
+  parent: 19s-11-glistening-straits
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-11-glistening-straits
+    }
+  ]
+}
+outline: false

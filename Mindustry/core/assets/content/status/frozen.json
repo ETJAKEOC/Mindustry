@@ -1,0 +1,20 @@
+{
+	"speedMultiplier":0,
+	"reloadMultiplier":1.8,
+	"color":"63E9FCFF",
+	"effect": {
+		"type": "ParticleEffect",
+		"region":"calamity-prism2-effect",
+		"particles":3,
+		"length":10,
+		"lifetime":40,
+		"interp": "circleOut",
+		"sizeInterp": "pow5Out",
+		"cone":360,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"B8DFE5FF",
+		"sizeFrom":12,
+		"sizeTo":0
+		},
+	"effectChance":0.1
+}

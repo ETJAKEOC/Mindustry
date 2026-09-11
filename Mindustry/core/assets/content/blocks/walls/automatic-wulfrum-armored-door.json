@@ -1,0 +1,20 @@
+{
+	"type": "AutoDoor",
+	"category": "defense",
+
+	"research": {
+	"parent": "wulfrum-armored-wall-large",
+	"objectives": [
+	"wulfrum-core"
+	]	},
+
+	"requirements": [
+	"wulfrum-steel/20",
+	"nickel/10",
+	"silicon/10"
+	],
+
+	"health":3560,
+	"armor":6,
+	"size":2
+}

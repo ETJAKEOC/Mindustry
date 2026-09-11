@@ -1,0 +1,49 @@
+{
+//	"type": "UnitAssembler",
+	"category":"units",
+	"health":2430,
+	"size":5,
+    "dronesCreated":4,
+    "areaSize":21,
+
+	"consumes":{"power":18,
+	"liquid":{
+	"liquid":"cyanogen","amount":0.2
+	}	},
+
+	"research": {"parent":"assembler(current)",
+	"requirements": [
+	"iridium/2500",
+	"forgotten-crystals/6000",
+	"silicon/10000",
+	"plastanium/8000"
+	]	},
+
+	"requirements": [
+	"iridium/200",
+	"forgotten-crystals/120",
+	"silicon/150",
+	"plastanium/100"
+	],
+
+		"plans":[
+		{"unit":"jet",
+		"time": 6000,
+		"requirements":[
+		"calamity-accretion/8",
+		"calamity-chromium-wall-large/10"
+		]	},
+		{"unit":"distort",
+		"time": 10800,
+		"requirements":[
+		"calamity-aggregation/12",
+		"calamity-iridium-wall-large/10"
+		]	},
+		{"unit":"collapse",
+		"time": 22000,
+		"requirements":[
+		"calamity-lightcone/12",
+		"calamity-iridium-wall-large/30"
+		]	}
+	]
+}

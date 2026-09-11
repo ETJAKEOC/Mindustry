@@ -1,0 +1,17 @@
+{
+"type": "Floor",
+"variants":0,
+"speedMultiplier":0.3,
+"drownTime":200,
+"status":"wet",
+"statusDuration": 150,
+"cacheLayer": "water",
+"albedo": 0.9,
+"isLiquid": true,
+"liquidDrop": "radoactive-water",
+"liquidMultiplier":1.25,
+"placeableOn":true,
+"supportsOverlay":true
+"statusDuration":3600,
+"status":"sulphurous-radiation"
+}

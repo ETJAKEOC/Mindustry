@@ -1,0 +1,20 @@
+{
+	"type":"PowerDiode",
+	"category":"power",
+	"size":1,
+	"health":200,
+
+	"research":{
+	"parent":"energy-node",
+	"requirements":[
+	"silicon/100",
+	"metaglass/100",
+	"plastanium/80"
+	]	},
+
+	"requirements":[
+	"silicon/10",
+	"metaglass/10",
+	"plastanium/8"
+	]
+}

@@ -1,0 +1,98 @@
+{
+	"type":"flying",
+	"controller":"BuilderAI",
+	"coreUnitDock":true,
+	"flying":true,
+	"accel":0.08,"drag":0.08,
+	"engineSize":4,
+	"engineOffset":8,
+	"trailLength":3,
+	"faceTarget":true,
+	"targetPriority":-2,
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"wulfrum-core",
+	"objectives":[
+	"wulfrum-core"
+	]	},
+	"alwaysUnlocked":false,
+
+	"envDisabled":0,
+	"fogRadius":0,
+	"isEnemy":false,
+	"targetable":false,
+	"hittable":false,
+	"rotateSpeed":9,
+	"mineWalls":true,
+	"mineFloor":true,
+	"buildSpeed":0.75,
+	"speed":6.0,
+	"lowAltitude":false,
+	"health":1200,
+	"armor":5,
+	"hitSize":11,
+	"itemCapacity":60,
+	"mineSpeed":8,
+	"mineTier":5,
+
+	"payloadCapacity":256,
+	"pickupUnits":false,
+	"vulnerableWithPayloads":true,
+
+	"weapons":[
+		{"name":"wulfrum-core-drone-weapon",
+		"type":"RepairBeamWeapon",
+		"mirror":false,
+		"x":0,"y":0,
+		"widthSinMag":0.11,
+		"reload":1,
+		"shootY":5,
+		"rotate":false,
+		"beamWidth":0.7,
+		"shootCone":40,
+		"repairSpeed":5,
+		"fractionRepairSpeed":0.04,
+		"laserColor":"C2FF43FF",
+		"healColor":"C2FF43FF",
+		"targetUnits":false,
+		"targetBuildings":true,
+		"autoTarget":false,
+		"controllable":true,
+		"recoil":0,
+
+	"parts":[
+		{"type":"RegionPart",
+		"suffix":"-blade",
+		"mirror":true,
+		"moveRot":-25,
+		"heatColor":"FCF387FF",
+		"moves":[
+		{"type":"PartMove",
+		"progress":"reload",
+		"rot":-1
+		}	]	}	],
+
+		"bullet":{
+		"maxRange":50
+	}	},
+		{"shootOnDeath":true,
+	"controllable":false,
+	"shootSound":"none",
+	"shootCone":360,
+		"bullet":{
+		"collidesAir":false,
+		"collides":false,
+		"instantDisappear":true,
+		"hittable":false,
+		"absorbable":false,
+		"splashDamageRadius":24,
+		"splashDamage":30,
+		"hitSound":"WulfrumDeath",
+		"hitSoundVolume":5,
+		"keepVelocity":false,
+		"despawnHit":true,
+		"shootEffect":"none",
+		"hitEffect":"none"
+	}	}	]
+}

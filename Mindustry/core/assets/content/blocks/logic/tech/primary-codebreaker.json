@@ -1,0 +1,52 @@
+{
+	"type":"GenericCrafter",
+	"category":"logic",
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	{"type":"DrawLiquidTile",
+	"drawLiquid":"cryofluid"
+	},
+	"DrawDefault"
+	]	},
+
+	"research":{
+//	"parent":"node-processor",
+	"requirements":[
+	"chromium/4000",
+	"plastanium/6000",
+	"silicon/4000"
+	]	},
+
+	"requirements":[
+	"chromium/40",
+	"plastanium/60",
+	"silicon/40"
+	],
+
+	"consumes":{"power":50,
+	"items":{
+	"items":[
+	"wulfrum-steel/3000"
+	]	},
+	"liquid":{
+	"liquid":"cryofluid","amount":4
+	}	},
+
+	"outputItems":[
+	"wulfrum-schematics/1"
+	],
+
+	"size":3,
+	"health":1060,
+	"itemCapacity":3000,
+	"liquidCapacity":600,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"craftTime":18000,
+	"craftEffect":"none",
+	"updateEffect":"none"
+}

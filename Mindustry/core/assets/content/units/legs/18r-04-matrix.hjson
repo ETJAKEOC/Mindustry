@@ -1,0 +1,118 @@
+type: mech
+flying: false
+hitSize: 20
+health: 11000
+armor: 17
+speed: 0.35
+rotateSpeed: 2.1
+itemCapacity: 75
+outlineColor: 26262F
+mechLegColor: 26262F
+research: {
+  parent: 18r-03-decode
+  objectives: [
+    {
+      type: Research
+      content: 10j-11-a-basic-module
+    }
+  ]
+}
+researchCostMultiplier: 2.5
+mechStepParticles: true
+mechFrontSway: 1
+stepShake: 0.15
+singleTarget: true
+drownTimeMultiplier: 1.5
+stepSound: mechStep
+stepSoundPitch: 0.9
+stepSoundVolume: 0.35
+abilities: [
+  {
+    type: ShieldRegenFieldAbility
+    reload: 120
+    range: 32
+    amount: 50
+    max: 2200
+    soundVolume: 0.2
+  }
+]
+weapons: [
+  {
+    x: 14.5
+    y: 0
+    shootY: 5
+    shootX: 1.2
+    name: matrix
+    reload: 60
+    recoil: 3
+    mirror: true
+    alternate: true
+    rotate: false
+    shootCone: 5
+    shootSound: shootMatrix
+    shootSoundVolume: 0.18
+    shake: 1
+    shoot: {
+    firstShotDelay: 35
+    shotDelay: 12
+    shots: 2
+      }
+    ejectEffect: casing3
+    top: false
+    bullet: {
+      type: BasicBulletType
+      damage: 225
+      splashDamage: 70.5
+      splashDamageRadius: 28
+      width: 12
+      height: 12
+      speed: 8
+      lifetime: 35
+      pierce: true
+      pierceCap: 2
+      trailChance: -1
+      trailRotation: true
+      trailLength: 4
+      trailWidth: 3
+      backColor: c59ae9
+      frontColor: ffffff
+      trailColor: c59ae9aa
+      status: 13m-07-stunned
+      statusDuration: 15
+    }
+  }
+  {
+    x: 6.75
+    y: -5
+    name: matrix-mount
+    reload: 24
+    mirror: true
+    alternate: true
+    rotate: true
+    rotateSpeed: 4
+    bullet: {
+      type: BasicBulletType
+      speed: 5
+      lifetime: 40
+      damage: 20
+      width: 8
+      height: 8
+      shootEffect: shootSmall
+      backColor: c59ae9
+      frontColor: ffffff
+      bulletInterval: 12
+      intervalBullet: {
+        type: ShrapnelBulletType
+        lifetime: 2.4
+        damage: 5
+        lightColor: c59ae9aa
+        lightOpacity: 0.5
+        length: 4
+        width: 2
+        serrations: 0
+        despawnSound: shockBulletByte
+        status: shocked
+      }
+    }
+  }
+]

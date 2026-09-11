@@ -1,0 +1,13 @@
+{
+"type":"Floor",
+"variants":3,
+"itemDrop":"sand",
+"wall":"origin-sand-wall",
+"attributes":{
+"heat":0,
+"spores":0,
+"water":3,
+"oil":0,
+"sand":1
+},
+}

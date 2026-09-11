@@ -1,0 +1,141 @@
+type: HeaterGenerator
+size: 8
+health: 12500
+armor: 15
+category: power
+squareSprite: false
+requirements: [
+  01a-06-item-chromium/1250
+  01a-07-item-clevorite/1000
+  01a-08-item-petal/750
+  01a-10-item-bethine/400
+  01a-11-item-pyroxene/500
+]
+consumes: {
+  liquids: [
+    02b-02-ichor/0.5
+    02b-06-morphitix-plasma/0.6666666666
+    02b-04-miasma/5.33333333333
+    02b-03-necroplasm/1
+    02b-05-hydrowater/12
+  ]
+  items: [
+    01a-11-item-pyroxene/1
+  ]
+}
+hasLiquids: true
+heatOutput: 40
+explodeSound: explosionReactor2
+explosionRadius: 22
+explosionDamage: 2200
+powerProduction: 1233.33333
+generateEffect: none
+ambientSound: loopFlux
+ambientSoundVolume: 0.18
+liquidCapacity: 800
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-05-hydrowater
+      padding: 1.5
+    }
+    {
+      type: DrawRegion
+      suffix: -cover
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-ichor
+      padLeft: 1.5
+      padTop: 1.5
+      padBottom: 45
+      padRight: 45
+    }
+    {
+      type: DrawCrucibleFlame
+      y: 19
+      x: -19
+      flameRad: 0.1
+      circleSpace: 0.1
+      particleSize: 1
+      particleRad: 10
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-03-necroplasm
+      padLeft: 1.5
+      padTop: 45
+      padBottom: 1.5
+      padRight: 45
+    }
+    {
+      type: DrawCrucibleFlame
+      y: -19
+      x: -19
+      flameRad: 0.1
+      circleSpace: 0.1
+      particleSize: 1
+      particleRad: 10
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-04-miasma
+      padLeft: 45
+      padTop: 1.5
+      padBottom: 45
+      padRight: 1.5
+    }
+    {
+      type: DrawCrucibleFlame
+      y: 19
+      x: 19
+      flameRad: 0.1
+      circleSpace: 0.1
+      particleSize: 1
+      particleRad: 10
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-06-morphitix-plasma
+      padLeft: 45
+      padTop: 45
+      padBottom: 1.5
+      padRight: 1.5
+    }
+    {
+      type: DrawCrucibleFlame
+      y: -19
+      x: 19
+      flameRad: 0.1
+      circleSpace: 0.1
+      particleSize: 1
+      particleRad: 10
+    }
+    {
+      type: DrawPlasma
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawHeatOutput
+    }
+  ]
+}
+researchCostMultiplier: 1
+research: {
+  #TODO - change to proper sector
+  parent: 07g-10-necroplasm-reactor
+  objectives: [
+    {
+      type: OnSector
+      preset: 20t-37-myrra-heights
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+	"speed":0.6,
+	"rotateSpeed":1.2,
+	"hitSize":17.5,
+	"health":3290,
+	"armor":14,
+	"range":320,
+	"type":"mech",
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"lighting",
+	"requirements":[
+	"plastanium/1600",
+	"silicon/2600"
+	],
+	"objectives":[
+	"second-refabricator"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+		{"name":"superheat-weapon",
+		"reload":90,
+		"x":12.375,"y":0,
+		"mirror":true,
+		"top":false,
+		"alternate":true,
+		"layerOffset":-0.001,
+		"rotationLimit":35,
+		"rotateSpeed":1.2,
+		"rotate":true,
+		"shootSound":"railgun",
+		"shootY":12.125,
+		"shootCone":45,
+
+		"bullet":{
+		"type":"EmpBulletType",
+		"sprite":"calamity-pointy-bullet",
+		"damage":200,
+		"splashDamageRadius":16,
+		"splashDamage":20,
+		"speed":20,
+		"lifetime":16,
+		"status":"shocked",
+		"shrinkY":0,"shrinkX":0,
+		"width":11,"height":16,
+		"frontColor":"FCF387FF",
+		"backColor":"D99F6BFF",
+		"hitSound":"spark",
+		"hitShake":1,
+		"hitColor":"FCF387FF",
+
+		"radius":16,
+		"timeIncrease":0,
+		"powerDamageScl":1,
+		"powerSclDecrease":1,
+		"unitDamageScl":0.3,
+
+		"trailInterval":1.6,
+		"trailRotation":true,
+		"trailColor":"FCF387FF",
+		"trailParam":6,
+		"trailColor":"FCF387FF",
+		"trailWidth":12,"trailLength":3,
+		"trailEffect":{
+		"type":"ParticleEffect",
+		"particles":1,
+		"length":0,
+		"lifetime":30,
+		"region":"calamity-angle-arrow",
+		"lightColor":"D99F6BFF",
+		"colorFrom":"FCF387FF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":23,
+		"sizeTo":1
+		},
+
+	"chainEffect":"chainLightning",
+	"applyEffect":"none",
+	"hitPowerEffect":{
+		"type":"ParticleEffect",
+		"particles":5,
+		"baseLength":35,
+		"length":35,
+		"lifetime":11,
+		"sizeFrom":2,
+		"sizeTo":0,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"FCF387FF",
+		"cone":360},
+
+	"despawnEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":7,
+		"lifetime":20,
+		"offset":50,
+		"length":55,
+		"cone":-360,
+		"lenFrom":6,
+		"lenTo":0,
+		"colorFrom":"A9D8FFFF",
+		"colorTo":"66B1FFFF"},
+
+	"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":10,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"strokeFrom":1.5,
+		"strokeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"},
+		{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":3,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		}	]	},
+	"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"strokeFrom":3.5,
+		"strokeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"},
+		{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":9,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		}	]	}
+		}	}	]
+}

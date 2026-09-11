@@ -1,0 +1,50 @@
+{
+	"type":"Separator",
+	"category":"crafting",
+
+	"itemCapacity":30,
+	"liquidCapacity":100,
+	"hasItems":true,
+	"hasLiquids":true,
+	"hasPower":true,
+	"outputsLiquid":true,
+	"health":1600,
+
+	"size":3,
+	"craftTime":20,
+	"results":["sand/2","uranium/1"],
+
+	"consumes":{"power":3.333333333,
+	"items":[
+	"uraniumine/2"
+	]
+	},
+
+	"research":{
+//	"parent":"dissociation-recombina-machine",
+	"requirements":[
+	"plastanium/6000",
+	"silicon/4000"
+	]	},
+
+	"requirements":[
+	"plastanium/60",
+	"silicon/40"
+	],
+
+	"drawer":
+	{"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	{"type":"DrawLiquidRegion",
+	"drawLiquid":"radoactive-water"
+	},
+	{"type":"DrawRegion",
+	"suffix":"-spinner",
+	"rotateSpeed":9,
+	"rotation":45
+	},
+	{"type":"DrawRegion",
+	"suffix":"-cap"
+	}	]	}
+}

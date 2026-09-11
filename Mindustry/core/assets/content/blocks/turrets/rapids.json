@@ -1,0 +1,100 @@
+{
+//	"type":"LiquidTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-"
+	},
+
+	"research":{
+	"parent":"asteroid",
+	"requirements":[
+	"tungsten/500",
+	"metaglass/800",
+	"silicon/360"
+	]	},
+
+
+	"requirements":[
+	"tungsten/50",
+	"metaglass/80",
+	"silicon/120"
+	],
+
+	"scaledHealth":250,
+	"size":3,
+	"squareSprite":false,
+	"reload":1.5,
+	"range":210,
+	"liquidCapacity":240,
+	"outlineColor":"2E2F34FF",
+	"shootSound":"shootLiquid",
+	"inaccuracy":3,
+	"velocityRnd":0.1,
+	"maxAmmo":60,
+
+	"shoot":{
+	"type":"ShootAlternate",
+	"shots":2,
+	"shotDelay":3
+	},
+
+	"ammoTypes":{
+	"water":{
+		"type":"LiquidBulletType",
+		"liquid":"water",
+		"speed":4,
+		"lifetime":63,
+		"status":"wet",
+		"statusDuration":600,
+		"damage":1,
+		"ammoMultiplier":0.75,
+		"knockback":1.75,
+		"puddleSize":8,
+		"orbSize":4,
+		"drag":0.001
+		},
+	"slag":{
+		"type":"LiquidBulletType",
+		"liquid":"slag",
+		"speed":4,
+		"lifetime":63,
+		"status":"melting",
+		"statusDuration":480,
+		"damage":9,
+		"ammoMultiplier":0.75,
+		"knockback":1.5,
+		"puddleSize":8,
+		"orbSize":4,
+		"drag":0.001
+		},
+	"oil":{
+		"type":"LiquidBulletType",
+		"liquid":"oil",
+		"speed":4,
+		"lifetime":63,
+		"status":"tarred",
+		"statusDuration":480,
+		"damage":1,
+		"ammoMultiplier":0.75,
+		"knockback":1.5,
+		"puddleSize":8,
+		"orbSize":4,
+		"drag":0.001
+		},
+	"cryofluid":{
+		"type":"LiquidBulletType",
+		"liquid":"cryofluid",
+		"speed":4,
+		"lifetime":63,
+		"status":"freezing",
+		"statusDuration":480,
+		"damage":1,
+		"ammoMultiplier":0.75,
+		"knockback":1.5,
+		"puddleSize":8,
+		"orbSize":4,
+		"drag":0.001
+		}	}
+}

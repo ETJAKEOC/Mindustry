@@ -1,0 +1,28 @@
+type: WallCrafter
+health: 650
+size: 2
+category: production
+research: {
+  parent: 0004-enchantment
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-16-waterfall
+    }
+  ]
+}
+consumes: {
+  power: 0.25
+}
+requirements: [
+  01a-05-item-aluminium/50
+  01a-06-item-chromium/30
+  01a-07-item-clevorite/15
+]
+researchCostMultiplier: 0.5
+drillTime: 75
+output: 01a-08-item-nucrid
+attribute: nucrid
+ambientSound: loopDrill
+ambientSoundVolume: 0.04
+fogRadius: 2

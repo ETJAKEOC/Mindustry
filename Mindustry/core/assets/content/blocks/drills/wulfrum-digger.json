@@ -1,0 +1,36 @@
+{
+	"type":"WallCrafter",
+	"category":"production",
+
+	"research":{
+	"parent":"wulfrum-drill",
+	"requirements":[
+	"graphite/5000",
+	"wulfrum-steel/10000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"graphite/50",
+	"wulfrum-steel/50"
+	],
+
+	"consumes":{
+	"power":0.4
+	},
+
+	"attribute":"sand",
+
+	"output":"sand",
+
+	"itemCapacity":10,
+	"liquidCapacity":10,
+	"size":3,
+	"health":980,
+	"armor":4,
+	"fogRadius":3,
+	"drillTime":100,
+	"hasShadow":true
+}

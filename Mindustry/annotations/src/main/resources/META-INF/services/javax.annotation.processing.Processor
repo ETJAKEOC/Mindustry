@@ -1,0 +1,6 @@
+mindustry.annotations.misc.LoadRegionProcessor
+mindustry.annotations.misc.LogicStatementProcessor
+mindustry.annotations.impl.StructProcess
+mindustry.annotations.impl.AssetsProcess
+mindustry.annotations.entity.EntityProcess
+mindustry.annotations.remote.RemoteProcess

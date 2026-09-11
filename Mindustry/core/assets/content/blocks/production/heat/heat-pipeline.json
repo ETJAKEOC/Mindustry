@@ -1,0 +1,28 @@
+{
+	"type":"HeatConductor",
+	"category":"crafting",
+
+	"research":{
+	"parent":"hydrogen-heater",
+	"requirements":[
+	"nickel/200",
+	"tungsten/400"
+	]	},
+
+	"requirements":[
+	"nickel/2",
+	"tungsten/4"
+	],
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	"DrawHeatOutput",
+	{"type":"DrawHeatInput",
+	"suffix":"-heat"
+	}	]	},
+
+	"size":1,
+	"health":300,
+	"regionRotated1":1
+}

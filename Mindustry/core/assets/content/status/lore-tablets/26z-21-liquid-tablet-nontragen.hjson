@@ -1,0 +1,7 @@
+research: {
+  parent: 26z-18-liquid-tablet-oasis-water
+  objectives: [
+    02b-05-liquid-nontragen
+  ]
+}
+databaseCategory: lore-tablets

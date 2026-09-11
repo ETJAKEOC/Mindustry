@@ -1,0 +1,6 @@
+{
+"type":"Floor",
+"variants":3,
+"itemDrop":"snow(item)",
+"wall":"origin-snow-wall"
+}

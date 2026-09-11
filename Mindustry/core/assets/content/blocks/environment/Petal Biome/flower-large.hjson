@@ -1,0 +1,6 @@
+type: TreeBlock
+variants: 0
+itemDrop: 01a-08-item-petal-flower
+emitLight: true
+lightColor: FBBDD2A3
+lightRadius: 45

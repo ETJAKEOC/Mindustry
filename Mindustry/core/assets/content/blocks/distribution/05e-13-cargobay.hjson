@@ -1,0 +1,32 @@
+type: UnitCargoLoader
+size: 3
+health: 1000
+unitType: 19r-02-iris
+buildTime: 600
+consumes: {
+  power: 6
+  liquid: 02b-02-a-purified-elixir/0.5
+}
+polyColor: c5a381
+polyRadius: 8
+itemCapacity: 200
+category: distribution
+requirements: [
+  01a-05-item-aluminium/175
+  01a-06-item-chromium/110
+  01a-09-item-morphite/50
+]
+research: {
+  parent: 05e-13-a-surge-driver
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-15-bioproject-core
+    }
+  ]
+}
+researchCost: [
+  01a-05-item-aluminium/5000
+  01a-06-item-chromium/3000
+  01a-09-item-morphite/250
+]

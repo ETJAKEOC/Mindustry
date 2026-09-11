@@ -1,0 +1,44 @@
+{
+//	"type":"UnitFactory",
+	"category":"units",
+
+	"research":{
+	"parent":"origin-core",
+	"requirements":[
+	"nickel/100",
+	"graphite/150",
+	"silicon/150"
+	]	},
+
+	"requirements":[
+	"nickel/100",
+	"graphite/150",
+	"silicon/150"
+	],
+
+	"consumes":{"power":5},
+
+	"health":1290,
+	"size":3,
+
+	"plans":[
+		{"unit":"current",
+		"time":1200,
+		"requirements":[
+		"graphite/30",
+		"silicon/40"
+		]	},
+		{"unit":"gmecht1",
+		"time":1800,
+		"requirements":[
+		"tungsten/40",
+		"processor-junior/30"
+		]	}
+/*		{"unit":"claw",
+		"time":1800,
+		"requirements":[
+		"graphite/40",
+		"silicon/50"
+		]	}*/
+	]
+}

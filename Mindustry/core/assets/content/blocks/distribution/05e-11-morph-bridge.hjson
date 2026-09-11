@@ -1,0 +1,25 @@
+type: ItemBridge
+size: 1
+health: 300
+range: 10
+pulse: true
+transportTime: 1.19999
+arrowPeriod: 0.9
+arrowTimeScl: 2.75
+hasPower: true
+outputsPower: false
+requirements: [
+  01a-05-item-aluminium/12
+  01a-09-item-morphite/6
+]
+itemCapacity: 20
+category: distribution
+squareSprite: false
+research: 05e-04-a-morphite-router
+researchCost: [
+  01a-05-item-aluminium/750
+  01a-09-item-morphite/50
+]
+consumes: {
+  power: 0.166666666667
+}

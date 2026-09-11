@@ -1,0 +1,27 @@
+{
+	"type":"Duct",
+	"category":"distribution",
+
+	"research":{
+	"parent":"wulfrum-core",
+	"requirements":[
+	"wulfrum-steel/100"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/1"
+	],
+
+	"size":1,
+	"health":300,
+	"armor":2,
+	"solid":false,
+	"underBullets":true,
+	"speed":2.608695652173913,
+	"itemCapacity":1,
+	"bridgeReplacement":"wulfrum-bridge",
+	"junctionReplacement":"wulfrum-junction"
+}

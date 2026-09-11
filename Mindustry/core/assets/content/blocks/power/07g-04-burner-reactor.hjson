@@ -1,0 +1,67 @@
+type: ConsumeGenerator
+health: 850
+size: 4
+category: power
+squareSprite: false
+requirements: [
+  01a-01-item-cobalt/150
+  01a-02-item-nickel/350
+  01a-05-item-aluminium/200
+  01a-06-item-chromium/250
+]
+consumes: {
+  itemFlammable: {}
+  items: [
+  01a-06-item-chromium/1
+  ]
+  liquid: 02b-02-a-purified-elixir/0.5
+}
+powerProduction: 15
+liquidCapacity: 60
+itemDuration: 180
+generateEffect: none
+ambientSound: loopSmelter
+ambientSoundVolume: 0.03
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padding: 2
+    }
+    {
+      type: DrawRegion
+      suffix: -mid
+    }
+    {
+      type: DrawCrucibleFlame
+      flameRad: 0.8
+      circleSpace: 0.8
+      particleRad: 12
+      particleSize: 2
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+research: {
+  parent: 07g-03-burner-generator
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-04-cliffside
+    }
+  ]
+}
+researchCost: [
+  01a-01-item-cobalt/2800
+  01a-02-item-nickel/4000
+  01a-05-item-aluminium/1600
+  01a-06-item-chromium/1400
+]

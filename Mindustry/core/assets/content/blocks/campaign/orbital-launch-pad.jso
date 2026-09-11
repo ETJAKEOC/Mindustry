@@ -1,0 +1,31 @@
+{
+//	"type":"LaunchPad",
+	"category":"distribution",
+
+	"scaledHealth":250,
+	"size":4,
+	"itemCapacity":300,
+	"liquidCapacity":300,
+	"launchTime":1800,
+	"hasPower":true,
+	"hasLiquids":true,
+
+	"research":{
+//	"parent":"unit-logistic-unload-point",
+	"requirements":[
+	"chromium/8000",
+	"surge-alloy/10000",
+	"silicon/15000"
+	]	},
+
+	"requirements":[
+	"chromium/80",
+	"surge-alloy/100",
+	"silicon/150"
+	],
+
+	"consumes":{"power":50,
+	"liquids":[
+	"nitrogen/0.5"
+	]	}
+}

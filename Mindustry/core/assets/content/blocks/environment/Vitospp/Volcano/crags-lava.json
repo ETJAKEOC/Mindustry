@@ -1,0 +1,17 @@
+{
+"type":"Floor",
+"variants":0,
+"speedMultiplier":0.3,
+"drownTime":200,
+"status":"melting",
+"statusDuration":150,
+"cacheLayer":"slag",
+"albedo":0.9,
+"isLiquid":true,
+"liquidDrop":"magma",
+"liquidMultiplier":1,
+"supportsOverlay":true,
+"color":"FB8882FF",
+"lightRadius":5,
+"lightColor":"FB8882FF"
+}

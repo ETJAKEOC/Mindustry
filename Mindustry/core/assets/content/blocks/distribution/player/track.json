@@ -1,0 +1,21 @@
+{
+//	"type":"Duct",
+	"category":"distribution",
+
+	"research":{
+	"parent":"origin-core"
+	},
+
+	"requirements":[
+	"nickel/1"
+	],
+
+	"size":1,
+	"health":100,
+	"solid":false,
+	"underBullets":true,
+	"speed":4,
+	"itemCapacity":1,
+	"bridgeReplacement":"track-bridge",
+	"junctionReplacement":"track-junction"
+}

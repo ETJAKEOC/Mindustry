@@ -1,0 +1,141 @@
+{
+	"speed":0.72,
+	"hitSize":10.25,
+	"name":"绿机甲t2",
+	"health":1180,
+	"description":"向目标发射治疗emp弹。",
+	"armor":5,
+	"type":"mech",
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"gmecht1",
+	"requirements":[
+	"chromium/1500",
+	"silicon/1200"
+	],
+	"objectives":[
+	"tank-manufacturer"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"abilities":[
+	{"type":"ShieldRegenFieldAbility",
+	"amount":30,
+	"max":120,
+	"reload":180,
+	"range":48,
+	"activeEffect":{
+	"type":"WaveEffect",
+	"lifetime":30,
+	"sizeFrom":0,
+	"sizeTo":48,
+	"colorFrom":"FFD37FFF",
+	"colorTo":"FFD37FFF"
+	}	}	],
+
+	"weapons":[
+		{"name":"gmecht2-weapon",
+		"reload":50,
+		"x":8.25,"y":0,
+		"mirror":true,
+		"top":false,
+		"alternate":true,
+		"shootCone":45,
+		"layerOffset":-0.001,
+		"rotationLimit":35,
+		"rotateSpeed":1,
+		"rotate":true,
+
+		"bullet":{
+		"type":"EmpBulletType",
+		"width":8,
+		"height":11,
+		"sprite":"circle-bullet",
+		"frontColor":"84F491FF",
+		"backColor":"62AE7FFF",
+		"lifetime":26,
+		"speed":6,
+		"damage":25,
+		"recoil":0.6,
+		"splashDamage":15,
+		"splashDamageRadius":40,
+		"shrinkY":0,
+		"shrinkX":0,
+		"radius":42,
+		"healPercent":1.2,
+
+		"hitColor":"84F491FF",
+		"timeIncrease":0.5,
+		"powerDamageScl":0.3,
+		"powerSclDecrease":0.1,
+		"unitDamageScl":0.4,
+		"status":"freezing",
+		"statusDuration":100,
+		"shootEffect":"lightningShoot",
+		"homingPower":0.0678,
+		"homingRange":40,
+
+		"hitPowerEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":6,
+		"lifetime":22,
+		"length":80,
+		"cone":-360,
+		"lenFrom":6,
+		"lenTo":6,
+		"colorFrom":"84F491FF",
+		"colorTo":"62AE7FFF"
+		},
+
+		"despawnEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":7,
+		"lifetime":20,
+		"offset":50,
+		"length":55,
+		"cone":-360,
+		"lenFrom":6,
+		"lenTo":0,
+		"colorFrom":"84F491FF",
+		"colorTo":"62AE7FFF"
+		},
+		"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":7,
+		"lifetime":20,
+		"offset":50,
+		"length":55,
+		"cone":-360,
+		"lenFrom":6,
+		"lenTo":0,
+		"colorFrom":"84F491FF",
+		"colorTo":"62AE7FFF"
+		},
+		"trailColor":"84F491FF",
+		"trailParam":6,
+		"trailLength":10,
+		"trailWidth":2,
+		"trailChance":0.3,
+		"trailEffect":{
+		"type":"ParticleEffect",
+		"particles":13,
+		"length":2.5,
+		"baseLength":2.5,
+		"lifetime":20,
+		"interp":"circleOut",
+		"cone":360,
+		"offset":5,
+		"colorFrom":"84F491FF",
+		"colorTo":"62AE7FFF",
+		"sizeFrom":5,
+		"sizeTo":0
+		}
+	}	}	]
+}

@@ -1,0 +1,17 @@
+{
+	"type":"Wall",
+	"category":"defense",
+
+	"research":{
+	"parent":"wulfrum-armored-wall"
+	},
+
+	"requirements":[
+	"wulfrum-steel/40"
+	],
+
+
+	"health":3040,
+	"armor":6,
+	"size":2
+}

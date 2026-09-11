@@ -1,0 +1,26 @@
+type: PowerNode
+fogRadius: 2
+laserRange: 50
+health: 250
+maxNodes: 1
+size: 3
+squareSprite: false
+researchCostMultiplier: 0.5
+category: power
+research: {
+  parent: 07g-01-q-powerbeam
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-11-glistening-straits
+    }
+  ]
+}
+requirements: [
+  01a-02-item-nickel/90
+  01a-07-item-clevorite/25
+  01a-06-item-chromium/30
+]
+laserScale: 1
+laserColor1: CEADEEFF
+laserColor2: 6A4291FF

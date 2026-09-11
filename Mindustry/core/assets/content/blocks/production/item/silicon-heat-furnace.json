@@ -1,0 +1,46 @@
+{
+//	"type":"HeatCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	"DrawArcSmelt",
+	"DrawDefault"
+	]	},
+
+	"research":{
+	"parent":"hydraulic-generator",
+	"requirements":[
+	"nickel/90",
+	"graphite/80"
+	]	},
+
+	"requirements":[
+	"nickel/30",
+	"graphite/20"
+	],
+
+	"consumes":{"power":4,
+	"items":{
+	"items":[
+	"graphite/1",
+	"sand/4"
+	]	}	},
+
+	"outputItems":[
+	"silicon/3"
+	],
+
+	"size":3,
+	"health":960,
+	"itemCapacity":30,
+	"hasPower":true,
+	"hasLiquids":false,
+	"hasItems":true,
+	"craftTime":65,
+	"craftEffect":"none",
+	"updateEffect":"none"
+}

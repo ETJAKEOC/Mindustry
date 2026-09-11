@@ -1,0 +1,10 @@
+{
+"type":"OreBlock",
+"playerUnmineable":true,
+"itemDrop":"uraniumine",
+"mapColor":"91F088FF",
+"useColor":true,
+"oreDefault":true,
+"oreThreshold":6,
+"oreScale":20
+}

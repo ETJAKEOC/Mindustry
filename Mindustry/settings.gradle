@@ -1,0 +1,80 @@
+plugins {
+	id 'org.gradle.toolchains.foojay-resolver' version '1.0.0'
+}
+
+rootProject.name = 'Mindustry'
+
+toolchainManagement {
+	jvm {
+		javaRepositories {
+			repository("foojay") {
+				resolverClass = org.gradle.toolchains.foojay.FoojayToolchainResolver
+			}
+		}
+	}
+}
+if(JavaVersion.current().ordinal() < JavaVersion.VERSION_21.ordinal()){
+    throw new Exception("!!! YOU MUST USE JAVA 21 OR ABOVE TO COMPILE AND RUN MINDUSTRY !!! Read the README. Your version: ${System.properties["java.version"]}")
+}
+
+try {
+    def pe = Class.forName("java.lang.ProcessEnvironment")
+    ["theEnvironment", "theUnmodifiableEnvironment", "theCaseInsensitiveEnvironment"].each { fieldName ->
+        try {
+            def f = pe.getDeclaredField(fieldName)
+            f.setAccessible(true)
+            def map = (Map) f.get(null)
+            if (map != null) {
+                def keysToRemove = map.keySet().findAll { k -> k.toString().equalsIgnoreCase("ANDROID_PREFS_ROOT") }
+                keysToRemove.each { k -> map.remove(k) }
+            }
+        } catch (Throwable ignored) {}
+    }
+} catch (Throwable ignored) {}
+
+
+
+include 'desktop', 'core', 'server', 'ios', 'annotations', 'tools', 'tests'
+
+def hasSdk = System.getenv("ANDROID_HOME") != null
+
+def localProperties = new Properties()
+if(new File(settingsDir, 'local.properties').exists()){
+    localProperties.load(new File(settingsDir, 'local.properties').newDataInputStream())
+	if(localProperties.containsKey("sdk.dir")) hasSdk = true
+}
+
+if(System.getenv("JITPACK") == "true") hasSdk = false
+
+if(hasSdk){
+    include 'android'
+}else{
+    println("No Android SDK found. Skipping Android module.")
+}
+
+if(hasProperty("localRhino") || localProperties.getOrDefault("localRhino", "false") == "true"){
+    includeBuild("../rhino")
+}
+
+if(hasProperty("localSteamworks") || localProperties.getOrDefault("localSteamworks", "false") == "true"){
+    includeBuild("../steamworks4j")
+}
+
+if(!hasProperty("noLocalArc")){
+    if(new File(rootDir, 'Arc').exists()){
+        println("Compiling with local Arc submodule")
+        includeBuild("Arc")
+    }else if(new File(rootDir.parent, 'Arc').exists()){
+        println("Compiling with local Arc in parent directory")
+        includeBuild("../Arc")
+    }else{
+        println("Local Arc not found.")
+    }
+
+    if(new File(rootDir.parent, 'Mindustry-Debug').exists()){
+        include(":debug")
+        project(":debug").projectDir = new File(rootDir.parent, "Mindustry-Debug")
+    }
+}else{
+    println("Not including local repositories.")
+}

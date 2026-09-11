@@ -1,0 +1,37 @@
+{
+//	"type":"Reconstructor",
+	"category":"units",
+
+	"research":{"parent":"production-shipyard",
+	"requirements":[
+	"metaglass/5000",
+	"chromium/3500",
+	"plastanium/1000",
+	"silicon/5000"
+	]	},
+
+	"requirements":[
+	"metaglass/80",
+	"plastanium/20",
+	"silicon/100"
+	],
+
+	"constructTime":3000,
+	"health":1360,
+	"size":4,
+
+	"consumes":{
+		"power":10,
+		"items":{
+		"items":[
+		"plastanium/30",
+		"silicon/40"
+		]	},
+		"liquid":{
+		"liquid":"hydrogen","amount":0.2
+		}	},
+
+	"upgrades":[
+	["dew","rivulet"]
+	]
+}

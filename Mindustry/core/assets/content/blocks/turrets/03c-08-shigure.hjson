@@ -1,0 +1,214 @@
+type: ItemTurret
+size: 4
+squareSprite: false
+health: 4350
+armor: 6
+shootSound: shootMachinegun
+shootSoundVolume: 0.7
+requirements: [
+  01a-01-item-cobalt/600
+  01a-06-item-chromium/550
+  01a-07-item-clevorite/100
+  01a-08-item-petal/350
+  01a-10-item-bethine/140
+]
+minWarmup: 0.90
+shootWarmupSpeed: 0.04
+researchCostMultiplier: 0.5
+research: {
+  #TODO - change to proper sector
+  parent: 03c-07-phalanx
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-23-eridanus
+    }
+  ]
+}
+category: turret
+recoil: 0.1
+outlineColor: 2C2A36
+targetAir: true
+targetGround: true
+rotateSpeed: 1.4
+reload: 3.5
+range: 280
+shootY: 9
+shake: 2
+shoot: {
+  type: ShootAlternate
+  spread: 12
+  shotDelay: 3
+}
+ammoUseEffect: casing2
+ammoPerShot: 2
+maxAmmo: 40
+ammoTypes: {
+  01a-06-item-chromium: {
+    buildingDamageMultiplier: 0.2
+    pierceArmor: true
+    hitEffect: flakExplosion
+    type: BasicBulletType
+    speed: 4
+    width: 11
+    height: 14
+    lifetime: 70
+    pierce: false
+    damage: 34.25
+    splashDamage: 15
+    splashDamageRadius: 16
+    ammoMultiplier: 6
+    weaveScale: 4
+    weaveMag: 4
+    frontColor: bca49f
+    backColor: bca49f
+    hitColor: bca49f
+  }
+  01a-09-item-morphite: {
+    buildingDamageMultiplier: 0.2
+    pierceArmor: true
+    hitEffect: flakExplosion
+    type: BasicBulletType
+    speed: 4
+    width: 11
+    height: 14
+    lifetime: 70
+    pierce: false
+    damage: 68.75
+    splashDamage: 25
+    splashDamageRadius: 16
+    ammoMultiplier: 8
+    weaveScale: 4
+    weaveMag: 4
+    backColor: 51c59c
+    frontColor: 51c59c
+    hitColor: 51c59c
+    fragBullets: 4
+    fragRandomSpread: 0
+    fragSpread: 90
+    fragVelocityMin: 0.5
+    fragLifeMin: 0.5
+    fragBullet: {
+      type: LightningBulletType
+      despawnSound: explosionArtilleryShock
+      damage: 12.5
+      lightningLength: 6
+      lightningLengthRand: 3
+      lightningColor: 51c59c
+      status: shocked
+    }
+  }
+  01a-08-item-petal: {
+    buildingDamageMultiplier: 0.2
+    pierceArmor: true
+    hitEffect: flakExplosion
+    type: BasicBulletType
+    speed: 4.5
+    width: 11
+    height: 14
+    lifetime: 70
+    pierce: false
+    damage: 78.45
+    splashDamage: 22.5
+    splashDamageRadius: 16
+    ammoMultiplier: 8
+    weaveScale: 4
+    weaveMag: 4
+    backColor: fe97ba
+    frontColor: fe97ba
+    hitColor: fe97ba
+    fragBullets: 6
+    fragVelocityMin: 0.4
+    fragLifeMin: 0.45
+    fragBullet: {
+      type: BasicBulletType
+      buildingDamageMultiplier: 0.2
+      frontColor: fe97ba
+      lightColor: fe97ba
+      speed: 2
+      lifetime: 30
+      width: 6
+      height: 9
+      damage: 15
+      splashDamage: 12.5
+      splashDamageRadius: 4
+    }
+  }
+  01a-10-item-bethine: {
+    buildingDamageMultiplier: 0.1
+    pierceArmor: true
+    hitEffect: flakExplosion
+    type: BasicBulletType
+    speed: 5
+    width: 11
+    height: 14
+    lifetime: 65
+    pierce: false
+    damage: 84.25
+    splashDamage: 35
+    splashDamageRadius: 16
+    backColor: bf97d6
+    frontColor: bf97d6
+    hitColor: bf97d6
+    ammoMultiplier: 12
+    weaveScale: 4
+    weaveMag: 4
+    homingPower: 0.045
+    fragBullets: 6
+    fragVelocityMin: 0.4
+    fragLifeMin: 0.45
+    fragBullet: {
+      type: BasicBulletType
+      buildingDamageMultiplier: 0.1
+      speed: 2
+      lifetime: 30
+      width: 6
+      height: 9
+      damage: 20
+      lightColor: bf97d6
+      frontColor: bf97d6
+      splashDamage: 15
+      splashDamageRadius: 4
+    }
+  }
+}
+heatColor: 483966
+recoils: 2
+drawer: {
+  type: DrawTurret
+  basePrefix: shigure-
+    parts: [
+    {
+      type: RegionPart
+      suffix: -arm-l
+      mirror: false
+      moves: [
+       {
+        type: PartMove
+        progress: warmup
+        y: -1
+       }
+      ]
+      progress: recoil
+      heatProgress: recoil
+      recoilIndex: 0
+      moveY: -1
+    }
+    {
+      type: RegionPart
+      suffix: -arm-r
+      mirror: false
+      moves: [
+       {
+        type: PartMove
+        progress: warmup
+        y: -1
+       }
+      ]
+      progress: recoil
+      heatProgress: recoil
+      recoilIndex: 1
+      moveY: -1
+    }
+  ]
+}

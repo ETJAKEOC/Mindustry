@@ -1,0 +1,28 @@
+{
+	"type":"CoreBlock",
+	"category":"effect",
+	"buildVisibility":"shown",
+
+	"alwaysUnlocked":false,
+	"research":{
+//	"root":true,
+//	"planet":"Vitospp",
+//	"name":" Draedon",
+	"requirements":[
+	"wulfrum-schematics/1"
+	]	},
+
+	"requirements":[
+	"graphite/600",
+	"silicon/800"
+	],
+
+	"buildCostMultiplier":0.107,
+	"size":3,
+	"health":5000,
+	"armor":5,
+	"itemCapacity":4000,
+	"unitCapModifier":15,
+	"unitType":"primary-core-drone",
+	"squareSprite":false
+}

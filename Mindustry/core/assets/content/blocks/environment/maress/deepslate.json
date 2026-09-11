@@ -1,0 +1,8 @@
+{
+  //"type": "Floor",
+  "variants": 8,
+  "wall": "deepslate-wall",
+  "attributes": {
+    "lava": 0.25
+  }
+}

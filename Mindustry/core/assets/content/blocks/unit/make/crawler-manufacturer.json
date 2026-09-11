@@ -1,0 +1,32 @@
+{
+//	"type":"UnitFactory",
+	"category":"units",
+
+	"research":{
+	"parent":"mech-manufacturer",
+	"requirements":[
+	"nickel/3600",
+	"graphite/2700",
+	"silicon/3000",
+	"forgotten-crystals/2500"
+	]	},
+
+	"requirements":[
+	"nickel/120",
+	"graphite/90",
+	"silicon/100"
+	],
+
+	"consumes":{"power":5},
+
+	"health":1290,
+	"size":3,
+
+	"plans":[
+		{"unit":"accretion",
+		"time":1380,
+		"requirements":[
+		"tungsten/30",
+		"silicon/60"
+		]	}	]
+}

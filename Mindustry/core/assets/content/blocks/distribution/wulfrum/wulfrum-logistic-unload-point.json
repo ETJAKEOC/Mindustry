@@ -1,0 +1,25 @@
+{
+	"type":"UnitCargoUnloadPoint",
+	"category":"distribution",
+	"health":440,
+	"size":2,
+	"itemCapacity":100,
+	"armor":4,
+
+	"research":{
+	"parent":"wulfrum-logistic-loader",
+	"requirements":[
+	"wulfrum-steel/5000",
+	"energy-core/2000",
+	"silicon/6000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/50",
+	"energy-core/20",
+	"silicon/60"
+	]
+}

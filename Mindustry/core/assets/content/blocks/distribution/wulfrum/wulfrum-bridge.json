@@ -1,0 +1,24 @@
+{
+	"type":"DuctBridge",
+	"range":5,
+	"category":"distribution",
+
+	"research":{
+	"parent":"wulfrum-junction",
+	"requirements":[
+	"wulfrum-steel/2000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/20"
+	],
+
+	"size":1,
+	"health":500,
+	"speed":2.608695652173913,
+	"armor":2,
+	"itemCapacity":1
+}

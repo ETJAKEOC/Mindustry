@@ -1,0 +1,234 @@
+type: ItemTurret
+size: 3
+squareSprite: false
+health: 1550
+shootSound: shootImpale
+requirements: [
+  01a-01-item-cobalt/120
+  01a-02-item-nickel/150
+  01a-05-item-aluminium/100
+]
+category: turret
+coolant: {
+  type: ConsumeLiquid
+  liquid: 02b-02-a-purified-elixir
+  amount: 0.166666667
+}
+coolantMultiplier: 7.5
+recoil: 2
+shake: 1
+outlineColor: 2C2A36
+targetAir: true
+targetGround: true
+rotateSpeed: 1.5
+reload: 45
+range: 208
+shootY: 1
+ammoPerShot: 2
+ammoTypes: {
+  01a-01-item-cobalt: {
+    type: BasicBulletType
+    sprite: exoprosopa-impale-arrow
+    ammoMultiplier: 1
+    width: 16
+    height: 16
+    buildingDamageMultiplier: 0.3
+    hitColor: a3bbeb
+    backColor: a3bbeb
+    frontColor: a3bbeb
+    lightColor: a3bbeb
+    damage: 52.75
+    speed: 6.4
+    lifetime: 32.5
+    despawnEffect: [
+    colorSpark,
+    {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 12
+        sizeFrom: 0
+        sizeTo: 12
+        colorFrom: a3bbeb
+        colorTo: a3bbeb
+    }
+    ]
+    pierceCap: 3
+    pierce: true
+    pierceBuilding: true  
+    trailColor: a3bbeb
+    trailInterval: 3
+    trailRotation: true
+    trailLength: 18
+    trailWidth: 2.2
+    trailEffect: colorSpark
+    shootEffect: shootBig
+    smokeEffect: shootBigSmoke
+    shrinkX: 0
+    shrinkY: 0
+  }
+  01a-05-item-aluminium: {
+    type: BasicBulletType
+    sprite: exoprosopa-impale-arrow
+    ammoMultiplier: 1
+    width: 16
+    height: 16
+    buildingDamageMultiplier: 0.3
+    hitColor: b1cbd8
+    backColor: b1cbd8
+    frontColor: b1cbd8
+    lightColor: b1cbd8
+    damage: 66.25
+    splashDamage: 10
+    splashDamageRadius: 16
+    speed: 6.4
+    lifetime: 32.5
+    despawnEffect: [
+    colorSpark,
+    {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 12
+        sizeFrom: 0
+        sizeTo: 12
+        colorFrom: b1cbd8
+        colorTo: b1cbd8
+    }
+    ]
+    pierceCap: 2
+    pierce: true
+    pierceBuilding: true  
+    trailColor: b1cbd8
+    trailInterval: 3
+    trailRotation: true
+    trailLength: 18
+    trailWidth: 2.2
+    trailEffect: colorSpark
+    shootEffect: shootBig
+    smokeEffect: shootBigSmoke
+    shrinkX: 0
+    shrinkY: 0
+  }
+  01a-06-item-chromium: {
+    type: BasicBulletType
+    buildingDamageMultiplier: 0.3
+    sprite: exoprosopa-impale-arrow
+    ammoMultiplier: 1
+    width: 16
+    height: 16
+    hitColor: bca49f
+    backColor: bca49f
+    frontColor: bca49f
+    lightColor: bca49f
+    damage: 82.75
+    splashDamage: 10
+    splashDamageRadius: 28
+    speed: 8
+    lifetime: 31.25
+    despawnEffect: [
+    colorSpark,
+    {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 12
+        sizeFrom: 0
+        sizeTo: 12
+        colorFrom: bca49f
+        colorTo: bca49f
+    }
+    ]
+    pierceCap: 4
+    pierce: true
+    pierceBuilding: true  
+    trailColor: bca49f
+    trailInterval: 3
+    trailRotation: true
+    trailLength: 18
+    trailWidth: 2.2
+    trailEffect: colorSpark
+    shootEffect: shootBig
+    smokeEffect: shootBigSmoke
+    shrinkX: 0
+    shrinkY: 0
+    rangeChange: 40
+  }
+  01a-09-item-morphite: {
+    type: BasicBulletType
+    buildingDamageMultiplier: 0.3
+    sprite: exoprosopa-impale-arrow
+    reloadMultiplier: 0.3
+    ammoMultiplier: 2
+    width: 16
+    height: 16
+    hitColor: 51c59c
+    backColor: 51c59c
+    frontColor: 51c59c
+    lightColor: 51c59c
+    damage: 160
+    speed: 9.5
+    lifetime: 31
+    despawnEffect: [
+    colorSpark,
+    {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 12
+        sizeFrom: 0
+        sizeTo: 12
+        colorFrom: 51c59c
+        colorTo: 51c59c
+    }
+    ]
+    pierceCap: 6
+    pierce: true
+    pierceBuilding: true  
+    trailColor: 51c59c
+    trailInterval: 3
+    trailRotation: true
+    trailLength: 18
+    trailWidth: 2.2
+    trailEffect: colorSpark
+    shootEffect: shootBig
+    smokeEffect: shootBigSmoke
+    shrinkX: 0
+    shrinkY: 0
+    rangeChange: 80
+    fragRandomSpread: 0
+    fragSpread: 90
+    fragLifeMin: 1
+    fragLifeMax: 1
+    fragVelocityMin: 1
+    fragVelocityMax: 1
+    fragBullets: 3
+    fragBullet: {
+      type: LightningBulletType
+      lightningLength: 6
+      lightningLengthRand: 3
+      lightningColor: 51c59c
+      status: shocked
+      damage: 7.5
+      despawnSound: explosionArtilleryShock
+    }
+  }
+}
+drawer: {
+  type: DrawTurret
+  basePrefix: impale-
+}
+research: {
+  parent: 0009-turret
+  objectives: [
+    {
+      type: Research
+      content: 10j-02-unitconstructor-ship
+    }
+  ]
+}
+researchCost: [
+  01a-01-item-cobalt/20
+  01a-02-item-nickel/60
+  01a-05-item-aluminium/20
+]

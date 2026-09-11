@@ -1,0 +1,45 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	{"type":"DrawFlame"
+	}	]	},
+
+	"research":{
+	"parent":"wulfrum-silicon-furnace",
+	"requirements":[
+	"chromium/3000",
+	"graphite/2000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"chromium/30",
+	"graphite/20"
+	],
+
+	"consumes":{"power":8,
+	"items":[
+	"chromium/2",
+	"silicon/3"
+	]	},
+	"craftTime":60,
+
+	"outputItems":[
+	"energy-core/3"
+	],
+
+	"size":3,
+	"health":1360,
+	"armor":4,
+	"itemCapacity":30,
+	"hasPower":true,
+	"hasLiquids":false,
+	"hasItems":true,
+	"updateEffect":"none"
+}

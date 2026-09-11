@@ -1,0 +1,11 @@
+type: Junction
+size: 3
+customShadow: true
+placeablePlayer: false
+requirements: [
+  01a-06-item-chromium/60
+  01a-07-item-clevorite/35
+]
+databaseTag: unitpart
+research: 10j-09-unitassembler-ship
+researchCostMultiplier: 0.5

@@ -1,0 +1,26 @@
+{
+	"type":"PayloadDeconstructor",
+	"category":"units",
+
+	"research":{
+	"parent":"payload-builder",
+	"requirements":[
+	"chromium/2000",
+	"plastanium/1000",
+	"silicon/3000"
+	]	},
+
+	"requirements":[
+	"chromium/80",
+	"plastanium/60",
+	"silicon/150"
+	],
+
+	"consumes":{"power":3.333333333333333},
+
+	"health":1290,
+	"size":3,
+	"regionSuffix":"-dark",
+	"itemCapacity":120,
+	"deconstructSpeed":1
+}

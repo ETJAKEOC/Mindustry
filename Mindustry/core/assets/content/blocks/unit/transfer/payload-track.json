@@ -1,0 +1,23 @@
+{
+//	"type":"PayloadConveyor",
+	"category":"units",
+
+	"research":{
+	"parent":"track",
+	"requirements":[
+	"chromium/750",
+	"graphite/750",
+	"silicon/750"]
+	},
+
+	"requirements":[
+	"chromium/15",
+	"graphite/15",
+	"silicon/15"
+	],
+
+	"size":3,
+	"moveTime":54,
+	"moveForce":603,
+	"payloadLimit":3
+}

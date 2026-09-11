@@ -1,0 +1,33 @@
+{
+	"type":"StackConveyor",
+	"category":"distribution",
+	"name":"塑钢物品轨道",
+	"description":"将物品集中装载并运输，在装满时向前运输，中途可用装卸器卸载部分物品。",
+
+	"research":{
+	"parent":"armored-track",
+	"requirements":[
+	"silicon/100",
+	"plastanium/200",
+	"metaglass/100"
+	]	},
+
+	"requirements":[
+	"silicon/1",
+	"plastanium/2",
+	"metaglass/1"
+	],
+
+	"hasPower":true,
+	"consumes":{"power":0.05
+	},
+
+	"health":300,
+	"speed":0.0444444444444444,
+	"itemCapacity":15,
+	"underBullets":true,
+	"outputRouter":false,
+	"consumesPower":true,
+	"conductivePower":true,
+	"baseEfficiency":1
+}

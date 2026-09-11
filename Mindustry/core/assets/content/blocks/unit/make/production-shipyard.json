@@ -1,0 +1,39 @@
+{
+//	"type":"UnitFactory",
+	"category":"units",
+
+	"research":{
+	"parent":"tank-manufacturer",
+	"requirements":[
+	"metaglass/800",
+	"chromium/1000",
+	"silicon/1500"
+	]	},
+
+	"requirements":[
+	"metaglass/80",
+	"chromium/100",
+	"silicon/150"
+	],
+
+	"consumes":{"power":5},
+
+	"health":2090,
+	"size":4,
+
+	"plans":[
+		{"unit":"dew",
+		"time":1800,
+		"requirements":[
+		"chromium/80",
+		"silicon/80",
+		"metaglass/60"
+		]	},
+		{"unit":"gboat1",
+		"time":1800,
+		"requirements":[
+		"chromium/80",
+		"silicon/80",
+		"metaglass/60"
+		]	}	]
+}

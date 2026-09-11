@@ -1,0 +1,45 @@
+{
+	"type": "UnitFactory",
+	"category":"units",
+
+	"research": {
+	"parent": "primary-core",
+	"requirements": [
+	"graphite/15000",
+	"silicon/15000"
+	]
+	"objectives": [
+	"primary-core",
+	]	},
+
+	"requirements": [
+	"graphite/150",
+	"silicon/150"
+	]
+
+	"consumes":{"power":10},
+
+	"health":1160,
+	"size":3,
+
+	"plans":[
+		{"unit": "divergence",
+		"time": 2400,
+		"requirements": [
+		"graphite/100",
+		"silicon/80"
+		]	},
+		{"unit": "taser",
+		"time": 2400,
+		"requirements": [
+		"graphite/100",
+		"silicon/80"
+		]	},
+		{"unit": "lark",
+		"time": 2400,
+		"requirements": [
+		"graphite/100",
+		"silicon/80"
+		]	}
+		]
+}

@@ -1,0 +1,46 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"consumes":{
+	"power":2,
+	"items":{"items":[
+	"coal/6"
+	]	}	},
+
+	"outputItems":[
+	"graphite/4"
+	],
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	{"type":"DrawPistons",
+	"sinMag":1
+	},
+	"DrawDefault"
+	]	},
+
+	"research":{
+	"parent":"wulfrum-node",
+	"requirements":[
+	"tungsten/1500",
+	"graphite/1000"
+	]	},
+
+	"requirements":[
+	"tungsten/30",
+	"graphite/20"
+	],
+
+	"health":1240,
+	"size":3,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemCapacity":30,
+	"liquidCapacity":100,
+	"craftTime":120
+}

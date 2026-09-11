@@ -1,0 +1,204 @@
+{
+	"type":"PowerTurret",
+	"category":"turret",
+
+	"size":6,
+	"health":8065,
+	"armor":20,
+	"rotateSpeed":2,
+	"reload":3,
+	"liquidCapacity":100,
+	"range":300,
+	"inaccuracy":2,
+	"squareSprite":false,
+	"cooldownTime":90,
+	"recoil":1,
+	"shootSound":"missileLarge",
+	"ammoUseEffect":"none",
+	"shake":2,
+	"velocityRnd":0.11,
+	"consumeAmmoOnce":true,
+
+	"research":{
+	"parent":"paralysis",
+	"requirements":[
+	"chromium/5000",
+	"plastanium/5000",
+	"silicon/12000"
+	]	},
+
+	"requirements":[
+	"chromium/50",
+	"plastanium/50",
+	"silicon/120"
+	],
+
+	"drawer":{"type":"drawTurret",
+	"basePrefix":"draedon-",
+	"parts":[
+		{"type":"RegionPart",
+		"colorTo":"FAFF70FF",
+		"color":"A6F069FF",
+		"progress":"warmup",
+		"blending":"additive",
+		"layerOffset":0.002,
+		"outline":false,
+		"suffix":"-glow"
+		},
+		{"type":"RegionPart",
+		"mirror":true,
+		"under":true,
+		"progress":"warmup",
+		"layerOffset":-0.001,
+		"moveRot":-20,
+		"suffix":"-wing"
+	"children":[
+		{"type":"RegionPart",
+		"layerOffset":0.001,
+		"blending":"additive",
+		"colorTo":"FAFF70FF",
+		"color":"A6F069FF",
+		"mirror":true,
+		"outline":false,
+		"suffix":"-wing-glow"
+		"progress":{
+		"type":"recoil",
+		"op":"blend",
+		"other":"heat",
+		"amount":0.45
+		}	}	],
+		}	]	},
+
+	"shootY":13.25,
+	"shoot":{
+	"type":"shootPattern",
+	"shots":4,
+	"shotDelay":1
+	},
+
+	"consumes":{"power":10
+	},
+
+	"shootType":{
+	"type":"BasicBulletType",
+	"status":"freezing",
+	"statusDuration":50,
+	"speed":6,
+	"damage":50,
+	"hitSize":9,
+	"width":0.1,
+	"height":0.1,
+
+	"status":"plasmaflame",
+	"statusDuration":600,
+
+	"shootEffect":{
+	"type":"multiEffect",
+	"layer":110,
+	"effects":[
+		{"type":"ParticleEffect",
+		"particles":2,
+		"sizeFrom":5,
+		"sizeTo":1,
+		"length":240,
+		"lifetime":70,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"lightColor":"FAFF70FF",
+	"colorFrom":"A6F069FF",
+	"colorTo":"FAFF70FF",
+		"cone":8
+		},
+		{"type":"ParticleEffect",
+		"particles":2,
+		"sizeFrom":6,
+		"sizeTo":1,
+		"length":230,
+		"lifetime":85,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"lightColor":"FAFF70FF",
+		"colorFrom":"A6F069FF",
+		"colorTo":"FAFF70FF",
+		"cone":12
+		},
+		{"type":"ParticleEffect",
+		"particles":2,
+		"sizeFrom":6,
+		"sizeTo":1.5,
+		"length":230,
+		"lifetime":120,
+		"interp":"fastSlow",
+		"lightColor":"FAFF70FF",
+		"colorFrom":"A6F069FF",
+		"colorTo":"FAFF70FF",
+		"cone":12
+		},
+		{"type":"ParticleEffect",
+		"particles":2,
+		"sizeFrom":6,
+		"sizeTo":1.5,
+		"length":270,
+		"lifetime":90,
+		"interp":"fastSlow",
+		"lightColor":"FAFF70FF",
+		"colorFrom":"A6F069FF",
+		"colorTo":"FAFF70FF",
+		"cone":8
+		}	]	},
+
+	"smokeEffect":{
+	"type":"multiEffect",
+	"layer":109,
+	"effects":[
+		{"type":"ParticleEffect",
+		"particles":3,
+		"sizeFrom":5,
+		"sizeTo":1,
+		"length":270,
+		"lifetime":110,
+		"lightOpacity":0,
+		"interp":"fastSlow",
+		"colorFrom":"FAFF70FF",
+		"colorTo":"37916AFF",
+		"cone":12
+		},
+		{"type":"ParticleEffect",
+		"particles":3,
+		"sizeFrom":7,
+		"sizeTo":1,
+		"length":290,
+		"lifetime":110,
+		"lightOpacity":0,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"colorFrom":"FAFF70FF",
+		"colorTo":"37916AFF",
+		"cone":8
+		}	]	},
+
+	"hitEffect":{
+	"type":"ParticleEffect",
+	"line":true,
+	"particles":4,
+	"lifetime":65,
+	"offset":10,
+	"interp":"circleOut",
+	"length":70,
+	"cone":-30,
+	"strokeFrom":3,
+	"strokeTo":0,
+	"lenFrom":7,
+	"lenTo":0,
+	"colorFrom":"A6F069FF",
+	"colorTo":"FAFF70FF"
+	},
+
+	"lifetime":50,
+	"despawnEffect":"none",
+	"hittable":false,
+	"reflectable":false,
+	"pierce":true,
+	"pierceBuilding":true
+},
+}

@@ -1,0 +1,26 @@
+{
+	"type":"PayloadDeconstructor",
+	"category":"units",
+
+	"research":{
+	"parent":"payload-disassembler",
+	"requirements":[
+	"uranium/12000",
+	"silicon/15000",
+	"plastanium/10000"
+	]	},
+
+	"requirements":[
+	"uranium/120",
+	"silicon/150",
+	"plastanium/100"
+	],
+
+	"consumes":{"power":3.333333333333333},
+
+	"health":2180,
+	"size":5,
+	"regionSuffix":"-dark",
+	"itemCapacity":320,
+	"deconstructSpeed":2
+}

@@ -1,0 +1,27 @@
+{
+	"type": "unitFactory",
+	"name": "Phantasm Cruiser factory",
+	"description": "Construct hard to hit Phantasm stealth cruisers.",
+	"unitType": "phantasm",
+	"produceTime": 2000,
+	"size": 4,
+	"maxSpawn": 4,
+	"consumes": {
+		"power": 3.5,
+		"items": {
+		"items": [
+            {"item": "titanium", "amount": 50.0},
+            {"item": "silicon", "amount": 50.0}, 
+            {"item": "phase-fabric", "amount": 20.0}       
+            ]
+		}
+  },
+	"requirements": [
+	    {"item": "lead", "amount": 170},
+		{"item": "titanium", "amount": 170},
+		{"item": "silicon", "amount" : 210},
+		{"item": "plastanium", "amount": 80}
+	],
+	"category": "units",
+	"research": "nebula-factory"
+}

@@ -1,0 +1,11 @@
+type: Junction
+size: 3
+customShadow: true
+placeablePlayer: false
+requirements: [
+  01a-06-item-chromium/85
+  01a-10-item-bethine/25
+]
+databaseTag: unitpart
+research: 10j-10-v-unitassembler-legs
+researchCostMultiplier: 0.5

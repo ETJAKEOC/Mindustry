@@ -1,0 +1,23 @@
+{
+  "planet": "phoon",
+  "sector": 24,
+  "difficulty": 10,
+  "research": {
+    "parent": "community-chiyanheliu",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "warp-tech-base"
+      }
+    ]
+  },
+  "overrideLaunchDefaults": false,
+  "captureWave": 0,
+  "addStartingItems": false,
+  "isLastSector": false,
+  "allowLaunchSchematics": true,
+  "allowLaunchLoadout": true
+}
+
+
+

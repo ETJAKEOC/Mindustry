@@ -1,0 +1,43 @@
+{
+	"type": "UnitAssembler",
+	"category":"units",
+	"health":3120,
+	"size":6,
+	"dronesCreated":4,
+	"areaSize":22,
+
+	"consumes":{"power":18,
+	"liquid":{
+	"liquid":"cyanogen","amount":0.2
+	}	},
+
+	"research": {"parent":"senior-shipyard",
+	"requirements": [
+	"iridium/2500",
+	"uranium/6000",
+	"silicon/10000",
+	"metaglass/6000"
+	]	},
+
+	"requirements": [
+	"iridium/200",
+	"uranium/120",
+	"silicon/150",
+	"metaglass/300"
+	],
+
+		"plans":[
+		{"unit":"river",
+		"time": 6000,
+		"requirements":[
+		"calamity-dew/6",
+		"calamity-iridium-wall-large/20"
+		]	}
+/*		{"unit":"stream",
+		"time": 6000,
+		"requirements":[
+		"calamity-rivulet/20",
+		"calamity-chromium-wall-large/30"
+		]	}*/
+	]
+}

@@ -1,0 +1,175 @@
+type: ItemTurret
+name: Typhoon
+description: Rapidly blasts bullets at enemies. Specialized at dealing with single enemies, head-on. Less efficient against swarms.
+size: 3
+squareSprite: false
+reload: 128
+range: 200
+outlineColor: 42413e
+coolantMultiplier: 2.5
+researchCostMultiplier: 0.5
+coolant: {
+  type: ConsumeCoolant
+  allowGas: true
+  allowLiquid: true
+  amount: 0.2
+}
+shoot: {
+  firstShotDelay: 60
+  shots: 16
+  shotDelay: 4
+}
+chargeSound: short-laser-charge
+velocityRnd: 0.21
+inaccuracy: 4
+ammoPerShot: 6
+drawer: {
+  type: DrawTurret
+  basePrefix: spiky-
+  parts: [
+    {
+      type: RegionPart
+      suffix: -wing
+      mirror: true
+      progress: warmup
+      under: false
+      moveX: 0.95
+      moveY: -0.5
+      moveRot: -8
+    }
+  ]
+}
+category: turret
+research: 03c-14-myriad
+shootSound: shoot-dull
+requirements: [
+  01a-01-item-ferrinite/225
+  01a-06-item-lodestone/120
+  01a-09-item-obsidian/100
+  01a-12-item-crosium/80
+]
+ammoTypes: {
+  01a-06-item-lodestone: {
+    chargeEffect: lightningCharge
+    frontColor: ffffff
+    backColor: 4e4277
+    trailColor: 4e4277
+    hitEffect: flakExplosion
+    type: BasicBulletType
+    speed: 3
+    width: 11
+    height: 14
+    lifetime: 65
+    homingPower: 0.02
+    homingDelay: 20
+    pierce: false
+    damage: 22
+    ammoMultiplier: 2
+  }
+  01a-07-item-lithium: {
+    chargeEffect: lightningCharge
+    frontColor: ffffff
+    backColor: b98279
+    trailColor: b98279
+    hitEffect: flakExplosion
+    type: BasicBulletType
+    speed: 3
+    width: 11
+    height: 14
+    lifetime: 65
+    pierce: false
+    damage: 28
+    status: shocked
+    ammoMultiplier: 2
+    homingPower: 0.02
+    homingDelay: 20
+  }
+  01a-09-item-obsidian: {
+    chargeEffect: lightningCharge
+    frontColor: ffffff
+    backColor: 2e293a
+    trailColor: 2e293a
+    reloadMultiplier: 0.66666666666666
+    hitEffect: flakExplosion
+    type: BasicBulletType
+    speed: 3
+    width: 11
+    height: 14
+    lifetime: 65
+    pierce: false
+    damage: 32
+    ammoMultiplier: 2
+    fragBullets: 4
+    fragVelocityMin: 0.4
+    fragLifeMin: 0.45
+    homingPower: 0.02
+    homingDelay: 20
+    fragBullet: {
+      type: BasicBulletType
+      speed: 2
+      lifetime: 30
+      width: 6
+      height: 9
+      pierce: false
+      damage: 10
+    }
+  }
+  01a-08-item-cretite: {
+    chargeEffect: lightningCharge
+    frontColor: ffffff
+    backColor: e28d62
+    trailColor: e28d62
+    hitEffect: flakExplosion
+    type: BasicBulletType
+    speed: 3
+    width: 11
+    height: 14
+    lifetime: 65
+    pierce: false
+    damage: 32
+    status: shocked
+    ammoMultiplier: 4
+    status: melting
+    statusDuration: 120
+    homingPower: 0.02
+    homingDelay: 20
+  }
+  01a-12-item-crosium: {
+    chargeEffect: lightningCharge
+    frontColor: ffffff
+    backColor: 486f64
+    trailColor: 486f64
+    reloadMultiplier: 1.1
+    hitEffect: flakExplosion
+    type: BasicBulletType
+    speed: 3
+    width: 11
+    height: 14
+    lifetime: 65
+    pierce: true
+    pierceCap: 1
+    damage: 36
+    ammoMultiplier: 3
+    fragBullets: 6
+    fragVelocityMin: 0.4
+    fragLifeMin: 0.45
+    homingPower: 0.02
+    homingDelay: 20
+    fragBullet: {
+      frontColor: ffffff
+      backColor: 486f64
+      trailColor: 486f64
+      type: BasicBulletType
+      speed: 2
+      lifetime: 30
+      width: 6
+      height: 9
+      pierce: true
+      pierceCap: 1
+      damage: 16
+      homingPower: 0.02
+      homingDelay: 10
+    }
+  }
+}
+rotate: false

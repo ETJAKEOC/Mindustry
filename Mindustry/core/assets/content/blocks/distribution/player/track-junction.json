@@ -1,0 +1,21 @@
+{
+//	"type":"junction",
+	"category":"distribution",
+
+	"research":{
+	"parent":"track",
+	"requirements":[
+	"nickel/20"
+	]
+	},
+
+	"requirements":[
+	"nickel/5"
+	],
+
+	"size":1,
+	"health":100,
+	"solid":false,
+	"underBullets":true,
+	"speed":2.5,
+}

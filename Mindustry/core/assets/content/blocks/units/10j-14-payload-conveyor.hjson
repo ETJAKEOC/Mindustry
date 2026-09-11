@@ -1,0 +1,19 @@
+type: PayloadConveyor
+health: 450
+category: units
+research: {
+  parent: 05e-01-transport-pipe
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-03-hostile-outpost
+    }
+  ]
+}
+requirements: [
+  01a-01-item-cobalt/30
+  01a-05-item-aluminium/15
+]
+canOverdrive: false
+payloadLimit: 4
+researchCostMultiplier: 0.5

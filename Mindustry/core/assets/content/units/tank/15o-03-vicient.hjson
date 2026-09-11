@@ -1,0 +1,144 @@
+type: tank
+hitSize: 22
+singleTarget: false
+omniMovement: false
+faceTarget: false
+health: 5700
+armor: 10
+speed: 0.65
+rotateSpeed: 1.4
+itemCapacity: 40
+outlineColor: 26262F
+floorMultiplier: 0.65
+drownTimeMultiplier: 1.2
+tankMoveVolume: 0.65
+tankMoveSound: tankMove
+treadFrames: 12
+treadRects: [
+  {
+    x: 14
+    y: -56
+    width: 20
+    height: 109
+  }
+]
+crushFragile: true
+weapons: [
+  {
+    x: 0
+    y: 0
+    name: vicient-weapon
+    reload: 109
+    mirror: false
+    rotate: true
+    rotateSpeed: 1.8
+    shootSound: shootBulwark
+    shootSoundVolume: 0.5
+    shootY: 5
+    recoil: 2.25
+    bullet: {
+      type: BasicBulletType
+      frontColor: 6B78B0
+      backColor: 4A5381
+      sprite: missile-large
+      speed: 5.74
+      drag: 0.018
+      lifetime: 47.5
+      damage: 120
+      splashDamage: 47.5
+      splashDamageRadius: 20
+      width: 0
+      height: 0
+      trailChance: -1
+      trailColor: 9EB6EB
+      trailEffect: colorSpark
+      trailLength: 16
+      trailWidth: 3
+      pierce: true
+      shootEffect: {
+        type: ExplosionEffect
+        lifetime: 25
+        waveStroke: 3
+        waveColor: 6B78B0
+        sparkColor: 6B78B0
+        smokeColor: 6B78B0
+        waveRad: 15
+        smokeSize: 6
+        smokes: 7
+        smokeSizeBase: 0
+        sparks: 4
+        sparkRad: 15
+        sparkLen: 3
+        sparkStroke: 1.5
+      }
+      despawnEffect: {
+        type: ExplosionEffect
+        lifetime: 25
+        waveStroke: 3
+        waveColor: 6B78B0
+        sparkColor: 6B78B0
+        smokeColor: 6B78B0
+        waveRad: 12
+        smokeSize: 5
+        smokes: 4
+        smokeSizeBase: 0
+        sparks: 3
+        sparkRad: 15
+        sparkLen: 3
+        sparkStroke: 1.5
+      }
+      bulletInterval: 8
+      intervalRandomSpread: 0
+      intervalBullets: 2
+      intervalSpread: 35
+      intervalBullet: {
+        type: BasicBulletType
+        frontColor: 6B78B0
+        backColor: 4A5381
+        speed: 2.5
+        drag: 0.01
+        lifetime: 15
+        damage: 5
+        splashDamage: 20
+        splashDamageRadius: 16
+        width: 6
+        height: 6
+        trailChance: -1
+        trailColor: 9EB6EB
+        trailLength: 7
+        trailWidth: 2
+        weaveScale: 2
+        weaveMag: 3
+        pierceArmor: false
+        pierceBuilding: true
+        despawnSound: explosion
+        despawnEffect: {
+          type: ExplosionEffect
+          lifetime: 15
+          waveStroke: 2.5
+          waveColor: 6B78B0
+          sparkColor: 6B78B0
+          smokeColor: 6B78B0
+          waveRad: 8
+          smokeSize: 3
+          smokes: 2
+          smokeSizeBase: 0
+          sparks: 2
+          sparkRad: 10
+          sparkLen: 2
+          sparkStroke: 1
+        }
+      }
+    }
+  }
+]
+researchCostMultiplier: 2
+research: {
+  parent: 15o-02-oktarav
+  objectives: [
+    {
+      type: Research
+      content: 10j-08-unitassembler-tank
+    }
+  ]
+}

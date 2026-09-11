@@ -1,0 +1,24 @@
+{
+  "planet": "phoon",
+  "sector": 26,
+  "difficulty": 8,
+  "research": {
+    "parent": "community-chiyanheliu",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "thorium-hacienda"
+      }
+    ]
+  },
+  "overrideLaunchDefaults": false,
+  "captureWave": 50,
+  "attackAfterWaves": true,
+  "addStartingItems": false,
+  "isLastSector": false,
+  "allowLaunchSchematics": true,
+  "allowLaunchLoadout": true
+}
+
+
+

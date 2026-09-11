@@ -1,0 +1,24 @@
+{
+	"type":"PayloadUnloader",
+	"category":"units",
+
+	"research":{"parent":"payload-unload-track",
+	"requirements":[
+	"uranium/4000",
+	"silicon/3750",
+	"plastanium/5000"
+	]	},
+
+	"requirements":[
+	"uranium/80",
+	"silicon/75",
+	"plastanium/100"
+	],
+
+	"consumes":{"power":0.3},
+	"hasPower":true,
+
+	"size":5,
+	"fogRadius":7,
+	"regionSuffix":"-dark"
+}

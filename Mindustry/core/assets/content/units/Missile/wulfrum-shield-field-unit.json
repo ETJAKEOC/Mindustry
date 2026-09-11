@@ -1,0 +1,46 @@
+{
+	"type": "missile",
+	"controller": "MissileAI",
+	"lowAltitude":true,
+	"speed":0,
+	"rotateSpeed":0.1,
+	"lifetime":15,
+	"isEnemy": false,
+	"targetable": false,
+	"hittable": false,
+	"allowedInPayloads": false,
+	"playerControllable": false,
+	"physics": false,
+	"useUnitCap": false,
+	"createWreck": false,
+	"createScorch": false,
+	"flying": true,
+	"hidden": true,
+	"health": 200,
+	"hitSize":1,
+	"outlineRadius": 0,
+	"maxRange":224,
+
+	"engineSize":0,
+	"drawCell": false,
+
+	"name": "wulfrum-shield-field-unit",
+	"description":"How did you see this?",
+
+	"abilities":[
+	{"type": "ShieldRegenFieldAbility",
+		"amount":400,
+		"max":800,
+		"reload":10,
+		"range":224,
+		"activeEffect":{
+	"type":"WaveEffect",
+	"lifetime":40,
+	"sizeFrom":0,
+	"sizeTo":224,
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	}	}	],
+
+	"deathExplosionEffect":"none"
+}

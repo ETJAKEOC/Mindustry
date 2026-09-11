@@ -1,0 +1,12 @@
+{
+	"type":"LongPowerNode",
+	"category":"power",
+	"buildVisibility":"editorOnly",
+
+	"size":3,
+	"scaledHealth":130,
+	"maxNodes":2,
+	"laserRange":1000,
+	"laserScale":0.8,
+	"autolink":false
+}

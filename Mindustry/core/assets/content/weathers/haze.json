@@ -1,0 +1,28 @@
+{
+"type":"ParticleWeather",
+"name":"[#DEEDFFFF]迷雾",
+"description":"水汽弥漫，云雾缭绕，为始源森林戴上了一面神秘的轻纱。",
+"color":"DEF7FF1B",
+"noiseColor":"DEF7FF1B",
+"duration":900,
+"noiseLayers":3,
+"noiseLayerSclM":0.8,
+"noiseLayerAlphaM":0.7,
+"noiseLayerSpeedM":2,
+"baseSpeed":0.05,
+"noiseScale":1100,
+"noisePath":"fog",
+"drawParticles":false,
+"drawNoise":true,
+"useWindVector":true,
+"xspeed":1,
+"yspeed":0.01,
+"opacityMultiplier":0.6,
+"hidden": false,
+"alwaysUnlocked": true,
+"attrs":{
+"light":-0.2,
+"water":0.05,
+"heat":-0.05
+}
+}

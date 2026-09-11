@@ -1,0 +1,62 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"consumes":{
+	"power":1,
+	"liquid":{
+	"liquid":"water","amount":0.083333333333333
+	}	},
+
+	"outputItems":[
+	"snow(item)/2"
+	],
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		{"type":"DrawLiquidTile",
+		"drawLiquid":"water"
+		},
+		"DrawRegion",
+		"DrawLiquidOutputs"
+		]	},
+
+	"research":{
+	"parent":"scrap-melter",
+	"requirements":[
+	"nickel/400",
+	"tungsten/400",
+	"graphite/400"
+	]	},
+
+	"requirements":[
+	"nickel/20",
+	"tungsten/20",
+	"graphite/20"
+	],
+
+	"health":560,
+	"size":2,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemCapacity":20,
+	"liquidCapacity":100,
+	"craftTime":40,
+	"craftEffect":{
+		"type":"ParticleEffect",
+		"particles":4,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"B8DFE5FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		}
+}

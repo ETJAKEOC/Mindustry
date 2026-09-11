@@ -1,0 +1,89 @@
+{
+	"type":"ItemTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-",
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-barrel",
+		"mirror":false,
+		"moveX":0,
+		"heatColor":"84F491FF",
+		"moveY":-8,
+		"progress":{
+		"type":"recoil",
+		"op":"curve",
+		"interp":"pow2In"
+		}
+		}	]	},
+
+	"research":{
+	"parent":"surge",
+	"requirements":[
+	"tungsten/900",
+	"chromium/1500",
+	"plastanium/2300",
+	"silicon/3000"
+	]	},
+
+
+	"requirements":[
+	"tungsten/90",
+	"chromium/150",
+	"plastanium/230",
+	"silicon/300"
+	],
+
+	"consumes":{
+	"liquid":{
+	"liquid":"hydrogen","amount":0.1
+	},
+	"coolant":{"amount":0.1,"optional":true}	},
+
+	"shoot":{
+	"shots":3,
+	"shotDelay":3
+	},
+
+	"size":4,
+	"health":1865,
+	"rotateSpeed":0.5,
+	"reload":120,
+	"ammoPerShot":5,
+	"maxAmmo":20,
+	"liquidCapacity":20,
+	"range":486,
+	"inaccuracy":8,
+	"squareSprite":false,
+	"shootWarmupSpeed":0.07,
+	"targetAir":false,
+	"recoil":3,
+	"minWarmup":0.85,
+	"shootSound":"mediumCannon",
+
+	"ammoTypes":{
+	"plastanium":{
+		"type":"BasicBulletType",
+		"spawnUnit":"calamity-rocket-rocketI",
+
+		"homingRange":480,
+		"homingDelay":0,
+		"homingPower":0.725,
+
+	"shootEffect":{
+	"type":"ParticleEffect",
+		"particles":2,
+		"length":35,
+		"lifetime":180,
+		"interp":"pow3Out",
+		"sizeInterp":"pow5In",
+		"offset":30,
+		"colorFrom":"787878",
+		"colorTo":"787878",
+		"sizeFrom":10,
+		"sizeTo":0
+		}
+		}	}
+}

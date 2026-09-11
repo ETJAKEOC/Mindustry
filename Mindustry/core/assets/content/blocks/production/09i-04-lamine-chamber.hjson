@@ -1,0 +1,71 @@
+type: GenericCrafter
+size: 4
+liquidCapacity: 120
+hasLiquids: true
+health: 1000
+category: crafting
+research: {
+  #TODO - change to proper sector
+  parent: 09i-04-laminator
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 20t-15-isolated-canyon
+    }
+  ]
+}
+itemCapacity: 20
+researchCostMultiplier: 1
+requirements: [
+  01a-02-item-nickel/470
+  01a-06-item-chromium/350
+  01a-03-item-lamine/35
+]
+craftTime: 120
+craftEffect: none
+outputItems: [
+  01a-03-item-lamine/3
+]
+consumes: {
+  items: [
+    01a-07-item-clevorite/1
+  ]
+  liquids: [
+    02b-02-ichor/0.166666666666666
+  ]
+  power: 9
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-ichor
+      padding: 3
+    }
+    {
+      type: DrawBubbles
+      color: FF8167
+      sides: 10
+      recurrence: 3
+      spread: 12
+      radius: 2.0
+      amount: 48
+    }
+    {
+     type: DrawCrucibleFlame
+     particleRad: 12
+    }
+    {
+      type: DrawRegion
+    }
+  ]
+}
+fogRadius: 4
+ambientSound: loopSmelter
+ambientSoundVolume: 0.12
+squareSprite: false

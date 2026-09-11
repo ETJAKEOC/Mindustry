@@ -1,0 +1,25 @@
+{
+//	"type":"Duct",
+	"category":"distribution",
+
+	"research":{
+	"parent":"track-bridge",
+	"requirements":[
+	"nickel/150",
+	"tungsten/100"
+	]	},
+
+	"requirements":[
+	"nickel/6",
+	"tungsten/2"
+	],
+
+	"size":1,
+	"health":500,
+	"solid":false,
+	"underBullets":true,
+	"armored":true,
+	"speed":2.5,
+	"itemCapacity":1,
+	"bridgeReplacement":"track-bridge"
+}

@@ -1,0 +1,16 @@
+{
+	"type":"Wall",
+	"category":"defense",
+
+	"research":{
+	"parent":"wulfrum-core"
+	},
+
+	"requirements":[
+	"wulfrum-steel/10"
+	],
+
+	"health":760,
+	"armor":6,
+	"size":1
+}

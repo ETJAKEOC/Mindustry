@@ -1,0 +1,17 @@
+{
+	"type":"OverflowGate",
+	"size":1,
+	"invert":true,
+	"category":"distribution",
+	"health":250,
+
+	"research":{
+	"parent":"secure-overflow-gate",
+	"requirements":[
+	"chromium/300"
+	]	},
+
+	"requirements":[
+	"chromium/3"
+	]
+}

@@ -1,0 +1,34 @@
+{
+  type: GenericSmelter
+name: Crimson Melter
+description: Creates crimson fluid from vulcanite.
+liquidCapacity: 50
+size: 2
+hasPower: true
+hasLiquids: true
+hasItems: true
+craftTime: 60
+updateEffect: smeltsmoke
+consumes: {
+  power: 3
+  items: {
+    items: [
+      vulcanite/3,
+    ]
+  }
+}
+requirements: [
+  crimson-compoundA/50
+  graphite/50
+  silicon/60
+  metaglass/60
+]
+category: crafting
+research: melter
+idleSound: respawning
+idleSoundVolume: 0.5
+outputLiquid:{
+ liquid: crimson-fluid
+ amount: 30
+} 
+}

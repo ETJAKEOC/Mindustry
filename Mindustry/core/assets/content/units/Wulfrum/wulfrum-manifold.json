@@ -1,0 +1,31 @@
+{
+	"type":"tether",
+	"flying":true,
+	"playerControllable":false,
+	"isEnemy":false,
+    "allowedInPayloads":false,
+    "logicControllable":false,
+	"controller": "CargoAI",
+	"engineSize":2.5,
+	"engineOffset":7,
+	"outlineColor": "2E2F34FF",
+
+	"research":{
+	"parent": "wulfrum-logistic-unload-point",
+	"objectives": [
+	"wulfrum-core"
+	]	},
+
+	"hitSize":14,
+	"health":900,
+	"armor":5,
+	"speed":10,
+	"accel":0.05,
+	"drag":0.08,
+	"rotateSpeed":8,
+	"itemCapacity":30,
+	"canDrown":false,
+	"buildSpeed":0,
+	"fogRadius":5,
+	"hidden":true
+}

@@ -1,0 +1,17 @@
+{
+"planet":"Vitospp",
+"sector":355,
+"captureWave":0,
+"difficulty":1,
+"research": {
+"parent": "MeteoriteBasin",
+"objectives": [
+"bombardment-drill",
+	"payload-rail-launcher",
+	"payload-freight-track",
+	"payload-unload-track",
+	"armored-container",
+	"dust",
+	"dew"
+	]	}
+}

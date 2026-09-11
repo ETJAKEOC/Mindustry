@@ -1,0 +1,102 @@
+{
+	"type":"ItemTurret",
+	"category":"effect",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"wulfrum-shield-field-",
+	"parts":[
+	{"type":"shapePart",
+	"hollow":true,
+	"circle":true,
+	"layer":110,
+	"color":"C2FF43FF",
+	"stroke":0,
+	"strokeTo":3,
+	"radius":0,
+	"radiusTo":20
+	},
+	{"type":"shapePart",
+	"hollow":true,
+	"circle":true,
+	"layer":110,
+	"color":"C2FF43FF",
+	"stroke":0,
+	"strokeTo":2,
+	"radius":0,
+	"radiusTo":1
+	},
+	{"type":"HaloPart",
+	"tri":true,
+	"radius":22,
+	"layer":110,
+	"color":"C2FF43FF",
+	"haloRotateSpeed":3,
+	"haloRadius":0,
+	"haloRadiusTo":22,
+	"stroke":0,
+	"strokeTo":5,
+	"shapes":2,
+	"triLength":0,
+	"triLengthTo":4
+	},
+	{"type":"HaloPart",
+	"tri":true,
+	"radius":22,
+	"layer":110,
+	"color":"C2FF43FF",
+	"haloRotateSpeed":-3,
+	"haloRadius":0,
+	"haloRadiusTo":22,
+	"stroke":0,
+	"strokeTo":5,
+	"shapes":2,
+	"triLength":0,
+	"triLengthTo":4
+	}	]	},
+
+	"research":{
+	"parent":"wulfrum-processor",
+	"requirements":[
+	"wulfrum-steel/5000",
+	"graphite/7500",
+	"silicon/4500"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/100",
+	"graphite/150",
+	"silicon/90"
+	],
+
+	"consumes":{
+	"power":10
+	},
+
+	"size":3,
+	"health":1165,
+	"armor":4,
+	"range":224,
+	"squareSprite":false,
+	"recoil":0,
+
+	"shootY":0,
+	"shootCone":360,
+	"shake":1,
+	"rotateSpeed":0,
+	"shootSound":"wave",
+	"alwaysShooting":true,
+
+	"reload":300,
+	"ammoPerShot":30,
+	"maxAmmo":120,
+
+	"ammoTypes":{
+	"wulfrum-steel":{
+	"type":"BasicBulletType",
+	"spawnUnit":"calamity-wulfrum-shield-field-unit"
+	}	}
+}

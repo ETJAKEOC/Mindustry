@@ -1,0 +1,14 @@
+type: Router
+size: 1
+health: 65
+speed: 6
+itemCapacity: 1
+requirements: [
+  01a-01-item-cobalt/5
+]
+category: distribution
+squareSprite: false
+research: 05e-05-crossblock
+researchCost: [
+  01a-01-item-cobalt/6
+]

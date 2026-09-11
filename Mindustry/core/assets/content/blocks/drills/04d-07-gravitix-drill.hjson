@@ -1,0 +1,69 @@
+type: BurstDrill
+size: 5
+health: 1750
+category: production
+research: 04d-03-r-ore-blaster
+hasLiquids: true
+drillTime: 180
+drillMultipliers: {
+  01a-03-item-anthracite: 1.1
+}
+drillEffect: {
+  type: MultiEffect
+  effects: [
+  {
+    type: particleEffect
+    particles: 16
+    length: 18
+    lifetime: 40
+    interp: circleOut
+    sizeInterp: pow5In
+    colorFrom: edc787
+    colorTo: fbf0c0
+    sizeFrom: 2.2 
+    sizeTo: 0.1
+    region: exoprosopa-spark-drill
+  }
+  {
+    type: WaveEffect
+    sizeFrom: 0.1
+    sizeTo: 32
+    strokeFrom: 2.6
+    strokeTo: 0.1
+    colorFrom: fbf0c0
+    colorTo: 8c67ad
+    lifetime: 22
+  }
+ ]
+}
+tier: 3
+shake: 5
+arrows: 1
+squareSprite: false
+fogRadius: 5
+itemCapacity: 80
+researchCost: [
+  01a-05-item-aluminium/5500
+  01a-06-item-chromium/4800
+  01a-08-item-petal/2800
+  01a-10-item-bethine/300
+]
+consumes: {
+  power: 2
+  liquid: 02b-02-ichor/0.125
+  liquids: {
+    liquids: [
+      02b-06-morphitix-plasma/0.125
+    ]
+    optional: true
+    booster: true
+  }
+}
+liquidBoostIntensity: 1.65
+liquidCapacity: 60
+requirements: [
+  01a-05-item-aluminium/425
+  01a-06-item-chromium/400
+  01a-08-item-petal/200
+  01a-10-item-bethine/25
+]

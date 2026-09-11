@@ -1,0 +1,23 @@
+{
+	"type":"LiquidRouter",
+	"category":"liquid",
+
+	"research":{
+	"parent":"armored-fluid-container",
+	"requirements":[
+	"nickel/1000",
+	"tungsten/500",
+	"metaglass/500"
+	]	},
+
+	"requirements":[
+	"nickel/50",
+	"tungsten/25",
+	"metaglass/25"
+	],
+
+	"size":3,
+	"health":900,
+	"liquidCapacity":3200,
+	"liquidPadding":2
+}

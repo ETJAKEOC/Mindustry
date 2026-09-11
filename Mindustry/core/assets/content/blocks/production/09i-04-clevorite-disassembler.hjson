@@ -1,0 +1,89 @@
+type: GenericCrafter
+size: 4
+liquidCapacity: 120
+hasLiquids: true
+health: 1250
+category: crafting
+research: {
+  parent: 09i-04-u-aquafilter
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-12-creek
+    }
+  ]
+}
+itemCapacity: 30
+researchCostMultiplier: 0.4
+requirements: [
+  01a-01-item-cobalt/250
+  01a-05-item-aluminium/180
+  01a-06-item-chromium/180
+  01a-07-item-clevorite/80
+]
+craftTime: 120
+craftEffect: smeltsmoke
+outputItems: [
+  01a-05-item-aluminium/2.5
+  01a-06-item-chromium/2.5
+  01a-07-item-clevorite/4
+]
+consumes: {
+  items: [
+    01a-05-item-raw-nichrome/8
+  ]
+  liquids: [
+    02b-02-a-purified-elixir/0.3333333333333
+  ]
+  power: 4
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padding: 3
+    }
+    {
+      type: DrawBubbles
+      color: e1cf9a
+      sides: 10
+      recurrence: 3
+      spread: 12
+      radius: 1.5
+      amount: 46
+    }
+    {
+      type: DrawParticles
+      color: e1cf9a
+      alpha: 0.85
+      particleSize: 1.5
+      particles: 12
+      particleRad: 15
+      particleLife: 60
+      reverse: true
+    }
+    {
+      type: DrawParticles
+      color: bca49f
+      alpha: 0.85
+      particleSize: 1.2
+      particles: 10
+      particleRad: 10
+      particleLife: 60
+      reverse: true
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+fogRadius: 4
+ambientSound: loopCultivator
+ambientSoundVolume: 0.14
+squareSprite: false

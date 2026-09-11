@@ -1,0 +1,28 @@
+{
+	"type":"BeamNode",
+	"category":"power",
+
+	"research":{
+	"parent":"energy-node",
+	"requirements":[
+	"plastanium/400",
+	"silicon/150"
+	]	},
+
+	"requirements":[
+	"plastanium/20",
+	"silicon/10"
+	],
+
+	"consumes":{"powerBuffered":5000},
+
+	"size":3,
+	"health":1120,
+	"range":20,
+	"fogRadius":1,
+	"hasPower":true,
+	"outputsPower":true,
+	"consumesPower":true,
+	"laserColor1":"FFFFFFFF",
+	"laserColor2":"FFE18FFF"
+}

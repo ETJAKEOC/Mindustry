@@ -1,0 +1,12 @@
+type: Wall
+size: 2
+health: 2200
+armor: 10
+requirements: [
+  01a-06-item-chromium/24
+]
+research: 08h-03-chromium-wall-small
+researchCost: [
+  01a-06-item-chromium/1300
+]
+category: defense

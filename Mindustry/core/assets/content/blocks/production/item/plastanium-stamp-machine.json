@@ -1,0 +1,58 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"consumes":{
+	"power":5,
+	"items":{"items":[
+	"nickel/6",
+	"chromium/3"
+	]	},
+	"liquid":{
+	"liquid":"oil","amount":0.416666666666666
+	}	},
+
+	"outputItems":[
+	"plastanium/5"
+	],
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	{"type":"DrawPistons",
+	"sinMag":1
+	},
+	{"type":"DrawLiquidRegion",
+	"drawLiquid":"oil"
+	},
+	"DrawDefault"
+	]	},
+
+	"research":{
+	"parent":"glass-furnace",
+	"requirements":[
+	"chromium/1400",
+	"graphite/1600",
+	"silicon/1400"
+	],
+	"objectives":[
+	"oil"
+	]	},
+
+	"requirements":[
+	"chromium/70",
+	"graphite/80",
+	"silicon/70"
+	],
+
+	"health":1240,
+	"size":3,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemCapacity":20,
+	"liquidCapacity":100,
+	"craftTime":90
+}

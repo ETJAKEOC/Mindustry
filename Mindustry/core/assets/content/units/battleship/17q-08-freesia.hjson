@@ -1,0 +1,126 @@
+type: naval
+abilities: [
+   {
+    type: ForceFieldAbility
+    radius: 70
+    sides: 6
+    cooldown: 1500
+    regen: 1.5
+    max: 3000
+   }
+   {
+    type: RepairFieldAbility
+    amount: 125
+    reload: 80
+    range: 60
+   }
+]
+speed: 0.5
+health: 15000
+armor: 12
+aimDst: 10
+drag: 0.1
+accel: 0.8
+hitSize: 25
+rotateSpeed: 1.7
+trailLength: 15
+outlineColor: 0C0E29
+moveSoundVolume: 0.9
+moveSoundPitchMin: 0.95
+moveSoundPitchMax: 0.95
+moveSound: shipMoveBig
+itemCapacity: 50
+weapons: [
+{
+    mirror: true
+    rotate: true
+    name: freesia-autocannon
+    shoot: {
+      shots: 3
+      shotDelay: 8
+    }
+    rotateSpeed: 1.75
+    x: 6.75
+    y: 7
+    reload: 51.2
+    recoil: 1.25
+    shootSound: shootPlasma
+    shootSoundVolume: 0.09
+    bullet: {
+      type: BasicBulletType
+      sprite: missile-large
+      width: 5
+      splashDamageRadius: 20
+      splashDamage: 35
+      lifetime: 50
+      damage: 96
+      speed: 4.5
+      smokeEffect: colorSpark
+      trailColor: E3EBFB
+      trailWidth: 1.5
+      trailLength: 5
+      backColor: E3EBFB
+      hitColor: E3EBFB
+      despawnEffect: {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 8
+        sizeFrom: 0
+        sizeTo: 15
+        colorFrom: ffffff
+        colorTo: feb380
+        }
+      }
+}
+{
+    mirror: true
+    rotate: true
+    name: narhwal-salvo
+    shoot: {
+      shots: 3
+      shotDelay: 8
+    }
+    rotateSpeed: 1.75
+    x: 8
+    y: -10.5
+    reload: 66.5
+    recoil: 1.3
+    shootSound: shootSalvo
+    shootSoundVolume: 1.2
+    ejectEffect: casing2
+    bullet: {
+      type: BasicBulletType
+      sprite: missile-large
+      width: 5
+      splashDamageRadius: 20
+      splashDamage: 50
+      pierce: true
+      lifetime: 42.5
+      damage: 150
+      speed: 6.5
+      smokeEffect: colorSpark
+      trailColor: E3EBFB
+      trailWidth: 1.5
+      trailLength: 5
+      backColor: E3EBFB
+      hitColor: E3EBFB
+      status: shocked
+      despawnEffect: {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 8
+        sizeFrom: 0
+        sizeTo: 15
+        colorFrom: ffffff
+        colorTo: feb380
+        }
+      }
+}
+]
+immunities: [
+  13m-06-contaminated
+]
+research: 17q-07-narhwal
+researchCostMultiplier: 0.5

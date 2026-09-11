@@ -1,0 +1,26 @@
+{
+	"type":"Incinerator",
+	"category":"crafting",
+
+	"research":{
+	"parent":"high-pressure-crusher",
+	"requirements":[
+	"tungsten/600",
+	"silicon/400"
+	]	},
+
+	"requirements":[
+	"tungsten/30",
+	"silicon/20"
+	],
+
+	"consumes":{
+	"power":6
+	},
+
+	"size":1,
+	"health":460,
+	"hasPower":true,
+	"hasLiquids":false,
+	"hasItems":true
+}

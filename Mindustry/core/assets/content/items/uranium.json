@@ -1,0 +1,10 @@
+{
+	"name":"铀",
+	"cost":2,
+	"hardness":6,
+	"color":"91F088FF",
+	"radioactivity":3,
+	"flammability":0,
+	"charge":0,
+	"explosiveness":0
+}

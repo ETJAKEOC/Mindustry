@@ -1,0 +1,12 @@
+{
+	"name":"谐振方晶",
+	"cost":1,
+	"color":"B4C8F0FF",
+	"frames":17,
+	"transitionFrames":3,
+	"frameTime":1.2,
+	"radioactivity":10,
+	"flammability":3,
+	"charge":3.5,
+	"explosiveness":3
+}

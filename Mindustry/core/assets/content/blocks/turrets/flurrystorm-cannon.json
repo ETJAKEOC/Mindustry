@@ -1,0 +1,165 @@
+{
+	"type":"ItemTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-"
+	},
+
+	"research":{
+	"parent":"snowball-cannon",
+	"requirements":[
+	"plastanium/900",
+	"graphite/1200",
+	"silicon/1200"
+	]	},
+
+	"requirements":[
+	"plastanium/90",
+	"graphite/120",
+	"silicon/120"
+	],
+
+	"size":4,
+	"health":2825,
+	"rotateSpeed":3.5,
+	"reload":16,
+	"ammoPerShot":1,
+	"maxAmmo":21,
+	"liquidCapacity":20,
+	"range":288,
+	"inaccuracy":1,
+	"squareSprite":false,
+	"shootSound":"mineDeploy",
+	"heatColor":"63E9FCFF",
+
+	"ammoTypes":{
+	"snow(item)":{
+		"keepVelocity":false,
+		"type":"basicBulletType",
+		"sprite":"calamity-plasma",
+		"damage":12,
+		"width":8,
+		"height":16,
+		"speed":18,
+		"lifetime":16,
+		"status":"wet",
+		"statusDuration":90,
+		"buildingDamageMultiplier":0.2,
+		"knockback":1.2,
+
+		"hitSound":"rockBreak",
+
+	"shootEffect":"none",
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"particles":9,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"B8DFE5FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		},
+
+	"despawnEffect":{
+		"type":"ParticleEffect",
+		"particles":9,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"B8DFE5FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		},
+
+	"frontColor":"FFFFFFFF",
+	"backColor":"B8DFE5FF",
+
+	"spawnBullets":[
+		{"type":"basicBulletType",
+		"sprite":"calamity-prism2",
+		"damage":12,
+		"width":8,
+		"height":16,
+		"speed":12,
+		"lifetime":23,
+		"status":"freezing",
+		"statusDuration":5,
+		"buildingDamageMultiplier":0.2,
+
+		"hitSound":"rockBreak",
+
+	"shootEffect":"none",
+
+	"hitEffect":{
+		"type":"ParticleEffect",
+		"particles":9,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"B8DFE5FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		},
+
+	"despawnEffect":{
+		"type":"ParticleEffect",
+		"particles":9,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"FFFFFFFF",
+		"colorTo":"B8DFE5FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		},
+
+		"trailColor":"63E9FCFF",
+		"trailLength":3,"trailWidth":3,
+		"trailSinScl":2.5,
+		"trailSinMag":0.5,
+		"trailEffect":"none",
+
+	"frontColor":"FFFFFFFF",
+	"backColor":"B8DFE5FF",
+
+		"fragRandomSpread":360,
+		"fragBullets":3,
+		"fragBullet":{
+		"type":"basicBulletType",
+		"sprite":"calamity-prism2",
+		"damage":12,
+		"width":8,
+		"height":16,
+		"speed":6,
+		"lifetime":10,
+		"status":"freezing",
+		"statusDuration":60,
+		"buildingDamageMultiplier":0.2,
+
+		"hitSound":"rockBreak",
+
+	"shootEffect":"none",
+
+	"hitEffect":"none",
+	"despawnEffect":"none",
+
+	"frontColor":"FFFFFFFF",
+	"backColor":"63E9FCFF"
+		}	}
+		]	}	}
+}

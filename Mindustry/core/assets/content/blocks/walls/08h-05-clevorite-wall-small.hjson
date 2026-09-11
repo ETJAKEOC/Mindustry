@@ -1,0 +1,12 @@
+type: Wall
+size: 1
+health: 680
+armor: 8
+absorbLasers: true
+requirements: [
+  01a-02-item-nickel/4
+  01a-07-item-clevorite/6
+]
+research: 08h-03-chromium-wall-small
+researchCostMultiplier: 0.5
+category: defense

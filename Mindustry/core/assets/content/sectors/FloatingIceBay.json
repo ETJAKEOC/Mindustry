@@ -1,0 +1,12 @@
+{
+"planet":"Vitospp",
+"sector":64,
+"captureWave":0,
+"difficulty":2,
+"research":{
+"parent":"MeteoriteBasin",
+"objectives": [
+"spore-stamp-machine",
+"drill-platform"
+	]	}
+}

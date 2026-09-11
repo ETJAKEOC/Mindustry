@@ -1,0 +1,22 @@
+type: LogicBlock
+category: logic
+research: {
+  parent: 0007-logic
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-11-station-annex
+    }
+  ]
+}
+requirements: [
+  01a-02-item-nickel/150
+  01a-05-item-aluminium/75
+  01a-06-item-chromium/75
+  01a-12-item-techno-plating/75
+]
+instructionsPerTick: 10
+size: 2
+health: 600
+researchCostMultiplier: 0.5
+range: 200

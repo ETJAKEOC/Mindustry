@@ -1,0 +1,156 @@
+{
+	"type":"flying",
+	"faceTarget":true,
+	"circleTarget":true,
+	"omniMovement":true,
+	"rotateMoveFirst":true,
+	"flying":true,
+	"accel":0.05,"drag":0.03,
+
+	"research":{
+	"parent":"accumulation",
+	"requirements":[
+	"plastanium/1600",
+	"silicon/2600"
+	],
+	"objectives":[
+	"second-refabricator"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"hitSize":18,
+	"engineSize":3.75,
+	"engineOffset":8.75,
+	"trailLength":5,
+	"speed":3.5,
+	"health":3125,
+	"armor":7,
+	"itemCapacity":60,
+	"outlineColor":"2E2F34FF",
+
+	"engines":[
+	{"x":-7.5,"y":-7.5,
+	"radius":3,
+	"trailLength":5
+	},
+	{"x":7.5,"y":-7.5,
+	"radius":2.25,
+	"trailLength":2.25
+	}	],
+
+	"weapons":[
+	{"name":"downpour-rush",
+	"x":0,"y":0,
+	"mirror":false,
+	"shootSound":"none",
+	"reload":180,
+	"rotate":false,
+	"shootStatus":"unmoving",
+	"shootStatusDuration":25,
+	"bullet":{
+	"type":"RailBulletType",
+	"damage":100,
+	"pierceDamageFactor":0,
+	"length":40,
+	"recoil":-13,
+	"smokeEffect":"none",
+		"shootEffect":{
+		"followParent":true,
+		"type":"ParticleEffect",
+		"region":"calamity-rush1",
+		"particles":1,
+		"lifetime":20,
+		"length":1,
+		"sizeFrom":30,
+		"sizeTo":30,
+		"lightColor":"DEEDFFFF",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+		}	}	},
+
+		{"name":"bomber-weapon",
+		"mirror":false,
+		"x":0,"y":0,
+		"shootSound":"plamsadrop",
+		"reload":180,
+		"recoil":0,
+		"shootCone":360,
+		"rotate":false,
+		"inaccuracy":30,
+		"velocityRnd":0.6,
+		"ignoreRotation":true,
+		"minShootVelocity":5,
+		"alwaysShooting":true,
+
+		"shoot":{
+		"shots":4,
+	"shotDelay":4},
+
+		"bullet":{
+		"type":"basicBulletType",
+		"sprite":"mine-bullet",
+		"spin":4,
+		"speed":-1.5,
+		"lifetime":40,
+		"drag":0.045,
+		"collidesAir":false,
+		"collides":false,
+		"shrinkX":0,"shrinkY":0,
+		"despawnShake":3,
+		"hitSound":"plasmaboom",
+		"splashDamage":200,
+		"splashDamageRadius":48,
+		"keepVelocity":false,
+		"width":20,"height":20,
+		"frontColor":"8598BFFF",
+		"backColor":"DEEDFFFF",
+
+		"shootEffect":"none",
+
+		"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WrapEffect",
+		"effect":"dynamicSpikes",
+		"color":"DEEDFFFF",
+		"rotation":48
+		},
+		{"type":"ParticleEffect",
+		"offset":30,
+		"particles":6,
+		"lifetime":20,
+		"length":50,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":-360,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":5,
+		"lenTo":0,
+		"lightColor":"DEEDFFFF",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+		},
+		{"type":"ParticleEffect",
+		"offset":30,
+		"particles":6,
+		"lifetime":25,
+		"length":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5In",
+		"cone":-360,
+		"line":true,
+		"strokeFrom":1.5,
+		"strokeTo":1.5,
+		"lenFrom":7,
+		"lenTo":0,
+		"lightColor":"DEEDFFFF",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+		}	]	}
+	}	}	]
+}

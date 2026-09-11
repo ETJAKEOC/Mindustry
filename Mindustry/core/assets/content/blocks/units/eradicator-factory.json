@@ -1,0 +1,28 @@
+{
+	"type": "unitFactory",
+	"name": "Eradicator factory",
+	"description": "Constructs eradicators.",
+	"unitType": "eradicator",
+	"produceTime": 10200,
+	"size": 7,
+	"maxSpawn": 1,
+	"consumes": {
+		"power": 165,
+		"items": {
+		"items": [
+            {"item": "graphite", "amount": 500.0},
+            {"item": "silicon", "amount": 550.0},
+            {"item": "surge-alloy", "amount": 480.0},
+      ]
+		}
+  },
+	"requirements": [
+		{"item": "lead", "amount": 525}
+		{ "item": "plastanium", "amount": 550},
+		{"item": "silicon", "amount" : 650}
+		{ "item": "thorium", "amount": 650 },
+		{ "item": "surge-alloy", "amount": 525}
+	],
+	"category": "units",
+	"research": "chaosArray-factory"
+}

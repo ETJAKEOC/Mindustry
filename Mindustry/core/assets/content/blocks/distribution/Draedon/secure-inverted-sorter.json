@@ -1,0 +1,19 @@
+{
+	"type":"Sorter",
+	"size":1,
+	"invert":true,
+	"category":"distribution",
+
+	"health":250,
+	"solid":false,
+
+	"research":{
+	"parent":"secure-sorter",
+	"requirements":[
+	"chromium/300"
+	]	},
+
+	"requirements":[
+	"chromium/3"
+	],
+}

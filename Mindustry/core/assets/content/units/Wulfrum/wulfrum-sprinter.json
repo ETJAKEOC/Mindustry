@@ -1,0 +1,79 @@
+{
+	"type":"flying",
+	"faceTarget":true,
+	"circleTarget":true,
+	"omniMovement":true,
+	"rotateMoveFirst":true,
+	"flying":true,
+	"accel":0.03,"drag":0.016,
+	"dpsEstimate":70,
+	"range":80,
+	"itemCapacity":60,
+
+	"research":{
+	"parent":"wulfrum-jump-gate",
+	"requirements":[
+	"graphite/300",
+	"silicon/250"],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"hitSize":15,
+	"trailLength":4,
+	"speed":4.5,
+	"health":700,
+	"outlineColor":"2E2F34FF",
+
+	"engineSize":3.5,
+	"engineOffset":8.75,
+
+	"weapons":[
+	{"name":"outbreak-ram",
+	"x":0,"y":0,
+	"mirror":false,
+	"shootSound":"none",
+	"reload":420,
+	"rotate":false,
+	"shootStatus":"unmoving",
+	"shootStatusDuration":20,
+	"bullet":{
+	"type":"RailBulletType",
+	"damage":110,
+	"pierceDamageFactor":0,
+	"length":56,
+	"recoil":-8,
+	"smokeEffect":"none",
+		"shootEffect":{
+		"followParent":true,
+		"type":"ParticleEffect",
+		"region":"calamity-rush1",
+		"particles":1,
+		"lifetime":20,
+		"length":1,
+		"sizeFrom":30,
+		"sizeTo":30,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+		}	}	},
+		{"shootOnDeath":true,
+	"controllable":false,
+	"shootSound":"none",
+	"shootCone":360,
+		"bullet":{
+		"collidesAir":false,
+		"collides":false,
+		"instantDisappear":true,
+		"hittable":false,
+		"absorbable":false,
+		"splashDamageRadius":24,
+		"splashDamage":30,
+		"hitSound":"WulfrumDeath",
+		"hitSoundVolume":5,
+		"keepVelocity":false,
+		"despawnHit":true,
+		"shootEffect":"none",
+		"hitEffect":"none"
+	}	}	]
+}

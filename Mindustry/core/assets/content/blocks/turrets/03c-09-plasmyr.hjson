@@ -1,0 +1,534 @@
+type: ItemTurret
+size: 5
+squareSprite: false
+heatRequirement: 12
+maxHeatEfficiency: 1.50
+health: 10800
+armor: 10
+loopSound: loopGlow
+loopSoundVolume: 0.75
+shootSound: shootArtillerySapBig
+shootSoundVolume: 1.25
+# Block requirements, more cost = more build time
+requirements: [
+  01a-05-item-aluminium/900
+  01a-06-item-chromium/600
+  01a-09-item-morphite/300
+  01a-10-item-bethine/250
+  01a-11-item-pyroxene/175
+]
+researchCost: [
+  01a-05-item-aluminium/10000
+  01a-06-item-chromium/7500
+  01a-09-item-morphite/4000
+  01a-10-item-bethine/1250
+  01a-11-item-pyroxene/250
+]
+research: 03c-08-scathe
+consumes: {
+  power: 12
+}
+category: turret
+recoil: 3
+minWarmup: 0.99
+warmupMaintainTime: 120
+shootWarmupSpeed: 0.05
+# Outline color of the turret
+outlineColor: 2C2A36
+# Targets
+targetAir: true
+targetGround: true
+# Turret rotation speed
+rotateSpeed: 1.1
+# Fire of rate, in tick
+reload: 145
+# Turret range, speed x lifetime
+range: 522
+# Bullet starting position, range unaffected
+shootY: 9
+# Shake power when fires
+shake: 11
+newTargetInterval: 40
+# Ammuminion
+ammoTypes: {
+  01a-11-item-pyroxene: {
+    # Bullet type
+    type: BasicBulletType
+    # Bullet sprite
+    sprite: large-orb
+    buildingDamageMultiplier: 0.2
+    hitColor: 96E3FC
+    frontColor: FFFFFF
+    backColor: 96E3FC
+    lightColor: 96E3FC
+    # Bullet damage, more damage = more immune to shockwave turret
+    shootEffect: shootTitan
+    width: 22
+    height: 22
+    damage: 2100
+    shrinkX: 0
+    shrinkY: 0
+    speed: 9
+    lifetime: 58
+    ammoMultiplier: 1
+    pierceCap: 5
+    pierceArmor: true
+    trailColor: 96E3FC
+    trailInterval: 1.25
+    trailLength: 11
+    trailWidth: 2.5
+    trailParam: 4
+    trailEffect: colorSpark
+    trailRotation: true
+    fragOnHit: false
+    fragBullets: 15
+    fragLifeMin: 0.5
+    fragVelocityMin: 0.55
+    fragVelocityMax: 1.25
+    intervalBullets: 2
+    intervalAngle: 180
+    intervalSpread: 300
+    intervalRandomSpread: 20
+    bulletInterval: 8
+    homingPower: 0.055
+    homingRange: 20
+    despawnShake: 3
+    despawnSound: explosionDull
+    despawnEffect: [
+      {
+      type: ExplosionEffect
+      waveColor: 96E3FC
+      sparkColor: 979DA6
+      smokeColor: 676B72
+      waveStroke: 5
+      waveRad: 40
+      }
+    ]
+    hitEffect: [
+      {
+      type: ExplosionEffect
+      waveColor: 96E3FC
+      sparkColor: 979DA6
+      smokeColor: 676B72
+      waveStroke: 5
+      waveRad: 40
+      }
+    ]
+    smokeEffect: shootSmokeTitan
+    fragBullet: {
+      type: BasicBulletType
+      hitSize: 5
+      hitEffect: [
+        {
+        type: WaveEffect
+        colorFrom: 96E3FC
+        colorTo: 96E3FC
+        strokeFrom: 6
+        sizeTo: 6
+        lifetime: 10
+        }
+      ]
+      despawnEffect: [
+        {
+        type: WaveEffect
+        colorFrom: 96E3FC
+        colorTo: 96E3FC
+        strokeFrom: 6
+        sizeTo: 6
+        lifetime: 10
+        }
+      ]
+      hitColor: 96E3FC
+      backColor: 96E3FC
+      frontColor: FFFFFF
+      lightColor: 96E3FC
+      homingPower: 0.55
+      width: 16
+      height: 17
+      speed: 3
+      pierceCap: 5
+      lifetime: 30
+      damage: 85
+      trailColor: 96E3FC
+      trailLength: 11
+      trailWidth: 2.75
+      }
+    intervalBullet: {
+      type: BasicBulletType
+      hitSize: 5
+      hitEffect: [
+        {
+        type: WaveEffect
+        colorFrom: 96E3FC
+        colorTo: 96E3FC
+        strokeFrom: 5
+        sizeTo: 5
+        lifetime: 10
+        }
+      ]
+      despawnEffect: [
+        {
+        type: WaveEffect
+        colorFrom: 96E3FC
+        colorTo: 96E3FC
+        strokeFrom: 5
+        sizeTo: 5
+        lifetime: 10
+        }
+      ]
+      hitColor: 96E3FC
+      backColor: 96E3FC
+      frontColor: FFFFFF
+      lightColor: 96E3FC
+      homingPower: 0.1
+      width: 16
+      height: 17
+      speed: 3
+      pierceCap: 5
+      lifetime: 30
+      damage: 40
+      trailColor: 96E3FC
+      trailLength: 11
+      trailWidth: 2.5
+      }
+    }
+  }
+# Turret drawer
+drawer: {
+  type: DrawTurret
+  # Base turret
+  basePrefix: plasmyr-
+    parts: [
+    {
+      # Region part = draws using certain sprite, by using suffix. From under to top layer
+      type: RegionPart
+      # Sprite suffix
+      suffix: -plasm
+      # Moves when warmup or recoil
+      progress: warmup
+      # Heat moves when warmup or recoil
+      heatProgress: warmup
+      # Move Y
+      moveY: -1.5
+      # Color of heat
+      heatColor: D1EFFF45
+      # Heat layer placement
+      turretHeatLayer: 49.9
+      under: true
+      outline: false
+      # Layer offset, change the layer of the object. Turret layer = 50, Turret heat layer = 50.1
+      layerOffset: -0.3
+    }
+    {
+      type: RegionPart
+      suffix: -bladea
+      progress: warmup
+      heatProgress: warmup
+      # For mirrored sprite
+      mirror: true
+      moveX: 13
+      moveY: 1
+      # Move Rotation
+      moveRot: -10
+      heatColor: d1efff45
+      turretHeatLayer: 49.9
+      under: true
+      layerOffset: -0.3
+      # Additional moves
+      moves: [{
+        type: PartMove
+        # Moves when recoil
+        progress: recoil
+        # moves
+        y: 2
+        rot: 40
+        }]
+    }
+    {
+      type: RegionPart
+      suffix: -bladeb
+      progress: warmup
+      heatProgress: warmup
+      mirror: true
+      moveX: 14
+      moveY: -3
+      moveRot: -45
+      heatColor: D1EFFF45
+      turretHeatLayer: 49.9
+      under: true
+      layerOffset: -0.3
+      moves: [{
+        type: PartMove
+        progress: recoil
+        y: 2
+        rot: 30
+        }]
+    }
+    {
+      type: RegionPart
+      suffix: -bladec
+      progress: warmup
+      heatProgress: warmup
+      mirror: true
+      moveX: 15
+      moveY: -7
+      moveRot: -80
+      heatColor: D1EFFF45
+      turretHeatLayer: 49.9
+      under: true
+      layerOffset: -0.3
+      moves: [{
+        type: PartMove
+        progress: recoil
+        y: 2
+        rot: 20
+        }]
+    }
+    {
+      type: RegionPart
+      suffix: -bladed
+      progress: warmup
+      heatProgress: warmup
+      mirror: true
+      moveX: 16
+      moveY: -10
+      moveRot: -115
+      heatColor: D1EFFF45
+      turretHeatLayer: 49.9
+      under: true
+      layerOffset: -0.3
+      moves: [{
+        type: PartMove
+        progress: recoil
+        y: 2
+        rot: 10
+        }]
+    }
+    {
+      type: RegionPart
+      suffix: -barrel
+      progress: warmup
+      heatProgress: warmup
+      moveY: -2
+      heatColor: D1EFFF45
+      moves: [{
+        type: PartMove
+        progress: recoil
+        y: -10
+        }]
+    }
+    {
+      type: RegionPart
+      suffix: -arm
+      mirror: true
+      progress: warmup
+      heatProgress: warmup
+      moveX: 2
+      moveY: 4
+      heatColor: D1EFFF45
+      moves: [{
+        type: PartMove
+        progress: recoil
+        y: -5.5
+      }]
+    }
+    {
+      type: RegionPart
+      suffix: -side
+      mirror: true
+      progress: warmup
+      heatProgress: warmup
+      moveX: 2
+      moveY: -1.5
+      heatColor: D1EFFF45
+    }
+    {
+      type: RegionPart
+      suffix: -back
+      progress: warmup
+      heatProgress: warmup
+      moveRot: -4
+      moveX: 2
+      moveY: -1.5
+      mirror: true
+      heatColor: D1EFFF45
+    }
+    {
+      # Creates a shape effect, mostly used with halo
+      type: ShapePart
+      y: -10.5
+      # Radius of the shape
+      radius: 5
+      # Shape thickness
+      stroke: 0
+      strokeTo: 1.5
+      # Layer
+      layer: 110
+      # Shapes
+      circle: true
+      hollow: true
+      # Color shape
+      color: D1EFFF
+    }
+    {
+      type: ShapePart
+      y: -10.5
+      radius: 10
+      stroke: 0
+      strokeTo: 1.5
+      layer: 110
+      circle: true
+      hollow: true
+      color: D1EFFF
+    }
+    {
+      # /
+      # Creates a halo-like effect
+      type: HaloPart
+      layer: 110
+      color: D1EFFF
+      y: -10
+      # Halo angle to center
+      haloRotation: 135
+      # Num of shapes
+      shapes: 1
+      # Halo radius
+      haloRadius: 17
+      # Halo size
+      radius: 3.5
+      hollow: false
+      # Triangle height
+      triLength: 0
+      triLengthTo: 15
+      # Triangle
+      tri: true
+    }
+    {
+      # -/
+      type: HaloPart
+      layer: 110
+      color: D1EFFF
+      y: -10
+      haloRotation: 135
+      shapes: 1
+      haloRadius: 17
+      radius: 3.5
+      hollow: false
+      triLength: 0
+      triLengthTo: 4
+      tri: true
+      #Halo angle
+      shapeRotation: 180
+    }
+    {
+      # |
+      type: HaloPart
+      layer: 110
+      color: D1EFFF
+      y: -10.5
+      haloRotation: 180
+      shapes: 1
+      haloRadius: 16
+      radius: 4
+      hollow: false
+      triLength: 0
+      triLengthTo: 22
+      tri: true
+    }
+    {
+      # -|
+      type: HaloPart
+      layer: 110
+      color: D1EFFF
+      y: -10.5
+      haloRotation: 180
+      shapes: 1
+      haloRadius: 16
+      radius: 4
+      hollow: false
+      triLength: 0
+      triLengthTo: 5.5
+      tri: true
+      shapeRotation: 180
+    }
+    {
+      # \
+      type: HaloPart
+      layer: 110
+      color: D1EFFF
+      y: -10
+      haloRotation: 225
+      shapes: 1
+      haloRadius: 17
+      radius: 3.5
+      hollow: false
+      triLength: 0
+      triLengthTo: 15
+      tri: true
+    }
+    {
+      # -\
+      type: HaloPart
+      layer: 110
+      color: D1EFFF
+      y: -10
+      haloRotation: 225
+      shapes: 1
+      haloRadius: 17
+      radius: 3.5
+      hollow: false
+      triLength: 0
+      triLengthTo: 4
+      tri: true
+      shapeRotation: 180
+    }
+    {
+      # Inner spinning halo
+      type: HaloPart
+      layer: 110
+      color: D1EFFF
+      y: -10.5
+      haloRotation: 90
+      shapes: 4
+      haloRadius: 5
+      radius: 3.25
+      hollow: false
+      triLength: 0
+      triLengthTo: 2.75
+      tri: true
+      # Halo rotation speed
+      haloRotateSpeed: -0.75
+    }
+    {
+      # Outer spinning halo
+      type: HaloPart
+      layer: 110
+      color: D1EFFF
+      y: -10.5
+      shapes: 4
+      haloRadius: 13.5
+      radius: 5.25
+      hollow: false
+      triLength: 0
+      triLengthTo: 4.25
+      tri: true
+      haloRotateSpeed: 1
+    }
+    {
+      # Outer spinning halo (invert)
+      type: HaloPart
+      layer: 110
+      color: D1EFFF
+      y: -10.5
+      shapes: 4
+      haloRadius: 13.5
+      radius: 5.25
+      hollow: false
+      triLength: 0
+      triLengthTo: 2
+      tri: true
+      haloRotateSpeed: 1
+      shapeRotation: 180
+    }
+  ]
+}

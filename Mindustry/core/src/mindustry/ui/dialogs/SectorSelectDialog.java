@@ -1,0 +1,84 @@
+package mindustry.ui.dialogs;
+
+import java.util.Locale;
+
+import arc.Core;
+import arc.func.Cons;
+import arc.input.KeyCode;
+import arc.scene.style.TextureRegionDrawable;
+import arc.scene.ui.TextField;
+import arc.scene.ui.layout.Table;
+import mindustry.Vars;
+import mindustry.content.Planets;
+import mindustry.gen.*;
+import mindustry.type.Planet;
+import mindustry.type.SectorPreset;
+import mindustry.ui.Styles;
+
+//internal use only!
+public class SectorSelectDialog extends BaseDialog{
+    Table sectors = new Table();
+    Planet planet = Planets.serpulo;
+    Cons<SectorPreset> cons = s -> {};
+    TextField search;
+
+    public SectorSelectDialog(){
+        super("@database-category.sector");
+
+        cont.top();
+        cont.table(s -> {
+            s.image(Icon.zoom);
+            search = s.field("", ignored -> {
+                rebuild();
+            }).width(300f).get();
+            search.keyDown(KeyCode.enter, () -> {
+                String text = search.getText().toLowerCase(Locale.ROOT);
+                var found = Vars.content.sectors().find(sec -> matches(sec, text));
+                if(found != null){
+                    cons.get(found);
+                    hide();
+                }
+            });
+        });
+        cont.row();
+
+        cont.pane(sectors).grow().top();
+        sectors.top();
+
+        addCloseButton();
+
+        shown(() -> {
+            search.clearText();
+            search.requestKeyboard();
+            Core.app.post(() -> search.requestKeyboard());
+            rebuild();
+        });
+    }
+
+    public void show(Planet planet, Cons<SectorPreset> cons){
+        this.planet = planet;
+        this.cons = cons;
+
+        show();
+    }
+
+    void rebuild(){
+        sectors.clear();
+
+        String text = search.getText().toLowerCase(Locale.ROOT);
+
+        for(var sector : Vars.content.sectors()){
+            if(matches(sector, text)){
+                sectors.button(sector.localizedName, new TextureRegionDrawable(sector.uiIcon), Styles.grayt, 32f, () -> {
+                    cons.get(sector);
+                    hide();
+                }).size(400f, 50f).margin(4f).pad(3f);
+                sectors.row();
+            }
+        }
+    }
+
+    boolean matches(SectorPreset sector, String text){
+        return sector.planet == planet && sector.requireUnlock && (text.isEmpty() || sector.name.toLowerCase(Locale.ROOT).contains(text) || sector.localizedName.toLowerCase(Locale.ROOT).contains(text));
+    }
+}

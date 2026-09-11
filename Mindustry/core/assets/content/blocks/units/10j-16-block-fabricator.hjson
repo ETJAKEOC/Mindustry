@@ -1,0 +1,46 @@
+type: Constructor
+size: 3
+health: 450
+category: units
+requirements: [
+  01a-02-item-nickel/200
+  01a-05-item-aluminium/150
+  01a-06-item-chromium/80
+] 
+hasPower: true
+consumes: {
+  power: 1.5
+}
+buildSpeed: 1
+filter: [
+  08h-01-cobalt-wall-small,
+  08h-02-cobalt-wall-large,
+  08h-03-chromium-wall-small,
+  08h-04-chromium-wall-large,
+  08h-05-a-aluminium-gate,
+  08h-05-clevorite-wall-small,
+  08h-06-clevorite-wall-large,
+  08h-06-lamine-wall-small,
+  08h-06-lbmine-wall-large,
+  08h-07-morphite-wall-small,
+  08h-08-morphite-wall-large,
+  08h-11-petal-wall-small,
+  08h-12-petal-wall-large,
+  08h-13-bethine-wall-small,
+  08h-14-bethine-wall-large,
+  08h-15-pyroxene-wall-small,
+  08h-16-pyroxene-wall-large,
+  08h-17-pyroxene-gate
+]
+research: {
+  parent: 10j-15-surge-launcher
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-10-precipice
+    }
+  ]
+}
+squareSprite: false
+maxBlockSize: 2
+researchCostMultiplier: 0.5

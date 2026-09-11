@@ -1,0 +1,9 @@
+{
+"type":"OreBlock",
+"itemDrop":"chromium",
+"mapColor":"BFC8E2FF",
+"useColor":true,
+"oreDefault":true,
+"oreScale":54.88,
+"oreThreshold":0.88
+}

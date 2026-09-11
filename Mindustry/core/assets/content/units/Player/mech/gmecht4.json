@@ -1,0 +1,215 @@
+{
+	"type":"legs",
+	"legCount":4,
+	"legMoveSpace":1.1,
+	"legLength":16,
+	"legBaseOffset":16,
+	"legSpeed":0.2,
+	"rippleScale":2.8,
+	"legSplashDamage":30,
+	"legSplashRange":30,
+	"allowLegStep":true,
+	"hovering":true,
+	"outlineColor":"2E2F34FF",
+	"shadowElevation":0.4,
+
+	"speed":0.58,
+	"rotateSpeed":0.76,
+	"hitSize":27.5,
+	"health":9300,
+	"armor":13,
+	"range":220,
+
+	"name":"绿机甲t4",
+	"description":"向目标发射能量激光。\n可跨越大多数地形。",
+
+	"research":{
+	"parent":"gmecht3",
+	"requirements":[
+	"osmium/30000",
+	"metaglass/50000",
+	"silicon/13000",
+	"plastanium/50000"
+	],
+	"objectives":[
+	"senior-refabricator"
+		]	},
+
+	"immunities":[
+	"wulfrum-amplify",
+	"shadowflame",
+	"empI"
+	],
+
+	"weapons":[
+		{"name":"gmecht4-weapon",
+		"x":0,"y":0,
+		"shootY":13,
+		"mirror":false,
+		"rotate":false,
+		"recoil":0,
+		"reload":420,
+		"shake":4,
+		"cooldownTime":360,
+		"continuous":true,
+		"top":false,
+
+		"shoot":{
+		"type":"shootPattern",
+		"firstShotDelay":80
+		},
+
+		"velocityRnd":0.22,
+		"inaccuracy":0,
+		"shootStatus":"unmoving",
+		"shootStatusDuration":90,
+		"soundPitchMin":1,
+		"chargeSound":"lasercharge",
+		"shootSound":"beam",
+		"parentizeEffects":true,
+
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-blade",
+		"mirror":true,
+		"moveRot":-35,
+		"progress":{
+		"type":"charge",
+		"op":"blend",
+		"other":"heat",
+		"amount":0.5
+		}	},
+		{"type":"shapePart",
+		"y":13,
+		"hollow":true,
+		"circle":true,
+		"layer":110,
+		"color":"84F491FF",
+		"stroke":0,
+		"strokeTo":4,
+		"radius":0,
+		"radiusTo":10,
+		"progress":{
+		"type":"charge",
+		"op":"blend",
+		"other":"heat",
+		"amount":0.5
+		}	},
+		{"type":"HaloPart",
+		"tri":true,
+		"y":13,
+		"radius":6,
+		"layer":110,
+		"color":"84F491FF",
+		"haloRotateSpeed":-1.3,
+		"haloRadius":0,
+		"haloRadiusTo":6,
+		"stroke":0,
+		"strokeTo":7,
+		"shapes":2,
+		"triLength":0,
+		"triLengthTo":14,
+		"progress":{
+		"type":"charge",
+		"op":"blend",
+		"other":"heat",
+		"amount":0.5
+		}	},
+		{"type":"HaloPart",
+		"tri":true,
+		"y":13,
+		"radius":6,
+		"layer":110,
+		"color":"84F491FF",
+		"haloRotateSpeed":0.8,
+		"haloRadius":0,
+		"haloRadiusTo":6,
+		"stroke":0,
+		"strokeTo":6,
+		"shapes":2,
+		"triLength":0,
+		"triLengthTo":28,
+		"progress":{
+		"type":"charge",
+		"op":"blend",
+		"other":"heat",
+		"amount":0.5
+		}	}	],
+
+	"bullet":{
+		"smokeEffect":"none",
+		"chargeEffect":"greenLaserCharge",
+		"type":"ContinuousLaserBulletType",
+		"damage":100,
+		"length":220,"width":6,
+		"oscScl":2,
+		"oscMag":3,
+		"status":"melting",
+		"statusDuration":300,
+		"colors":["64CF8DAA","84F491FF","F2FFF3FF"],
+		"lifetime":360,
+
+	"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"ParticleEffect",
+		"particles":12,
+		"length":100,
+		"lifetime":55,
+		"line":true,
+		"cone":40,
+		"lenFrom":8,
+		"lenTo":2,
+		"strokeFrom":3,
+		"strokeTo":0.5,
+		"colorFrom":"84F491FF",
+		"colorTo":"62AE7FFF"
+		},
+		{"type":"ParticleEffect",
+		"particles":21,
+		"length":100,
+		"lifetime":35,
+		"line":true,
+		"cone":70,
+		"lenFrom":8,
+		"lenTo":5,
+		"strokeFrom":3,
+		"strokeTo":0.5,
+		"colorFrom":"84F491FF",
+		"colorTo":"62AE7FFF"
+		},
+		{"type":"ParticleEffect",
+		"particles":24,
+		"length":140,
+		"lifetime":25,
+		"line":true,
+		"cone":40,
+		"lenFrom":10,
+		"lenTo":10,
+		"strokeFrom":3,
+		"strokeTo":0.5,
+		"colorFrom":"84F491FF",
+		"colorTo":"62AE7FFF"
+	}	]	},
+
+		"hitEffect":{
+			"type":"ParticleEffect",
+			"particles":6,
+			"length":30,
+			"lifetime":15,
+			"line":true,
+			"lenFrom":8,
+			"lenTo":8,
+			"strokeFrom":2,
+			"strokeTo":0.5,
+		"colorFrom":"84F491FF",
+		"colorTo":"62AE7FFF"
+		},
+
+		"drawSize":420,
+		"makeFire":false,
+		"incendChance":0,
+		"incendSpread":0,
+		"incendAmount":0
+		}	}	]
+}

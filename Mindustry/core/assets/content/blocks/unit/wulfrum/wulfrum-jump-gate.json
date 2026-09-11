@@ -1,0 +1,192 @@
+{
+	"type":"ItemTurret",
+	"category":"units",
+
+	"health":1850,
+	"armor":4,
+	"size":3,
+	"reload":5700,
+	"range":200,
+	"recoil":0,
+	"shootY":0,
+	"playerControllable":false,
+
+	"research":{
+	"parent":"wulfrum-machine-manufacturer",
+	"requirements":[
+	"wulfrum-steel/20000",
+	"graphite/15000",
+	"silicon/10000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/200",
+	"graphite/150",
+	"silicon/100"
+	],
+
+	"drawer":{
+	"type":"DrawTurret",
+	"basePrefix":"wulfrum-jump-gate-",
+	"parts":[
+	{"type":"HaloPart",
+	"tri":true,
+	"radius":8,
+	"haloRadius":17,
+	"haloRadiusTo":17,
+	"layer":110,
+	"color":"C2FF43FF",
+	"haloRotateSpeed":-5,
+	"shapes":4,
+	"triLength":0,
+	"triLengthTo":8
+	},
+
+	{"type":"HaloPart",
+	"progress":{
+	"type":"charge",
+	"op":"delay",
+	"amount":0.1},
+	"color":"C2FF43FF",
+	"tri":true,
+	"shapes":4,
+	"triLength":0,
+	"triLengthTo":5,
+	"radius":5,
+	"haloRadius":12,
+	"haloRadiusTo":12,
+	"shapeRotation":0,
+	"haloRotation":0,
+	"layer":110
+	},
+	{"type":"HaloPart",
+	"progress":{
+	"type":"charge",
+	"op":"delay",
+	"amount":0.2},
+	"color":"C2FF43FF",
+	"tri":true,
+	"shapes":4,
+	"triLength":0,
+	"triLengthTo":5,
+	"radius":5,
+	"haloRadius":19,
+	"haloRadiusTo":19,
+	"shapeRotation":0,
+	"haloRotation":0,
+	"layer":110
+	},
+	{"type":"HaloPart",
+	"progress":{
+	"type":"charge",
+	"op":"delay",
+	"amount":0.3},
+	"color":"C2FF43FF",
+	"tri":true,
+	"shapes":4,
+	"triLength":0,
+	"triLengthTo":5,
+	"radius":5,
+	"haloRadius":26,
+	"haloRadiusTo":26,
+	"shapeRotation":0,
+	"haloRotation":0,
+	"layer":110
+	}
+	]	},
+
+	"consumes":{
+	"power":15
+	},
+
+	"targetGround":false,
+	"targetAir":false,
+	"inaccuracy":360,
+	"shootCone":360,
+	"shake":1,
+	"rotateSpeed":0,
+	"shootSound":"wave",
+
+	"ammoPerShot":125,
+	"maxAmmo":250,
+	"alwaysShooting":true,
+
+		"shoot":{"type":"shootSpread",
+		"firstShotDelay":5400,
+		"spread":360,
+		"shots":5,
+		"shotDelay":60},
+
+	"ammoTypes":{
+		"wulfrum-steel":{
+			"speed":8,
+			"damage":50,
+			"lifetime":20,
+			"sprite":"calamity-none",
+			"width":24,
+			"height":24,
+
+	"chargeEffect":{
+	"type":"multiEffect",
+			"effects":[
+		{"type":"ParticleEffect",
+		"particles":1,
+		"sizeFrom":12,
+		"sizeTo":12,
+		"interp":"swingOut",
+		"length":0,
+		"spin":5,
+		"lifetime":5400,
+		"region":"calamity-prism-large",
+		"colorFrom":"C2FF43FF",
+		"colorTo":"C2FF43FF"
+		},
+		{"type":"ParticleEffect",
+		"particles":1,
+		"sizeFrom":17,
+		"sizeTo":17,
+		"interp":"swingOut",
+		"length":0,
+		"spin":-5,
+		"lifetime":5400,
+		"region":"calamity-prism-large",
+		"colorFrom":"C2FF43FF",
+		"colorTo":"C2FF43FF"
+		}
+	]	},
+
+	"hitEffect":{
+	"type":"multiEffect",
+		"effects":[
+			{"type":"ParticleEffect",
+			"particles":1,
+			"sizeFrom":9,
+			"sizeTo":9,
+			"length":0,
+			"layer":110,
+			"region":"calamity-jump-effect",
+			"interp":"swing",
+			"lifetime":300,
+			"colorFrom":"C2FF43FF",
+			"colorTo":"C2FF43FF"
+	}	]	},
+
+	"shootEffect":"healWave",
+	"fragBullets":1,
+	"fragBullet":{
+	"speed":0,
+	"lifetime":300,
+	"sprite":"calamity-none",
+	"width":24,
+	"height":24,
+	"fragBullets":1,
+	"fragBullet":{
+	"spawnUnit":"calamity-wulfrum-sprinter"
+	}	}
+	}	},
+
+	"researchCostMultiplier":0.45
+}

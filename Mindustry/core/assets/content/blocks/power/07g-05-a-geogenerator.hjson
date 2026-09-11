@@ -1,0 +1,92 @@
+type: ConsumeGenerator
+health: 650
+size: 3
+powerProduction: 10.8333333
+squareSprite: false
+researchCostMultiplier: 0.5
+hasLiquids: true
+consumes: {
+  liquids: [
+    02b-04-miasma/0.33333333333
+    02b-02-a-purified-elixir/0.166666666
+  ]
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-04-miasma
+      padding: 3
+    }
+    {
+      type: DrawRegion
+      suffix: -mid
+    }   
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padLeft: 15.5
+      padTop: 15.5
+      padBottom: 1.5
+      padRight: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padRight: 15.5
+      padTop: 15.5
+      padBottom: 1.5
+      padLeft: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padLeft: 15.5
+      padBottom: 15.5
+      padTop: 1.5
+      padRight: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padRight: 15.5
+      padBottom: 15.5
+      padTop: 1.5
+      padLeft: 1.5
+    }
+    {
+      type: DrawCrucibleFlame
+      flameRad: 0.5
+      circleSpace: 0.5
+      particleRad: 8
+      particleSize: 1.5
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+liquidCapacity: 60
+category: power
+research: {
+  parent: 07g-04-burner-reactor
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-09-hazardous-wasteland
+    }
+  ]
+}
+requirements: [
+  01a-02-item-nickel/150
+  01a-05-item-aluminium/90
+  01a-06-item-chromium/90
+  01a-07-item-clevorite/50
+]
+ambientSound: loopSmelter
+ambientSoundVolume: 0.03

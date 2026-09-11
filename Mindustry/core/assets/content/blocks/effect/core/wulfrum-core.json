@@ -1,0 +1,29 @@
+{
+	"type":"CoreBlock",
+	"category":"effect",
+	"buildVisibility":"shown",
+
+	"alwaysUnlocked":false,
+	"research":{
+	"root":true,
+	"name":"[#C2FF43FF]Wulfrum",
+	"planet":"Vitospp",
+	"requirements":[
+	"wulfrum-schematics/1"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/800",
+	"energy-core/300",
+	"silicon/800"
+	],
+
+	"buildCostMultiplier":0.107,
+	"size":3,
+	"health":5000,
+	"armor":4,
+	"itemCapacity":4000,
+	"unitCapModifier":15,
+	"unitType":"wulfrum-core-drone",
+	"squareSprite":false
+}

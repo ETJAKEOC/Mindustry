@@ -1,0 +1,34 @@
+{
+	"type":"SolidPump",
+	"category":"production",
+
+	"health":1050,
+	"size":3,
+	"hasPower":true,
+	"hasLiquids":true,
+	"liquidCapacity":120,
+
+	"research":{
+	"parent":"electromagnetic-drill",
+	"requirements":[
+	"tungsten/750",
+	"graphite/1000",
+	"metaglass/600"
+	]	},
+
+	"requirements":[
+	"tungsten/35",
+	"graphite/40",
+	"metaglass/30"
+	],
+
+	"consumes":{
+	"power":2
+	},
+
+	"pumpAmount":0.3,
+	"rotateSpeed":1.3,
+	"result":"water",
+	"baseEfficiency":1,
+	"attribute":"water"
+}

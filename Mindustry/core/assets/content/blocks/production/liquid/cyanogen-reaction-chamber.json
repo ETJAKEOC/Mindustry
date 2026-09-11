@@ -1,0 +1,55 @@
+{
+	"type":"HeatCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		{"type":"DrawLiquidTile",
+		"drawLiquid":"cyanogen"
+		},
+		"DrawRegion",
+		"DrawLiquidOutputs",
+		"DrawHeatInput"]	},
+
+	"consumes":{
+	"power":3,
+	"items":{"items":[
+	"graphite/2"
+	]	},
+	"liquid":{
+	"liquid":"hydrogen","amount":0.1,
+	"liquid":"nitrogen","amount":0.1
+	}	},
+	"heatRequirement":8,
+
+	"outputLiquids":[
+	"cyanogen/0.05"
+	],
+
+	"research":{
+	"parent":"atmospheric-separator",
+	"requirements":[
+	"uranium/3500",
+	"plastanium/4500",
+	"silicon/5000"
+	]	},
+
+
+	"requirements":[
+	"uranium/70",
+	"plastanium/90",
+	"silicon/100"
+	],
+
+	"health":1240,
+	"size":3,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemCapacity":20,
+	"liquidCapacity":100,
+	"craftTime":80
+}

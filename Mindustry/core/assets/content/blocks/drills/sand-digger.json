@@ -1,0 +1,32 @@
+{
+//	"type":"WallCrafter",
+	"category":"production",
+
+	"research":{
+	"parent":"cut-drill",
+	"requirements":[
+	"graphite/30",
+	"nickel/60"
+	]	},
+
+	"requirements":[
+	"graphite/10",
+	"nickel/20"
+	],
+
+	"consumes":{
+		"power":0.3
+	},
+
+	"attribute":"sand",
+
+	"output":"sand",
+
+	"itemCapacity":10,
+	"liquidCapacity":10,
+	"size":2,
+	"health":480,
+	"fogRadius":2,
+	"drillTime":90,
+	"hasShadow":true
+}

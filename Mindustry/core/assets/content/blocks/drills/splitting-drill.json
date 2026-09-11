@@ -1,0 +1,47 @@
+{
+	"type":"BurstDrill",
+	"category":"production",
+
+	"research":{
+//	"parent":"bombardment-drill",
+	"requirements":[
+	"chromium/5000",
+	"silicon/6000",
+	"metaglass/6000",
+	"plastanium/4000"
+	]	},
+
+	"requirements":[
+	"chromium/300",
+	"silicon/250",
+	"metaglass/100",
+	"plastanium/80"
+	],
+
+	"consumes":{
+		"power":2,
+		"liquid":{
+		"liquid":"hydrogen","amount":0.1,
+		"booster":false,
+		"optional":false
+		}	},
+
+	"drillEffect":[
+	"mineImpact","drillSteam","dynamicSpikes",
+	{"type":"WrapEffect",
+	"effect":"mineImpact",
+	"color":"EA8878FF"
+	}	],
+
+	"drillTime":105,
+
+	"size":5,
+	"tier":6,
+	"health":5370,
+	"hasItems":true,
+	"itemCapacity":100,
+	"liquidCapacity":180,
+	"shake":5,
+	"fogRadius":5,
+	"squareSprite":false
+}

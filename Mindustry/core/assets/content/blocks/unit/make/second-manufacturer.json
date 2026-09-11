@@ -1,0 +1,86 @@
+{
+	"type":"UnitFactory",
+	"category":"units",
+
+	"research":{
+	"parent":"elementary-refabricator",
+	"requirements":[
+	"plastanium/4500",
+	"processor-senior/3000",
+	"silicon/4000"
+	]	},
+
+	"requirements":[
+	"plastanium/90",
+	"processor-senior/60",
+	"silicon/80"
+	],
+
+	"consumes":{
+		"power":15,
+		"liquid":{
+		"liquid":"nitrogen","amount":0.2
+		}	},
+
+	"health":2590,
+	"size":5,
+
+	"plans":[
+		{"unit":"superheat",
+		"time":4200,
+		"requirements":[
+		"plastanium/50",
+		"processor-junior/90"
+		]	},
+/*		{"unit":"thump",
+		"time":4500,
+		"requirements":[
+		"plastanium/70",
+		"processor-junior/70"
+		]	},*/
+		{"unit":"gmecht3",
+		"time":4500,
+		"requirements":[
+		"plastanium/40",
+		"processor-junior/100"
+		]	},
+		{"unit":"lightcone",
+		"time":4200,
+		"requirements":[
+		"forgotten-crystals/80",
+		"plastanium/40",
+		"processor-junior/80"
+		]	},
+		{"unit":"ionize",
+		"time":4800,
+		"requirements":[
+		"plastanium/90",
+		"processor-junior/90"
+		]	},
+		{"unit":"massif",
+		"time":4200,
+		"requirements":[
+		"plastanium/30",
+		"processor-junior/70"
+		]	},
+/*		{"unit":"downpour",
+		"time":4800,
+		"requirements":[
+		"plastanium/40",
+		"processor-junior/90"
+		]	},*/
+		{"unit":"bless",
+		"time":4800,
+		"requirements":[
+		"plastanium/50",
+		"processor-junior/120"
+		]	},
+		{"unit":"rivulet",
+		"time":3600,
+		"requirements":[
+		"plastanium/40",
+		"metaglass/50",
+		"processor-junior/40"
+		]	}
+	]
+}

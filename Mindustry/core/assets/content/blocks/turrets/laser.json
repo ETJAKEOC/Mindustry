@@ -1,0 +1,67 @@
+{
+//	"type":"PowerTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-"
+	},
+
+	"research":{
+	"parent":"fissure",
+	"requirements":[
+	"chromium/120",
+	"graphite/360",
+	"silicon/360"
+	]	},
+
+	"requirements":[
+	"chromium/120",
+	"graphite/120",
+	"silicon/120"
+	],
+
+	"reload":60,
+	"consumes":{"power":4
+	},
+
+	"shoot":{
+	"type":"shootBarrel",
+	"firstShotDelay":30
+	},
+
+	"size":3,
+	"health":1865,
+	"rotateSpeed":3,
+	"range":236,
+	"inaccuracy":1,
+	"squareSprite":false,
+	"targetAir":false,
+	"targetGround":true,
+	"moveWhileCharging":false,
+	"accurateDelay":false,
+	"shootSound":"laser",
+	"shake":1,
+
+	"shootType":{
+		"collidesAir":false,
+		"type":"LaserBulletType",
+		"length":236,
+		"width":20,
+		"damage":250,
+		"hitSize":10,
+		"hitEffect":"hitLancer",
+		"shootEffect":"lancerLaserShoot",
+		"smokeEffect":"none",
+		"colors":["74E8E1FF","B5FFECFF","F2FFF3FF"],
+		"sideAngle":25,
+		"sideLength":0,
+		"sideWidth":0,
+
+	"chargeEffect":{
+		"type":"multiEffect",
+		"effects":[
+		"lancerLaserCharge",
+		"lancerLaserChargeBegin"
+	]	}	}
+}

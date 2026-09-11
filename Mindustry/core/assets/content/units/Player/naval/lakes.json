@@ -1,0 +1,177 @@
+{
+	"type":"naval",
+	"health":7360,
+	"armor":26,
+	"speed":0.75,
+	"outlineColor":"2E2F34FF",
+	"faceTarget":false,
+	"rotateSpeed":1.5,
+	"trailLength":24,
+	"waveTrailX":18,
+	"waveTrailY":-6,
+	"trailScl":2,
+	"hitSize":30,
+	"itemCapacity":600,
+
+	"research":{
+	"parent":"rivulet",
+	"requirements":[
+	"iridium/12000",
+	"metaglass/9000",
+	"silicon/15000"
+	],
+	"objectives":[
+	"second-shipyard"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"abilities":[
+	{"type":"ShieldArcAbility",
+	"radius":31.5,
+	"angle":125,
+	"regen":0.3,
+	"cooldown":480,
+	"max":3000,
+	"width":3.5,
+	"x":0,"y":5,
+	"whenShooting":false
+	}	],
+
+	"weapons":[
+		{"name":"lakes-artillery",
+		"reload":30,
+		"x":11.,"y":-8.75,
+		"mirror":true,
+		"top":true,
+		"alternate":true,
+		"rotateSpeed":2.3,
+		"rotate":true,
+		"shootSound":"shootBig",
+		"shootY":5.125,
+		"shootCone":45,
+		"layerOffset":0.003,
+		"inaccuracy":5,
+
+	"shoot":{
+	"shots":3,
+	"shotDelay":5},
+
+	"bullet":{
+		"type":"ArtilleryBulletType",
+		"width":17,"height":17,
+		"speed":6,"lifetime":45,
+		"collidesAir":false,
+		"frontColor":"8598BFFF",
+		"backColor":"DEEDFFFF",
+		"shrinkY":0,"shrinkX": 0,
+		"splashDamageRadius":32,
+		"splashDamage":87,
+
+		"hitSound":"explosion",
+		"despawnEffect":"flakExplosionBig",
+
+		"trailRotation":true,
+		"trailLength":9,
+		"trailWidth":3.5,
+		"trailColor":"DEEDFFFF",
+		"trailChance":1,
+		"trailInterval":2,
+		"trailEffect":{
+		"type":"ParticleEffect",
+		"particles":1,
+		"sizeFrom":1,
+		"sizeTo":0,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF",
+		"lifetime":10,
+		"interp":"pow10Out",
+		"baseLength":3,
+		"cone":30,
+		"length":-35
+		},
+
+		"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":10,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF",
+		"strokeFrom":1.5,
+		"strokeTo":0},
+		{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":3,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":0,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		}	]	},
+
+	"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF",
+		"strokeFrom":3.5,
+		"strokeTo":0},
+	{"type":"WaveEffect",
+	"lifetime":15,
+	"sizeFrom":0,
+	"sizeTo":60,
+	"strokeFrom":7.5,
+	"strokeTo":0,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":20,
+	"length":50,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":14,
+	"lenTo":0,
+	"lightColor":"DEEDFFFF",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":25,
+	"length":30,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":7,
+	"lenTo":0,
+	"lightColor":"DEEDFFFF",
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF"
+	}	]	}
+		}	}	]
+}

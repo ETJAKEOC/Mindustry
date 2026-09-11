@@ -1,0 +1,61 @@
+{
+	"type":"flying",
+	"defaultController":"BuilderAI",
+	"flying":true,
+	"accel":0.2,"drag":0.1,
+	"engineSize":2,
+	"engineOffset":5,
+	"trailLength":2,
+	"faceTarget":true,
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+//	"parent":"primary-core",
+	"objectives":[
+	"primary-core"
+	]	},
+	"alwaysUnlocked":false,
+
+	"fogRadius":0,
+	"isEnemy":false,
+	"targetable":false,
+	"hittable":false,
+	"rotateSpeed":5,
+	"mineWalls":true,
+	"mineFloor":true,
+	"buildSpeed":1,
+	"speed":5.0,
+	"lowAltitude":true,
+	"health":1200,
+	"armor":8,
+	"hitSize":11,
+	"itemCapacity":60,
+	"mineSpeed":8,
+	"mineTier":5,
+
+	"payloadCapacity":256,
+	"pickupUnits":false,
+	"vulnerableWithPayloads":true,
+
+	"weapons":[
+		{"name":"RepairBeamWeapon",
+		"type":"RepairBeamWeapon",
+		"widthSinMag":0.11,
+		"reload":30,
+		"x":0,"y":5,
+		"rotate":false,
+		"beamWidth":0.7,
+		"shootCone":40,
+		"mirror":false,
+		"repairSpeed":5,
+		"fractionRepairSpeed":0.04,
+		"laserColor":"FFD37FFF",
+		"healColor":"FFD37FFF",
+		"targetUnits":false,
+		"targetBuildings":true,
+		"autoTarget":false,
+		"controllable":true,
+		"bullet":{
+		"maxRange":50
+	}	}	]
+}

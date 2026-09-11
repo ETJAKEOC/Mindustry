@@ -1,0 +1,23 @@
+{
+	"type": "unitFactory",
+	"name": "Behemoth Summoner",
+	"description": "Everything eventually comes to an end.",
+	"unitType": "Behemoth",
+	"produceTime": 26000,
+	"size": 8,
+	"maxSpawn": 1,
+	"consumes": {
+		"power": 100,
+		"items": {
+		"items": [
+            {"item": "obsidian", "amount": 10.0},       
+            ]
+        
+		}
+  },
+	"requirements": [
+	    {"item": "obsidian", "amount": 40},
+	],
+	"category": "units",
+	"buildVisibility": "sandboxOnly",
+}

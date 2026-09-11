@@ -1,0 +1,53 @@
+{
+	"type":"flying",
+	"flying":true,
+	"accel":0.05,"drag":0.05,
+
+	"research":{
+	"parent":"patrol",
+	"requirements":[
+	"plastanium/1600",
+	"silicon/2600"
+	],
+	"objectives":[
+	"second-refabricator"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"abilities":[
+		{"type":"StatusFieldAbility",
+		"effect":"overclock",
+		"reload":420,
+		"range":80,
+		"applyEffect":"none",
+		"duration":600,
+		"activeEffect":"none"
+	}	],
+
+	"buildSpeed":1.8,
+
+	"hitSize":22.5,
+	"engineSize":4,
+	"engineOffset":14,
+	"trailLength":5,
+	"speed":2,
+	"health":2885,
+	"itemCapacity":100,
+	"armor":7,
+	"outlineColor":"2E2F34FF",
+
+	"weapons":[
+		{"name":"bless-weapon",
+		"type":"RepairBeamWeapon",
+		"x":8,"y":-6.75,
+		"shootY":6.5,
+		"beamWidth":0.8,
+		"mirror":true,
+		"repairSpeed":2,
+		"bullet":{
+		"maxRange":60
+		}	}	]
+}

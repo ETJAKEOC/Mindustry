@@ -1,0 +1,61 @@
+{
+	"type":"HeatCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	{"type":"DrawLiquidTile",
+	"drawLiquid":"nitrogen"
+	},
+	{"type":"DrawParticles",
+	"color":"D4F0FF",
+	"alpha":0.5,
+	"particleSize":4,
+	"particles":10,
+	"particleRad":10,
+	"particleLife":120
+	},
+	{"type":"DrawPistons",
+	"sinMag":1
+	},
+	"DrawDefault",
+	"DrawHeatInput"
+	]	},
+
+	"research":{
+	"parent":"electrolytic-chamber",
+	"requirements":[
+	"tungsten/4500",
+	"plastanium/2500",
+	"silicon/4500"
+	]	},
+
+	"requirements":[
+	"tungsten/90",
+	"plastanium/50",
+	"silicon/90"
+	],
+
+	"consumes":{"power":3
+	},
+	"heatRequirement":6,
+
+	"outputLiquids":[
+	"nitrogen/0.1"
+	],
+
+	"size":3,
+	"health":960,
+	"itemCapacity":40,
+	"liquidCapacity":100,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"craftTime":50,
+	"updateEffect":"none",
+	"ambientSound":"extractLoop",
+	"ambientSoundVolume":0.06
+}

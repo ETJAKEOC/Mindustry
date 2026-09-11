@@ -1,0 +1,102 @@
+{
+	"type":"naval",
+	"health":1410,
+	"armor":10,
+	"speed":1.2,
+	"outlineColor":"2E2F34FF",
+	"faceTarget":false,
+	"rotateSpeed":2,
+	"trailLength":24,
+	"waveTrailX":11.75,
+	"waveTrailY":-6,
+	"trailScl":2,
+	"hitSize":19,
+	"itemCapacity":200,
+
+	"research":{
+	"parent":"production-shipyard",
+	"requirements":[
+	"chromium/150",
+	"silicon/200",
+	"metaglass/200"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+	{"name":"dew-artillery",
+	"mirror":true,
+	"reload":120,
+	"x":5,"y":-5.625,
+	"shootSound":"shockBlast",
+	"rotate":true,
+	"rotateSpeed":5,
+	"inaccuracy":3,
+
+	"shoot":{
+	"shots":3,
+	"shotDelay":5},
+
+	"bullet":{
+		"damage":120,
+		"width":14,"height":18,
+		"speed":6,"lifetime":38,
+		"homingRange":250,
+		"homingDelay":8,
+		"homingPower":0.1,
+		"frontColor":"8598BFFF",
+		"backColor":"DEEDFFFF",
+
+		"hitEffect":"flakExplosionBig",
+		"hitSound":"explosion",
+		"despawnEffect":"flakExplosionBig",
+
+		"trailRotation":true,
+		"trailLength":6,
+		"trailWidth":2.25,
+		"trailColor":"DEEDFFFF",
+		"trailChance":1,
+		"trailInterval":2,
+		"trailEffect":{
+		"type":"ParticleEffect",
+		"particles":1,
+		"sizeFrom":1,
+		"sizeTo":0,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF",
+		"lifetime":10,
+		"interp":"pow10Out",
+		"baseLength":3,
+		"cone":30,
+		"length":-35
+		},
+
+		"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":10,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF",
+		"strokeFrom":1.5,
+		"strokeTo":0},
+		{
+		"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":3,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":0,
+		"colorFrom":"8598BFFF",
+		"colorTo":"DEEDFFFF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		}	]	}
+		}	}	]
+}

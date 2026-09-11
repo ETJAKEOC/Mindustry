@@ -1,0 +1,31 @@
+type: Wall
+size: 1
+health: 720
+armor: 8
+requirements: [
+  01a-03-item-lamine/4
+  01a-06-item-chromium/3
+]
+research: 08h-03-chromium-wall-small
+researchCostMultiplier: 0.5
+buildCostMultiplier: 1.5
+category: defense
+destroyBullet: {
+  instantDisappear: true
+  damage: 0
+  speed: 0
+  fragBullets: 8
+  fragBullet: {
+    type: BasicBulletType
+    speed: 4
+    lifetime: 30
+    pierce: true
+    width: 6
+    height: 7
+    pierceCap: 1
+    homingPower: 0.1
+    damage: 45
+    mixColorFrom: de5750
+    mixColorTo: ff8167
+  }
+}

@@ -1,0 +1,57 @@
+type: ConsumeGenerator
+size: 2
+health: 450
+category: power
+squareSprite: false
+requirements: [
+  01a-01-item-cobalt/75
+  01a-02-item-nickel/50
+]
+consumes: {
+  itemFlammable: {}
+  liquid: 02b-01-bioliquid/0.5
+}
+liquidCapacity: 60
+powerProduction: 2
+itemDuration: 240
+generateEffect: generatespark
+ambientSound: loopSmelter
+ambientSoundVolume: 0.015
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-01-bioliquid
+      padding: 1.5
+    }
+    {
+      type: DrawRegion
+      suffix: -mid
+    }
+    {
+      type: DrawCrucibleFlame
+      flameRad: 0.4
+      circleSpace: 0.4
+      particleRad: 8.0
+      particleSize: 1.2
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+research: {
+  parent: 04d-01-pressure-generator
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-02-mountain-ridge
+    }
+  ]
+}
+researchCostMultiplier: 0.5

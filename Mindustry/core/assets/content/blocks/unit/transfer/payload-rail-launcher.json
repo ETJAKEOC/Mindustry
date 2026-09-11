@@ -1,0 +1,28 @@
+{
+//	"type":"PayloadMassDriver",
+	"category":"units",
+
+	"research":{"parent":"payload-track",
+	"requirements":[
+	"chromium/500",
+	"graphite/800",
+	"silicon/300"
+	]	},
+
+	"requirements":[
+	"chromium/50",
+	"graphite/80",
+	"silicon/30"
+	],
+
+	"consumes":{"power":2},
+	"hasPower":true,
+
+	"size":3,
+	"reload":60,
+	"chargeTime":120,
+	"range":800,
+	"maxPayloadSize":2.5,
+	"fogRadius":5,
+	"regionSuffix":"-dark"
+}

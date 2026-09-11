@@ -1,0 +1,111 @@
+type: GenericCrafter
+size: 4
+liquidOutputDirections: [0]
+rotate: true
+quickRotate: true
+rotateDraw: false
+liquidCapacity: 120
+hasLiquids: true
+health: 1000
+category: crafting
+research: {
+  parent: 09i-02-elixir-converter
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-09-hazardous-wasteland
+    }
+  ]
+}
+itemCapacity: 30
+researchCost: [
+  01a-01-item-cobalt/900
+  01a-02-item-nickel/700
+  01a-05-item-aluminium/700
+  01a-06-item-chromium/500
+]
+requirements: [
+  01a-01-item-cobalt/120
+  01a-02-item-nickel/90
+  01a-05-item-aluminium/120
+  01a-06-item-chromium/220
+]
+craftTime: 120
+craftEffect: formsmoke
+outputItems: [
+  01a-07-item-clevorite/4
+  01a-01-item-cobalt/1.5555555555
+]
+outputLiquids: [
+  02b-01-bioliquid/0.25
+]
+consumes: {
+  items: [
+    01a-02-item-nickel/5
+  ]
+  liquids: [
+    02b-02-a-purified-elixir/0.3333333333
+  ]
+  power: 5
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padding: 3
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-01-bioliquid
+      padTop: 25
+      padBottom: 1.5
+      padLeft: 1.5
+      padRight: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-01-bioliquid
+      padTop: 1.5
+      padBottom: 25
+      padLeft: 1.5
+      padRight: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-01-bioliquid
+      padTop: 1.5
+      padBottom: 1.5
+      padLeft: 1.5
+      padRight: 25
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-01-bioliquid
+      padTop: 1.5
+      padBottom: 1.5
+      padLeft: 25
+      padRight: 1.5
+    }
+    {
+      type: DrawRegion
+      suffix: -rotator
+      spinSprite: true
+      rotateSpeed: 1.25
+    }
+    {
+      type: DrawRegion
+    }
+    {
+      type: DrawSideRegion
+    }
+  ]
+}
+ambientSound: loopMachineSpin
+ambientSoundVolume: 0.14
+squareSprite: false

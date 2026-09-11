@@ -1,0 +1,87 @@
+{
+	"type":"LaserTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-"
+	},
+
+	"research":{
+	"parent":"laser",
+	"requirements":[
+	"processor-nano/80000",
+	"silicon/120000"
+	]	},
+
+	"requirements":[
+	"processor-nano/800",
+	"silicon/100000"
+	],
+
+	"size":5,
+	"health":5900,
+	"reload":720,
+	"range":320,
+	"targetAir":true,
+	"targetGround":true,
+	"shootY":22,
+	"shootCone":40,
+
+	"consumes":{
+	"power":24,
+	"coolant":{
+	"amount":1.0
+	}	},
+
+	"shoot":{
+	"type":"shootBarrel",
+	"firstShotDelay":30
+	},
+
+	"coolantMultiplier":1.0,
+	"update":true,
+	"hasPower":true,
+	"shootEffect":"shootBigSmoke2",
+	"firingMoveFract":0.5,
+	"shootDuration":480,
+	"accurateDelay":false,
+	"shootSound":"laserbig",
+	"loopSound":"beam",
+	"loopSoundVolume":3.5,
+	"rotateSpeed":2,
+	"squareSprite":false,
+	"moveWhileCharging":false,
+	"heatColor":"B5FFECFF",
+
+	"shootType":{
+		"type":"ContinuousLaserBulletType",
+		"damage":100,
+		"length":320,"width":6,
+		"oscScl":2,
+		"oscMag":3,
+		"status":"melting",
+		"statusDuration":720,
+		"colors":["74E8E1FF","B5FFECFF","F2FFF3FF"],
+
+		"hitEffect":{
+			"type":"ParticleEffect",
+			"particles":6,
+			"length":30,
+			"lifetime":15,
+			"line":true,
+			"lenFrom":8,
+			"lenTo":8,
+			"strokeFrom":2,
+			"strokeTo":0.5,
+			"colorFrom":"ffb98b",
+			"colorTo":"ffb98b50"
+		},
+
+		"drawSize":420,
+		"makeFire":false,
+		"incendChance":0,
+		"incendSpread":0,
+		"incendAmount":0
+	},
+}

@@ -1,0 +1,23 @@
+type: Duct
+size: 1
+health: 250
+armored: true
+speed: 10
+requirements: [
+  01a-05-item-aluminium/1
+]
+research: {
+  parent: 05e-07-mechanical-bridge
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-02-mountain-ridge
+    }
+  ]
+}
+researchCost: [
+  01a-05-item-aluminium/50
+]
+category: distribution
+bridgeReplacement: 05e-07-mechanical-bridge
+junctionReplacement: 05e-05-crossblock

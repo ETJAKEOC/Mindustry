@@ -1,0 +1,46 @@
+{
+	"type":"HeatProducer",
+	"category":"crafting",
+
+	"research":{
+	"parent":"hydrogen-heater",
+	"requirements":[
+	"tungsten/3000",
+	"plastanium/1500",
+	"graphite/1000",
+	"silicon/1500"
+	]	},
+
+	"requirements":[
+	"tungsten/60",
+	"plastanium/30",
+	"graphite/20",
+	"silicon/30"
+	],
+
+	"consumes":{
+	"items":[
+	"pyratite/1"
+	],
+	"liquid":"water/0.25"
+	},
+	"heatOutput":8,
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	"DrawDefault",
+	"DrawHeatOutput",
+	{"type":"DrawHeatInput",
+	"suffix":"-heat"
+	}	]	},
+
+	"size":3,
+	"health":560,
+	"hasPower":true,
+	"liquidCapacity":40,
+	"ambientSound":"hum",
+	"ambientSoundVolume":0.002
+}

@@ -1,0 +1,11 @@
+{
+"wallOre":true,
+"type":"OreBlock",
+"playerUnmineable":true,
+"itemDrop":"chromium",
+"mapColor":"BFC8E2FF",
+"useColor":true,
+"oreDefault":true,
+"oreThreshold":2,
+"oreScale":20
+}

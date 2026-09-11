@@ -1,0 +1,79 @@
+{
+	"type":"ItemTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"draedon-",
+	"parts":[
+		{"type":"RegionPart",
+		"layerOffset":-0.001,
+		"mirror":true,
+		"suffix":"-wing",
+		"heatProgress":"warmup",
+		"heatColor":"FF404080",
+		"under":true,
+		"moveRot":-25
+		}	]	},
+
+	"shootY":0,
+	"shoot":{
+		"type":"ShootBarrel",
+		"shots":3,
+		"firstShotDelay":60
+		"shotDelay":20,
+		"barrels":[
+			-11.75,9.75,25,
+			11.75,9.75,-25,
+			0,12.75,0,
+		]
+	},
+
+	"research":{
+	"parent":"erosion",
+	"requirements":[
+	"plastanium/1800",
+	"graphite/1600",
+	"silicon/2400"
+	]	},
+
+
+	"requirements":[
+	"plastanium/60",
+	"graphite/80",
+	"silicon/120"
+	],
+	"consumes":{
+	"coolant":{"amount":0.1,"optional":true}	},
+
+	"size":4,
+	"health":1730,
+	"rotateSpeed":3,
+	"reload":160,
+	"ammoPerShot":5,
+	"maxAmmo":40,
+	"liquidCapacity":20,
+	"range":520,
+	"shootSound":"laser",
+	"shootCone":20,
+	"squareSprite":false,
+
+	"ammoTypes":{
+	"wulfrum-steel":{
+		"type":"BasicBulletType",
+		"spawnUnit":"calamity-plasma-missile",
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"particles":5,
+		"length":50,
+		"lifetime":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":60,
+	"colorFrom":"A6F069FF",
+	"colorTo":"FAFF70FF",
+		"sizeFrom":12,
+		"sizeTo":0
+		}	}	},
+}

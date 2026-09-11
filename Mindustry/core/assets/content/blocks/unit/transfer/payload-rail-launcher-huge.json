@@ -1,0 +1,30 @@
+{
+//	"type":"PayloadMassDriver",
+	"category":"units",
+
+	"research":{"parent":"payload-rail-launcher-large",
+	"requirements":[
+	"iridium/10000",
+	"uranium/6000",
+	"silicon/7500",
+	"plastanium/5000"
+	]	},
+
+	"requirements":[
+	"iridium/200",
+	"uranium/120",
+	"silicon/150",
+	"plastanium/100"
+	],
+
+	"consumes":{"power":20},
+	"hasPower":true,
+
+	"size":7,
+	"reload":180,
+	"chargeTime":240,
+	"range":1400,
+	"maxPayloadSize":6.5,
+	"fogRadius":9,
+	"regionSuffix":"-dark"
+}

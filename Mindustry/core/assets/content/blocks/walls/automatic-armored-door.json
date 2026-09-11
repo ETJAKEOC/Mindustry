@@ -1,0 +1,22 @@
+{
+//	"type": "AutoDoor",
+	"category": "defense",
+
+	"research": {
+	"parent": "chromium-wall-large",
+	"requirements": [
+	"chromium/1000",
+	"nickel/500",
+	"silicon/500"
+	]	},
+
+	"requirements": [
+	"chromium/20",
+	"nickel/10",
+	"silicon/10"
+	],
+
+	"health":2940,
+	"armor":7,
+	"size":2
+}

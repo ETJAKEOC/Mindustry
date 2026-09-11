@@ -1,0 +1,13 @@
+difficulty: 7
+planet: frostnova
+sector: 85
+research: {
+  parent: 19s-08-cornerstone
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-08-cornerstone
+    }
+  ]
+}
+outline: false

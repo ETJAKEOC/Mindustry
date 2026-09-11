@@ -1,0 +1,79 @@
+type: legs
+legCount: 4
+lockLegBase: true
+legContinuousMove: true
+legExtension: -2
+legBaseOffset: 3
+legLength: 9
+legMaxLength: 1.1
+legMinLength: 0.2
+legSpeed: 0.25
+legGroupSize: 3
+legForwardScl: 1.05
+legLengthScl: 0.95
+legPhysicsLayer: false
+legStraightness: 0.3
+rippleScale: 0.2
+hovering: true
+groundLayer: 60
+health: 740
+armor: 2
+allowLegStep: true
+speed: 0.7794
+rotateSpeed: 3.5
+hitSize: 8
+drag: 0.1
+itemCapacity: 0
+outlineColor: 26262F
+alwaysShootWhenMoving: true
+targetAir: false
+stepShake: 0
+stepSound: walkerStepTiny
+stepSoundVolume: 0.3
+research: {
+  parent: 0010-fabricator
+  objectives: [
+    {
+      type: Research
+      content: 10j-03-unitconstructor-mech
+    }
+  ]
+}
+researchCostMultiplier: 0
+controller: HugAI
+weapons: [
+  {
+    x: 0
+    y: 0
+    shootY: 1.5
+    reload: 15
+    mirror: false
+    name: ares-weapon
+    ejectEffect: none
+    continuous: true
+    alwaysContinuous: true
+    shootSound: shootBeam
+    shootStatus: slow
+    shootStatusDuration: 16
+    shootY: -3.5
+    bullet: {
+      type: ContinuousFlameBulletType
+      flareLength: 0
+      length: 68.5
+      width: 1.75
+      damage: 7.5
+      pierce: true
+      pierceArmor: false
+      hitEffect: none
+      despawnEffect: none
+      hitColor: E67676
+      colors: [
+               D45050FF,
+               E67676CC,
+               EEAAAA80,
+               FFC7C759
+              ]
+      lightColor: D45050
+    }
+  }
+]

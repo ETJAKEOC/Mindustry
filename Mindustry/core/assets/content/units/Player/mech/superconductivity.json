@@ -1,0 +1,147 @@
+{
+	"speed":0.55,
+	"rotateSpeed":0.65,
+	"hitSize":27.5,
+	"health":9300,
+	"armor":22,
+	"range":180,
+	"type":"mech",
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"superheat",
+	"requirements":[
+	"osmium/30000",
+	"metaglass/50000",
+	"silicon/13000",
+	"plastanium/50000"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify",
+	"empI"
+	],
+
+	"weapons":[
+		{"name":"superconductivity-weapon",
+		"reload":60,
+		"x":19.375,"y":0,
+		"mirror":true,
+		"top":false,
+		"alternate":true,
+		"layerOffset":-0.001,
+		"rotationLimit":35,
+		"rotateSpeed":1,
+		"rotate":true,
+		"shootSound":"laser",
+		"shootY":19.875,
+		"shootCone":45,
+		"heatColor":"FCF387FF",
+
+		"bullet":{
+		"type":"LaserBulletType",
+		"colors":["D99F6BFF","FCF387FF","FFFFFFFF"],
+		"pierceCap":5,
+		"pierce":true,
+		"pierceBuilding":true,
+		"damage":220,
+		"lifetime":16,
+		"status":"empI",
+		"statusDuration":240,
+		"width":21,"length":180,
+		"hitSound":"spark",
+		"hitShake":1,
+		"hitColor":"FCF387FF",
+		"sideAngle":45,
+
+	"shootEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":10,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"strokeFrom":1.5,
+		"strokeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		},
+		{"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":3,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		}	]	},
+
+	"hitEffect":{
+		"type":"multiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"strokeFrom":3.5,
+		"strokeTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		},
+		{"type":"ParticleEffect",
+		"region":"calamity-prism",
+		"particles":3,
+		"length":40,
+		"lifetime":48,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":360,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":4.5,
+		"sizeTo":0
+		}	]	},
+
+		"intervalBullets":1,
+		"bulletInterval":16,
+		"intervalRandomSpread":0,
+		"intervalBullet":{
+		"damage":20,
+		"pierce":true,
+		"pierceBuilding":true,
+		"speed":40,
+		"lifetime":6,
+		"status":"shocked",
+		"shrinkY":0,"shrinkX":0,
+		"width":8,"height":8,
+		"frontColor":"D99F6BFF",
+		"backColor":"FCF387FF",
+		"hitEffect":"none",
+
+		"intervalRandomSpread":0,
+		"intervalBullets":1,
+		"bulletInterval":0.8,
+		"intervalAngle":180,
+		"intervalSpread":0,
+		"fragVelocityMin":8,
+		"fragVelocityMax":8,
+		"despawnEffect":"none",
+		"intervalBullet":{
+		"damage":6,
+		"type":"LightningBulletType",
+		"lightningLength":4,
+		"lightningLengthRand":6,
+		"lightningColor":"F3E979FF",
+		"lightColor":"FFFFFFFF",
+		"status":"shocked",
+		"hittable":false,
+		"ammoMultiplier":1,
+		"lifetime":3,
+		"hitEffect":"hitLancer"
+		}	}
+		}	}	]
+}

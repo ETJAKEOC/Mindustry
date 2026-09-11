@@ -1,0 +1,47 @@
+{
+	"type":"HeaterGenerator",
+	"category":"power",
+
+	"size":3,
+	"health":1260,
+	"generateEffect":"lightning",
+	"liquidCapacity":100,
+	"hasLiquids":true,
+	"powerProduction":18,
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	"DrawCrucibleFlame",
+	"DrawDefault",
+	"DrawHeatOutput",
+	{"type":"DrawHeatInput",
+	"suffix":"-heat"
+	}	]	},
+
+	"research":{
+	"parent":"geothermal-generator",
+	"requirements":[
+	"plastanium/1000",
+	"graphite/1000",
+	"silicon/1500"
+	]	},
+
+	"requirements":[
+	"plastanium/20",
+	"graphite/20",
+	"silicon/30"
+	],
+
+	"consumes":{
+	"liquids":[
+	"ozone/0.1",
+	"hydrogen/0.15"
+	]	},
+	"heatOutput":6,
+
+	"ambientSound":"bigshot",
+	"ambientSoundVolume":0.07
+}

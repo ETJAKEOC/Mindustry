@@ -1,0 +1,15 @@
+{
+"planet":"Vitospp",
+"sector":175,
+"captureWave":0,
+"difficulty":2,
+"research":{
+"parent":"DryDesert",
+"objectives":[
+	"bombardment-drill",
+	"superheat",
+	"lightcone",
+	"ionize",
+	"bless"
+	]	}
+}

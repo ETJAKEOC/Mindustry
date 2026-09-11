@@ -1,0 +1,38 @@
+{
+	"type": "UnitAssembler",
+	"category":"units",
+
+	"research": {
+	"parent": "wulfrum-machine-manufacturer"
+	"requirements": [
+	"wulfrum-steel/15000",
+	"energy-core/8000",
+	"silicon/20000"
+	]
+	"objectives": [
+	"wulfrum-core",
+	]	},
+
+	"health":2430,
+	"armor":4,
+	"size":5,
+	"dronesCreated":4,
+	"areaSize":11,
+
+	"consumes":{"power":12,
+	},
+
+	"requirements": [
+	"wulfrum-steel/150",
+	"energy-core/80",
+	"silicon/200"
+	]
+
+		"plans":[
+		{"unit":"wulfrum-warplane",
+		"time":3600,
+		"requirements":[
+		"calamity-wulfrum-surrounder/2",
+		]	}
+	],
+}

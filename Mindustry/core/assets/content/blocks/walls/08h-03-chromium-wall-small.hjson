@@ -1,0 +1,12 @@
+type: Wall
+size: 1
+health: 550
+armor: 8
+requirements: [
+  01a-06-item-chromium/6
+]
+research: 08h-02-cobalt-wall-large
+researchCost: [
+  01a-06-item-chromium/700
+]
+category: defense

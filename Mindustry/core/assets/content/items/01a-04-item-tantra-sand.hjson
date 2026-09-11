@@ -1,0 +1,15 @@
+hardness: 2
+cost: 0.2
+buildable: false
+lowPriority: true
+research: {
+  parent: 01a-02-item-nickel
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-02-mountain-ridge
+    }
+  ]
+}
+color: 90BDD8
+shownPlanets: [frostnova, teresa]

@@ -1,0 +1,65 @@
+type: RegenProjector
+size: 3
+range: 30
+healPercent: 0.03
+health: 850
+baseColor: f9e1f3
+hasPower: false
+hasItems: false
+requirements: [
+  01a-01-item-cobalt/100
+  01a-05-item-aluminium/185
+  01a-06-item-chromium/140
+  01a-07-item-clevorite/65
+]
+squareSprite: false
+category: effect
+research: {
+  parent: 10j-12-regenerator
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-11-glistening-straits
+    }
+  ]
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padding: 3
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawGlowRegion
+      suffix: -glow
+      color: 335f86
+    }
+    {
+      type: DrawPulseShape
+      color: 8eceec
+      square: false
+    }
+    {
+      type: DrawShape
+      color: 8eceec
+      radius: 4
+      useWarmupRadius: true
+      timeScl: 2
+    }
+  ]
+}
+liquidCapacity: 20
+consumes: {
+  liquid: 02b-02-a-purified-elixir/0.08333333333
+  power: 2.5
+}
+researchCostMultiplier: 0.5

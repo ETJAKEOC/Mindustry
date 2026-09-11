@@ -1,0 +1,31 @@
+type: Pump
+health: 450
+size: 2
+category: liquid
+squareSprite: false
+requirements: [
+  01a-02-item-nickel/75
+  01a-05-item-aluminium/40
+  01a-06-item-chromium/30
+]
+liquidCapacity: 40
+pumpAmount: 0.1
+consumes: {
+  liquids: [
+    02b-02-a-purified-elixir/0.08333333333
+  ]
+}
+researchCost: [
+  01a-02-item-nickel/2500
+  01a-05-item-aluminium/1500
+  01a-06-item-chromium/750
+]
+research: {
+  parent: 06f-01-a-sea-conduit
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-07-escarpment
+    }
+  ]
+}

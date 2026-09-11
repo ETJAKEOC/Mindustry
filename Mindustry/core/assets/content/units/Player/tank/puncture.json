@@ -1,0 +1,131 @@
+{
+	"type":"tank",
+	"template":"ErekirUnitType",
+
+	"squareShape":true,
+	"treadPullOffset":8,
+	"treadRects":[
+	{"x":17,"y":-39,
+	"width":25,"height":84
+	}	],
+	"singleTarget":false,
+	"omniMovement":false,
+	"rotateMoveFirst":true,
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"electron",
+	"requirements":[
+	"chromium/1500",
+	"silicon/1200"
+	],
+	"objectives":[
+	"elementary-refabricator"
+	]	},
+
+	"armor":9,
+	"hitSize":24,
+	"rotateSpeed":1.8,
+	"speed":0.74,
+	"flying":false,
+	"health":2390,
+	"range":130,
+	
+	"immunities":[
+	"wulfrum-amplify"
+],
+
+		"weapons":[
+		{"name":"puncture-weapon",
+		"layerOffset":1,
+		"reload":30,
+		"mirror":false,
+		"top":true,
+		"x":0,"y":0,
+		"shootY":16,
+		"shake":2,
+		"rotate":true,
+		"rotateSpeed":5,
+		"recoils":2,
+
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-barrel-l",
+		"under":true,
+		"mirror":false,
+		"moveY":-4,
+		"progress":"recoil",
+		"recoilIndex":1,
+	"heatProgress":{
+		"type":"recoil",
+		"op":"blend",
+		"amount":0,
+		"other":0,
+		"recoilIndex":1
+		}	},
+		{"type":"RegionPart",
+		"suffix":"-barrel-r",
+		"under":true,
+		"mirror":false,
+		"moveY":-4,
+		"progress":"recoil",
+		"recoilIndex":0,
+	"heatProgress":{
+		"type":"recoil",
+		"op":"blend",
+		"amount":0,
+		"other":0,
+		"recoilIndex":0
+		}	}	],
+
+		"shoot":{
+		"type":"ShootAlternate",
+		"barrels":2,
+		"shots":1,
+		"spread":6
+		},
+
+		"shootSound":"shotgun",
+		"shootCone":45,
+		"bullet":{
+		"keepVelocity":false,
+		"damage":36,
+		"width":18,
+		"type":"ShrapnelBulletType",
+		"lifetime":20,
+		"length":80,
+
+	"shootEffect":{
+		"type":"ParticleEffect",
+		"particles":3,
+		"length":10,
+		"lifetime":30,
+		"interp":"circleOut",
+		"sizeInterp":"pow5Out",
+		"cone":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF",
+		"sizeFrom":5.5,
+		"sizeTo":0
+		},
+
+		"hitEffect":{
+		"type":"ParticleEffect",
+		"line":true,
+		"particles":7,
+		"lifetime":15,
+		"length":25,
+		"cone":-360,
+		"lenFrom":5,
+		"lenTo":0,
+		"colorFrom":"D99F6BFF",
+		"colorTo":"FCF387FF"
+		},
+		"serrations":6,
+		"serrationSpacing":3,
+		"fromColor":"D99F6BFF",
+		"toColor":"FCF387FF",
+		"despawnEffect":"none",
+		"smokeEffect":"none"
+		}	}	]
+}

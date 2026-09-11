@@ -1,0 +1,69 @@
+{
+	"speed":0.75,
+	"hitSize":10.25,
+	"name":"绿机甲t1",
+	"health":810,
+	"description":"向敌人发射激光，搭载范围恢复系统。\n可治疗友方建筑但不会主动治疗。",
+	"armor":4,
+	"range":192,
+	"type":"mech",
+	"outlineColor":"2E2F34FF",
+
+	"research":{
+	"parent":"current",
+	"requirements":[
+	"tungsten/60",
+	"processor-junior/80"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+		"abilities":[
+		{"type":"RepairFieldAbility",
+		"amount":30,
+		"reload":300,
+		"range":64,
+		"activeEffect":{
+		"type":"WaveEffect",
+		"lifetime":20,
+		"sizeFrom":0,
+		"sizeTo":64,
+		"strokeFrom":3,
+		"strokeTo":0,
+		"colorFrom":"84F491FF",
+		"colorTo":"84F491FF"
+		}	}	],
+
+	"weapons":[
+		{"name":"gmecht1-weapon",
+		"reload":50,
+		"x":6.875,"y":0,
+		"shootY":6.875,
+		"top":false,
+		"alternate":true,
+		"shootCone":45,
+		"layerOffset":-0.001,
+		"shootSound":"lasershoot",
+		"rotationLimit":35,
+		"rotateSpeed":1,
+		"rotate":true,
+
+		"shoot":{
+		"shots":2,
+		"shotDelay":4
+		},
+
+	"bullet":{
+		"type":"LaserBoltBulletType",
+		"frontColor":"84F491FF",
+		"backColor":"62AE7FFF",
+		"healPercent":1.2,
+		"damage":17,
+		"collidesTeam":true,
+		"speed":8,
+		"lifetime":24,
+		"width":2,"height":8
+		}	}	]
+}

@@ -1,0 +1,41 @@
+package mindustry.world;
+
+import arc.func.Prov;
+import mindustry.game.Team;
+import mindustry.gen.*;
+import mindustry.world.modules.ItemModule;
+import mindustry.world.modules.LiquidModule;
+import mindustry.world.modules.PowerModule;
+
+/**
+ * A tile which does not trigger change events and whose entity types are cached.
+ * Prevents garbage when loading previews.
+ */
+public class CachedTile extends Tile {
+
+	public CachedTile() {
+		super(0, 0);
+	}
+
+	@Override
+	protected void preChanged() {
+		//this basically overrides the old tile code and doesn't remove from proximity
+	}
+
+	@Override
+	protected void changeBuild(Team team, Prov<Building> entityprov, int rotation) {
+		build = null;
+
+		Block block = block();
+
+		if (block.hasBuilding()) {
+			Building n = entityprov.get();
+			n.tile = this;
+			n.block = block;
+			if (block.hasItems) n.items = new ItemModule();
+			if (block.hasLiquids) n.liquids = new LiquidModule();
+			if (block.hasPower) n.power = new PowerModule();
+			build = n;
+		}
+	}
+}

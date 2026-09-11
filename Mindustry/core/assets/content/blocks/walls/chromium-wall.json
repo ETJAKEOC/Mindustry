@@ -1,0 +1,20 @@
+{
+//	"type": "Wall",//类型
+	"category": "defense",
+
+	"research": {
+	"parent": "nickel-wall",
+	"requirements": [
+	"chromium/250",
+	"nickel/150"
+	]	},
+
+	"requirements": [
+	"chromium/5",
+	"nickel/3"
+	],
+
+	"health":840,
+	"armor":10,
+	"size":1
+}

@@ -1,0 +1,75 @@
+type: GenericCrafter
+size: 3
+liquidCapacity: 120
+hasLiquids: true
+health: 650
+category: crafting
+itemCapacity: 20
+requirements: [
+  01a-02-item-nickel/40
+  01a-05-item-aluminium/80
+  01a-06-item-chromium/40
+]
+craftTime: 60
+craftEffect: none
+outputItems: [
+  01a-06-item-chromium/2
+  01a-02-item-nickel/2
+]
+consumes: {
+  items: [
+  01a-05-item-raw-nichrome/4
+  01a-04-item-tantra-sand/2
+  ]
+  liquid: 02b-05-hydrowater/0.5
+  power: 1
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-05-hydrowater
+      padding: 2
+    }
+    {
+    type: DrawBubbles
+    color: 72ccbd
+    sides: 10
+    recurrence: 3
+    spread: 8
+    radius: 1.5
+    amount: 36
+    }
+    {
+      type: DrawParticles
+      color: e1cf9a
+      alpha: 0.85
+      particleSize: 1.5
+      particles: 12
+      particleRad: 12
+      particleLife: 60
+      reverse: true
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+ambientSound: loopCultivator
+ambientSoundVolume: 0.065
+squareSprite: false
+research: {
+  parent: 09i-04-u-aquafilter
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-11-glistening-straits
+    }
+  ]
+}
+researchCostMultiplier: 0.5

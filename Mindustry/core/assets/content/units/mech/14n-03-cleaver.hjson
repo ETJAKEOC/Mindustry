@@ -1,0 +1,87 @@
+type: mech
+name: Cleaver
+description: Uses a gatling gun to pelt enemy targets. Equipped with an electric mine launcher.
+speed: 0.45
+flying: false
+health: 1090
+armor: 9
+hitSize: 14
+outlineColor: 44413c
+mechLegColor: 44413c
+stepSound: mechStepSmall
+stepSoundPitch: 0.8
+stepSoundVolume: 0.65
+weapons: [
+  {
+    x: -11
+    y: 0
+    reload: 90
+    mirror: false
+    rotate: false
+    name: cleaver-weapon
+    shootSound: shootArtillerySmall
+    shootSoundVolume: 1.55
+    bullet: {
+      type: ArtilleryBulletType
+      width: 13
+      height: 18
+      speed: 2
+      lifetime: 90
+      frontColor: ffbe7f
+      backColor: d46f6b
+      trailChance: -1
+      trailEffect: missileTrail
+      trailColor: d46f6b
+      splashDamage: 20
+      splashDamageRadius: 32
+      shootEffect: shootBig2
+      smokeEffect: shootBigSmoke
+      hitEffect: blastExplosion
+      fragBullets: 1
+      fragBullet: {
+        instantDisappear: true  
+        spawnUnit: asthosus-18r-11-lightning-emitter
+        damage: 0
+      }
+    }
+  }
+  {
+    name: cleaver-weapon-r
+    y: 0
+    x: 11
+    reload: 45
+    mirror: false
+    rotate: false
+    inaccuracy: 4
+    shoot: {
+      shots: 10
+      shotDelay: 2
+    }
+    shootSound: shoot-dull
+    shootSoundVolume: 0.35
+    bullet: {
+      type: BasicBulletType
+      speed: 3
+      lifetime: 50
+      damage: 3
+      pierce: true
+      pierceCap: 1
+      width: 9
+      height: 13
+      frontColor: ffbe7f
+      backColor: d46f6b
+      trailChance: -1
+      trailEffect: missileTrail
+      trailColor: d46f6b
+      shootEffect: shootSmall
+      smokeEffect: shootSmallSmoke
+    }
+  }
+]
+research: {
+  parent: 14n-02-bayonet
+  objectives: [
+    10j-05-advanced-assembler-constituent
+  ]
+}  
+researchCostMultiplier: 2.5

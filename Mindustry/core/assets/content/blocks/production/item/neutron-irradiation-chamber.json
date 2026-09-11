@@ -1,0 +1,56 @@
+{
+	"type":"HeatCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+		"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		"DrawCrucibleFlame",
+		"DrawDefault",
+		{"type":"DrawGlowRegion",
+		"suffix":"-glow",
+		"glowScale":30,
+		"glowIntensity":0.5,
+		"color":"FFCBDDFF"
+		},
+		"DrawHeatInput"
+		]	},
+
+	"research":{
+	"parent":"uranium-centrifuge",
+	"requirements":[
+	"uranium/7000",
+	"iridium/9000",
+	"silicon/12000"
+	]	},
+
+	"requirements":[
+	"uranium/70",
+	"iridium/90",
+	"silicon/120"
+	],
+
+	"consumes":{"power":1,
+	"items":{
+	"items":[
+	"uranium/3"
+	]	}	},
+	"heatRequirement":10,
+
+	"outputItems":[
+	"plutonium/1"
+	],
+
+	"size":4,
+	"health":1260,
+	"itemCapacity":40,
+	"hasPower":true,
+	"hasLiquids":false,
+	"hasItems":true,
+	"craftTime":90,
+	"updateEffect":"none",
+	"ambientSound":"respawning",
+	"ambientSoundVolume":0.09
+}

@@ -1,0 +1,146 @@
+type: HeatCrafter
+heatRequirement: 6
+maxEfficiency: 4
+size: 3
+liquidCapacity: 120
+hasLiquids: true
+health: 1000
+category: crafting
+research: {
+  #TODO - change to proper sector
+  parent: 09i-11-o-anthracite-heater
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-23-eridanus
+    }
+  ]
+}
+itemCapacity: 30
+researchCost: [
+  01a-02-item-nickel/8000
+  01a-06-item-chromium/4000
+  01a-07-item-clevorite/1000
+  01a-10-item-bethine/25
+]
+requirements: [
+  01a-02-item-nickel/400
+  01a-06-item-chromium/225
+  01a-07-item-clevorite/75
+  01a-10-item-bethine/45
+]
+craftTime: 60
+craftEffect: {
+  type: RadialEffect
+  layer: 90
+  rotationSpacing: 60
+  amount: 1
+  lengthOffset: 3
+  effect: {
+    particles: 6
+    length: 40
+    lifetime: 80
+    cone: 30
+    baseRotation: 42
+    useRotation: false 
+    sizeFrom: 0.2
+    sizeTo: 6
+    colorFrom: 60c9ad66
+    colorTo: 60c9ad00
+    sizeInterp: pow2Out
+    interp: pow2Out
+    layer: 110
+  }
+}
+outputLiquids: [
+  02b-03-necroplasm/0.25
+]
+consumes: {
+  items: [
+    01a-03-item-anthracite/1
+  ]
+  liquids: [
+    02b-04-miasma/0.5
+  ]
+  power: 4
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-04-miasma
+    }
+    {
+      type: DrawRegion
+      suffix: -mid
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-04-miasma
+      alpha: 0.8
+    }
+    {
+      type: DrawRegion
+      suffix: -center
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-04-miasma
+      alpha: 0.2
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-03-necroplasm
+      padLeft: 1.5
+      padTop: 1.5
+      padBottom: 18
+      padRight: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-03-necroplasm
+      padLeft: 1.5
+      padTop: 18
+      padBottom: 1.5
+      padRight: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-03-necroplasm
+      padLeft: 1.5
+      padTop: 1.5
+      padBottom: 1.5
+      padRight: 17
+    }
+    {
+      type: DrawParticles
+      color: 60c9ad
+      x: 2.6
+      alpha: 0.8
+      particleSize: 1.5
+      particles: 12
+      particleRad: 10
+      particleLife: 30
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawHeatInput
+      suffix: -heat
+    }
+    {
+      type: DrawGlowRegion
+      suffix: -glow
+      color: 6e3e7a
+    }
+  ]
+}
+ambientSound: loopExtract
+ambientSoundVolume: 0.06
+squareSprite: false

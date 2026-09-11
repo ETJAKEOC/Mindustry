@@ -1,0 +1,52 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	"DrawDefault",
+	{"type":"DrawLiquidRegion",
+	"drawLiquid":"oil"
+	},
+	{"type":"DrawRegion",
+	"suffix":"-top"
+	}	]	},
+
+	"research":{
+	"parent":"electrolytic-chamber",
+	"requirements":[
+	"chromium/1500",
+	"graphite/2000",
+	"silicon/2500"
+	]	},
+
+	"requirements":[
+	"chromium/30",
+	"graphite/40",
+	"silicon/50"
+	],
+
+	"consumes":{"power":3,
+	"liquids":[
+	"oil/0.2",
+	"hydrogen/0.1"
+	]	},
+
+	"outputItems":[
+	"pyratite/3"
+	],
+
+	"size":3,
+	"health":960,
+	"itemCapacity":30,
+	"hasPower":true,
+	"hasLiquids":true,
+	"liquidCapacity":100,
+	"hasItems":true,
+	"craftTime":90,
+	"craftEffect":"none",
+	"updateEffect":"none"
+}

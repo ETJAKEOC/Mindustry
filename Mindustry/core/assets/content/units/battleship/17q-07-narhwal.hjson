@@ -1,0 +1,69 @@
+type: naval
+speed: 0.6
+health: 6000
+armor: 7
+aimDst: 10
+range: 200
+drag: 0.1
+accel: 0.8
+hitSize: 20
+rotateSpeed: 1.85
+trailLength: 15
+outlineColor: 0c0e29
+moveSoundVolume: 0.7
+moveSoundPitchMin: 0.75
+moveSoundPitchMax: 0.75
+moveSound: shipMove
+itemCapacity: 35
+weapons: [
+{
+    mirror: true
+    rotate: true
+    name: narhwal-salvo
+    rotateSpeed: 1.5
+    shoot: {
+      shots: 3
+      shotDelay: 8
+    }
+    x: 6.5
+    y: -3.25
+    reload: 48.5
+    recoil: 1.3
+    shootSound: shootSalvo
+    shootSoundVolume: 1.2
+    ejectEffect: casing2
+    bullet: {
+      type: BasicBulletType
+      sprite: missile-large
+      width: 8
+      splashDamageRadius: 20
+      splashDamage: 25
+      pierce: true
+      lifetime: 45
+      damage: 85
+      speed: 4.5
+      smokeEffect: colorSpark
+      trailColor: E3EBFB
+      trailWidth: 2
+      trailLength: 8
+      backColor: E3EBFB
+      hitColor: E3EBFB
+      status: shocked
+      despawnEffect: {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        lifetime: 8
+        sizeFrom: 0
+        sizeTo: 15
+        colorFrom: ffffff
+        colorTo: feb380
+        }
+      }
+}
+]
+immunities: [
+  13m-06-contaminated
+]
+research: 17q-06-shark
+researchCostMultiplier: 0.5

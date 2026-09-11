@@ -1,0 +1,13 @@
+difficulty: 5
+planet: frostnova
+sector: 15
+research: {
+  parent: 19s-03-hostile-outpost
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-03-hostile-outpost
+    }
+  ]
+}
+outline: false

@@ -1,0 +1,578 @@
+type: mech
+name: Everse
+description: Fires a burst of rupturing railgun bolts as well as missiles at enemies. Cannot cross terrain.
+hovering: true
+hoverable: true
+shadowElevation: 0.1
+mechFrontSway: 0
+mechSideSway: 0
+mechStride: 0
+drag: 0.08
+outlineColor: 44413c
+speed: 0.8
+rotateSpeed: 5
+accel: 0.06
+groundLayer: 60
+health: 16790
+armor: 8
+hitSize: 30
+canDrown: false
+moveSound: loopExtract
+moveSoundVolume: 0.8
+moveSoundPitchMin: 0.8
+moveSoundPitchMax: 1.5
+researchCostMultiplier: 2.5
+research: {
+  parent: 16a-04-tequant
+  objectives: [
+    10j-07-cumulative-assembler-constituent
+  ]
+}
+parts: [
+  {
+    type: FlarePart
+    x: 0
+    y: -2
+    color1: 6e5b9a
+    color2: 473b64
+    spinSpeed: -0.65
+    radius: 15
+    followRotation: true
+    sides: 4
+  }
+  {
+    type: FlarePart
+    x: 0
+    y: -2
+    color1: 6e5b9a
+    color2: 473b64
+    spinSpeed: 0.89
+    radius: 13
+    sides: 8
+    followRotation: true
+  }
+]
+abilities: [
+  {
+    type: MoveEffectAbility
+    x: 0
+    y: -43
+    teamColor: true
+    effect: missileTrail
+    interval: 6
+  }
+  {
+    type: MoveEffectAbility
+    x: 21
+    y: -34
+    teamColor: true
+    effect: missileTrail
+    interval: 7
+  }
+  {
+    type: MoveEffectAbility
+    x: -21
+    y: -34
+    teamColor: true
+    effect: missileTrail
+    interval: 7
+  }
+
+  {
+    type: MoveEffectAbility
+    x: 0
+    y: 0
+    teamColor: false
+    interval: 160
+    rotateEffect: true
+    parentizeEffects: true
+    minVelocity: 0
+    effect: {
+        baseLength: 0
+        randLength: false
+        type: ParticleEffect
+        particles: 1
+        length: 0
+        cone: 0
+        useRotation: true
+        region: asthosus-everse-radiance
+        sizeTo: 36
+        colorFrom: 6e5b9a
+        colorTo: 6e5b9a
+        interp: fastSlow
+        offset: -90
+        layer: 1
+        followParent: true
+        rotWithParent: true
+    }
+  }
+]
+engines: [
+  {
+    x: 0
+    y: -34
+    radius: 8
+    rotation: -90
+  }
+  {
+    x: 21
+    y: -33
+    radius: 3
+    rotation: -90
+  }
+  {
+    x: -21
+    y: -33
+    radius: 3
+    rotation: -90
+  }
+]
+itemCapacity: 0
+engineSize: 0
+useEngineElevation: false
+weapons: [
+  {
+      name: everse-launcher
+      x: 24
+      layerOffset: -1
+      y: 21
+      mirror: true
+      alternate: false
+      rotate: false
+      baseRotation: -45
+      shootCone: 360
+      shootSound: shootMissileLong
+      shootSoundVolume: 1.05
+      reload: 9
+      bullet: {
+        type: MissileBulletType
+        homingPower: 0.09
+        homingDelay: 10
+        width: 8
+        height: 14
+        speed: 3
+        lifetime: 90
+        damage: 40
+        pierce: true
+        pierceCap: 2
+      }
+    }
+    {
+      name: everse-launcher
+      layerOffset: -1
+      x: 27
+      y: 10
+      mirror: true
+      alternate: true
+      rotate: false
+      baseRotation: -45
+      shootSound: shootMissileLong
+      shootSoundVolume: 1.1
+      reload: 7
+      shootCone: 360
+      bullet: {
+        type: MissileBulletType
+        homingPower: 0.09
+        homingDelay: 10
+        width: 8
+        height: 14
+        speed: 3
+        lifetime: 90
+        damage: 30
+        pierce: true
+        pierceCap: 2
+      }
+    }
+    {
+      name: everse-launcher
+      layerOffset: -1
+      x: 26.5
+      y: -21
+      mirror: true
+      alternate: true
+      rotate: false
+      baseRotation: -45
+      shootSound: shootMissileLong
+      shootSoundVolume: 1.05
+      reload: 15
+      shootCone: 360
+      bullet: {
+        type: MissileBulletType
+        homingPower: 0.09
+        homingDelay: 10
+        width: 8
+        height: 14
+        speed: 3
+        lifetime: 90
+        damage: 60
+        pierce: true
+        pierceCap: 2
+      }  
+  }
+  {
+    useAttackRange: false
+    showStatSprite: false
+    display: false
+    predictTarget: false
+    ignoreRotation: true
+    alwaysShooting: true
+    x: -7.5
+    y: -9.5
+    rotate: false
+    mirror: false
+    alwaysContinuous: true
+    shootSound: beamLustre
+    shootSoundVolume: 0.1
+    shoot: {
+      firstShotDelay: 60
+    }
+    shootCone: 360
+    baseRotation: -45
+    layerOffset: -0.125
+    shootCone: 360
+    bullet: {
+      shootEffect: none
+      type: ContinuousFlameBulletType
+      length: 7
+      drawFlare: false
+      width: 0.5
+      damage: 1
+      hitColor: 473b64
+      shake: 0
+      colors: [31254d, 473b64, 6e5b9a, 8f7eb8, ffffff]
+      hitEffect: none
+      despawnEffect: none
+    }
+  }
+  {
+    useAttackRange: false
+    showStatSprite: false
+    display: false
+    predictTarget: false
+    ignoreRotation: true
+    alwaysShooting: true
+    x: 7.5
+    y: -9.5
+    rotate: false
+    mirror: false
+    alwaysContinuous: true
+    shootSound: beamLustre
+    shootSoundVolume: 0.1
+    shoot: {
+      firstShotDelay: 60
+    }
+    shootCone: 360
+    baseRotation: 45
+    layerOffset: -0.125
+    bullet: {
+      shootEffect: none
+      type: ContinuousFlameBulletType
+      length: 7
+      drawFlare: false
+      width: 0.5
+      damage: 1
+      hitColor: 473b64
+      shake: 0
+      colors: [31254d, 473b64, 6e5b9a, 8f7eb8, ffffff]
+      hitEffect: none
+      despawnEffect: none
+    }
+  }
+  {
+    useAttackRange: false
+    showStatSprite: false
+    display: false
+    predictTarget: false
+    ignoreRotation: true
+    alwaysShooting: true
+    x: -5.5
+    y: 8
+    rotate: false
+    mirror: false
+    alwaysContinuous: true
+    shootSound: beamLustre
+    shootSoundVolume: 0.1
+    shoot: {
+      firstShotDelay: 90
+    }
+    shootCone: 360
+    baseRotation: -45
+    layerOffset: -0.125
+    shootCone: 360
+    bullet: {
+      shootEffect: none
+      type: ContinuousFlameBulletType
+      length: 4.25
+      drawFlare: false
+      width: 0.5
+      damage: 1
+      hitColor: 473b64
+      shake: 0
+      colors: [31254d, 473b64, 6e5b9a, 8f7eb8, ffffff]
+      hitEffect: none
+      despawnEffect: none
+    }
+  }
+  {
+    useAttackRange: false
+    showStatSprite: false
+    display: false
+    predictTarget: false
+    ignoreRotation: true
+    alwaysShooting: true
+    x: 5.5
+    y: 8
+    rotate: false
+    mirror: false
+    alwaysContinuous: true
+    shootSound: beamLustre
+    shootSoundVolume: 0.1
+    shoot: {
+      firstShotDelay: 90
+    }
+    shootCone: 360
+    baseRotation: 45
+    layerOffset: -0.125
+    shootCone: 360
+    bullet: {
+      shootEffect: none
+      type: ContinuousFlameBulletType
+      length: 4.25
+      drawFlare: false
+      width: 0.5
+      damage: 1
+      hitColor: 473b64
+      shake: 0
+      colors: [31254d, 473b64, 6e5b9a, 8f7eb8, ffffff]
+      hitEffect: none
+      despawnEffect: none
+    }
+  }
+  {
+    useAttackRange: false
+    showStatSprite: false
+    display: false
+    predictTarget: false
+    ignoreRotation: true
+    alwaysShooting: true
+    x: -7
+    y: 16.25
+    rotate: false
+    mirror: false
+    alwaysContinuous: true
+    shootSound: beamLustre
+    shootSoundVolume: 0.1
+    shoot: {
+      firstShotDelay: 120
+    }
+    shootCone: 360
+    baseRotation: -45
+    layerOffset: -0.125
+    shootCone: 360
+    bullet: {
+      shootEffect: none
+      type: ContinuousFlameBulletType
+      length: 6
+      drawFlare: false
+      width: 0.5
+      damage: 1
+      hitColor: 473b64
+      shake: 0
+      colors: [31254d, 473b64, 6e5b9a, 8f7eb8, ffffff]
+      hitEffect: none
+      despawnEffect: none
+    }
+  }
+  {
+    useAttackRange: false
+    showStatSprite: false
+    display: false
+    predictTarget: false
+    ignoreRotation: true
+    alwaysShooting: true
+    x: 7
+    y: 16.25
+    rotate: false
+    mirror: false
+    alwaysContinuous: true
+    shootSound: beamLustre
+    shootSoundVolume: 0.1
+    shoot: {
+      firstShotDelay: 120
+    }
+    shootCone: 360
+    baseRotation: 45
+    layerOffset: -0.125
+    shootCone: 360
+    bullet: {
+      shootEffect: none
+      type: ContinuousFlameBulletType
+      length: 6
+      drawFlare: false
+      width: 0.5
+      damage: 1
+      hitColor: 473b64
+      shake: 0
+      colors: [31254d, 473b64, 6e5b9a, 8f7eb8, ffffff]
+      hitEffect: none
+      despawnEffect: none
+    }
+  }
+  {
+    useAttackRange: false
+    showStatSprite: false
+    display: false
+    predictTarget: false
+    ignoreRotation: true
+    alwaysShooting: true
+    x: 0
+    y: -5.5
+    rotate: false
+    mirror: false
+    alwaysContinuous: true
+    shoot: {
+      firstShotDelay: 210
+    }
+    shootSound: beamLustre
+    shootSoundVolume: 0.2
+    shootCone: 360
+    layerOffset: -0.1
+    bullet: {
+      shootEffect: none
+      type: ContinuousFlameBulletType
+      flareColor: 6e5b9a
+      length: 28
+      width: 1.25
+      damage: 1
+      hitColor: 473b64
+      shake: 0.3
+      colors: [31254d, 473b64, 6e5b9a, 8f7eb8, ffffff]
+      hitEffect: none
+      despawnEffect: none
+      flareLength: 6
+    }
+  }
+  {
+    useAttackRange: true
+    x: 0
+    y: -5.5
+    mirror: false
+    rotate: false
+    reload: 356
+    shoot: {
+      firstShotDelay: 150
+      shots: 4
+      shotDelay: 30
+    }
+    shake: 4
+    chargeSound: green-laser-charge-early-short
+    shootSound: shootSmite
+    bullet: {
+      chargeEffect: {
+        type: MultiEffect
+        lifetime: 300
+        effects: [
+          {
+            type: ParticleEffect
+            particles: 40
+            lightOpacity: 0
+            length: 50
+            baseLength: -50
+            lifetime: 115
+            layer: 106
+            interp: exp5
+            sizeFrom: 6
+            sizeTo: 2
+            colorFrom: 8f7eb8
+            colorTo: 473b64
+          }
+          {
+            type: ParticleEffect
+            particles: 40
+            offset: 60
+            baseLength: 9
+            length: 40
+            sizeFrom: 0
+            sizeTo: 4
+            cone: 360
+            colorFrom: 8f7eb8
+            lifetime: 115
+            colorTo: 473b64
+          }
+          {
+            type: ParticleEffect
+            particles: 40
+            offset: 120
+            lightOpacity: 0
+            length: 60
+            baseLength: -60
+            lifetime: 105
+            layer: 106
+            interp: pow3In
+            sizeInterp: pow5Out
+            lifetime: 110
+            sizeFrom: 1
+            sizeTo: 4
+            colorFrom: 8f7eb8
+            colorTo: 473b64
+          }
+          {
+            type: ParticleEffect
+            particles: 40
+            offset: 180
+            lightOpacity: 0
+            length: 60
+            baseLength: -60
+            lifetime: 95
+            layer: 106
+            interp: pow3In
+            sizeInterp: pow5Out
+            lifetime: 140
+            sizeFrom: 1
+            sizeTo: 4
+            colorFrom: 8f7eb8
+            colorTo: 473b64
+          }
+        ]
+      }
+      type: BasicBulletType
+      speed: 7
+      damage: 50
+      splashDamage: 100
+      splashDamageRadius: 32
+      status: asthosus-13m-04-status-energy-phasing
+      statusDuration: 30
+      sprite: large-orb
+      width: 17
+      height: 21
+      hitSize: 8
+      pierceCap: 4
+      pierceBuilding: true
+      spin: 2
+      pierce: true
+      hitColor: 473b64
+      backColor: 473b64
+      trailColor: 473b64
+      frontColor: ffffff
+      trailWidth: 2.8
+      trailLength: 9
+      hitEffect: hitBulletColor
+      buildingDamageMultiplier: 0.9
+      trailRotation: true
+      trailEffect: shootSmokeSquareSparse
+      trailInterval: 3
+      intervalBullets: 8
+      intervalRandomSpread: 0
+      intervalSpread: 45
+      bulletInterval: 8
+      intervalBullet: {
+        type: LaserBulletType
+        damage: 30
+        despawnSound: shockBullet
+        width: 6
+        length: 36
+        colors: [8f7eb8, 473b64, ffffff]
+      }
+    }
+  }
+]

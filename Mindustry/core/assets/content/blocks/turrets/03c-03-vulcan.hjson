@@ -1,0 +1,159 @@
+type: ContinuousLiquidTurret
+size: 3
+health: 2000
+armor: 3
+shootSound: shootVulcanPlasma
+shootSoundVolume: 0.4
+shootWarmupSpeed: 0.1
+shootCone: 360
+requirements: [
+  01a-02-item-nickel/450
+  01a-05-item-aluminium/180
+  01a-06-item-chromium/210
+  01a-07-item-clevorite/135
+]
+category: turret
+recoil: 1
+consumes: {
+  power: 4
+}
+hasLiquids: true
+liquidCapacity: 50
+minWarmup: 0.60
+liquidConsumed: 0.25
+outlineColor: 2C2A36
+targetAir: true
+targetGround: true
+rotateSpeed: 1.4
+range: 190
+targetUnderBlocks: false
+targetInterval: 5
+newTargetInterval: 30
+loopSound: shootBeam
+loopSoundVolume: 1.1
+ammoTypes: {
+ 02b-04-miasma: {
+  type: ContinuousLaserBulletType
+  length: 190
+  damage: 46
+  buildingDamageMultiplier: 0.1
+  width: 2.5
+  incendChance: 0
+  incendAmount: 0
+  incendSpread: 0
+  colors: [5A4B67FF, 726081CC, 8E789F99, AC98BB73, CCBCD959
+  ]
+  status: 13m-06-contaminated
+  statusDuration: 60
+  knockback: 1
+  pierceCap: 2
+  timescaleDamage: true
+ }
+ 02b-06-morphitix-plasma: {
+  type: ContinuousLaserBulletType
+  length: 280
+  rangeChange: 92
+  damage: 68
+  buildingDamageMultiplier: 0.1
+  width: 3.25
+  incendChance: 0
+  incendAmount: 0
+  incendSpread: 0
+  colors: [58977EFF, 7AB69ECC, 8BD9BA99, AEECD373, D0FAE959
+  ]
+  intervalBullets: 5
+  bulletInterval: 8
+  intervalRandomSpread: 0
+  knockback: 2
+  ammoMultiplier: 1.5
+  timescaleDamage: true
+  pierceCap: 4
+  pierceArmor: false
+  status: 13m-03-hsos6
+  statusDuration: 120
+  intervalBullet: {
+    type: LightningBulletType
+    despawnSound: shockBulletSyntax
+    damage: 25
+    lightningLength: 20
+    lightningLengthRand: 4
+    lightningColor: 51c59c
+    status: shocked
+    buildingDamageMultiplier: 0.1
+    }
+ }
+}
+shootY: 4.4
+drawer: {
+  type: DrawTurret
+  basePrefix: vulcan-
+  parts: [
+    {
+      type: RegionPart
+      suffix: -glow
+      progress: recoil
+      heatProgress: recoil
+      heatColor: 844cff88
+      drawRegion: false
+    }
+    {
+      type: RegionPart
+      suffix: -back
+      mirror: true
+      progress: warmup
+      heatProgress: recoil
+      moveRot: -15
+      moveY: 0.5
+      moveX: 1.25
+      y: 0.1
+      under: true
+      heatColor: 844cff88
+    }
+    {
+      type: RegionPart
+      suffix: -front
+      mirror: true
+      progress: warmup
+      heatProgress: recoil
+      moveRot: -15
+      moveY: 0.5
+      moveX: 1.25
+      heatColor: 844cff88
+    }
+    {
+      type: RegionPart
+      suffix: -nozzle
+      mirror: true
+      progress: warmup
+      heatProgress: recoil
+      moveX: 1.25
+      moveY: 1.25
+    }
+    {
+      type: RegionPart
+      suffix: -nozzle-glow
+      drawRegion: false
+      mirror: true
+      progress: warmup
+      heatProgress: recoil
+      moveX: 1.25
+      moveY: 1.25
+      heatColor: 844cff88
+    }
+  ]
+}
+research: {
+  parent: 03c-02-calamity
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-09-hazardous-wasteland
+    }
+  ]
+}
+researchCost: [
+  01a-02-item-nickel/6500
+  01a-05-item-aluminium/3000
+  01a-06-item-chromium/4500
+  01a-07-item-clevorite/1200
+]

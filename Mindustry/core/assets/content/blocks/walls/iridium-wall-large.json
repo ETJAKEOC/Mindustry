@@ -1,0 +1,18 @@
+{
+	"type":"Wall",
+	"category":"defense",
+
+	"research":{
+	"parent":"iridium-wall",
+	"requirements":[
+	"iridium/40"
+	]	},
+
+	"requirements":[
+	"iridium/40"
+	],
+
+	"health":3600,
+	"armor":12,
+	"size":2
+}

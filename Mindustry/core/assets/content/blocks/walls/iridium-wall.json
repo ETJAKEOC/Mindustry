@@ -1,0 +1,18 @@
+{
+	"type":"Wall",
+	"category":"defense",
+
+	"research":{
+	"parent":"chromium-wall",
+	"requirements":[
+	"iridium/1000"
+	]	},
+
+	"requirements":[
+	"iridium/10"
+	],
+
+	"health":900,
+	"armor":12,
+	"size":1
+}

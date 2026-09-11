@@ -1,0 +1,52 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		{"type":"DrawLiquidTile",
+		"drawLiquid":"cryofluid"
+		},
+		"DrawRegion",
+		"DrawLiquidOutputs"
+		]	},
+
+	"consumes":{
+	"power":3,
+	"items":{"items":[
+	"nickel/4"
+	]	},
+	"liquids":[
+	"hydrogen/0.5"
+	]	},
+
+	"outputLiquid":"cryofluid/0.5",
+
+	"research":{
+	"parent":"electrolytic-chamber",
+	"requirements":[
+	"tungsten/4000",
+	"graphite/3000",
+	"metaglass/3000"
+	]	},
+
+	"requirements":[
+	"tungsten/80",
+	"graphite/60",
+	"metaglass/60"
+	],
+
+	"health":1240,
+	"size":3,
+	"hasItems":true,
+	"hasLiquids":true,
+	"outputsLiquid":true,
+	"hasPower":true,
+	"craftTime":90,
+	"updateEffect":"freezing",
+	"itemCapacity":20,
+	"liquidCapacity":300
+}

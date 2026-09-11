@@ -1,0 +1,13 @@
+type: Junction
+health: 65
+size: 1
+speed: 22
+requirements: [
+  01a-01-item-cobalt/3
+]
+squareSprite: false
+category: distribution
+research: 05e-01-transport-pipe
+researchCost: [
+  01a-01-item-cobalt/6
+]

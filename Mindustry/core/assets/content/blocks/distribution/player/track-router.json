@@ -1,0 +1,20 @@
+{
+//	"type":"DuctRouter",
+	"category":"distribution",
+
+	"research":{
+	"parent":"track-junction",
+	"requirements":[
+	"nickel/30"
+	]	},
+
+	"requirements":[
+	"nickel/3"],
+
+	"size":1,
+	"health":100,
+	"solid":false,
+	"underBullets":true,
+	"speed":2.5,
+	"itemCapacity":1
+}

@@ -1,0 +1,226 @@
+type: flying
+immunities: [shocked
+]
+flying: true
+faceTarget: true
+targetAir: false
+shadowElevation: 0.15
+drag: 0.07
+outlineColor: 26262F
+speed: 0.35
+rotateSpeed: 1.7
+accel: 0.1
+health: 27000
+armor: 20
+hitSize: 42
+researchCostMultiplier: 3
+loopSound: loopHover
+loopSoundVolume: 0.8
+research: {
+  parent: 17q-04-noya
+  objectives: [
+    {
+      type: Research
+      content: 10j-11-advanced-module-a
+    }
+  ]
+}
+engineOffset: 8
+engineSize: 0
+engines: [
+  {
+    x: 0
+    y: -24
+    radius: 8
+    rotation: -90
+  }
+  {
+    x: 8
+    y: -28
+    radius: 3.25
+    rotation: -90
+  }
+  {
+    x: -8
+    y: -28
+    radius: 3.25
+    rotation: -90
+  }
+  {
+    x: -19
+    y: -26
+    radius: 4.75
+    rotation: -135
+  }
+  {
+    x: 19
+    y: -26
+    radius: 4.75
+    rotation: -45
+  }
+]
+parts: [
+  {
+    type: RegionPart
+    suffix: -blade
+    heatProgress: recoil
+    mirror: true
+    under: true
+  }
+]
+itemCapacity: 120
+lowAltitude: false
+abilities: [
+  {
+    type: ForceFieldAbility
+    radius: 80
+    sides: 6
+    cooldown: 1500
+    regen: 2
+    max: 4000
+  }
+  {
+    type: SuppressionFieldAbility
+    reload: 900
+    range: 280
+    orbRadius: 5.6
+    orbSinScl: 7
+    y: 2
+    color: d7f08bda
+    particleColor: 92b25890
+    effectColor: 92b25890
+  }
+]
+weapons: [
+  {
+    x: 0
+    y: 4
+    reload: 600
+    rotate: false
+    mirror: false
+    shootSound: shootEmp
+    chargeSound: chargeEmp
+    shootStatus: unmoving
+    shootStatusDuration: 210
+    shoot: {
+      firstShotDelay: 210
+    }
+    shake: 15
+    shootY: -9
+    bullet: {
+      chargeEffect: {
+        type: SeqEffect
+        effects: [
+          {
+            type: ParticleEffect
+            offsetX: 4.5
+            layer: 100
+            length: 32.5
+            baseLength: 27.5
+            cone: 360
+            particles: 24
+            offset: 120
+            sizeFrom: 5
+            colorFrom: d7f08b90
+            colorTo: 92b25890
+            sizeTo: 0.5
+            lifetime: 190
+          }
+          {
+            type: WaveEffect
+            offsetX: 4.5
+            layer: 100
+            sizeFrom: 64
+            sizeTo: 0
+            strokeFrom: 3
+            strokeTo: 0
+            colorFrom: d7f08b90
+            colorTo: 92b25890
+            lifetime: 30
+          }
+        ]
+      }
+      smokeEffect: none
+      type: ArtilleryBulletType
+      collidesAir: true
+      status: blasted
+      recoil: 4
+      speed: 5
+      lifetime: 100
+      width: 10
+      height: 18
+      hitColor: D8F18C
+      despawnEffect: [scatheExplosion, spawnShockwave
+      ]
+      hitSound: explosionMortar
+      pierceArmor: true
+      damage: 750
+      splashDamage: 2650
+      splashDamageRadius: 76
+      despawnSound: explosionMortar
+      trailChance: -1
+      trailEffect: shootSmokeTitan
+      trailInterval: 3
+      trailRotation: true
+      trailLength: 18
+      trailWidth: 4
+      trailColor: D8F18C
+      bulletInterval: 6
+      intervalRandomSpread: 0
+      intervalBullets: 2
+      intervalSpread: 90
+      intervalBullet: {
+        type: LaserBulletType
+        despawnSound: shootArc
+        colors: [
+          d8f18c,
+          ffffff
+        ]
+        sideWidth: 2
+        sideLength: 16
+        sideAngle: 45
+        length: 60
+        width: 4
+        damage: 125
+        status: electrified
+        statusDuration: 300
+      }
+    }
+  }
+  {
+    x: 16.25
+    y: -16.25
+    reload: 288
+    rotate: true
+    mirror: true
+    alternate: true
+    shootSound: shootMissiles
+    shootSoundVolume: 0.2
+    shake: 5
+    rotationLimit: 30
+    shoot: {
+      barrels: [
+        -3.25, 0.5, 0,
+        0, 0.5, 0,
+        3.25, 0.5, 0,
+        -3.25, -1, 0,
+        0, -1, 0,
+        3.25, -1, 0,
+      ]
+      type: ShootBarrel
+      shots: 12
+      shotDelay: 2.5
+    }
+    name: archangel-missile-mount
+    bullet: {
+      shootEffect: shootBig
+      smokeEffect: shootBigSmoke
+      keepVelocity: false
+      collidesAir: false
+      instantDisappear: true
+      damage: 0
+      spawnUnit: exoprosopa-arc-missile
+      despawnSound: explosion
+    }
+  }
+]

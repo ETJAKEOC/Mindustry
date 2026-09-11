@@ -1,0 +1,85 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"consumes":{
+	"power":5,
+	"items":{"items":[
+	"nickel/4",
+	"tungsten/2"
+	]	},
+	"liquid":{
+	"liquid":"helium","amount":0.04
+	}	},
+
+	"outputItems":[
+	"surge-alloy/2"
+	],
+
+	"research":{
+	"parent":"alloy-cast-furnace",
+	"requirements":[
+	"iridium/4000",
+	"plastanium/6500",
+	"silicon/6000"
+	]	},
+
+	"requirements":[
+	"iridium/80",
+	"plastanium/130",
+	"silicon/120"
+	],
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	"DrawArcSmelt",
+	"DrawDefault",
+	{"type":"DrawGlowRegion",
+	"alpha":1,
+	"glowScale":5,
+	"color":"D99F6BFF"
+	}	]	},
+
+	"health":1240,
+	"size":4,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemCapacity":20,
+	"liquidCapacity":100,
+	"craftTime":15,
+	"craftEffect":{
+	"type":"RadialEffect",
+	"effect":{"type":"multiEffect",
+	"effects":[
+	{"type":"ParticleEffect",
+	"particles":3,
+	"lifetime":60,
+	"interp":"circleOut",
+	"length":30,
+	"cone":-8,
+	"sizeFrom":3,
+	"sizeTo":0,
+	"colorFrom":"D99F6BFF",
+	"colorTo":"FCF387FF"
+	},
+	{"type":"ParticleEffect",
+	"particles":3,
+	"lifetime":60,
+	"startDelay":10,
+	"interp":"circleOut",
+	"length":30,
+	"cone":-8,
+	"sizeFrom":3,
+	"sizeTo":0,
+	"colorFrom":"D99F6BFF",
+	"colorTo":"FCF387FF"
+	}	]	},
+	"rotationOffset":45,
+	"lengthOffset":16,
+	"amount":4
+	}
+}

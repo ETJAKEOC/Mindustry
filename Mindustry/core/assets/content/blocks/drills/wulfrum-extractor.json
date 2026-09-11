@@ -1,0 +1,35 @@
+{
+	"type":"Drill",
+	"category":"production",
+
+	"research":{
+	"parent":"wulfrum-drill",
+	"requirements":[
+	"wulfrum-steel/8000",
+	"graphite/5000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/80",
+	"graphite/50"
+	],
+
+	"consumes":{
+	"power":0.6
+	},
+
+	"size":3,
+	"tier":6,
+	"health":480,
+	"armor":4,
+	"drillTime":180,
+	"rotateSpeed":4,
+	"warmupSpeed":5,
+	"itemCapacity":60,
+	"hasItems":true,
+	"updateEffect":"mineSmall",
+	"liquidBoostIntensity":1.65
+}

@@ -1,0 +1,50 @@
+{
+	"type":"ForceProjector",
+	"category":"effect",
+
+	"health":1850,
+	"armor":4,
+	"size":3,
+	"radius":120,
+	"shieldHealth":3000,
+	"cooldownNormal":3,
+	"cooldownLiquid":1,
+	"liquidCapacity":400,
+	"cooldownBrokenBase":5,
+	"coolantConsumption":0.5,
+	"hasPower":true,
+	"hasLiquids":true,
+
+	"absorbEffect":{
+		"type":"ParticleEffect",
+		"particles":1,
+		"sizeFrom":5,
+		"sizeTo":0,
+		"length":0,
+		"baseLength":0,
+		"lifetime":180,
+		"colorFrom":"FEEBB3FF",
+		"colorTo":"FEEBB300"
+		},
+
+	"consumes":{"power":5,
+	"coolant":{"amount":0.1,"optional":true}
+	},
+
+	"research":{
+	"parent":"wulfrum-node",
+	"requirements":[
+	"wulfrum-steel/10000",
+	"graphite/5000",
+	"silicon/8000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/100",
+	"graphite/50",
+	"silicon/80"
+	]
+}

@@ -1,0 +1,48 @@
+{
+	"type":"UnitFactory",
+	"category":"units",
+
+	"research":{
+	"parent":"air-manufacturer",
+	"requirements":[
+	"plastanium/4500",
+	"processor-junior/3000",
+	"silicon/4000"
+	]	},
+
+	"requirements":[
+	"plastanium/90",
+	"processor-senior/60",
+	"silicon/80"
+	],
+
+	"consumes":{
+		"power":15,
+		"liquid":{
+		"liquid":"hydrogen","amount":0.2
+		}	},
+
+	"health":2590,
+	"size":5,
+
+	"plans":[
+		{"unit":"gather",
+		"time":4800,
+		"requirements":[
+		"chromium/50",
+		"silicon/100"
+		]	},
+		{"unit":"patrol",
+		"time":4800,
+		"requirements":[
+		"chromium/50",
+		"processor-junior/120"
+		]	},
+		{"unit":"bless",
+		"time":4800,
+		"requirements":[
+		"chromium/60",
+		"processor-junior/150"
+		]	}
+	]
+}

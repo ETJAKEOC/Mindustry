@@ -1,0 +1,14 @@
+captureWave: 12
+difficulty: 3
+planet: frostnova
+sector: 178
+research: {
+  parent: 19s-02-mountain-ridge
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-02-mountain-ridge
+    }
+  ]
+}
+outline: false

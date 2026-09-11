@@ -1,0 +1,104 @@
+type: mech
+hovering: true
+hoverable: true
+faceTarget: false
+shadowElevation: 0.1
+mechFrontSway: 0
+mechSideSway: 0
+mechStride: 0
+drag: 0.075
+outlineColor: 26262f
+speed: 2.25
+rotateSpeed: 5.5
+accel: 0.11
+groundLayer: 60
+health: 1200
+armor: 3
+hitSize: 15
+canDrown: false
+targetAir: false
+researchCostMultiplier: 0
+moveSound: loopExtract
+moveSoundVolume: 0.25
+moveSoundPitchMin: 0.7
+moveSoundPitchMax: 1.5
+research: {
+  parent: 17q-01-codex
+  objectives: [
+    {
+      type: Research
+      content: 10j-05-unitreconstructor-ship
+    }
+  ]
+}
+engines: [
+  {
+    x: 0
+    y: -7
+    radius: 2.3
+  }
+]
+itemCapacity: 0
+useEngineElevation: false
+lowAltitude: false
+parts: [
+  {
+    type: HoverPart
+    x: 7
+    y: 6
+    mirror: true
+    radius: 7
+    phase: 90
+    stroke: 2
+    layerOffset: -0.001
+    color: d8f18c
+  }
+  {
+    type: HoverPart
+    x: 7
+    y: -5
+    mirror: true
+    radius: 7
+    phase: 90
+    stroke: 2
+    layerOffset: -0.001
+    color: d8f18c
+  }
+]
+abilities: [
+  {
+    type: MoveEffectAbility
+    effect: missileTrailShort
+    minVelocity: 0.1
+    teamColor: true
+    effectParam: 4
+    interval: 3
+    x: 0
+    y: -5
+  }
+]
+weapons: [
+  {
+    x: 0
+    y: 1
+    name: calaust-weapon
+    reload: 21.8
+    rotate: true
+    mirror: false
+    shootSound: shootElectric
+    shootSoundVolume: 0.3
+    bullet: {
+      type: LightningBulletType
+      lightningColor: e9c574
+      pierceBuilding: false
+      lightningLength: 14
+      pierce: true
+      pierceBuilding: false
+      damage: 17.35
+      hitSound: none
+      status: shocked
+    }
+  }
+]
+trailColor: d8f18c
+trailLength: 12

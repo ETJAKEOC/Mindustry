@@ -1,0 +1,23 @@
+{
+	"type":"ItemBridge",
+	"category":"distribution",
+
+	"size":1,
+	"range":5,
+	"health":250,
+	"hasPower":false,
+	"itemCapacity":10,
+	"arrowSpacing":5,
+
+	"research":{
+	"parent":"secure-router",
+	"requirements":[
+	"chromium/2000"
+	]	},
+
+	"requirements":[
+	"chromium/20"
+	],
+
+	"transportTime":3
+}

@@ -1,0 +1,26 @@
+type: LiquidBridge
+size: 1
+health: 300
+canOverdrive: false
+range: 10
+pulse: true
+liquidCapacity: 125
+arrowPeriod: 0.9
+arrowTimeScl: 2.75
+hasPower: true
+outputsPower: false
+requirements: [
+  01a-05-item-aluminium/10
+  01a-09-item-morphite/6
+]
+category: liquid
+floating: true
+squareSprite: false
+research: 06f-04-m-clevoritebridge
+researchCost: [
+  01a-05-item-aluminium/750
+  01a-09-item-morphite/50
+]
+consumes: {
+  power: 0.166666666667
+}

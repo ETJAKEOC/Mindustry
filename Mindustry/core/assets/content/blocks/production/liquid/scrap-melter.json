@@ -1,0 +1,47 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"consumes":{
+	"power":1,
+	"items":{
+	"items":[
+	"scrap/1"
+	]	}	},
+	"outputLiquid":"slag/0.05",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		{"type":"DrawLiquidTile",
+		"drawLiquid":"slag"
+		},
+		"DrawRegion",
+		"DrawLiquidOutputs"
+		]	},
+
+	"research":{
+	"parent":"laser-incinerator",
+	"requirements":[
+	"nickel/1500",
+	"tungsten/1500",
+	"graphite/600"
+	]	},
+
+	"requirements":[
+	"nickel/50",
+	"tungsten/30",
+	"graphite/20"
+	],
+
+	"health":560,
+	"size":2,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemCapacity":20,
+	"liquidCapacity":100,
+	"craftTime":80
+}

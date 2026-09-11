@@ -1,0 +1,150 @@
+{
+	"type":"legs",
+	"legCount":6,
+	"legMoveSpace":1,
+	"legLength":18,
+	"legExtension":-3,
+	"legBaseOffset":7,
+	"legSpeed":0.2,
+	"legLengthScl":0.95,
+	"legForwardScl":0.9,
+	"legGroupSize":3,
+	"legMaxLength":1.1,
+	"legMinLength":0.2,
+	"legContinuousMove":true,
+	"hovering":true,
+	"lockLegBase":true,
+	"outlineColor":"2E2F34FF",
+	"dpsEstimate":170,
+
+	"research":{
+	"parent":"wulfrum-tank",
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"speed":0.8,
+	"rotateSpeed":2,
+	"hitSize":30,
+	"health":1790,
+	"faceTarget":true,
+	"armor":5,
+	"drag":0.4,
+	"range":360,
+	"maxRange":130,
+	"targetAir":false,
+	"itemCapacity":80,
+
+	"weapons":[
+	{"name":"wulfrum-mount",
+	"layerOffset":1,
+	"mirror":false,
+	"reload":120,
+	"x":0,"y":-4.5,
+	"shootY":8,
+	"rotationLimit":45,
+	"rotateSpeed":1.5,
+	"rotate":true,
+	"inaccuracy":1,
+	"shootSound":"missileSmall",
+	"cooldownTime":20,
+	"shootStatus":"slow",
+	"shootStatusDuration":180,
+
+	"parts":[
+		{"type":"RegionPart",
+		"suffix":"-blade",
+		"moveRot":-25,
+		"mirror":true,
+		"progress":{
+		"type":"warmup",
+		"op":"blend",
+		"other":"reload",
+		"amount":0.5
+		}	}	],
+
+		"shoot":{
+		"shots":3,
+		"shotDelay":5
+		},
+
+	"bullet":{
+		"type":"BasicBulletType",
+		"spawnUnit":"calamity-wulfrum-homing-missile",
+
+		"trailColor":"BAFFF9FF",
+		"trailParam":2,
+		"trailWidth":1.5,"trailLength":6,
+		"trailRotation":true,
+		"trailInterval":1,
+		"trailEffect":"disperseTrail",
+
+	"shootEffect":"lancerLaserShoot",
+
+	"hitEffect":{
+	"type":"multiEffect",
+	"effects":[
+	{"type":"WaveEffect",
+	"lifetime":15,
+	"sizeFrom":0,
+	"sizeTo":30,
+	"strokeFrom":7.5,
+	"strokeTo":0,
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":20,
+	"length":50,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":5,
+	"lenTo":5,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	},
+	{"type":"ParticleEffect",
+	"offset":30,
+	"particles":10,
+	"lifetime":25,
+	"length":30,
+	"interp":"circleOut",
+	"sizeInterp":"pow5In",
+	"cone":-360,
+	"line":true,
+	"strokeFrom":1.5,
+	"strokeTo":1.5,
+	"lenFrom":7,
+	"lenTo":7,
+	"lightColor":"BAFFF9FF",
+	"colorFrom":"36B1DDFF",
+	"colorTo":"BAFFF9FF"
+	}	]	}
+	}	},
+		{"shootOnDeath":true,
+	"controllable":false,
+	"shootSound":"none",
+	"shootCone":360,
+		"bullet":{
+		"collidesAir":false,
+		"collides":false,
+		"instantDisappear":true,
+		"hittable":false,
+		"absorbable":false,
+		"splashDamageRadius":24,
+		"splashDamage":30,
+		"hitSound":"WulfrumDeath",
+		"hitSoundVolume":5,
+		"keepVelocity":false,
+		"despawnHit":true,
+		"shootEffect":"none",
+		"hitEffect":"none"
+	}	}	]
+}

@@ -1,0 +1,26 @@
+{
+//	"type":"BeamNode",
+	"category":"power",
+
+	"research":{
+	"parent":"hydraulic-generator",
+	"requirements":[
+	"nickel/20"
+	]	},
+
+	"requirements":[
+	"nickel/8"
+	],
+
+	"consumes":{"powerBuffered":2000},
+
+	"size":1,
+	"health":250,
+	"range":10,
+	"fogRadius":1,
+	"hasPower":true,
+	"outputsPower":true,
+	"consumesPower":true,
+	"laserColor1":"FFFFFFFF",
+	"laserColor2":"FFE18FFF"
+}

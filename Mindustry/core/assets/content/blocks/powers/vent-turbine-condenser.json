@@ -1,0 +1,44 @@
+{
+//	"type":"ThermalGenerator",
+	"category":"power",
+
+	"ambientSound":"hum",
+	"ambientSoundVolume":0.06,
+	"generateEffect":"turbinegenerate",
+	"effectChance":0.04,
+
+	"size":3,
+	"attribute":"steam",
+	"fogRadius":3,
+	"health":1420,
+	"floating":false,
+	"powerProduction":0.5,
+	"displayEfficiency":false,
+	"minEfficiency":8.9999,
+	"displayEfficiencyScale":0.1111111111111,
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		{"type":"DrawBlurSpin",
+		"suffix":"-rotator"
+		},
+		"DrawDefault"
+		]	},
+
+	"consumes":{"powerBuffered":20000},
+
+	"research":{
+	"parent":"geothermal-generator",
+	"requirements":[
+	"nickel/4000",
+	"graphite/2000"
+	]	},
+
+	"requirements":[
+	"nickel/40",
+	"graphite/20"
+	]
+}

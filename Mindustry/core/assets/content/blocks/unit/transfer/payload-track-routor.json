@@ -1,0 +1,23 @@
+{
+//	"type":"PayloadRouter",
+	"category":"units",
+
+	"research":{
+	"parent":"payload-track",
+	"requirements":[
+	"chromium/1250",
+	"graphite/750",
+	"silicon/750"
+	]	},
+
+	"requirements":[
+	"chromium/25",
+	"graphite/15",
+	"silicon/15"
+	],
+
+	"size":3,
+	"moveTime":54,
+	"moveForce":603,
+	"payloadLimit":3
+}

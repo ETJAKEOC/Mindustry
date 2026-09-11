@@ -1,0 +1,23 @@
+{
+	"type": "Wall",
+	"category": "defense",
+
+	"research": {
+	"parent": "lab-protective-wall",
+	"requirements": [
+	"chromium/3200",
+	"nickel/2400"
+	]
+	},
+
+	"requirements": [
+	"chromium/32",
+	"nickel/24"
+	],
+
+	"health":2800,
+	"armor":10,
+	"size":2,
+	"insulated":true,
+	"absorbLasers":true
+}

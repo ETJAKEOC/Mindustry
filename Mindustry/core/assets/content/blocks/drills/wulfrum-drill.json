@@ -1,0 +1,41 @@
+{
+	"type":"BeamDrill",
+	"category":"production",
+
+	"research":{
+	"parent":"wulfrum-node",
+	"requirements":[
+	"wulfrum-steel/5000",
+	"silicon/6000",
+	"graphite/1000"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/50",
+	"silicon/60",
+	"graphite/10"
+	],
+
+	"consumes":{
+		"power":0.8,
+		"liquid":{
+		"liquid":"hydrogen",
+		"amount":0.003333333333333,
+		"booster":true,
+		"optional":true
+		}	},
+
+	"itemCapacity":50,
+	"liquidCapacity":50,
+	"size":3,
+	"health":1090,
+	"armor":3,
+	"tier":5,
+	"range":6,
+	"fogRadius":3,
+	"drillTime":50,
+	"hasShadow":true
+}

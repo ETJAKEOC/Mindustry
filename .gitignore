@@ -1,0 +1,78 @@
+# Output directory for build artifacts
+output/
+/output/
+
+# Build outputs and Gradle caches
+**/build/
+**/.gradle/
+**/local.properties
+**/bin/
+**/out/
+**/dist/
+**/nbbuild/
+**/nbdist/
+
+# Generated source and assets
+**/src/mindustry/gen/
+Mindustry/core/assets/sprites/sprites*
+Mindustry/core/assets/sprites/fallback/
+Mindustry/core/assets/sprites/block_colors.png
+Mindustry/core/assets/version.properties
+Mindustry/core/assets/locales
+Mindustry/core/assets/cache/
+Mindustry/core/assets/saves/
+Mindustry/core/assets/mindustry-saves/
+Mindustry/core/assets/mindustry-maps/
+Mindustry/core/assets/bundles/output/
+Mindustry/core/assets/.gifimages/
+Mindustry/core/assets/gifexport/
+Mindustry/core/assets-raw/sprites/generated/
+Mindustry/core/assets-raw/sprites_out/
+Mindustry/core/assets-raw/fontgen/out/
+Mindustry/core/assets-raw/fontgen/icons/
+Mindustry/core/assets-raw/fontgen/icon_parts/
+Mindustry/core/assets-raw/sprites/ui/sectors/*.json
+
+# Application runtime/export paths
+/deploy/
+/gifs/
+/saves/
+/changelog
+steam_appid.txt
+/test_files/
+packr-out/
+config/
+MODS/
+
+# Java and OS artifacts
+*.class
+*.war
+*.ear
+hs_err_pid*
+crash-report-*
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+*.ipr
+*.iws
+*.iml
+.vscode/
+.classpath
+.project
+.metadata/
+.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
+nbproject/
+nbactions.xml
+nb-configuration.xml
+
+# Gradle
+gradle-app.setting
+gradle/gradle-daemon-jvm.properties

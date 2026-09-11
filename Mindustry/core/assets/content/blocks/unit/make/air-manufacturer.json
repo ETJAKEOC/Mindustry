@@ -1,0 +1,44 @@
+{
+//	"type":"UnitFactory",类型
+	"category":"units",
+
+	"research":{
+	"parent":"mech-manufacturer",
+	"requirements":[
+	"tungsten/2700",
+	"graphite/1800",
+	"silicon/2400"
+	]	},
+
+	"requirements":[
+	"tungsten/90",
+	"graphite/60",
+	"silicon/80"
+	],
+
+	"consumes":{"power":5},
+
+	"health":1290,
+	"size":3,
+
+	"plans":[
+		{"unit":"dust",
+		"time":1200,
+		"requirements":[
+		"nickel/50",
+		"silicon/60"
+		]	},
+/*		{"unit":"cloud",
+		"time":3000,
+		"requirements":[
+		"chromium/60",
+		"silicon/80"
+		]	}*/
+		{"unit":"gather",
+		"time":2400,
+		"requirements":[
+		"nickel/60",
+		"chromium/30",
+		"silicon/60"
+		]	}	]
+}

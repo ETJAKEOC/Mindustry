@@ -1,0 +1,160 @@
+type: legs
+controller: BuilderAI
+legCount: 6
+lockLegBase: true
+legContinuousMove: true
+legExtension: -3
+legBaseOffset: 3
+legLength: 22
+legMaxLength: 1.1
+legMinLength: 0.2
+legSpeed: 0.14
+legGroupSize: 3
+legForwardScl: 1.05
+legLengthScl: 0.95
+legPhysicsLayer: false
+legStraightness: 0.3
+hovering: true
+faceTarget: true
+health: 600
+hitSize: 18
+armor: 4
+speed: 1.7
+mineWalls: true
+mineSpeed: 16
+mineTier: 1
+buildSpeed: 2.75
+accel: 0.1
+drag: 0.075
+groundLayer: 60
+shadowElevation: 0.1
+rotateSpeed: 5.75
+itemCapacity: 25
+outlineColor: 26262F
+fogRadius: 20
+isEnemy: false
+range: 160
+stepShake: 0
+stepSound: walkerStepSmall
+stepSoundVolume: 0.8
+stepSoundPitch: 0.75
+abilities: [
+  {
+    type: ShieldRegenFieldAbility
+    reload: 300
+    range: 60
+    amount: 30
+    max: 600
+    soundVolume: 0.2
+  }
+]
+weapons: [
+  {
+    x: -9
+    y: 7.75
+    name: evernight-blade
+    reload: 30
+    recoil: 1.5
+    mirror: true
+    rotate: false
+    alternate: false
+    shootSound: shootLaser
+    shootSoundVolume: 1.2
+    layerOffset: -0.002
+      bullet: { 
+      type: BasicBulletType
+      damage: 10
+      width: 5
+      splashDamageRadius: 16
+      splashDamage: 20
+      lifetime: 40
+      speed: 5
+      smokeEffect:shootSmokeSquare
+      trailColor: d8f18c
+      trailWidth: 3
+      trailLength: 4
+      trailParam: 1.75
+      trailInterval: 6
+      trailEffect: missileTrail
+      backColor: d8f18c
+      hitColor: d8f18c
+      buildingDamageMultiplier: 0.01
+      collidesTeam: true
+      healPercent: 7.5
+      despawnSound: explosion
+      shootEffect: { 
+        type: MultiEffect
+        effects: [
+          {
+            type: WaveEffect
+            colorFrom: d8f18c
+            colorTo: d8f18cf9
+            sizeFrom: 0
+            sizeTo: 5
+            lifetime: 9
+            strokeFrom: 0.2
+            strokeTo: 0.8
+            sides: 4
+            rotation: 0
+            offsetX: 0
+          }
+        ]
+      }
+      hitEffect: hitBulletColor
+      despawnEffect: {
+        type: MultiEffect
+        effects: [
+          {
+            type: particleEffect
+            colorFrom: d8f18c
+            colorTo: d8f18c
+            sizeFrom: 1.8
+            sizeTo: 0
+            lifetime: 8
+            strokeFrom: 1.6
+            strokeTo: 0.4
+          }
+          {
+            type: WaveEffect
+            colorFrom: d8f18c
+            colorTo: d8f18c
+            sizeFrom: 0
+            sizeTo: 9
+            lifetime: 9
+            strokeFrom: 0.8
+            strokeTo: 0.2
+          }
+        ]
+      }
+    }
+  }
+  {
+    x: 0
+    y: -4.5
+    name: evernight-mount
+    reload: 48
+    rotate: true
+    mirror: false
+    shootSound: shootElectric
+    shootSoundVolume: 0.2
+    rotateSpeed: 3
+    bullet: {
+    type: LightningBulletType
+     lightningLength: 16
+     damage: 35
+     pierce: false
+     pierceBuilding: false
+     lightningColor: D8F18C
+    }
+  }
+]
+research: {
+  #TODO - change to proper sector
+  parent: 14n-04-sepia
+  objectives: [
+    {
+      type: OnSector
+      preset: 20t-37-myrra-heights
+    }
+  ]
+}

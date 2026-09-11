@@ -1,0 +1,39 @@
+{
+//	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":["DrawDefault",
+	"DrawFlame"]	},
+
+	"research":{
+	"parent":"silicon-heat-furnace",
+	"requirements":[
+	"nickel/300",
+	"graphite/350"
+	]	},
+
+	"requirements":[
+	"nickel/60",
+	"graphite/70"
+	],
+
+	"consumes":{"power":2,
+	"items":{"items":[
+	"nickel/3",
+	"sand/6"
+	]	}	},
+
+	"outputItems":[
+	"metaglass/4"
+	],
+
+	"size":3,
+	"health":360,
+	"itemCapacity":40,
+	"hasPower":true,
+	"hasLiquids":false,
+	"hasItems":true,
+	"craftTime":90,
+	"updateEffect":"none"
+}

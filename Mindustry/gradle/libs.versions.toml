@@ -1,0 +1,39 @@
+[versions]
+badlogicgamesJnigenJnigenGradle = "3.1.2"
+dalvikDx = "16.0.1"
+de = "5.7.0"
+gradle = "9.4.0"
+gradleToolchainsFoojayResolver = "1.0.0"
+gradleToolchainsFoojayResolverConvention = "1.0.0"
+guava = "33.7.1-jre"
+javaparserCore = "3.28.2"
+javapoet = "1.13.0"
+jline = "4.4.3"
+jnigenGradle = "3.1.2"
+json = "20260814"
+junitPlatform = "6.1.3"
+jupiter = "6.1.3"
+lz4Java = "1.11.2"
+robovmGradlePlugin = "2.3.26"
+
+[libraries]
+dalvik-dx = { group = "com.jakewharton.android.repackaged", name = "dalvik-dx", version.ref = "dalvikDx" }
+gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+javaparser-core = { group = "com.github.javaparser", name = "javaparser-core", version.ref = "javaparserCore" }
+javapoet = { group = "com.squareup", name = "javapoet", version.ref = "javapoet" }
+jline = { group = "org.jline", name = "jline", version.ref = "jline" }
+jnigen-gradle = { group = "com.badlogicgames.jnigen", name = "jnigen-gradle", version.ref = "jnigenGradle" }
+json = { group = "org.json", name = "json", version.ref = "json" }
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "jupiter" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "jupiter" }
+junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "jupiter" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junitPlatform" }
+lz4-java = { group = "at.yawk.lz4", name = "lz4-java", version.ref = "lz4Java" }
+robovm-gradle-plugin = { group = "com.mobidevelop.robovm", name = "robovm-gradle-plugin", version.ref = "robovmGradlePlugin" }
+
+[plugins]
+badlogicgames-jnigen-jnigen-gradle = { id = "com.badlogicgames.jnigen.jnigen-gradle", version.ref = "badlogicgamesJnigenJnigenGradle" }
+de = { id = "de.undercouch.download", version.ref = "de" }
+gradle-toolchains-foojay-resolver = { id = "org.gradle.toolchains.foojay-resolver", version.ref = "gradleToolchainsFoojayResolver" }
+gradle-toolchains-foojay-resolver-convention = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "gradleToolchainsFoojayResolverConvention" }

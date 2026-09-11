@@ -1,0 +1,13 @@
+difficulty: 8
+planet: frostnova
+sector: 228
+research: {
+  parent: 19s-09-hazardous-wasteland
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-09-hazardous-wasteland
+    }
+  ]
+}
+outline: false

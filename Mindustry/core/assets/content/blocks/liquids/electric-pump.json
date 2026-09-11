@@ -1,0 +1,26 @@
+{
+	"type":"Pump",
+	"category":"liquid",
+
+	"research":{
+	"parent":"fluid-pipeline",
+	"requirements":[
+	"nickel/900",
+	"silicon/600",
+	"metaglass/300"]	},
+
+	"requirements":[
+	"nickel/30",
+	"silicon/20",
+	"metaglass/10"
+	],
+
+	"consumes": {
+		"power": 0.4
+	},
+
+	"size":2,
+	"health":320,
+	"pumpAmount":0.333333333333333,
+	"liquidCapacity":300
+}

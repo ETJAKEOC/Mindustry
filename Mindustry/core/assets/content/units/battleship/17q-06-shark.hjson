@@ -1,0 +1,53 @@
+type: naval
+speed: 0.7
+health: 2400
+armor: 5
+aimDst: 10
+range: 150
+drag: 0.1
+accel: 0.8
+hitSize: 15
+rotateSpeed: 2.25
+trailLength: 15
+outlineColor: 0c0e29
+moveSoundVolume: 0.55
+moveSoundPitchMin: 0.9
+moveSoundPitchMax: 0.9
+moveSound: shipMove
+itemCapacity: 20
+weapons: [
+{
+    mirror: true
+    rotate: true
+    alternate: true
+    name: shark-mine
+    rotateSpeed: 2
+    x: 4
+    y: -1
+    reload: 15
+    recoil: 0
+    shootSound: shootMissileShort
+    shootSoundVolume: 1.2
+    bullet: {
+      type: MissileBulletType
+      width: 7
+      height: 9
+      homingPower: 0.05
+      homingDelay: 30
+      homingRange: 120
+      speed: 2.6
+      lifetime: 60
+      hitEffect: blastExplosion
+      despawnHit: true
+      damage: 46
+      splashDamage: 15
+      splashDamageRadius: 24
+      despawnEffect: blastExplosion
+      }
+}
+]
+immunities: [
+  13m-06-contaminated
+]
+research: 17q-05-bulbhead
+researchCostMultiplier: 0.5

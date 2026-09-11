@@ -1,0 +1,208 @@
+{
+	"type":"payload",
+	"flying":true,
+	"accel":0.07,"drag":0.06,
+	"faceTarget":false,
+	"useEngineElevation":false,
+	"lowAltitude":true,
+	"outlineColor":"2E2F34FF",
+
+	"engineSize":3.5,
+	"engineOffset":15,
+	"trailLength":7,
+
+	"parts":[
+	{"type":"HoverPart",
+	"mirror":false,
+	"x":0,"y":0,
+	"radius":25,
+	"phase":90,
+	"stroke":2,
+	"layerOffset":-0.001,
+	"color":"C2FF43FF"
+	}	],
+
+	"hitSize":33.5,
+	"rotateSpeed":2,
+	"itemCapacity":50,
+	"speed":0.8,
+	"health":3050,
+	"armor":7,
+	"range":168,
+
+	"research":{
+	"parent":"sandstone",
+	"requirements":[
+	"plastanium/1600",
+	"silicon/2600"
+	],
+	"objectives":[
+	"second-refabricator"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+	{"name":"massif-weapon",
+		"shootCone":15,
+		"mirror":false,
+		"top":true,
+		"x":0,"y":0,
+		"reload":180,
+		"recoil":0.5,
+		"rotate":true,
+		"rotateSpeed":100,
+		"shootSound":"laser",
+
+	"shoot":{
+	"firstShotDelay":25
+	},
+
+		"bullet":{
+		"keepVelocity":false,
+		"type":"basicBulletType",
+		"sprite":"calamity-plasma",
+		"damage":50,
+		"width":16,
+		"height":16,
+		"speed":4,
+		"lifetime":60,
+		"homingDelay":6,
+		"homingPower":1,
+		"homingRange":90,
+		"weaveScale":5,
+		"weaveMag":3,
+		"splashDamageRadius":8,
+		"splashDamage":70,
+
+	"hitEffect":{
+		"type":"WrapEffect",
+		"effect":"dynamicSpikes",
+		"color":"84F491FF",
+		"rotation":56
+		},
+
+	"despawnEffect":"smokeCloud",
+	"smokeEffect":"smokeCloud",
+	"chargeEffect":
+		{"type":"ParticleEffect",
+		"line":true,
+		"particles":15,
+		"lifetime":25,
+		"length":35,
+		"baseLength":-35,
+		"cone":-360,
+		"lenFrom":14,
+		"lenTo":0,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF"
+		},
+
+	"shootEffect":
+		{"type":"ParticleEffect",
+		"particles":1,
+		"sizeFrom":1,
+		"sizeTo":9,
+		"length":0,
+		"lifetime":28,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF",
+		"cone":360
+		},
+
+	"frontColor":"84F491FF",
+		"backColor":"F2FFF3FF",
+		"trailChance":1,
+		"trailEffect":{
+		"type":"ParticleEffect",
+		"particles":1,
+		"length":0,
+		"lifetime":20,
+		"sizeFrom":16,
+		"region":"calamity-plasma-back",
+		"colorFrom":"84F491FF",
+		"colorTo":"64CF8DAA"
+		},
+
+		"fragBullets":4,
+		"fragBullet":{
+		"type":"FlakBulletType",
+		"explodeRange":48,
+		"damage":30,
+		"splashDamage":60,
+		"splashDamageRadius":48,
+		"sprite":"calamity-mine",
+		"frontColor":"84F491FF",
+		"backColor":"F2FFF3FF",
+		"spin":0.4,
+		"height":10,"width":10,
+		"lifetime":360,
+		"shrinkX":0.2,"shrinkY":0.2,
+		"speed":3,
+		"drag":0.05
+		}	}	},
+
+	{"name":"sandstone-weapon",
+		"shootCone":15,
+		"mirror":true,
+		"rotate":true,
+		"inaccuracy":0,
+		"rotateSpeed":6,
+		"x":8.5,"y":-8.25,
+		"reload":60,
+		"shootSound":"laser",
+		"recoil":1,
+
+	"shoot":{
+	"shots":3,
+	"shotDelay":4
+	},
+
+		"bullet":{
+		"damage":30,
+		"width":12,"height":12,
+		"speed":8,"lifetime":18,
+		"frontColor":"84F491FF",
+		"backColor":"64CF8DAA",
+
+		"hitSound":"explosion",
+
+		"trailParam":2,
+		"trailWidth":3,"trailLength":10,
+		"trailEffect":"none",
+		"trailColor":"64CF8DAA",
+
+		"shootEffect":{
+		"type":"WaveEffect",
+		"lifetime":10,
+		"sizeFrom":0,
+		"sizeTo":15,
+		"colorFrom":"84F491FF",
+		"colorTo":"64CF8DAA",
+		"strokeFrom":1.5,
+		"strokeTo":0},
+
+	"hitEffect":{
+		"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF",
+		"strokeFrom":3.5,
+		"strokeTo":0
+		},
+
+	"despawnEffect":{
+		"type":"WaveEffect",
+		"lifetime":25,
+		"sizeFrom":0,
+		"sizeTo":20,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF",
+		"strokeFrom":3.5,
+		"strokeTo":0
+		}	}	}	]
+}

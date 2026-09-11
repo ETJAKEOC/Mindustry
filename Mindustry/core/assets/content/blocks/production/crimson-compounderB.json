@@ -1,0 +1,33 @@
+{
+  type: GenericSmelter
+name: Crimson Compounder B
+description: Creates special crimson compound from lead, thorium and vulcanite.
+liquidCapacity: 50
+size: 2
+hasPower: true
+hasLiquids: false
+hasItems: true
+craftTime: 100
+updateEffect: smeltsmoke
+consumes: {
+  power: 4
+  items: {
+    items: [
+      lead/3,
+      thorium/2,
+      vulcanite/2,
+    ]
+  }
+}
+requirements: [
+  obsidian/50
+  graphite/50
+  silicon/70
+  crimson-compoundA/40
+]
+category: crafting
+research: crimson-compounderA
+idleSound: respawning
+idleSoundVolume: 0.5
+outputItem: crimson-compoundB/1
+}

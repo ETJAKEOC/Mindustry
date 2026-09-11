@@ -1,0 +1,21 @@
+{
+//	"type":"DuctBridge",
+	"range":5,
+	"category":"distribution",
+
+	"research":{
+	"parent":"track-router",
+	"requirements":[
+	"nickel/30"
+	]
+	},
+
+	"requirements":[
+	"nickel/10"
+	],
+
+	"size":1,
+	"health":250,
+	"speed":2.4,
+	"itemCapacity":1
+}

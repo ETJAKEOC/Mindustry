@@ -1,0 +1,23 @@
+{
+	"type":"LiquidBridge",
+	"range":5,
+	"category":"liquid",
+
+	"research":{
+	"parent":"fluid-pipeline-router",
+	"requirements":[
+	"nickel/100",
+	"metaglass/100"
+	]	},
+
+	"requirements":[
+	"nickel/10",
+	"metaglass/10"
+	],
+
+	"health":300,
+	"liquidCapacity":30,
+	"fadeIn":false,
+	"moveArrows":false,
+	"hasPower":false
+}

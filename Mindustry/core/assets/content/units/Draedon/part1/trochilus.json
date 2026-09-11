@@ -1,0 +1,48 @@
+{
+	"type":"flying",
+	"defaultController":"minerAI",
+	"flying":true,
+	"lowAltitude":true,
+	"isEnemy":false,
+	"accel":0.12,"drag":0.06,
+
+	"research":{
+	"parent":"primary-machine-manufacturer",
+	"requirements":[
+	"nickel/3000",
+	"chromium/1500",
+	"silicon/3000"
+	]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"mineItems":["nickel","tungsten","chromium"],
+
+	"hitSize":16,
+	"range":80,
+	"mineWalls":true,
+	"engineSize":3.4,
+	"engineOffset":9.2,
+	"trailLength":3,
+	"speed":1.2,
+	"health":1250,
+	"itemCapacity":120,
+	"mineSpeed":10,
+	"mineTier":6,
+	"armor":12,
+	"outlineColor":"2E2F34FF",
+
+	"weapons": [
+		{"name": "repair-beam-weapon-center",
+		"type":"RepairBeamWeapon",
+		"x":0,"y":-6.5,
+		"shootY":6,
+		"beamWidth": 0.7,
+		"mirror":false,
+		"repairSpeed":6,
+		"bullet": {
+		"maxRange":120
+		}	}	]
+}

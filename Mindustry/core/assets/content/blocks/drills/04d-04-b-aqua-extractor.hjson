@@ -1,0 +1,66 @@
+type: AttributeCrafter
+size: 2
+attribute: aquanite
+baseEfficiency: 0
+minEfficiency: 1
+liquidCapacity: 30
+hasLiquids: true
+health: 450
+category: production
+research: {
+  parent: 04d-04-b-aqua-dregder
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-12-creek
+    }
+  ]
+}
+itemCapacity: 10
+researchCostMultiplier: 0.5
+requirements: [
+  01a-02-item-nickel/60
+  01a-05-item-aluminium/45
+  01a-06-item-chromium/25
+]
+craftTime: 60
+craftEffect: none
+outputItems: [
+  01a-03-item-aquashard/2
+]
+lightLiquid: 02b-05-hydrowater
+consumes: {
+  liquids: [
+    02b-05-hydrowater/0.083333333
+  ]
+  power: 0.5
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+    type: DrawLiquidTile
+    drawLiquid: 02b-05-hydrowater
+    padding: 1.5
+    }
+    {
+    type: DrawBubbles
+    color: 72ccbd
+    sides: 10
+    recurrence: 3
+    spread: 5
+    radius: 1.5
+    amount: 18
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+ambientSound: loopCultivator
+ambientSoundVolume: 0.055
+squareSprite: false

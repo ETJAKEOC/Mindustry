@@ -1,0 +1,335 @@
+{
+	"type":"payload",
+	"payloadCapacity":976,
+	"rotateSpeed":0.75,
+	"flying":true,
+	"accel":0.3,"drag":0.1,
+	"faceTarget":false,
+	"useEngineElevation":false,
+	"lowAltitude":true,
+	"outlineColor":"2E2F34FF",
+
+	"engineSize":7.5,
+	"engineOffset":55,
+	"engines":[
+	{"x":16.25,"y":-45,
+	"radius":5
+	},
+	{"x":-16.25,"y":-45,
+	"radius":5
+	}	],
+
+	"parts":[
+	{"type":"HoverPart",
+	"mirror":false,
+	"x":0,"y":0,
+	"radius":78,
+	"phase":90,
+	"stroke":2,
+	"layerOffset":-0.001,
+	"color":"C2FF43FF"
+	}	],
+
+	"hitSize":100,
+	"itemCapacity":240,
+	"speed":0.4,
+	"health":41890,
+	"armor":45,
+
+	"research":{
+	"parent":"berg",
+	"requirements":[
+	"chromium/60000",
+	"iridium/30000",
+	"osmium/30000",
+	"metaglass/50000",
+	"silicon/13000",
+	"plastanium/50000"
+	],
+	"objectives":[
+	"rudiment-assembler-module",
+	"senior-refabricator"
+		]	},
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"abilities":[
+		{"type":"SuppressionFieldAbility",
+		"x":0,"y":0,
+		"orbRadius":14,
+		"particleSize":8,
+		"particleColor":"84F491FF",
+		"particles":6,
+		"rotateScl":1,
+		"color":"84F491FF"
+	},
+	{"type":"ForceFieldAbility",
+	"sides":6,
+	"radius":120,
+	"regen":5,
+	"max":9000,
+	"cooldown":2000
+	}	],
+
+	"weapons":[
+	{"name":"heaven-lightingbullet",
+		"shootCone":360,
+		"mirror":false,
+		"top":true,
+		"x":0,"y":0,
+		"inaccuracy":180,
+		"reload":480,
+		"recoil":0.5,
+		"shootSound":"plasmaboom",
+		"rotate":true,
+		"rotateSpeed":100,
+
+	"shoot":{
+	"shots":12,
+	"shotDelay":8
+	},
+
+		"bullet":{
+		"hitEffect":"healWave",
+		"despawnEffect":"healWave",
+
+		"keepVelocity":false,
+		"type":"basicBulletType",
+		"sprite":"calamity-plasma",
+		"damage":200,
+		"width":8,
+		"height":8,
+		"speed":4,
+		"frontColor":"84F491FF",
+		"backColor":"F2FFF3FF",
+		"lifetime":120,
+		"homingDelay":10,
+		"homingPower":0.08,
+		"homingRange":300,
+		"weaveScale":5,
+		"weaveMag":3,
+		"splashDamageRadius":20,
+		"splashDamage":50,
+		"lightningColor":"84F491FF",
+		"lightning":6,
+		"lightningDamage":30,
+		"lightningLength":5,
+		"lightningCone":360,
+		"lightningLengthRand":8,
+
+		"trailChance":1,
+		"trailEffect":{
+		"type":"ParticleEffect",
+		"particles":1,
+		"length":0,
+		"lifetime":20,
+		"sizeFrom":8,
+		"region":"calamity-plasma-back",
+		"colorFrom":"84F491FF",
+		"colorTo":"64CF8DAA"
+		},
+
+	"chargeEffect":
+		{"type":"ParticleEffect",
+		"line":true,
+		"particles":15,
+		"lifetime":23,
+		"length":35,
+		"baseLength":-35,
+		"cone":-360,
+		"lenFrom":14,
+		"lenTo":0,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF"
+		},
+
+	"shootEffect":
+		{"type":"ParticleEffect",
+		"particles":1,
+		"sizeFrom":1,
+		"sizeTo":9,
+		"length":0,
+		"lifetime":28,
+		"colorFrom":"84F491FF",
+		"colorTo":"F2FFF3FF",
+		"cone":360
+		},
+
+	"hitSound":"plasmaboom",
+	"despawnEffect":"smokeCloud",
+	"smokeEffect":"smokeCloud"
+	}	},
+
+		{"name":"heaven-laserbullet",
+		"x":0,"y":0,
+		"inaccuracy":180,
+		"shootCone":360,
+		"shootSound":"cannon",
+		"mirror":false,
+		"reload":480,
+		"controllable":false,
+		"autoTarget":true,
+		"rotate":true,
+		"rotateSpeed":100,
+
+		"shoot":{
+		"firstShotDelay":240,
+		"shots":3,
+		"shotDelay":30
+		},
+
+		"bullet":{
+		"damage":500,
+		"absorbable":false,
+		"homingDelay":10,
+		"homingPower":0.08,
+		"homingRange":300,
+		"healPercent":8,
+		"speed":6,
+		"lifetime":120,
+		"splashDamageRadius":55,
+		"splashDamage":45,
+		"collidesTeam":true,
+		"frontColor":"97FFA8",
+		"backColor":"97FFA8",
+		"sprite":"mine-bullet",
+		"width":28,"height":28,
+		"trailColor":"97FFA8",
+		"trailRotation":true,
+		"trailLength":20,
+		"trailWidth":6,
+
+		"shootEffect":{
+		"type":"MultiEffect",
+		"effects":[
+		{"type":"WaveEffect",
+		"lifetime":20,
+		"sizeFrom":5,
+		"sizeTo":30,
+		"strokeFrom":3,
+		"strokeTo":0,
+		"colorFrom":"97FFA8",
+		"colorTo":"FFFFFF"
+		},
+		{"type":"ParticleEffect",
+		"particles":8,
+		"sizeFrom":6,
+		"sizeTo":0,
+		"length":45,
+		"baseLength":0,
+		"lifetime":35,
+		"colorFrom":"97FFA8",
+		"colorTo":"FFFFFF"
+		}	]	},
+		"smokeEffect":"bigShockwave",
+
+		"hitSound":"plasmaboom",
+
+		"despawnEffect":"none",
+		"hitEffect":{"type":"MultiEffect",
+		"effects":[
+		{"type":"ParticleEffect",
+		"particles":12,
+		"sizeFrom":1.2,
+		"sizeTo":0,
+		"length":80,
+		"baseLength":5,
+		"lifetime":60,
+		"interp":"fastSlow",
+		"sizeInterp":"pow3In",
+		"colorFrom":"97FFA8",
+		"colorTo":"97FFA8"
+		},
+		{"type":"ParticleEffect",
+		"particles":9,
+		"sizeFrom":2,
+		"sizeTo":0,
+		"length":80,
+		"baseLength":5,
+		"lifetime":60,
+		"interp":"fastSlow",
+		"sizeInterp":"pow3In",
+		"colorFrom":"97FFA8",
+		"colorTo":"97FFA8"
+		},
+		{"type":"WaveEffect",
+		"interp":"circleOut",
+		"lifetime":13,
+		"sizeFrom":2,
+		"sizeTo":65,
+		"strokeFrom":6,
+		"strokeTo":0,
+		"colorFrom":"97FFA8",
+		"colorTo":"97FFA8"
+		}	]	},
+
+		"fragRandomSpread":360,
+		"fragBullets":3,
+		"fragBullet":{
+		"type":"LaserBulletType",
+		"length":200,
+		"width":25,
+		"damage":300,
+		"hitEffect":"hitMeltHeal",
+		"shootEffect":"hitMeltHeal",
+		"colors":["64CF8DAA","84F491FF","F2FFF3FF"],
+		"sideAngle":90,
+		"sideLength":18,
+		"sideWidth":1
+		}	}	},
+
+		{"name":"astrolabe-energy-bomb",
+		"x":39.5,"y":-10.25,
+		"mirror":true,
+		"alternate":false,
+		"top":true,
+		"shake":0.5,
+		"reload":300,
+		"recoil":2,
+		"rotate":true,
+		"shootY":13,
+		"rotateSpeed":2.9,
+		"shootSound":"beam",
+		"continuous":true,
+		"cooldownTime":240,
+		"heatColor":"C2FF43FF",
+		"layerOffset":0.003,
+
+		"parts":[
+		{"type":"RegionPart",
+		"suffix":"-blade",
+		"mirror":false,
+		"heatColor":"C2FF43FF",
+		"moveY":-3,
+		"progress":{
+		"type":"recoil",
+		"op":"curve",
+		"interp":"pow2In"
+		}	}	],
+
+		"bullet":{
+		"type":"ContinuousLaserBulletType",
+		"damage":60,
+		"length":320,
+		"width":5,
+		"hitEffect":"hitMeltHeal",
+		"drawSize":300,
+		"lifetime":280,
+		"shake":1,
+		"despawnEffect":"smokeCloud",
+		"smokeEffect":"smokeCloud",
+		"colors":["64CF8DAA","84F491FF","F2FFF3FF"],
+		"shootEffect":{
+		"type":"WaveEffect",
+		"lifetime":20,
+		"sizeFrom":0,
+		"sizeTo":30,
+		"strokeFrom":0,
+		"strokeTo":2,
+		"colorTo":"84F491FF",
+		"colorFrom":"F2FFF3FF"
+		}	}	}
+	]
+}

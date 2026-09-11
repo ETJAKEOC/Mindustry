@@ -1,0 +1,22 @@
+{
+	"type":"ArmoredConduit",
+	"category":"liquid",
+
+	"research":{
+	"parent":"fluid-pipeline-bridge",
+	"requirements":[
+	"tungsten/150",
+	"metaglass/50"
+	]	},
+
+	"requirements":[
+	"tungsten/3",
+	"metaglass/1"
+	],
+
+	"health":250,
+	"liquidCapacity":20,
+	"liquidPressure":1,
+	"bridgeReplacement":"fluid-pipeline-bridge",
+	"junctionReplacement":"fluid-pipeline-connector"
+}

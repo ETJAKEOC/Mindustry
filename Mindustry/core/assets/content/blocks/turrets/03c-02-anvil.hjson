@@ -1,0 +1,143 @@
+type: ItemTurret
+size: 3
+squareSprite: false
+health: 1650
+shootSound: shootDiffuse
+requirements: [
+  01a-01-item-cobalt/125
+  01a-02-item-nickel/275
+  01a-05-item-aluminium/225
+]
+researchCost: [
+  01a-01-item-cobalt/1000
+  01a-02-item-nickel/2000
+  01a-05-item-aluminium/1500
+]
+research: {
+  parent: 03c-01-impale
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-02-mountain-ridge
+    }
+  ]
+}
+coolant: {
+  type: ConsumeLiquid
+  liquid: 02b-02-a-purified-elixir
+  amount: 0.166666667
+}
+coolantMultiplier: 7.5
+category: turret
+recoil: 2
+shake: 1
+outlineColor: 2C2A36
+targetAir: true
+targetGround: true
+rotateSpeed: 2.25
+reload: 50
+range: 140
+shootY: 1
+shoot: {
+  type: ShootSpread
+  shots: 5
+  spread: 14
+}
+maxAmmo: 15
+ammoTypes: {
+  01a-02-item-nickel: {
+    type: BasicBulletType
+    sprite: large-orb
+    buildingDamageMultiplier: 0.2
+    ammoMultiplier: 5
+    hitColor: f6b08a
+    frontColor: f6b08a
+    backColor: f6b08a
+    damage: 35.25
+    homingPower: 0.045
+    knockback: 2
+    width: 8
+    height: 14
+    hitSize: 6
+    speed: 5
+    lifetime: 30
+    trailColor: f6b08a
+    trailChance: -1
+    trailEffect: shootSmokeTitan
+    trailInterval: 3
+    trailRotation: true
+    trailLength: 4
+    trailWidth: 0.5
+  }
+  01a-06-item-chromium: {
+    type: BasicBulletType
+    sprite: large-orb
+    buildingDamageMultiplier: 0.2
+    ammoMultiplier: 5
+    hitColor: bca49f
+    frontColor: bca49f
+    backColor: bca49f
+    damage: 52.75
+    homingPower: 0.045
+    knockback: 4
+    width: 8
+    height: 14
+    hitSize: 6
+    speed: 5
+    lifetime: 30
+    trailColor: bca49f
+    trailChance: -1
+    trailEffect: shootSmokeTitan
+    trailInterval: 3
+    trailRotation: true
+    trailLength: 4
+    trailWidth: 0.5
+  }
+  01a-07-item-clevorite: {
+    type: BasicBulletType
+    sprite: large-orb
+    buildingDamageMultiplier: 0.2
+    ammoMultiplier: 5
+    hitColor: d8f18c
+    frontColor: d8f18c
+    backColor: d8f18c
+    damage: 60.25
+    homingPower: 0.055
+    knockback: 4
+    width: 8
+    height: 14
+    hitSize: 6
+    speed: 5
+    lifetime: 30
+    trailColor: d8f18c
+    trailChance: -1
+    trailEffect: shootSmokeTitan
+    trailInterval: 3
+    trailRotation: true
+    trailLength: 4
+    trailWidth: 0.5
+  }
+}
+drawer: {
+  type: DrawTurret
+  basePrefix: anvil-
+    parts: [
+    {
+      type: RegionPart
+      suffix: -cannon
+      moves: [
+       {
+        progress: recoil
+        rot: -25
+        x: 1.5
+        y: 1
+       }
+      ]
+      progress: warmup
+      moveRot: -5
+      under: true
+      mirror: true
+      heatColor: a65d36
+    }
+  ]
+}

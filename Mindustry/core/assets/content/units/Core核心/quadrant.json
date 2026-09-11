@@ -1,0 +1,77 @@
+{
+	"type":"payload",
+	"payloadCapacity":256,
+	"pickupUnits":false,
+	"vulnerableWithPayloads":true,
+
+	"controller":"BuilderAI",
+	"flying":true,
+	"accel":0.1,"drag":0.05,
+	"engineSize":3.125,
+	"engineOffset":8.5,
+	"trailLength":4,
+	"faceTarget":true,
+	"outlineColor":"2E2F34FF",
+
+	"name":"象限",
+	"description":"配备激光修复系统和建造系统，负责守护象限核心及周边的安全",
+	"research":"quadrant-core",
+
+	"fogRadius":0,
+	"isEnemy":false,
+	"targetable":false,
+	"hittable":false,
+	"rotateSpeed":6,
+	"speed":7.0,
+	"lowAltitude":true,
+	"health":1530,
+	"hitSize":11,
+	"itemCapacity":80,
+	"coreUnitDock":true,
+
+	"mineWalls":true,
+	"mineFloor":true,
+	"mineSpeed":18,
+	"mineTier":4,
+
+	"buildSpeed":2.75,
+
+	"immunities":[
+	"wulfrum-amplify"
+	],
+
+	"weapons":[
+	{"name":"quadrant-heal-weapon",
+		"type":"RepairBeamWeapon",
+		"x":-13,"y":0,
+		"shootY":12.5,
+		"rotationLimit":30,
+		"rotate":true,
+		"rotateSpeed":8,
+		"mirror":false,
+		"layerOffset":-0.001,
+		"widthSinMag":0.11,
+		"reload":20,
+		"beamWidth":0.7,
+		"shootCone":40,
+		"repairSpeed":7,
+		"fractionRepairSpeed":0.2,
+		"laserColor":"FFD37FFF",
+		"healColor":"FFD37FFF",
+		"targetUnits":false,
+		"targetBuildings":true,
+		"autoTarget":false,
+		"controllable":true,
+		"bullet":{
+		"maxRange":96
+	}	},
+	{"name":"quadrant-build-weapon",
+		"type":"BuildWeapon",
+		"x":13,"y":0,
+		"shootY":13.5,
+		"rotate":true,
+		"rotateSpeed":8,
+		"mirror":false,
+		"layerOffset":-0.001
+		}	]
+}

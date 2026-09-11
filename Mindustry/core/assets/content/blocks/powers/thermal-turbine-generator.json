@@ -1,0 +1,49 @@
+{
+	"type":"ConsumeGenerator",
+	"category":"power",
+
+	"size":3,
+	"health":1060,
+	"generateEffect":"lightning",
+	"itemCapacity":30,
+	"liquidCapacity":100,
+	"hasLiquids":true,
+	"powerProduction":35,
+
+	"research":{
+	"parent":"geothermal-generator",
+	"requirements":[
+	"plastanium/1500",
+	"graphite/1000",
+	"silicon/1500"
+	]	},
+
+	"requirements":[
+	"plastanium/30",
+	"graphite/20",
+	"silicon/30"
+	],
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	"DrawDefault",
+	{"type":"DrawRegion",
+	"suffix":"-rotator",
+	"rotateSpeed":9,
+	"rotation":45
+	},
+	{"type":"DrawRegion",
+	"suffix":"-cap"
+	},
+	"DrawWarmupRegion",
+	{"type":"DrawLiquidRegion",
+	"drawLiquid":"water"
+	}	]	},
+
+	"consumes":{
+	"items":[
+	"pyratite/2"
+	],
+	"liquid":"water/0.5"
+	}
+}

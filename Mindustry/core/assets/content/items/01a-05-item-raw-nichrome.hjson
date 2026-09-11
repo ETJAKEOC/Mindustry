@@ -1,0 +1,7 @@
+color: a88b65
+hardness: 1
+lowPriority: true
+buildable: false
+cost: 0.3
+research: 01a-03-item-aquashard
+shownPlanets: [frostnova, teresa]

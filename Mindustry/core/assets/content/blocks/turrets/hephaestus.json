@@ -1,0 +1,98 @@
+{
+	"type":"ItemTurret",
+	"category":"turret",
+
+	"drawer":{
+	"type":"drawTurret",
+	"basePrefix":"vitospp-",
+	},
+
+	"research":{
+	"parent":"erupt",
+	"requirements":[
+	"chromium/300",
+	"plastanium/100",
+	"graphite/2000"
+	]	},
+
+	"requirements":[
+	"chromium/300",
+	"plastanium/100",
+	"graphite/80"
+	],
+
+	"consumes":{
+	"coolant":{"amount":0.1,"optional":true}	},
+
+	"health":1640,
+	"size":3,
+	"reload":1,
+	"range":280,
+	"inaccuracy":0,
+	"recoilAmount":3,
+	"rotateSpeed":5,
+	"maxAmmo":600,
+	"ammoPerShot":1,
+
+	"ammoTypes":{
+		"plastanium":{
+			"speed":16,
+			"damage":40,
+			"pierce":true,
+			"pierceCap":3,
+//			"reloadMultiplier":0.3,
+			"ammoMultiplier":4,
+			"knockback":0.4,
+			"width":9,
+			"height":36,
+			"inaccuracy":2.5,
+			"backColor":"C6D676FF",
+			"frontColor":"EBF2A2FF",
+			"fragBullets":5,
+			"fragBullet":{
+		"width":15,"height":15,
+			"pierce":true,
+			"pierceCap":2,
+			"lifetime":6,
+			"speed":5.5,
+			"damage":26,
+			"backColor":"C6D676FF",
+			"frontColor":"EBF2A2FF",
+			"hitEffect":"none",
+			"despawnEffect":"none"
+			},
+
+			"lifetime":17.5
+		},
+		"surge-alloy":{
+			"speed":17.5,
+			"status":"shocked",
+			"damage":60,
+			"pierce":"true",
+			"pierceCap":5,
+//			"reloadMultiplier":0.5,
+			"ammoMultiplier":4,
+			"knockback":0.8,
+		"width":15,"height":15,
+			"inaccuracy":1,
+			"lightningDamage":30,
+			"lightning":3,
+			"lightningLength":6,
+			"lifetime":16
+		},
+		"pyratite":{
+			"speed":10,
+			"status":"burning",
+			"damage":36,
+//			"reloadMultiplier":0.5,
+			"ammoMultiplier":5,
+		"width":15,"height":15,
+			"inaccuracy":3.5,
+			"splashDamageRadius":18.4,
+			"splashDamage":15,
+			"lifetime":28,
+			"backColor":"CC6600",
+			"frontColor":"FFAA33"
+		}
+	}
+}

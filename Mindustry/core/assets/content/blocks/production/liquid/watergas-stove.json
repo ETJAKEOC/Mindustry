@@ -1,0 +1,54 @@
+{
+	"type":"GenericCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+		{"type":"DrawRegion",
+		"suffix":"-bottom"
+		},
+		{"type":"DrawLiquidTile",
+		"drawLiquid":"hydrogen"
+		},
+		"DrawRegion",
+		"DrawLiquidOutputs"
+		]	},
+
+	"consumes":{
+	"power":3,
+	"items":[
+	"coal/5"
+	],
+	"liquids":[
+	"water/0.3",
+	"ozone/0.166666666666666"
+	]	},
+
+	"outputLiquids":[
+	"hydrogen/0.5"
+	],
+
+	"research":{
+	"parent":"atmospheric-separator",
+	"requirements":[
+	"tungsten/5000",
+	"plastanium/2500",
+	"silicon/5000"
+	]	},
+
+	"requirements":[
+	"tungsten/100",
+	"plastanium/50",
+	"silicon/100"
+	],
+
+	"health":1240,
+	"size":3,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"itemCapacity":30,
+	"liquidCapacity":100,
+	"craftEffect":"turbinegenerate",
+	"craftTime":90
+}

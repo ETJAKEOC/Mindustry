@@ -1,0 +1,11 @@
+{
+  "name": "cold-plasma",
+  "temperature": -10,
+  "viscosity": -1,
+  "gas": true,
+  "lightColor": "A9D8FFFF",
+  "effect": "freezing",
+  "color": "A9D8FFFF",
+  "research": "astrolite"
+}
+

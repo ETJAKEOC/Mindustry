@@ -1,0 +1,21 @@
+{
+	"type":"DuctRouter",
+	"category":"distribution",
+
+	"research":{
+	"parent":"secure-junction",
+	"requirements":[
+	"chromium/300"
+	]	},
+
+	"requirements":[
+	"chromium/3"
+	],
+
+	"size":1,
+	"health":100,
+	"solid":false,
+	"underBullets":true,
+	"speed":3,
+	"itemCapacity":1
+}

@@ -1,0 +1,7 @@
+research: {
+  parent: 26z-03-item-tablet-lignite
+  objectives: [
+    01a-04-item-hardened-sand
+  ]
+}
+databaseCategory: lore-tablets

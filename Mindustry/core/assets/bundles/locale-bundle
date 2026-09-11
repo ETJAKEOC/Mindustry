@@ -1,0 +1,34 @@
+# Check Maps Properties - These are just an example
+# if u want Exoprosopa Lores being translated, hop in Discord and contact Kevin :3
+
+en:
+bio.chip1 = [salmon]High Radiation Area\nOnly Nikkes Allowed
+bio.chip2 = [accent]Miasma Capacity = [salmon]88%\n[accent]Status = [salmon]Danger
+bio.chip3 = [salmon]All defense point has been destroyed.\nAll remaining personel units evacuate to\n[accent]Armored Warfare Facility[] immediately!
+bio.chip4 = -- - -- -- --- -- -
+bio.chip5 = - - --- - -- -- ---
+bio.chip6 = EX--VATION S--TUS = DEST-OY-D\nCA-SE = DE------ P-.-- ---TR---- - --4N--- -POT--- -TR/-- --V.--- -----.- - --_
+
+in_ID:
+bio.chip1 = [salmon]Area Radiasi Tinggi\nHanya Nikke yang Diizinkan
+bio.chip2 = [accent]Kapasitas Miasma = [salmon]88%\n[accent]Status = [salmon]Bahaya
+bio.chip3 = [salmon]Semua titik pertahanan telah hancur.\nSemua unit personel yang tersisa harap dievakuasi ke\n[accent]Fasilitas Peperangan berlapis Baja[] sesegera mungkin!
+bio.chip4 = -- - -- -- --- -- -
+bio.chip5 = - - --- - -- -- ---
+bio.chip6 = S--TUS ES__VASI = HA_C_R\nPEN_E_AB = ST__K___ DI T___K __RDA__M  - --4N--- -POT--- -TR/-- --V.--- -----.- - --_
+
+id_ID:
+bio.chip1 = [salmon]Area Radiasi Tinggi\nHanya Nikke yang Diizinkan
+bio.chip2 = [accent]Kapasitas Miasma = [salmon]88%\n[accent]Status = [salmon]Bahaya
+bio.chip3 = [salmon]Semua titik pertahanan telah hancur.\nSemua unit personel yang tersisa harap dievakuasi ke\n[accent]Fasilitas Peperangan berlapis Baja[] sesegera mungkin!
+bio.chip4 = -- - -- -- --- -- -
+bio.chip5 = - - --- - -- -- ---
+bio.chip6 = S--TUS ES__VASI = HA_C_R\nPEN_E_AB = ST__K___ DI T___K __RDA__M  - --4N--- -POT--- -TR/-- --V.--- -----.- - --_
+
+ru:
+bio.chip1 = [salmon]Высокорадиоактивная зона\nДопустимы только Никки
+bio.chip2 = [accent]Вместимость миазмы = [salmon]88%\n[accent]Статус = [salmon]Опасно
+bio.chip3 = [salmon]Все оборонительные точки были уничтожены.\nВесь оставшийся персонал эвакуирован в\n[accent]Предприятие Механизированной Войны[] немедленно!
+bio.chip4 = -- - -- -- --- -- -
+bio.chip5 = - - --- - -- -- ---
+bio.chip6 = СТ--УС ЭКС--ВАЦИИ = УНИ-ТО--Н\nПР-ЧИНА = ДЕ------ П-.-- ---ТР---- - --4Н--- -ПОТ--- -ТР/-- --В.--- -----.- - --_

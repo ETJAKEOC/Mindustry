@@ -1,0 +1,18 @@
+{
+	"damage":1,
+	"color":"91A4FF",
+	"effect": {
+		"type": "ParticleEffect",
+		"particles":3,
+		"length":10,
+		"lifetime":40,
+		"interp": "circleOut",
+		"sizeInterp": "pow5Out",
+		"cone":360,
+		"colorFrom": "A6F069FF",
+		"colorTo": "A6F069FF",
+		"sizeFrom":4,
+		"sizeTo":0
+		},
+	"effectChance":0.5
+}

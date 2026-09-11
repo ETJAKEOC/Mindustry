@@ -1,0 +1,9 @@
+{
+"type":"Floor",
+"variants":3,
+"wall":"fertile-soil-wall",
+"status":"muddy",
+"statusDuration":120,
+"cacheLayer":"mud",
+"walkSound":"mud"
+}

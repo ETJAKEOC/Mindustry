@@ -1,0 +1,116 @@
+type: GenericCrafter
+size: 3
+liquidCapacity: 60
+hasLiquids: true
+health: 850
+category: crafting
+research: {
+  parent: 09i-04-a-terra-basin
+  objectives: [
+    {
+      type: SectorComplete
+      preset: 19s-11-station-annex
+    }
+  ]
+}
+itemCapacity: 15
+researchCostMultiplier: 0.4
+requirements: [
+  01a-05-item-aluminium/170
+  01a-06-item-chromium/115
+  01a-07-item-clevorite/40
+]
+craftTime: 240
+craftEffect: formsmoke
+outputItems: [
+  01a-07-item-clevorite/5
+]
+consumes: {
+  items: [
+    01a-02-item-nickel/3
+  ]
+  liquids: [
+    02b-02-a-purified-elixir/0.0833333333
+    02b-04-miasma/0.33333333333
+  ]
+  power: 2
+}
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: -bottom
+    }
+    {
+      type: DrawCrucibleFlame
+      flameColor: b979bd
+      midColor: b979bd
+      flameRad: 0.4
+      circleSpace: 0.4
+      particleRad: 10
+      particleSize: 1.2
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padLeft: 15.5
+      padTop: 15.5
+      padBottom: 1.5
+      padRight: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padRight: 15.5
+      padTop: 15.5
+      padBottom: 1.5
+      padLeft: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padLeft: 15.5
+      padBottom: 15.5
+      padTop: 1.5
+      padRight: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-02-a-purified-elixir
+      padRight: 15.5
+      padBottom: 15.5
+      padTop: 1.5
+      padLeft: 1.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: 02b-04-miasma
+      padding: 9
+
+    }
+    {
+      type: DrawBubbles
+      color: b979bd
+      spread: 7
+      amount: 8
+    }
+    {
+      type: DrawParticles
+      color: d8f18c
+      alpha: 0.8
+      particleSize: 1.5
+      particles: 12
+      particleRad: 12
+      particleLife: 60
+      reverse: true
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+fogRadius: 3
+ambientSound: loopSmelter
+ambientSoundVolume: 0.07
+squareSprite: false

@@ -1,0 +1,78 @@
+type: ItemTurret
+name: Catapult
+description: Fires bursts of small artillery shells at enemies over medium distances.
+size: 1
+category: turret
+research: {
+  parent: 11k-01-core-essence
+  requirements: [
+    01a-01-item-ferrinite/200
+  ]
+}
+researchCostMultiplier: 0.05
+shootSound: shootArtillerySmall
+shootSoundVolume: 0.7
+requirements: [
+  01a-01-item-ferrinite/40
+]
+coolant: {
+  type: ConsumeCoolant
+  allowGas: true
+  allowLiquid: true
+  amount: 0.1
+}
+outlineColor: 42413e
+targetAir: false
+targetGround: true
+reload: 72
+range: 160
+velocityRnd: 0.12
+inaccuracy: 5
+shoot: {
+  shots: 3
+  shotDelay: 0.78
+}
+ammoTypes: {
+  01a-01-item-ferrinite: {
+    frontColor: ffffff
+    backColor: 757575
+    trailColor: 757575
+    type: ArtilleryBulletType
+    width: 7
+    height: 9
+    speed: 2
+    lifetime: 80
+    splashDamage: 28
+    splashDamageRadius: 8
+  }
+  01a-02-item-demetite: {
+    frontColor: ffffff
+    backColor: 9a916e
+    trailColor: 9a916e
+    type: ArtilleryBulletType
+    width: 7
+    height: 9
+    speed: 2
+    lifetime: 80
+    splashDamage: 38
+    splashDamageRadius: 12
+  }
+  01a-07-item-lithium: {
+    frontColor: ffffff
+    backColor: b98279
+    trailColor: b98279
+    type: ArtilleryBulletType
+    width: 7
+    height: 9
+    speed: 2
+    lifetime: 80
+    splashDamage: 44
+    splashDamageRadius: 16
+    status: shocked
+  }
+}
+drawer: {
+  type: DrawTurret
+  basePrefix: spiky-
+}
+rotate: false

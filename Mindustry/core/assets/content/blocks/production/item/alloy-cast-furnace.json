@@ -1,0 +1,68 @@
+{
+	"type":"HeatCrafter",
+	"category":"crafting",
+
+	"drawer":{"type":"DrawMulti",
+	"drawers":[
+	{"type":"DrawRegion",
+	"suffix":"-bottom"
+	},
+	{"type":"DrawLiquidTile",
+	"drawLiquid":"slag"
+	},
+	{"type":"DrawCircles",
+	"color":"FFC073",
+	"strokeMax":2.5,
+	"radius":10,
+	"amount":3
+	},
+	{"type":"DrawHeatRegion",
+	"color":"FF6060FF"
+	},
+	{"type":"DrawHeatRegion",
+	"suffix":"-vents",
+	"color":"FF6060FF"
+	},
+	"DrawDefault",
+	"DrawHeatInput"
+	]	},
+
+	"research":{
+	"parent":"plastanium-stamp-machine",
+	"requirements":[
+	"chromium/4000",
+	"plastanium/3000",
+	"silicon/4000"
+	]	},
+
+	"requirements":[
+	"chromium/90",
+	"plastanium/60",
+	"silicon/120"
+	],
+
+	"consumes":{"power":10,
+	"items":{
+	"items":[
+	"silicon/10"
+	]	},
+	"liquid":{
+	"liquid":"slag","amount":0.833333333333333
+	}	},
+	"heatRequirement":8,
+
+	"outputItems":[
+	"surge-alloy/4"
+	],
+
+	"size":3,
+	"health":1060,
+	"itemCapacity":40,
+	"liquidCapacity":400,
+	"hasPower":true,
+	"hasLiquids":true,
+	"hasItems":true,
+	"craftTime":330,
+	"craftEffect":"instBomb",
+	"updateEffect":"none"
+}

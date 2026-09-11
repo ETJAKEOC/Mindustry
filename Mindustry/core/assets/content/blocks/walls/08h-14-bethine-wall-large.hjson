@@ -1,0 +1,19 @@
+type: ShieldWall
+size: 2
+health: 3600
+armor: 14
+outputsPower: false
+hasPower: true
+conductivePower: true
+chanceDeflect: 15
+shieldHealth: 800
+requirements: [
+  01a-06-item-chromium/24
+  01a-10-item-bethine/16
+]
+consumes: {
+  power: 0.1
+}
+research: 08h-13-bethine-wall-small
+researchCostMultiplier: 0.5
+category: defense

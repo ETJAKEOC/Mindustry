@@ -1,0 +1,20 @@
+{
+//	"type":"Wall",
+	"category":"defense",
+
+	"research":{
+	"parent":"chromium-wall",
+	"requirements":[
+	"chromium/1000",
+	"nickel/900"
+	]	},
+
+	"requirements":[
+	"chromium/20",
+	"nickel/12"
+	],
+
+	"health":3360,
+	"armor":10,
+	"size":2
+}

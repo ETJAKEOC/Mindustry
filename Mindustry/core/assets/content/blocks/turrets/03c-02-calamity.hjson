@@ -1,0 +1,426 @@
+type: ItemTurret
+# Is this turret has liquids
+hasLiquids: true
+# MinWarmup : how much warmup animation before automatically fires
+# Example, really long recoil new horizon turret takes 20 sec to shoot, with minWarmup 0.1 you just hold the target for 2 sec and it will automatically fires in the next 18 seconds
+# While on that 18 seconds, the turret's position is locked. Just like corvus charging
+minWarmup: 0.99
+warmupMaintainTime: 90
+shootWarmupSpeed: 0.1
+# Size Blocks
+size: 3
+# Health Blocks
+health: 1650
+# Sound created when firing
+shootSound: shootBeamPlasmaSmall
+shootSoundVolume: 0.58
+# Block Cost
+requirements: [
+  01a-01-item-cobalt/225
+  01a-02-item-nickel/175
+  01a-05-item-aluminium/175
+  01a-06-item-chromium/120
+]
+# Block's tab category
+category: turret
+# Outline color for this turret, use hexadecimal
+outlineColor: 2C2A36
+# Targets, Set targetGround: false to make it anti air turrets
+targetAir: true
+targetGround: true
+# Turret rotation speed
+rotateSpeed: 1.25
+# Reload time, in ticks
+reload: 105
+# Turret range, in world unit 
+range: 180
+# Position of starting bullets, doesnt affect range
+shootY: 6
+# block consumption
+consumes: {
+  liquid: 02b-01-bioliquid/0.5
+}
+# First delay
+shoot: {
+  firstShotDelay: 45
+}
+# Coolant
+coolant: {
+  type: ConsumeLiquid
+  liquid: 02b-02-a-purified-elixir
+  amount: 0.25
+}
+# Max ammo capacity
+maxAmmo: 20
+# How much/fast the turret firing with coolant applied
+coolantMultiplier: 2.5
+# Charging sound
+chargeSound: chargeTarget
+# Ammo types
+ammoTypes: {
+  # Name of items
+  01a-05-item-aluminium: {
+    # Bullet Type, BasicBulletType creates a basic bullet like duo and salvo
+    type: BasicBulletType
+    ammoMultiplier: 1
+    # Building damage mult
+    buildingDamageMultiplier: 0.2
+    # Effect created when charging
+    chargeEffect: [
+      {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        startDelay: 0
+        offsetX: 1
+        sizeFrom: 27.5
+        sizeTo: 0
+        colorFrom: ffffff
+        colorTo: b1cbd8
+      }
+    ]
+    # Bullet's sprite
+    sprite: large-orb
+    # Bullet colors
+    hitColor: b1cbd8
+    frontColor: feb380
+    backColor: feb380
+    lightColor: feb380
+    damage: 24
+    # Bullet size, to increase hitbox use hitSize instead
+    width: 12
+    height: 12
+    # Speed × Lifetime bullet = Range
+    speed: 6
+    lifetime: 30
+    # Effect created when despawns
+    despawnEffect: [
+    smokePuff,
+    vapor,
+    ]
+    # Trail variety
+    trailColor: 98bfd3
+    trailChance: -1
+    trailEffect: shootSmokeDisperse
+    trailInterval: 2
+    trailRotation: true
+    trailLength: 2
+    trailWidth: 1.5
+    # Fragment of bullet created when the main bullet lifetime runs out
+    fragRandomSpread: 0
+    fragSpread: 45
+    fragLifeMin: 1
+    fragLifeMax: 1
+    fragVelocityMin: 1
+    fragVelocityMax: 1
+    fragBullets: 8
+    despawnSound: explosionArtillery
+      fragBullet: {
+        # Explosion, mostly didnt have lifetime and speed
+        type: ExplosionBulletType
+        splashDamageRadius: 20
+        killShooter: false
+        splashDamage: 16
+        buildingDamageMultiplier: 0.2
+        fragRandomSpread: 0
+        fragSpread: 45
+        fragLifeMin: 1
+        fragLifeMax: 1
+        fragVelocityMin: 1
+        fragVelocityMax: 1
+        fragBullets: 8
+        fragBullet: {
+        # A bullet that damages ground only and only damages units where it lands instead of linear
+          type: ArtilleryBulletType
+          speed: 2
+          lifetime: 12
+          damage: 10
+          buildingDamageMultiplier: 0.2
+          fragRandomSpread: 0
+          fragAngle: 90
+          fragBullets: 1
+          fragBullet: {
+            type: ExplosionBulletType
+            splashDamageRadius: 20
+            killShooter: false
+            splashDamage: 5
+            # Status created when this bullet damages enemy. To increase duration, use statusDuration
+            status: blasted
+            buildingDamageMultiplier: 0.2
+        }
+      }
+    }
+  }
+  01a-06-item-chromium: {
+    type: BasicBulletType
+    buildingDamageMultiplier: 0.2
+    ammoMultiplier: 2
+    chargeEffect: [
+      {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        startDelay: 0
+        offsetX: 1
+        sizeFrom: 27.5
+        sizeTo: 0
+        colorFrom: ffffff
+        colorTo: bca49f
+      }
+    ]
+    sprite: large-orb
+    hitColor: feb380
+    frontColor: bca49f
+    backColor: feb380
+    lightColor: feb380
+    damage: 30
+    width: 12
+    height: 12
+    speed: 6
+    lifetime: 30
+    despawnEffect: [
+    smokePuff,
+    vapor,
+    ]
+    trailColor: dcc6c6
+    trailChance: -1
+    trailEffect: shootSmokeDisperse
+    trailInterval: 2
+    trailRotation: true
+    trailLength: 2
+    trailWidth: 1.5
+    fragRandomSpread: 0
+    fragSpread: 45
+    fragLifeMin: 1
+    fragLifeMax: 1
+    fragVelocityMin: 1
+    fragVelocityMax: 1
+    fragBullets: 8
+    knockback: 2
+    despawnSound: explosionArtillery
+      fragBullet: {
+        type: ExplosionBulletType
+        splashDamageRadius: 20
+        killShooter: false
+        splashDamage: 25
+        buildingDamageMultiplier: 0.2
+        fragRandomSpread: 0
+        fragSpread: 45
+        fragLifeMin: 1
+        fragLifeMax: 1
+        fragVelocityMin: 1
+        fragVelocityMax: 1
+        fragBullets: 8
+        fragBullet: {
+          type: ArtilleryBulletType
+          speed: 2
+          lifetime: 12
+          damage: 10
+          buildingDamageMultiplier: 0.2
+          fragRandomSpread: 0
+          fragAngle: 90
+          fragBullets: 1
+          fragBullet: {
+            type: ExplosionBulletType
+            splashDamageRadius: 20
+            killShooter: false
+            splashDamage: 5
+            status: blasted
+            buildingDamageMultiplier: 0.2
+        }
+      }
+    }
+  }
+  01a-03-item-lamine: {
+    type: BasicBulletType
+    ammoMultiplier: 1
+    buildingDamageMultiplier: 0.2
+    chargeEffect: [
+      {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        startDelay: 0
+        offsetX: 1
+        sizeFrom: 27.5
+        sizeTo: 0
+        colorFrom: ffffff
+        colorTo: ff8167
+      }
+    ]
+    sprite: large-orb
+    hitColor: ff8167
+    frontColor: ff8167
+    backColor: ff8167
+    lightColor: ff8167
+    damage: 38
+    width: 12
+    height: 12
+    speed: 6
+    lifetime: 32
+    rangeChange: 16
+    despawnEffect: [
+    smokePuff,
+    vapor,
+    ]
+    trailColor: ff816780
+    trailChance: -1
+    trailEffect: shootSmokeDisperse
+    trailInterval: 2
+    trailRotation: true
+    trailLength: 2
+    trailWidth: 1.5
+    fragRandomSpread: 0
+    fragSpread: 45
+    fragLifeMin: 1
+    fragLifeMax: 1
+    fragVelocityMin: 1
+    fragVelocityMax: 1
+    fragBullets: 6
+    despawnSound: explosionArtillery
+      fragBullet: {
+        type: ExplosionBulletType
+        splashDamageRadius: 20
+        killShooter: false
+        splashDamage: 33
+        buildingDamageMultiplier: 0.2
+        fragRandomSpread: 0
+        fragSpread: 45
+        fragLifeMin: 1
+        fragLifeMax: 1
+        fragVelocityMin: 1
+        fragVelocityMax: 1
+        fragBullets: 6
+        fragBullet: {
+          type: ArtilleryBulletType
+          speed: 2
+          lifetime: 12
+          damage: 7
+          buildingDamageMultiplier: 0.2
+          fragRandomSpread: 0
+          fragAngle: 90
+          fragBullets: 1
+          fragBullet: {
+            type: ExplosionBulletType
+            splashDamageRadius: 20
+            killShooter: false
+            splashDamage: 5
+            status: 13m-01-breached
+            statusDuration: 30
+            buildingDamageMultiplier: 0.2
+        }
+      }
+    }
+  }
+  01a-08-item-petal: {
+    type: BasicBulletType
+    buildingDamageMultiplier: 0.2
+    ammoMultiplier: 3
+    chargeEffect: [
+      {
+        type: WaveEffect
+        rotWithParent: true
+        followParent: true
+        startDelay: 0
+        offsetX: 1
+        sizeFrom: 27.5
+        sizeTo: 0
+        colorFrom: ffffff
+        colorTo: ff91b3
+      }
+    ]
+    sprite: large-orb
+    hitColor: feb380
+    frontColor: ff91b3
+    backColor: feb380
+    lightColor: feb380
+    damage: 46
+    width: 12
+    height: 12
+    speed: 6
+    lifetime: 40
+    rangeChange: 60
+    despawnEffect: [
+    smokePuff,
+    vapor,
+    ]
+    trailColor: dcc6c6
+    trailChance: -1
+    trailEffect: shootSmokeDisperse
+    trailInterval: 2
+    trailRotation: true
+    trailLength: 2
+    trailWidth: 1.5
+    fragRandomSpread: 0
+    fragSpread: 45
+    fragLifeMin: 1
+    fragLifeMax: 1
+    fragVelocityMin: 1
+    fragVelocityMax: 1
+    fragBullets: 8
+    knockback: 5
+    despawnSound: explosionArtillery
+    fragBullet: {
+      type: ArtilleryBulletType
+      speed: 2
+      lifetime: 12
+      damage: 27
+      buildingDamageMultiplier: 0.2
+      fragRandomSpread: 0
+      fragAngle: 90
+      fragBullets: 1
+      fragBullet: {
+        type: ExplosionBulletType
+        splashDamageRadius: 20
+        killShooter: false
+        splashDamage: 20
+        buildingDamageMultiplier: 0.2
+        fragRandomSpread: 0
+        fragSpread: 45
+        fragLifeMin: 1
+        fragLifeMax: 1
+        fragVelocityMin: 1
+        fragVelocityMax: 1
+        fragBullets: 8
+        fragBullet: {
+          type: ArtilleryBulletType
+          speed: 2
+          lifetime: 12
+          damage: 10
+          buildingDamageMultiplier: 0.2
+          fragRandomSpread: 0
+          fragAngle: 90
+          fragBullets: 1
+          fragBullet: {
+            type: ExplosionBulletType
+            splashDamageRadius: 20
+            killShooter: false
+            splashDamage: 5
+            status: blasted
+            buildingDamageMultiplier: 0.2
+          }
+        }
+      }
+    }
+  }
+}
+# A drawer to load sprites into game
+drawer: {
+  type: DrawTurret
+  basePrefix: calamity-
+}
+research: {
+  parent: 03c-02-anvil
+  objectives: [
+    {
+      type: OnSector
+      preset: 19s-04-cliffside
+    }
+  ]
+}
+researchCost: [
+  01a-01-item-cobalt/1800
+  01a-02-item-nickel/1400
+  01a-05-item-aluminium/1400
+  01a-06-item-chromium/800
+]

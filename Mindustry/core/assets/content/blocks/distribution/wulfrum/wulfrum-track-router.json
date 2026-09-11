@@ -1,0 +1,24 @@
+{
+	"type":"DuctRouter",
+	"category":"distribution",
+
+	"research":{
+	"parent":"wulfrum-junction",
+	"requirements":[
+	"wulfrum-steel/300"
+	],
+	"objectives":[
+	"wulfrum-core"
+	]	},
+
+	"requirements":[
+	"wulfrum-steel/3"
+	],
+
+	"size":1,
+	"health":100,
+	"solid":false,
+	"underBullets":true,
+	"speed":2.4,
+	"itemCapacity":1
+}

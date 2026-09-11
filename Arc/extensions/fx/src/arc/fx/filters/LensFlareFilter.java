@@ -7,34 +7,34 @@ import arc.math.geom.Vec2;
 
 /**
  * Lens flare effect.
+ *
  * @author Toni Sagrista
  **/
-public final class LensFlareFilter extends FxFilter{
-    private final Vec2 viewport = new Vec2();
+public final class LensFlareFilter extends FxFilter {
+	public final Vec2 lightPosition = new Vec2(0.5f, 0.5f);
+	public final Color color = new Color(1f, 0.8f, 0.2f, 1f);
+	private final Vec2 viewport = new Vec2();
+	public float intensity = 5.0f;
 
-    public final Vec2 lightPosition = new Vec2(0.5f, 0.5f);
-    public final Color color = new Color(1f, 0.8f, 0.2f, 1f);
-    public float intensity = 5.0f;
+	public LensFlareFilter() {
+		super(compileShader(
+				Core.files.classpath("vfxshaders/screenspace.vert"),
+				Core.files.classpath("vfxshaders/lensflare.frag")));
+		rebind();
+	}
 
-    public LensFlareFilter(){
-        super(compileShader(
-        Core.files.classpath("vfxshaders/screenspace.vert"),
-        Core.files.classpath("vfxshaders/lensflare.frag")));
-        rebind();
-    }
+	@Override
+	public void resize(int width, int height) {
+		viewport.set(width, height);
+		rebind();
+	}
 
-    @Override
-    public void resize(int width, int height){
-        viewport.set(width, height);
-        rebind();
-    }
-
-    @Override
-    public void setParams(){
-        shader.setUniformi("u_texture0", u_texture0);
-        shader.setUniformf("u_lightPosition", lightPosition);
-        shader.setUniformf("u_intensity", intensity);
-        shader.setUniformf("u_color", color.r, color.g, color.b);
-        shader.setUniformf("u_viewport", viewport);
-    }
+	@Override
+	public void setParams() {
+		shader.setUniformi("u_texture0", u_texture0);
+		shader.setUniformf("u_lightPosition", lightPosition);
+		shader.setUniformf("u_intensity", intensity);
+		shader.setUniformf("u_color", color.r, color.g, color.b);
+		shader.setUniformf("u_viewport", viewport);
+	}
 }

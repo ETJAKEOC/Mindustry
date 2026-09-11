@@ -16,24 +16,25 @@ import arc.util.Threads;
 
 /**
  * Global references to all of Arc's core modules.
- * */
-public class Core{
-    public static Application app;
-    public static Graphics graphics;
-    public static Audio audio;
-    public static Input input;
-    public static Files files;
-    public static Settings settings;
+ *
+ */
+public class Core {
+	public static Application app;
+	public static Graphics graphics;
+	public static Audio audio;
+	public static Input input;
+	public static Files files;
+	public static Settings settings;
 
-    public static I18NBundle bundle = I18NBundle.createEmptyBundle();
-    public static Camera camera;
-    public static Batch batch;
-    public static Scene scene;
-    public static AssetManager assets;
-    public static TextureAtlas atlas;
-    public static ExecutorService executor = Threads.executor("Main Executor", OS.cores);
+	public static I18NBundle bundle = I18NBundle.createEmptyBundle();
+	public static Camera camera;
+	public static Batch batch;
+	public static Scene scene;
+	public static AssetManager assets;
+	public static TextureAtlas atlas;
+	public static ExecutorService executor = Threads.executor("Main Executor", OS.cores);
 
-    public static GL20 gl;
-    public static GL20 gl20;
-    public static GL30 gl30;
+	public static GL20 gl;
+	public static GL20 gl20;
+	public static GL30 gl30;
 }

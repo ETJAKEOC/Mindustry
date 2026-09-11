@@ -3,27 +3,29 @@ package mindustry.ai.types;
 import mindustry.entities.units.UnitController;
 import mindustry.gen.*;
 
-public class NoAI implements UnitController{
-    protected Unit unit;
+public class NoAI implements UnitController {
+	protected Unit unit;
 
-    @Override
-    public Unit unit(){
-        return unit;
-    }
+	@Override
+	public Unit unit() {
+		return unit;
+	}
 
-    @Override
-    public void unit(Unit unit){
-        this.unit = unit;
-    }
+	@Override
+	public void unit(Unit unit) {
+		this.unit = unit;
+	}
 
-    @Override
-    public boolean isValidController(){
-        return true;
-    }
+	@Override
+	public boolean isValidController() {
+		return true;
+	}
 
-    @Override
-    public void updateUnit(){}
+	@Override
+	public void updateUnit() {
+	}
 
-    @Override
-    public void removed(Unit unit){}
+	@Override
+	public void removed(Unit unit) {
+	}
 }

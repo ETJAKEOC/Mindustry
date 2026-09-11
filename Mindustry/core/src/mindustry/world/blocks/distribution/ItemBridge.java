@@ -65,6 +65,7 @@ public class ItemBridge extends Block {
 	public boolean noAcceptDisabled = false;
 	//for autolink
 	public @Nullable ItemBridgeBuild lastBuild;
+
 	public ItemBridge(String name) {
 		super(name);
 		update = true;

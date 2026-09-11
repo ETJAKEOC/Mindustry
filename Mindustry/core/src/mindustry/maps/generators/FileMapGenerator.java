@@ -28,6 +28,13 @@ public record FileMapGenerator(@Nullable Map map, SectorPreset preset) implement
 		this(maps == null ? null : loadMap(mapName, preset), preset);
 	}
 
+	/**
+	 * If you use this constructor, make sure to override generate()!
+	 */
+	public FileMapGenerator(SectorPreset preset) {
+		this(emptyMap, preset);
+	}
+
 	private static Map loadMap(String mapName, SectorPreset preset) {
 		Seq<String> candidates = new Seq<>(4);
 
@@ -52,13 +59,6 @@ public record FileMapGenerator(@Nullable Map map, SectorPreset preset) implement
 		String fileName = candidates.find(name -> Vars.tree.get("maps/" + name + "." + mapExtension).exists());
 
 		return maps.loadInternalMap(fileName == null ? candidates.first() : fileName);
-	}
-
-	/**
-	 * If you use this constructor, make sure to override generate()!
-	 */
-	public FileMapGenerator(SectorPreset preset) {
-		this(emptyMap, preset);
 	}
 
 	@Override

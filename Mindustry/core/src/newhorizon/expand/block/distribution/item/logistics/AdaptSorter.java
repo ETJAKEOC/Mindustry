@@ -7,31 +7,31 @@ import mindustry.world.blocks.distribution.Sorter;
 import newhorizon.NewHorizon;
 
 public class AdaptSorter extends Sorter {
-    public TextureRegion itemRegion;
+	public TextureRegion itemRegion;
 
-    public AdaptSorter(String name) {
-        super(name);
+	public AdaptSorter(String name) {
+		super(name);
 
-        placeableLiquid = true;
-        drawTeamOverlay = false;
-    }
+		placeableLiquid = true;
+		drawTeamOverlay = false;
+	}
 
-    @Override
-    public void load() {
-        super.load();
-        itemRegion = Core.atlas.find(NewHorizon.name("logistics-item"));
-    }
+	@Override
+	public void load() {
+		super.load();
+		itemRegion = Core.atlas.find(NewHorizon.name("logistics-item"));
+	}
 
-    public class AdaptSorterBuild extends SorterBuild {
-        @Override
-        public void draw() {
-            Draw.rect(region, x, y);
+	public class AdaptSorterBuild extends SorterBuild {
+		@Override
+		public void draw() {
+			Draw.rect(region, x, y);
 
-            if (sortItem != null) {
-                Draw.color(sortItem.color);
-                Draw.rect(itemRegion, x, y);
-                Draw.color();
-            }
-        }
-    }
+			if (sortItem != null) {
+				Draw.color(sortItem.color);
+				Draw.rect(itemRegion, x, y);
+				Draw.color();
+			}
+		}
+	}
 }

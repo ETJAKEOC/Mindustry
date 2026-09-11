@@ -13,53 +13,53 @@ import mindustry.world.Block;
 import mindustry.world.draw.DrawFlame;
 
 public class DrawFlameRotated extends DrawFlame {
-    public boolean drawFlame = true;
-    public String suffix = "";
-    public float x, y;
-    public float flameX, flameY;
+	public boolean drawFlame = true;
+	public String suffix = "";
+	public float x, y;
+	public float flameX, flameY;
 
-    public DrawFlameRotated(float x, float y, Color flameColor) {
-        super(flameColor);
-        this.x = x;
-        this.y = y;
-    }
+	public DrawFlameRotated(float x, float y, Color flameColor) {
+		super(flameColor);
+		this.x = x;
+		this.y = y;
+	}
 
-    public DrawFlameRotated(Color flameColor) {
-        super(flameColor);
-    }
+	public DrawFlameRotated(Color flameColor) {
+		super(flameColor);
+	}
 
-    public DrawFlameRotated() {
-    }
+	public DrawFlameRotated() {
+	}
 
-    @Override
-    public void load(Block block) {
-        top = Core.atlas.find(block.name + suffix);
-        block.clipSize = Math.max(block.clipSize, (lightRadius + lightSinMag) * 2f * block.size);
-    }
+	@Override
+	public void load(Block block) {
+		top = Core.atlas.find(block.name + suffix);
+		block.clipSize = Math.max(block.clipSize, (lightRadius + lightSinMag) * 2f * block.size);
+	}
 
-    @Override
-    public void draw(Building build) {
-        if (build.warmup() > 0f && flameColor.a > 0.001f) {
-            float g = 0.3f;
-            float r = 0.06f;
-            float cr = Mathf.random(0.1f);
+	@Override
+	public void draw(Building build) {
+		if (build.warmup() > 0f && flameColor.a > 0.001f) {
+			float g = 0.3f;
+			float r = 0.06f;
+			float cr = Mathf.random(0.1f);
 
-            Tmp.v1.set(x, y).rotate(build.rotdeg());
+			Tmp.v1.set(x, y).rotate(build.rotdeg());
 
-            Draw.z(Layer.block + 0.01f);
+			Draw.z(Layer.block + 0.01f);
 
-            Draw.alpha(build.warmup());
-            if (drawFlame) Draw.rect(top, build.x + Tmp.v1.x, build.y + Tmp.v1.y, build.rotdeg());
+			Draw.alpha(build.warmup());
+			if (drawFlame) Draw.rect(top, build.x + Tmp.v1.x, build.y + Tmp.v1.y, build.rotdeg());
 
-            Draw.alpha(((1f - g) + Mathf.absin(Time.time, 8f, g) + Mathf.random(r) - r) * build.warmup());
+			Draw.alpha(((1f - g) + Mathf.absin(Time.time, 8f, g) + Mathf.random(r) - r) * build.warmup());
 
-            Tmp.v1.set(flameX, flameY).rotate(build.rotdeg());
-            Draw.tint(flameColor);
-            Fill.circle(build.x + Tmp.v1.x, build.y + Tmp.v1.y, flameRadius + Mathf.absin(Time.time, flameRadiusScl, flameRadiusMag) + cr);
-            Draw.color(1f, 1f, 1f, build.warmup());
-            Fill.circle(build.x + Tmp.v1.x, build.y + Tmp.v1.y, flameRadiusIn + Mathf.absin(Time.time, flameRadiusScl, flameRadiusInMag) + cr);
+			Tmp.v1.set(flameX, flameY).rotate(build.rotdeg());
+			Draw.tint(flameColor);
+			Fill.circle(build.x + Tmp.v1.x, build.y + Tmp.v1.y, flameRadius + Mathf.absin(Time.time, flameRadiusScl, flameRadiusMag) + cr);
+			Draw.color(1f, 1f, 1f, build.warmup());
+			Fill.circle(build.x + Tmp.v1.x, build.y + Tmp.v1.y, flameRadiusIn + Mathf.absin(Time.time, flameRadiusScl, flameRadiusInMag) + cr);
 
-            Draw.color();
-        }
-    }
+			Draw.color();
+		}
+	}
 }

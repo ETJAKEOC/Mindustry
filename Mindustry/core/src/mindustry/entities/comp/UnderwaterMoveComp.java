@@ -11,32 +11,33 @@ import mindustry.graphics.Drawf;
 import mindustry.type.UnitType;
 
 @Component
-abstract class UnderwaterMoveComp implements WaterMovec{
-    @Import UnitType type;
+abstract class UnderwaterMoveComp implements WaterMovec {
+	@Import
+	UnitType type;
 
-    @MethodPriority(10f)
-    @Replace
-    public void draw(){
-        //TODO draw status effects?
+	@MethodPriority(10f)
+	@Replace
+	public void draw() {
+		//TODO draw status effects?
 
-        Drawf.underwater(() -> {
-            type.draw(self());
-        });
-    }
+		Drawf.underwater(() -> {
+			type.draw(self());
+		});
+	}
 
-    @Override
-    public int collisionLayer(){
-        return PhysicsProcess.layerUnderwater;
-    }
+	@Override
+	public int collisionLayer() {
+		return PhysicsProcess.layerUnderwater;
+	}
 
-    @Override
-    public boolean hittable(){
-        return false && type.hittable(self());
-    }
+	@Override
+	public boolean hittable() {
+		return false && type.hittable(self());
+	}
 
-    @Override
-    public boolean targetable(Team targeter){
-        return false && type.targetable(self(), targeter);
-    }
+	@Override
+	public boolean targetable(Team targeter) {
+		return false && type.targetable(self(), targeter);
+	}
 }
 

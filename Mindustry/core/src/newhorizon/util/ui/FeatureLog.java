@@ -7,84 +7,84 @@ import arc.scene.ui.layout.Table;
 import mindustry.ctype.UnlockableContent;
 
 public class FeatureLog {
-    public UnlockableContent content;
+	public UnlockableContent content;
 
-    public String title, description;
-    public featureType type;
-    public TextureRegion icon;
+	public String title, description;
+	public featureType type;
+	public TextureRegion icon;
 
-    public boolean important = false;
-    public Cons<Table> modifier = null;
+	public boolean important = false;
+	public Cons<Table> modifier = null;
 
-    public boolean isContent;
+	public boolean isContent;
 
-    public FeatureLog(UnlockableContent content) {
-        title = content.localizedName;
-        description = content.description;
-        icon = content.fullIcon;
-        type = featureType.CONTENT;
+	public FeatureLog(UnlockableContent content) {
+		title = content.localizedName;
+		description = content.description;
+		icon = content.fullIcon;
+		type = featureType.CONTENT;
 
-        this.content = content;
+		this.content = content;
 
-        isContent = true;
-    }
+		isContent = true;
+	}
 
 
-    public FeatureLog(String title, String description, featureType type, TextureRegion icon) {
-        this.title = title;
-        this.description = description;
-        this.type = type;
-        this.icon = icon;
-    }
+	public FeatureLog(String title, String description, featureType type, TextureRegion icon) {
+		this.title = title;
+		this.description = description;
+		this.type = type;
+		this.icon = icon;
+	}
 
-    public FeatureLog(String title, String description, featureType type, UnlockableContent content) {
-        this.content = content;
-        this.title = title;
-        this.description = description;
-        this.type = type;
-        this.icon = content.fullIcon;
-    }
+	public FeatureLog(String title, String description, featureType type, UnlockableContent content) {
+		this.content = content;
+		this.title = title;
+		this.description = description;
+		this.type = type;
+		this.icon = content.fullIcon;
+	}
 
-    public FeatureLog(int index, featureType type, TextureRegion icon) {
-        this.title = type.name + "-" + index;
-        this.description = type.name + "-" + index + "-desc";
-        this.type = type;
-        this.icon = icon;
-    }
+	public FeatureLog(int index, featureType type, TextureRegion icon) {
+		this.title = type.name + "-" + index;
+		this.description = type.name + "-" + index + "-desc";
+		this.type = type;
+		this.icon = icon;
+	}
 
-    public FeatureLog(int index, featureType type, UnlockableContent content) {
-        this.content = content;
-        this.title = type.name + "-" + index;
-        this.description = type.name + "-" + index + "-desc";
-        this.type = type;
-        this.icon = content.fullIcon;
-    }
+	public FeatureLog(int index, featureType type, UnlockableContent content) {
+		this.content = content;
+		this.title = type.name + "-" + index;
+		this.description = type.name + "-" + index + "-desc";
+		this.type = type;
+		this.icon = content.fullIcon;
+	}
 
-    public String getLocalizedTitle() {
-        return isContent ? content.localizedName : Core.bundle.get("nh.new-feature." + title);
-    }
+	public String getLocalizedTitle() {
+		return isContent ? content.localizedName : Core.bundle.get("nh.new-feature." + title);
+	}
 
-    public String getLocalizedDescription() {
-        return isContent ? content.description : Core.bundle.get("nh.new-feature." + description);
-    }
+	public String getLocalizedDescription() {
+		return isContent ? content.description : Core.bundle.get("nh.new-feature." + description);
+	}
 
-    public enum featureType {
+	public enum featureType {
 
-        ADJUST("adjust"),
-        IMPROVE("improve"),
-        BALANCE("balance"),
-        FEATURE("feature"),
-        CONTENT("content"),
-        FIX("fix"),
-        IMPORTANT("important"),
-        ;
+		ADJUST("adjust"),
+		IMPROVE("improve"),
+		BALANCE("balance"),
+		FEATURE("feature"),
+		CONTENT("content"),
+		FIX("fix"),
+		IMPORTANT("important"),
+		;
 
-        public final String name;
-        public final String localizedName;
+		public final String name;
+		public final String localizedName;
 
-        featureType(String s) {
-            name = s;
-            localizedName = Core.bundle.get("nh.new-feature." + s);
-        }
-    }
+		featureType(String s) {
+			name = s;
+			localizedName = Core.bundle.get("nh.new-feature." + s);
+		}
+	}
 }

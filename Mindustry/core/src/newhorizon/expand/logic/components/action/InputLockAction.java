@@ -7,16 +7,16 @@ import static mindustry.Vars.headless;
 import static newhorizon.NHVars.cutsceneUI;
 
 public class InputLockAction extends Action {
-    @Override
-    public String actionName() {
-        return "input_lock";
-    }
+	@Override
+	public String actionName() {
+		return "input_lock";
+	}
 
-    @Override
-    public void begin() {
-        if (headless) return;
+	@Override
+	public void begin() {
+		if (headless) return;
 
-        cutsceneUI.controlOverride = true;
-        control.input.config.forceHide();
-    }
+		cutsceneUI.controlOverride = true;
+		control.input.config.forceHide();
+	}
 }

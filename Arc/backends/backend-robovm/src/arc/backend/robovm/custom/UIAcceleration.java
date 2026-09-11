@@ -37,41 +37,41 @@ import org.robovm.rt.bro.ptr.Ptr;
 @Library("UIKit")
 @NativeClass/*</annotations>*/
 /*<visibility>*/ public/*</visibility>*/ class /*<name>*/UIAcceleration/*</name>*/
-extends /*<extends>*/NSObject/*</extends>*/
-/*<implements>*//*</implements>*/{
+		extends /*<extends>*/NSObject/*</extends>*/
+		/*<implements>*//*</implements>*/ {
 
-    /*<bind>*/static{
-        ObjCRuntime.bind(UIAcceleration.class);
-    }/*</bind>*/
+	/*<bind>*/static {
+		ObjCRuntime.bind(UIAcceleration.class);
+	}/*</bind>*/
 
-    /*<constants>*//*</constants>*/
-    /*<constructors>*/
-    public UIAcceleration(){
-    }
+	/*<constants>*//*</constants>*/
+	/*<constructors>*/
+	public UIAcceleration() {
+	}
 
-    protected UIAcceleration(SkipInit skipInit){
-        super(skipInit);
-    }
+	protected UIAcceleration(SkipInit skipInit) {
+		super(skipInit);
+	}
 
-    /*</constructors>*/
-    /*<properties>*/
-    @Property(selector = "timestamp")
-    public native double getTimestamp();
+	/*</constructors>*/
+	/*<properties>*/
+	@Property(selector = "timestamp")
+	public native double getTimestamp();
 
-    @Property(selector = "x")
-    public native double getX();
+	@Property(selector = "x")
+	public native double getX();
 
-    @Property(selector = "y")
-    public native double getY();
+	@Property(selector = "y")
+	public native double getY();
 
-    @Property(selector = "z")
-    public native double getZ();
+	@Property(selector = "z")
+	public native double getZ();
 
-    /*<ptr>*/public static class UIAccelerationPtr extends Ptr<UIAcceleration, UIAccelerationPtr>{
-    }/*</ptr>*/
-    /*</properties>*/
-    /*<members>*//*</members>*/
-    /*<methods>*/
+	/*<ptr>*/public static class UIAccelerationPtr extends Ptr<UIAcceleration, UIAccelerationPtr> {
+	}/*</ptr>*/
+	/*</properties>*/
+	/*<members>*//*</members>*/
+	/*<methods>*/
 
-    /*</methods>*/
+	/*</methods>*/
 }

@@ -15,31 +15,32 @@ import arc.struct.Seq;
  * {@code assetManager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()))}
  * to register it.
  * </p>
+ *
  * @author Daniel Holderbaum
  */
-public class FreeTypeFontGeneratorLoader extends SynchronousAssetLoader<FreeTypeFontGenerator, FreeTypeFontGeneratorLoader.FreeTypeFontGeneratorParameters>{
+public class FreeTypeFontGeneratorLoader extends SynchronousAssetLoader<FreeTypeFontGenerator, FreeTypeFontGeneratorLoader.FreeTypeFontGeneratorParameters> {
 
-    public FreeTypeFontGeneratorLoader(FileHandleResolver resolver){
-        super(resolver);
-    }
+	public FreeTypeFontGeneratorLoader(FileHandleResolver resolver) {
+		super(resolver);
+	}
 
-    @Override
-    public FreeTypeFontGenerator load(AssetManager assetManager, String fileName, Fi file,
-                                      FreeTypeFontGeneratorParameters parameter){
-        FreeTypeFontGenerator generator = null;
-        if(file.extension().equals("gen")){
-            generator = new FreeTypeFontGenerator(file.sibling(file.nameWithoutExtension()));
-        }else{
-            generator = new FreeTypeFontGenerator(file);
-        }
-        return generator;
-    }
+	@Override
+	public FreeTypeFontGenerator load(AssetManager assetManager, String fileName, Fi file,
+	                                  FreeTypeFontGeneratorParameters parameter) {
+		FreeTypeFontGenerator generator = null;
+		if (file.extension().equals("gen")) {
+			generator = new FreeTypeFontGenerator(file.sibling(file.nameWithoutExtension()));
+		} else {
+			generator = new FreeTypeFontGenerator(file);
+		}
+		return generator;
+	}
 
-    @Override
-    public Seq<AssetDescriptor> getDependencies(String fileName, Fi file, FreeTypeFontGeneratorParameters parameter){
-        return null;
-    }
+	@Override
+	public Seq<AssetDescriptor> getDependencies(String fileName, Fi file, FreeTypeFontGeneratorParameters parameter) {
+		return null;
+	}
 
-    public static class FreeTypeFontGeneratorParameters extends AssetLoaderParameters<FreeTypeFontGenerator>{
-    }
+	public static class FreeTypeFontGeneratorParameters extends AssetLoaderParameters<FreeTypeFontGenerator> {
+	}
 }

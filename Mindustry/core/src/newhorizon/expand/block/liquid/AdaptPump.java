@@ -17,86 +17,86 @@ import static newhorizon.util.graphic.SpriteUtil.ATLAS_INDEX_4_4;
 import static newhorizon.util.graphic.SpriteUtil.orthogonalPos;
 
 public class AdaptPump extends Pump {
-    public TextureRegion[] splits;
+	public TextureRegion[] splits;
 
-    public AdaptPump(String name) {
-        super(name);
-    }
+	public AdaptPump(String name) {
+		super(name);
+	}
 
-    @Override
-    public void load() {
-        super.load();
-        if (size == 1) {
-            splits = SpriteUtil.splitRegionArray(name + "-atlas", 32, 32, 1, ATLAS_INDEX_4_4);
-        } else {
-            splits = SpriteUtil.splitRegionArray(name + "-atlas", 32, 32, 1);
-        }
-    }
+	@Override
+	public void load() {
+		super.load();
+		if (size == 1) {
+			splits = SpriteUtil.splitRegionArray(name + "-atlas", 32, 32, 1, ATLAS_INDEX_4_4);
+		} else {
+			splits = SpriteUtil.splitRegionArray(name + "-atlas", 32, 32, 1);
+		}
+	}
 
-    public class AdaptPumpBuild extends PumpBuild {
-        public boolean[] drawLink = new boolean[8];
-        public int[] drawIdx = new int[4];
-        public int drawIndex = 0;
+	public class AdaptPumpBuild extends PumpBuild {
+		public boolean[] drawLink = new boolean[8];
+		public int[] drawIdx = new int[4];
+		public int drawIndex = 0;
 
-        @Override
-        public void onProximityUpdate() {
-            super.onProximityUpdate();
-            if (size == 1) {
-                drawIndex = 0;
-                for (int i = 0; i < orthogonalPos.length; i++) {
-                    Point2 p = orthogonalPos[i];
-                    if (world.build(tileX() + p.x, tileY() + p.y) instanceof AdaptPumpBuild) {
-                        drawIndex += 1 << i;
-                    }
-                }
-            } else {
-                for (int i = 0; i < Edges.getEdges(2).length; i++) {
-                    Point2 p = Edges.getEdges(2)[i];
-                    Building b = world.build(tileX() + p.x, tileY() + p.y);
-                    drawLink[i] = b instanceof AdaptPumpBuild;
-                }
+		@Override
+		public void onProximityUpdate() {
+			super.onProximityUpdate();
+			if (size == 1) {
+				drawIndex = 0;
+				for (int i = 0; i < orthogonalPos.length; i++) {
+					Point2 p = orthogonalPos[i];
+					if (world.build(tileX() + p.x, tileY() + p.y) instanceof AdaptPumpBuild) {
+						drawIndex += 1 << i;
+					}
+				}
+			} else {
+				for (int i = 0; i < Edges.getEdges(2).length; i++) {
+					Point2 p = Edges.getEdges(2)[i];
+					Building b = world.build(tileX() + p.x, tileY() + p.y);
+					drawLink[i] = b instanceof AdaptPumpBuild;
+				}
 
-                drawIdx[0] = Mathf.num(drawLink[1]) + Mathf.num(drawLink[2]) * 2;
-                drawIdx[1] = Mathf.num(drawLink[3]) + Mathf.num(drawLink[4]) * 2;
-                drawIdx[2] = Mathf.num(drawLink[5]) + Mathf.num(drawLink[6]) * 2;
-                drawIdx[3] = Mathf.num(drawLink[7]) + Mathf.num(drawLink[0]) * 2;
-            }
-        }
+				drawIdx[0] = Mathf.num(drawLink[1]) + Mathf.num(drawLink[2]) * 2;
+				drawIdx[1] = Mathf.num(drawLink[3]) + Mathf.num(drawLink[4]) * 2;
+				drawIdx[2] = Mathf.num(drawLink[5]) + Mathf.num(drawLink[6]) * 2;
+				drawIdx[3] = Mathf.num(drawLink[7]) + Mathf.num(drawLink[0]) * 2;
+			}
+		}
 
-        @Override
-        public void draw() {
-            if (isPayload()) {
-                Draw.rect(region, x, y);
-            } else if (splits != null && splits.length > 0) {
-                if (size == 1) {
-                    Draw.rect(splits[Math.min(drawIndex, splits.length - 1)], x, y);
-                } else if (size == 2) {
-                    Draw.rect(splits[Math.min(drawIdx[0], splits.length - 1)], x + 4, y + 4);
-                    Draw.rect(splits[Math.min(drawIdx[1] + 4, splits.length - 1)], x - 4, y + 4);
-                    Draw.rect(splits[Math.min(drawIdx[2] + 8, splits.length - 1)], x - 4, y - 4);
-                    Draw.rect(splits[Math.min(drawIdx[3] + 12, splits.length - 1)], x + 4, y - 4);
-                }
-            } else {
-                Draw.rect(region, x, y);
-            }
+		@Override
+		public void draw() {
+			if (isPayload()) {
+				Draw.rect(region, x, y);
+			} else if (splits != null && splits.length > 0) {
+				if (size == 1) {
+					Draw.rect(splits[Math.min(drawIndex, splits.length - 1)], x, y);
+				} else if (size == 2) {
+					Draw.rect(splits[Math.min(drawIdx[0], splits.length - 1)], x + 4, y + 4);
+					Draw.rect(splits[Math.min(drawIdx[1] + 4, splits.length - 1)], x - 4, y + 4);
+					Draw.rect(splits[Math.min(drawIdx[2] + 8, splits.length - 1)], x - 4, y - 4);
+					Draw.rect(splits[Math.min(drawIdx[3] + 12, splits.length - 1)], x + 4, y - 4);
+				}
+			} else {
+				Draw.rect(region, x, y);
+			}
 
-            if (liquids != null && liquidDrop != null) {
-                Drawf.liquid(liquidRegion, x, y, liquids.get(liquidDrop) / liquidCapacity, liquidDrop.color);
-            }
-        }
+			if (liquids != null && liquidDrop != null) {
+				Drawf.liquid(liquidRegion, x, y, liquids.get(liquidDrop) / liquidCapacity, liquidDrop.color);
+			}
+		}
 
-        @Override
-        public void drawStatus() {
-            if (drawIdx[3] == 0) super.drawStatus();
-        }
+		@Override
+		public void drawStatus() {
+			if (drawIdx[3] == 0) super.drawStatus();
+		}
 
-        @Override
-        public boolean acceptLiquid(Building source, Liquid liquid) {
-            return super.acceptLiquid(source, liquid) || (isValidPump(source) && liquidDrop == liquid);
-        }
+		@Override
+		public boolean acceptLiquid(Building source, Liquid liquid) {
+			return super.acceptLiquid(source, liquid) || (isValidPump(source) && liquidDrop == liquid);
+		}
 
-        public boolean isValidPump(Building e) {
-            return e instanceof AdaptPumpBuild;
-        }
-    }
+		public boolean isValidPump(Building e) {
+			return e instanceof AdaptPumpBuild;
+		}
+	}
 }

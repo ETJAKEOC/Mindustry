@@ -8,20 +8,20 @@ import static mindustry.Vars.headless;
 import static newhorizon.NHVars.cutsceneUI;
 
 public class CurtainFadeInAction extends Action {
-    @Override
-    public String actionName() {
-        return "curtain_fade_in";
-    }
+	@Override
+	public String actionName() {
+		return "curtain_fade_in";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+	}
 
-    @Override
-    public void begin() {
-        if (headless) return;
+	@Override
+	public void begin() {
+		if (headless) return;
 
-        cutsceneUI.targetOverlayAlpha = 1f;
-    }
+		cutsceneUI.targetOverlayAlpha = 1f;
+	}
 }

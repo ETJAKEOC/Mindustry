@@ -44,178 +44,188 @@ import arc.util.OS;
  * <p>
  * <b>Note</b>: any values provided will not be clamped, it is the developer's responsibility to do so
  * </p>
+ *
  * @author mzechner
  */
-public class Music extends AudioSource{
-    public @Nullable Fi file;
+public class Music extends AudioSource {
+	public @Nullable Fi file;
 
-    int voice = -1;
-    boolean looping;
-    float volume = 1f, pitch = 1f, pan = 0f;
+	int voice = -1;
+	boolean looping;
+	float volume = 1f, pitch = 1f, pan = 0f;
 
-    /** Creates music from an external file without copying it. */
-    public static Music create(Fi file){
-        Music music = new Music();
-        try{
-            music.file = file;
-            music.handle = streamLoadFile(file.path());
-        }catch(Throwable e){
-            Log.err("Failed loading music from " + file, e);
-        }
-        return music;
-    }
+	/**
+	 * Loads music from a file.
+	 */
+	public Music(Fi file) throws Exception {
+		load(file);
+	}
 
-    /** Loads music from a file. */
-    public Music(Fi file) throws Exception{
-        load(file);
-    }
+	/**
+	 * Creates an empty music instance. This instance cannot be played until loaded.
+	 */
+	public Music() {
 
-    /** Creates an empty music instance. This instance cannot be played until loaded. */
-    public Music(){
+	}
 
-    }
+	/**
+	 * Creates music from an external file without copying it.
+	 */
+	public static Music create(Fi file) {
+		Music music = new Music();
+		try {
+			music.file = file;
+			music.handle = streamLoadFile(file.path());
+		} catch (Throwable e) {
+			Log.err("Failed loading music from " + file, e);
+		}
+		return music;
+	}
 
-    public void load(byte[] bytes) throws Exception{
-        handle = streamLoadBytes(bytes, bytes.length);
-    }
+	protected static Fi[] caches(String name) throws IOException {
+		String dir = System.getProperty("java.io.tmpdir");
 
-    public void load(Fi file) throws Exception{
-        this.file = file;
+		//prefer cache dir on android
+		if (Core.app.isAndroid()) {
+			return new Fi[]{
+					Core.files.cache(name), Core.settings.getDataDirectory().child("cache").child(name),
+					dir == null ? Core.files.absolute(File.createTempFile(name, "mind").getAbsolutePath()) : Core.files.absolute(dir).child(name)
+			};
+		} else {
+			return new Fi[]{
+					Core.settings.getDataDirectory().child("cache").child(name), Core.files.cache(name),
+					dir == null ? Core.files.absolute(File.createTempFile(name, "mind").getAbsolutePath()) : Core.files.absolute(dir).child(name)
+			};
+		}
+	}
 
-        //on iOS, try to load from internal storage instead, as that prevents unnecessary copies
-        if(OS.isIos && file.type() == FileType.internal){
-            try{
-                String path = Core.files.getInternalStoragePath();
-                handle = streamLoadFile((path.endsWith("/") ? path : path + "/") + file.path());
-                return;
-            }catch(Exception failed){}
-        }
+	public void load(byte[] bytes) throws Exception {
+		handle = streamLoadBytes(bytes, bytes.length);
+	}
 
-        Exception last = null;
+	public void load(Fi file) throws Exception {
+		this.file = file;
 
-        for(Fi result : caches(file.nameWithoutExtension() + "__" + file.length() + "." + file.extension())){
-            //check if file already exists (use length as "hash")
-            if(!(result.exists() && !result.isDirectory() && result.length() == file.length())){
-                //save to the cached file
-                file.copyTo(result);
-            }
+		//on iOS, try to load from internal storage instead, as that prevents unnecessary copies
+		if (OS.isIos && file.type() == FileType.internal) {
+			try {
+				String path = Core.files.getInternalStoragePath();
+				handle = streamLoadFile((path.endsWith("/") ? path : path + "/") + file.path());
+				return;
+			} catch (Exception failed) {
+			}
+		}
 
-            try{
-                handle = streamLoadFile(result.file().getCanonicalPath());
-                return;
-            }catch(Exception e){
-                try{
-                    handle = streamLoadFile(result.file().getAbsolutePath());
-                    return;
-                }catch(Exception ignored){
-                }
-                last = new ArcRuntimeException("Error loading music: " + result.file().getCanonicalPath(), e);
-            }
-        }
+		Exception last = null;
 
-        if(last != null) throw last;
-    }
+		for (Fi result : caches(file.nameWithoutExtension() + "__" + file.length() + "." + file.extension())) {
+			//check if file already exists (use length as "hash")
+			if (!(result.exists() && !result.isDirectory() && result.length() == file.length())) {
+				//save to the cached file
+				file.copyTo(result);
+			}
 
-    public void play(){
-        if(handle == 0 || !Core.audio.initialized) return;
+			try {
+				handle = streamLoadFile(result.file().getCanonicalPath());
+				return;
+			} catch (Exception e) {
+				try {
+					handle = streamLoadFile(result.file().getAbsolutePath());
+					return;
+				} catch (Exception ignored) {
+				}
+				last = new ArcRuntimeException("Error loading music: " + result.file().getCanonicalPath(), e);
+			}
+		}
 
-        if(idValid(voice) && idGetPause(voice)){
-            pause(false);
-        }else{
-            voice = sourcePlayBus(handle, Core.audio.musicBus.handle, volume, pitch, pan, looping);
+		if (last != null) throw last;
+	}
 
-            idProtected(voice, true);
-        }
-    }
+	public void play() {
+		if (handle == 0 || !Core.audio.initialized) return;
 
-    public void pause(boolean pause){
-        if(handle == 0 || voice <= 0) return;
+		if (idValid(voice) && idGetPause(voice)) {
+			pause(false);
+		} else {
+			voice = sourcePlayBus(handle, Core.audio.musicBus.handle, volume, pitch, pan, looping);
 
-        idPause(voice, pause);
-    }
+			idProtected(voice, true);
+		}
+	}
 
-    @Override
-    public void stop(){
-        super.stop();
-        voice = 0;
-    }
+	public void pause(boolean pause) {
+		if (handle == 0 || voice <= 0) return;
 
-    public boolean isPlaying(){
-        if(handle == 0 || voice <= 0) return false;
+		idPause(voice, pause);
+	}
 
-        return idValid(voice) && !idGetPause(voice);
-    }
+	@Override
+	public void stop() {
+		super.stop();
+		voice = 0;
+	}
 
-    public boolean isLooping(){
-        return looping;
-    }
+	public boolean isPlaying() {
+		if (handle == 0 || voice <= 0) return false;
 
-    public void setLooping(boolean isLooping){
-        this.looping = isLooping;
-        if(handle == 0 || voice <= 0) return;
+		return idValid(voice) && !idGetPause(voice);
+	}
 
-        idLooping(voice, isLooping);
-    }
+	public boolean isLooping() {
+		return looping;
+	}
 
-    public float getVolume(){
-        return volume;
-    }
+	public void setLooping(boolean isLooping) {
+		this.looping = isLooping;
+		if (handle == 0 || voice <= 0) return;
 
-    public void setVolume(float volume){
-        this.volume = volume;
-        if(handle == 0 || voice <= 0) return;
+		idLooping(voice, isLooping);
+	}
 
-        idVolume(voice, volume);
-    }
+	public float getVolume() {
+		return volume;
+	}
 
-    public void set(float pan, float volume){
-        this.volume = volume;
-        this.pan = pan;
+	public void setVolume(float volume) {
+		this.volume = volume;
+		if (handle == 0 || voice <= 0) return;
 
-        if(handle == 0 || voice <= 0) return;
+		idVolume(voice, volume);
+	}
 
-        idVolume(voice, volume);
-        idPan(voice, pan);
-    }
+	public void set(float pan, float volume) {
+		this.volume = volume;
+		this.pan = pan;
 
-    public float getPosition(){
-        if(handle == 0) return 0;
+		if (handle == 0 || voice <= 0) return;
 
-        return idPosition(voice);
-    }
+		idVolume(voice, volume);
+		idPan(voice, pan);
+	}
 
-    public void setPosition(float position){
-        if(handle == 0 || voice <= 0) return;
+	public float getPosition() {
+		if (handle == 0) return 0;
 
-        idSeek(voice, position);
-    }
+		return idPosition(voice);
+	}
 
-    /** @return length in seconds */
-    @Override
-    public float getLength(){
-        if(handle == 0 || !Core.audio.initialized) return 0f;
-        return (float)Soloud.streamLength(handle);
-    }
+	public void setPosition(float position) {
+		if (handle == 0 || voice <= 0) return;
 
-    @Override
-    public String toString(){
-        return "SoloudMusic: " + file;
-    }
+		idSeek(voice, position);
+	}
 
-    protected static Fi[] caches(String name) throws IOException{
-        String dir = System.getProperty("java.io.tmpdir");
+	/**
+	 * @return length in seconds
+	 */
+	@Override
+	public float getLength() {
+		if (handle == 0 || !Core.audio.initialized) return 0f;
+		return (float) Soloud.streamLength(handle);
+	}
 
-        //prefer cache dir on android
-        if(Core.app.isAndroid()){
-            return new Fi[]{
-            Core.files.cache(name), Core.settings.getDataDirectory().child("cache").child(name),
-            dir == null ? Core.files.absolute(File.createTempFile(name, "mind").getAbsolutePath()) : Core.files.absolute(dir).child(name)
-            };
-        }else{
-            return new Fi[]{
-            Core.settings.getDataDirectory().child("cache").child(name), Core.files.cache(name),
-            dir == null ? Core.files.absolute(File.createTempFile(name, "mind").getAbsolutePath()) : Core.files.absolute(dir).child(name)
-            };
-        }
-    }
+	@Override
+	public String toString() {
+		return "SoloudMusic: " + file;
+	}
 }

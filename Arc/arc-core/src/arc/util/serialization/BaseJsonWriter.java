@@ -5,24 +5,24 @@ import java.io.IOException;
 
 import arc.util.serialization.JsonWriter.OutputType;
 
-public interface BaseJsonWriter extends Closeable{
-    void setOutputType(OutputType outputType);
+public interface BaseJsonWriter extends Closeable {
+	void setOutputType(OutputType outputType);
 
-    void setQuoteLongValues(boolean quoteLongValues);
+	void setQuoteLongValues(boolean quoteLongValues);
 
-    BaseJsonWriter name(String name) throws IOException;
+	BaseJsonWriter name(String name) throws IOException;
 
-    BaseJsonWriter object() throws IOException;
+	BaseJsonWriter object() throws IOException;
 
-    BaseJsonWriter array() throws IOException;
+	BaseJsonWriter array() throws IOException;
 
-    BaseJsonWriter value(Object value) throws IOException;
+	BaseJsonWriter value(Object value) throws IOException;
 
-    BaseJsonWriter object(String name) throws IOException;
+	BaseJsonWriter object(String name) throws IOException;
 
-    BaseJsonWriter array(String name) throws IOException;
+	BaseJsonWriter array(String name) throws IOException;
 
-    BaseJsonWriter set(String name, Object value) throws IOException;
+	BaseJsonWriter set(String name, Object value) throws IOException;
 
-    BaseJsonWriter pop() throws IOException;
+	BaseJsonWriter pop() throws IOException;
 }

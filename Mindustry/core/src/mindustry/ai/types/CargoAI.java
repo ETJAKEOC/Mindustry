@@ -12,169 +12,169 @@ import mindustry.type.Item;
 import mindustry.world.blocks.units.UnitCargoUnloadPoint.UnitCargoUnloadPointBuild;
 import mindustry.world.meta.BlockFlag;
 
-public class CargoAI extends AIController{
-    static Seq<Item> orderedItems = new Seq<>();
-    static Seq<UnitCargoUnloadPointBuild> targets = new Seq<>();
+public class CargoAI extends AIController {
+	public static float emptyWaitTime = 60f * 2f, dropSpacing = 60f * 1.5f;
+	public static float transferRange = 20f, moveRange = 6f, moveSmoothing = 20f;
+	static Seq<Item> orderedItems = new Seq<>();
+	static Seq<UnitCargoUnloadPointBuild> targets = new Seq<>();
+	public @Nullable UnitCargoUnloadPointBuild unloadTarget;
+	public @Nullable Item itemTarget;
+	public float noDestTimer = 0f;
+	public int targetIndex = 0;
 
-    public static float emptyWaitTime = 60f * 2f, dropSpacing = 60f * 1.5f;
-    public static float transferRange = 20f, moveRange = 6f, moveSmoothing = 20f;
+	@Override
+	public void updateMovement() {
+		if (!(unit instanceof BuildingTetherc tether) || tether.building() == null) return;
 
-    public @Nullable UnitCargoUnloadPointBuild unloadTarget;
-    public @Nullable Item itemTarget;
-    public float noDestTimer = 0f;
-    public int targetIndex = 0;
+		var build = tether.building();
 
-    @Override
-    public void updateMovement(){
-        if(!(unit instanceof BuildingTetherc tether) || tether.building() == null) return;
+		if (build.items == null) return;
 
-        var build = tether.building();
+		//empty, approach the loader, even if there's nothing to pick up (units hanging around doing nothing looks bad)
+		if (!unit.hasItem()) {
+			moveTo(build, moveRange, moveSmoothing);
 
-        if(build.items == null) return;
+			//check if ready to pick up
+			if (build.items.any() && unit.within(build, transferRange)) {
+				if (retarget()) {
+					findAnyTarget(build);
 
-        //empty, approach the loader, even if there's nothing to pick up (units hanging around doing nothing looks bad)
-        if(!unit.hasItem()){
-            moveTo(build, moveRange, moveSmoothing);
+					//target has been found, grab items and go
+					if (unloadTarget != null) {
+						Call.takeItems(build, itemTarget, Math.min(unit.type.itemCapacity, build.items.get(itemTarget)), unit);
+					}
+				}
+			}
+		} else { //the unit has an item, deposit it somewhere.
 
-            //check if ready to pick up
-            if(build.items.any() && unit.within(build, transferRange)){
-                if(retarget()){
-                    findAnyTarget(build);
+			//there may be no current target, try to find one
+			if (unloadTarget == null) {
+				if (retarget()) {
+					findDropTarget(unit.item(), 0, null);
 
-                    //target has been found, grab items and go
-                    if(unloadTarget != null){
-                        Call.takeItems(build, itemTarget, Math.min(unit.type.itemCapacity, build.items.get(itemTarget)), unit);
-                    }
-                }
-            }
-        }else{ //the unit has an item, deposit it somewhere.
+					//if there is not even a single place to unload, dump items.
+					if (unloadTarget == null) {
+						unit.clearItem();
+					}
+				}
+			} else {
 
-            //there may be no current target, try to find one
-            if(unloadTarget == null){
-                if(retarget()){
-                    findDropTarget(unit.item(), 0, null);
+				//what if some prankster reconfigures or picks up the target while the unit is moving? we can't have that!
+				if (unloadTarget.item != itemTarget || unloadTarget.isPayload()) {
+					unloadTarget = null;
+					return;
+				}
 
-                    //if there is not even a single place to unload, dump items.
-                    if(unloadTarget == null){
-                        unit.clearItem();
-                    }
-                }
-            }else{
+				moveTo(unloadTarget, moveRange, moveSmoothing);
 
-                //what if some prankster reconfigures or picks up the target while the unit is moving? we can't have that!
-                if(unloadTarget.item != itemTarget || unloadTarget.isPayload()){
-                    unloadTarget = null;
-                    return;
-                }
+				//deposit in bursts, unloading can take a while
+				if (unit.within(unloadTarget, transferRange) && timer.get(timerTarget2, dropSpacing)) {
+					int max = unloadTarget.acceptStack(unit.item(), unit.stack.amount, unit);
 
-                moveTo(unloadTarget, moveRange, moveSmoothing);
+					//deposit items when it's possible
+					if (max > 0) {
+						Call.transferItemTo(unit, unit.item(), max, unit.x, unit.y, unloadTarget);
+					}
 
-                //deposit in bursts, unloading can take a while
-                if(unit.within(unloadTarget, transferRange) && timer.get(timerTarget2, dropSpacing)){
-                    int max = unloadTarget.acceptStack(unit.item(), unit.stack.amount, unit);
+					//keep the target for at most emptyWaitTime, then we try change if other need.
+					if (!unit.hasItem() || (noDestTimer += dropSpacing) >= emptyWaitTime) {
+						//oh no, it's out of space - wait for a while, and if nothing changes, try the next destination
 
-                    //deposit items when it's possible
-                    if(max > 0){
-                        Call.transferItemTo(unit, unit.item(), max, unit.x, unit.y, unloadTarget);
-                    }
+						//next targeting attempt will try the next destination point
+						targetIndex = findDropTarget(unit.item(), targetIndex, unloadTarget);
+						noDestTimer = 0f;
 
-                    //keep the target for at most emptyWaitTime, then we try change if other need.
-                    if(!unit.hasItem() || (noDestTimer += dropSpacing) >= emptyWaitTime){
-                        //oh no, it's out of space - wait for a while, and if nothing changes, try the next destination
+						//nothing found at all, clear item
+						if (unloadTarget == null) {
+							unit.clearItem();
+						}
+					}
+				}
+			}
+		}
 
-                        //next targeting attempt will try the next destination point
-                        targetIndex = findDropTarget(unit.item(), targetIndex, unloadTarget);
-                        noDestTimer = 0f;
+	}
 
-                        //nothing found at all, clear item
-                        if(unloadTarget == null){
-                            unit.clearItem();
-                        }
-                    }
-                }
-            }
-        }
+	/**
+	 * find target for the unit's current item
+	 */
+	public int findDropTarget(Item item, int offset, UnitCargoUnloadPointBuild ignore) {
+		unloadTarget = null;
+		itemTarget = item;
 
-    }
+		//autocast for convenience... I know all of these must be cargo unload points anyway
+		targets.selectFrom((Seq<UnitCargoUnloadPointBuild>) (Seq) Vars.indexer.getFlagged(unit.team, BlockFlag.unitCargoUnloadPoint), u -> u.item == item);
 
-    /** find target for the unit's current item */
-    public int findDropTarget(Item item, int offset, UnitCargoUnloadPointBuild ignore){
-        unloadTarget = null;
-        itemTarget = item;
+		if (targets.isEmpty()) return 0;
 
-        //autocast for convenience... I know all of these must be cargo unload points anyway
-        targets.selectFrom((Seq<UnitCargoUnloadPointBuild>)(Seq)Vars.indexer.getFlagged(unit.team, BlockFlag.unitCargoUnloadPoint), u -> u.item == item);
+		//Search from offset + 1
+		for (int i = 0; i < targets.size; i++) {
+			int index = (i + offset + 1) % targets.size;
+			var target = targets.get(index);
 
-        if(targets.isEmpty()) return 0;
+			if (!target.stale) {
+				unloadTarget = target;
+				targets.clear();
+				return index;
+			}
+		}
 
-        //Search from offset + 1
-        for(int i = 0; i < targets.size; i++){
-            int index = (i + offset + 1) % targets.size;
-            var target = targets.get(index);
+		//a stale target is better than nothing
+		unloadTarget = targets.get(0);
+		targets.clear();
+		return 0;
+	}
 
-            if(!target.stale){
-                unloadTarget = target;
-                targets.clear();
-                return index;
-            }
-        }
+	public void findAnyTarget(Building build) {
+		unloadTarget = null;
+		itemTarget = null;
 
-        //a stale target is better than nothing
-        unloadTarget = targets.get(0);
-        targets.clear();
-        return 0;
-    }
+		//autocast for convenience... I know all of these must be cargo unload points anyway
+		var baseTargets = (Seq<UnitCargoUnloadPointBuild>) (Seq) Vars.indexer.getFlagged(unit.team, BlockFlag.unitCargoUnloadPoint);
 
-    public void findAnyTarget(Building build){
-        unloadTarget = null;
-        itemTarget = null;
+		if (baseTargets.isEmpty()) return;
 
-        //autocast for convenience... I know all of these must be cargo unload points anyway
-        var baseTargets = (Seq<UnitCargoUnloadPointBuild>)(Seq)Vars.indexer.getFlagged(unit.team, BlockFlag.unitCargoUnloadPoint);
+		orderedItems.size = 0;
+		for (Item item : content.items()) {
+			if (build.items.get(item) > 0) {
+				orderedItems.add(item);
+			}
+		}
 
-        if(baseTargets.isEmpty()) return;
+		//sort by most items in descending order, and try each one.
+		orderedItems.sort(i -> -build.items.get(i));
 
-        orderedItems.size = 0;
-        for(Item item : content.items()){
-            if(build.items.get(item) > 0){
-                orderedItems.add(item);
-            }
-        }
+		UnitCargoUnloadPointBuild lastStale = null;
 
-        //sort by most items in descending order, and try each one.
-        orderedItems.sort(i -> -build.items.get(i));
+		outer:
+		for (Item item : orderedItems) {
+			targets.selectFrom(baseTargets, u -> u.item == item);
 
-        UnitCargoUnloadPointBuild lastStale = null;
+			if (targets.size > 0) itemTarget = item;
 
-        outer:
-        for(Item item : orderedItems){
-            targets.selectFrom(baseTargets, u -> u.item == item);
+			for (int i = 0; i < targets.size; i++) {
+				var target = targets.get((i + targetIndex) % targets.size);
 
-            if(targets.size > 0) itemTarget = item;
+				lastStale = target;
 
-            for(int i = 0; i < targets.size; i ++){
-                var target = targets.get((i + targetIndex) % targets.size);
+				if (!target.stale) {
+					unloadTarget = target;
+					break outer;
+				}
+			}
+		}
 
-                lastStale = target;
+		//if the only thing that was found was a "stale" target, at least try that...
+		if (unloadTarget == null && lastStale != null) {
+			unloadTarget = lastStale;
+		}
 
-                if(!target.stale){
-                    unloadTarget = target;
-                    break outer;
-                }
-            }
-        }
+		targets.clear();
+	}
 
-        //if the only thing that was found was a "stale" target, at least try that...
-        if(unloadTarget == null && lastStale != null){
-            unloadTarget = lastStale;
-        }
-
-        targets.clear();
-    }
-
-    //unused, might change later
-    void sortTargets(Seq<UnitCargoUnloadPointBuild> targets){
-        //find sort by "most desirable" first
-        targets.sort(Structs.comps(Structs.comparingInt(b -> b.items.total()), Structs.comparingFloat(b -> b.dst2(unit))));
-    }
+	//unused, might change later
+	void sortTargets(Seq<UnitCargoUnloadPointBuild> targets) {
+		//find sort by "most desirable" first
+		targets.sort(Structs.comps(Structs.comparingInt(b -> b.items.total()), Structs.comparingFloat(b -> b.dst2(unit))));
+	}
 }

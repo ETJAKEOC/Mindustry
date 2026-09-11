@@ -8,25 +8,25 @@ import static mindustry.Vars.headless;
 import static mindustry.Vars.ui;
 
 public class UIShowAction extends Action {
-    @Override
-    public String actionName() {
-        return "ui_show";
-    }
+	@Override
+	public String actionName() {
+		return "ui_show";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+	}
 
-    @Override
-    public void end() {
-        if (headless) return;
-        ui.hudfrag.shown = true;
-    }
+	@Override
+	public void end() {
+		if (headless) return;
+		ui.hudfrag.shown = true;
+	}
 
-    @Override
-    public void skip() {
-        if (headless) return;
-        end();
-    }
+	@Override
+	public void skip() {
+		if (headless) return;
+		end();
+	}
 }

@@ -6,12 +6,12 @@ import mindustry.world.blocks.production.Drill;
 import mindustry.world.draw.DrawBlock;
 
 public class DrawDrillOreTop extends DrawBlock {
-    @Override
-    public void draw(Building build) {
-        if (build instanceof Drill.DrillBuild drill && drill.dominantItem != null) {
-            Draw.color(drill.dominantItem.color);
-            Draw.rect(((Drill) drill.block).itemRegion, drill.x, drill.y);
-            Draw.color();
-        }
-    }
+	@Override
+	public void draw(Building build) {
+		if (build instanceof Drill.DrillBuild drill && drill.dominantItem != null) {
+			Draw.color(drill.dominantItem.color);
+			Draw.rect(((Drill) drill.block).itemRegion, drill.x, drill.y);
+			Draw.color();
+		}
+	}
 }

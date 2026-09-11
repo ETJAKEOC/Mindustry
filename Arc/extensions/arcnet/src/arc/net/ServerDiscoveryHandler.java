@@ -1,5 +1,3 @@
-
-
 package arc.net;
 
 import java.io.IOException;
@@ -8,14 +6,15 @@ import java.nio.ByteBuffer;
 
 import arc.net.FrameworkMessage.DiscoverHost;
 
-public interface ServerDiscoveryHandler{
-    /**
-     * Called when the {@link Server} receives a {@link DiscoverHost} packet.
-     * @throws IOException from sending a response.
-     */
-    void onDiscoverReceived(InetAddress address, ReponseHandler handler) throws IOException;
+public interface ServerDiscoveryHandler {
+	/**
+	 * Called when the {@link Server} receives a {@link DiscoverHost} packet.
+	 *
+	 * @throws IOException from sending a response.
+	 */
+	void onDiscoverReceived(InetAddress address, ReponseHandler handler) throws IOException;
 
-    interface ReponseHandler{
-        void respond(ByteBuffer buffer) throws IOException;
-    }
+	interface ReponseHandler {
+		void respond(ByteBuffer buffer) throws IOException;
+	}
 }

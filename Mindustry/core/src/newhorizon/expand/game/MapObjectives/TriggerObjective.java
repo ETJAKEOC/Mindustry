@@ -5,46 +5,46 @@ import mindustry.game.MapObjectives;
 import newhorizon.expand.game.MapMarker.RaidIndicator;
 
 public class TriggerObjective extends MapObjectives.MapObjective {
-    public @MapObjectives.Second float duration = 60f * 10f;
-    public String timer = "event-timer";
+	public @MapObjectives.Second float duration = 60f * 10f;
+	public String timer = "event-timer";
 
-    protected boolean triggered = false;
-    protected float countup;
+	protected boolean triggered = false;
+	protected float countup;
 
-    public TriggerObjective(String timer) {
-        this.timer = timer;
-        RaidIndicator raidIndicator = new RaidIndicator(timer);
-        raidIndicator.minimap = 0;
+	public TriggerObjective(String timer) {
+		this.timer = timer;
+		RaidIndicator raidIndicator = new RaidIndicator(timer);
+		raidIndicator.minimap = 0;
 
-        markers = new MapObjectives.ObjectiveMarker[]{raidIndicator};
-    }
+		markers = new MapObjectives.ObjectiveMarker[]{raidIndicator};
+	}
 
-    public TriggerObjective() {
-    }
+	public TriggerObjective() {
+	}
 
-    @Override
-    public boolean update() {
-        if (countup <= duration) {
-            countup += Time.delta;
-        } else {
-            triggered = false;
-        }
-        return false;
-    }
+	@Override
+	public boolean update() {
+		if (countup <= duration) {
+			countup += Time.delta;
+		} else {
+			triggered = false;
+		}
+		return false;
+	}
 
-    public void trigger(float duration) {
-        this.duration = duration;
-        countup = 0;
+	public void trigger(float duration) {
+		this.duration = duration;
+		countup = 0;
 
-        triggered = true;
-    }
+		triggered = true;
+	}
 
-    public float getCountup() {
-        return countup;
-    }
+	public float getCountup() {
+		return countup;
+	}
 
-    @Override
-    public boolean qualified() {
-        return triggered;
-    }
+	@Override
+	public boolean qualified() {
+		return triggered;
+	}
 }

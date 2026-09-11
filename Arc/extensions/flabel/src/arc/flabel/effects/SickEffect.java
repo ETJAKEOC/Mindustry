@@ -12,11 +12,9 @@ import arc.util.Strings;
  */
 public class SickEffect extends FEffect {
 	private static final float defaultFrequency = 50f, defaultDistance = .125f, defaultIntensity = 1f;
-
+	private final IntSeq indices = new IntSeq();
 	public float distance = 1; // How far the glyphs should move
 	public float intensity = 1; // How fast the glyphs should move
-
-	private final IntSeq indices = new IntSeq();
 
 	@Override
 	public void applyParams(String[] params) {

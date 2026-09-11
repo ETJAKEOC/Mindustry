@@ -11,31 +11,31 @@ import static newhorizon.NHVars.cutscene;
 
 public class RunMainBus extends ActionLStatement {
 
-    public RunMainBus(String[] token) {
-    }
+	public RunMainBus(String[] token) {
+	}
 
-    public RunMainBus() {
-    }
+	public RunMainBus() {
+	}
 
-    @Override
-    public String getLStatementName() {
-        return "runmainbus";
-    }
+	@Override
+	public String getLStatementName() {
+		return "runmainbus";
+	}
 
-    @Override
-    public LCategory category() {
-        return NHLogic.nhcutscene;
-    }
+	@Override
+	public LCategory category() {
+		return NHLogic.nhcutscene;
+	}
 
-    @Override
-    public LExecutor.LInstruction build(LAssembler builder) {
-        return new RunMainBusI();
-    }
+	@Override
+	public LExecutor.LInstruction build(LAssembler builder) {
+		return new RunMainBusI();
+	}
 
-    public class RunMainBusI extends ActionInstruction {
-        @Override
-        public void run(LExecutor exec) {
-            cutscene.addMainActionBus(CutsceneControl.parseCode(exec.textBuffer.toString()));
-        }
-    }
+	public class RunMainBusI extends ActionInstruction {
+		@Override
+		public void run(LExecutor exec) {
+			cutscene.addMainActionBus(CutsceneControl.parseCode(exec.textBuffer.toString()));
+		}
+	}
 }

@@ -3,25 +3,25 @@ package arc.fx.filters;
 import arc.Core;
 import arc.fx.FxFilter;
 
-public class NoiseFilter extends FxFilter{
-    public float amount;
-    public float speed;
+public class NoiseFilter extends FxFilter {
+	public float amount;
+	public float speed;
 
-    public NoiseFilter(float amount, float speed){
-        super(compileShader(
-        Core.files.classpath("vfxshaders/screenspace.vert"),
-        Core.files.classpath("vfxshaders/noise.frag")));
-        this.amount = amount;
-        this.speed = speed;
-        rebind();
-    }
+	public NoiseFilter(float amount, float speed) {
+		super(compileShader(
+				Core.files.classpath("vfxshaders/screenspace.vert"),
+				Core.files.classpath("vfxshaders/noise.frag")));
+		this.amount = amount;
+		this.speed = speed;
+		rebind();
+	}
 
-    @Override
-    public void setParams(){
-        shader.setUniformi("u_texture0", u_texture0);
-        shader.setUniformf("u_amount", amount);
-        shader.setUniformf("u_speed", speed);
-        shader.setUniformf("u_time", time);
-    }
+	@Override
+	public void setParams() {
+		shader.setUniformi("u_texture0", u_texture0);
+		shader.setUniformf("u_amount", amount);
+		shader.setUniformf("u_speed", speed);
+		shader.setUniformf("u_time", time);
+	}
 }
 

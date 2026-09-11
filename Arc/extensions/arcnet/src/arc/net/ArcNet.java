@@ -2,10 +2,11 @@ package arc.net;
 
 import arc.func.Cons;
 
-public class ArcNet{
-    public static Cons<Throwable> errorHandler = e -> {};
+public class ArcNet {
+	public static Cons<Throwable> errorHandler = e -> {
+	};
 
-    public static void handleError(Throwable e){
-        errorHandler.get(e);
-    }
+	public static void handleError(Throwable e) {
+		errorHandler.get(e);
+	}
 }

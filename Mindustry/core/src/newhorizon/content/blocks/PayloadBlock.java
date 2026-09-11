@@ -3,9 +3,9 @@ package newhorizon.content.blocks;
 import mindustry.world.Block;
 
 public class PayloadBlock {
-    public static Block payloadRail, payloadRouter, payloadTeleport;
+	public static Block payloadRail, payloadRouter, payloadTeleport;
 
-    public static void load() {
+	public static void load() {
 //        payloadRail = new PayloadConveyor("module-rail") {{
 //            requirements(Category.units, BuildVisibility.shown, ItemStack.with(NHItems.presstanium, 10));
 //            size = 1;
@@ -59,5 +59,5 @@ public class PayloadBlock {
 //                return false;
 //            }
 //        };
-    }
+	}
 }

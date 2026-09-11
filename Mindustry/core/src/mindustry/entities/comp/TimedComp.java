@@ -7,22 +7,22 @@ import mindustry.annotations.Annotations.MethodPriority;
 import mindustry.gen.*;
 
 @Component
-abstract class TimedComp implements Entityc, Scaled{
-    float time, lifetime;
+abstract class TimedComp implements Entityc, Scaled {
+	float time, lifetime;
 
-    //called last so pooling and removal happens then.
-    @MethodPriority(100)
-    @Override
-    public void update(){
-        time = Math.min(time + Time.delta, lifetime);
+	//called last so pooling and removal happens then.
+	@MethodPriority(100)
+	@Override
+	public void update() {
+		time = Math.min(time + Time.delta, lifetime);
 
-        if(time >= lifetime){
-            remove();
-        }
-    }
+		if (time >= lifetime) {
+			remove();
+		}
+	}
 
-    @Override
-    public float fin(){
-        return time / lifetime;
-    }
+	@Override
+	public float fin() {
+		return time / lifetime;
+	}
 }

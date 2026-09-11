@@ -9,9 +9,12 @@ import arc.scene.Group;
  * <p>
  * When Group is given a culling rectangle with {@link Group#setCullingArea(Rect)}, it will automatically call
  * {@link #setCullingArea(Rect)} on its children.
+ *
  * @author Nathan Sweet
  */
-public interface Cullable{
-    /** @param cullingArea The culling area in the child actor's coordinates. */
-    void setCullingArea(Rect cullingArea);
+public interface Cullable {
+	/**
+	 * @param cullingArea The culling area in the child actor's coordinates.
+	 */
+	void setCullingArea(Rect cullingArea);
 }

@@ -35,134 +35,135 @@ import static mindustry.type.ItemStack.with;
 import static newhorizon.util.func.NHFunc.rand;
 
 public class ProductionBlock {
-    public static Block
-            sandCracker, decoherenceReverser, tungstenReconstructor, titaniumReconstructor, /*resourceConvertor,*/ oilRefiner, scanCollector,
-            resonanceMiningFacility, interlockingDrill, beamMiningFacility, implosionMiningFacility,
-            airRadiator, liquidRadiator;
+	public static Block
+			sandCracker, decoherenceReverser, tungstenReconstructor, titaniumReconstructor, /*resourceConvertor,*/
+			oilRefiner, scanCollector,
+			resonanceMiningFacility, interlockingDrill, beamMiningFacility, implosionMiningFacility,
+			airRadiator, liquidRadiator;
 
-    public static void load() {
+	public static void load() {
 
-        scanCollector = new OreCollector("scan-collector") {{
-            requirements(Category.production, ItemStack.with(
-                    NHItems.silicon, 40,
-                    NHItems.graphite, 40
-            ));
-            size = 3;
-            // Formerly two size-2 links; the current API requires one link per occupied tile.
-            addLink(
-                    p(0, 2), p(1, 2), p(0, 3), p(1, 3),
-                    p(0, -3), p(1, -3), p(0, -2), p(1, -2)
-            );
+		scanCollector = new OreCollector("scan-collector") {{
+			requirements(Category.production, ItemStack.with(
+					NHItems.silicon, 40,
+					NHItems.graphite, 40
+			));
+			size = 3;
+			// Formerly two size-2 links; the current API requires one link per occupied tile.
+			addLink(
+					p(0, 2), p(1, 2), p(0, 3), p(1, 3),
+					p(0, -3), p(1, -3), p(0, -2), p(1, -2)
+			);
 
-            itemCapacity = 30;
+			itemCapacity = 30;
 
-            consumePower(2.5f);
-            consumeLiquid(NHLiquids.ammonia, 5f / 60f).boost();
-        }};
+			consumePower(2.5f);
+			consumeLiquid(NHLiquids.ammonia, 5f / 60f).boost();
+		}};
 
-        sandCracker = new RecipeGenericCrafter("sand-cracker") {{
-            requirements(Category.production, ItemStack.with(
-                    NHItems.silicon, 40,
-                    NHItems.graphite, 40
-            ));
-            size = 2;
-            health = 300;
-            armor = 2;
-            itemCapacity = 30;
-            rotate = false;
+		sandCracker = new RecipeGenericCrafter("sand-cracker") {{
+			requirements(Category.production, ItemStack.with(
+					NHItems.silicon, 40,
+					NHItems.graphite, 40
+			));
+			size = 2;
+			health = 300;
+			armor = 2;
+			itemCapacity = 30;
+			rotate = false;
 
-            drawer = new DrawMulti(
-                    new DrawBaseRegion("-2x2"),
-                    new DrawRotator(),
-                    new DrawRegion()
-            );
+			drawer = new DrawMulti(
+					new DrawBaseRegion("-2x2"),
+					new DrawRotator(),
+					new DrawRegion()
+			);
 
-            craftEffect = NHFx.hugeSmokeGray;
+			craftEffect = NHFx.hugeSmokeGray;
 
-            updateEffect = new Effect(80f, e -> {
-                Fx.rand.setSeed(e.id);
-                Draw.color(Color.lightGray, Color.gray, e.fin());
-                Angles.randLenVectors(e.id, 4, 2.0F + 12.0F * e.fin(Interp.pow3Out), (x, y) -> {
-                    Fill.circle(e.x + x, e.y + y, e.fout() * Fx.rand.random(1, 2.5f));
-                });
-            }).layer(Layer.blockOver + 1);
+			updateEffect = new Effect(80f, e -> {
+				Fx.rand.setSeed(e.id);
+				Draw.color(Color.lightGray, Color.gray, e.fin());
+				Angles.randLenVectors(e.id, 4, 2.0F + 12.0F * e.fin(Interp.pow3Out), (x, y) -> {
+					Fill.circle(e.x + x, e.y + y, e.fout() * Fx.rand.random(1, 2.5f));
+				});
+			}).layer(Layer.blockOver + 1);
 
-            consumePower(5f);
-        }};
+			consumePower(5f);
+		}};
 
-        decoherenceReverser = new GenericCrafter("decoherence-reverser") {{
-            requirements(Category.production, with(
-                    NHItems.titanium, 40,
-                    NHItems.silicon, 40,
-                    NHItems.hardLight, 60
-            ));
+		decoherenceReverser = new GenericCrafter("decoherence-reverser") {{
+			requirements(Category.production, with(
+					NHItems.titanium, 40,
+					NHItems.silicon, 40,
+					NHItems.hardLight, 60
+			));
 
-            size = 2;
-            scaledHealth = 100f;
-            liquidCapacity = 120f;
-            craftTime = 60f;
+			size = 2;
+			scaledHealth = 100f;
+			liquidCapacity = 120f;
+			craftTime = 60f;
 
-            consumePower(1f);
-            consumeLiquid(NHLiquids.water, 30 / 60f);
-            outputLiquid = new LiquidStack(NHLiquids.quantumLiquid, 18 / 60f);
+			consumePower(1f);
+			consumeLiquid(NHLiquids.water, 30 / 60f);
+			outputLiquid = new LiquidStack(NHLiquids.quantumLiquid, 18 / 60f);
 
-            drawer = new DrawMulti(
-                    new DrawBaseRegion("-2x2"),
-                    new DrawLiquidTile(NHLiquids.water, 2f),
-                    new DrawLiquidTile(NHLiquids.quantumLiquid, 2f),
-                    new DrawArcSmelt() {{
-                        midColor = flameColor = NHColor.darkEnrColor.lerp(Color.lightGray, 0.3f);
-                        flameRad = 0.3f;
-                        circleSpace = 1f;
-                        particleStroke = 0.8f;
-                        particleRad = 4.5f;
-                        particleLen = 1.5f;
-                    }},
-                    new DrawRegion()
-            );
+			drawer = new DrawMulti(
+					new DrawBaseRegion("-2x2"),
+					new DrawLiquidTile(NHLiquids.water, 2f),
+					new DrawLiquidTile(NHLiquids.quantumLiquid, 2f),
+					new DrawArcSmelt() {{
+						midColor = flameColor = NHColor.darkEnrColor.lerp(Color.lightGray, 0.3f);
+						flameRad = 0.3f;
+						circleSpace = 1f;
+						particleStroke = 0.8f;
+						particleRad = 4.5f;
+						particleLen = 1.5f;
+					}},
+					new DrawRegion()
+			);
 
-            craftEffect = NHFx.square(NHColor.darkEnrColor, 60, 6, 16, 2);
-            updateEffect = NHFx.square(NHColor.processorBlue, 60, 2, 12, 2);
-        }};
+			craftEffect = NHFx.square(NHColor.darkEnrColor, 60, 6, 16, 2);
+			updateEffect = NHFx.square(NHColor.processorBlue, 60, 2, 12, 2);
+		}};
 
 
-        tungstenReconstructor = new GenericCrafter("tungsten-reconstructor") {{
-            requirements(Category.production, with(
-                    NHItems.titanium, 30
-            ));
+		tungstenReconstructor = new GenericCrafter("tungsten-reconstructor") {{
+			requirements(Category.production, with(
+					NHItems.titanium, 30
+			));
 
-            size = 2;
-            health = 600;
-            itemCapacity = 30;
-            craftTime = 60f;
+			size = 2;
+			health = 600;
+			itemCapacity = 30;
+			craftTime = 60f;
 
-            consumePower(90f / 60f);
-            consumeItems(with(NHItems.titanium, 5));
-            outputItems = with(NHItems.tungsten, 4);
+			consumePower(90f / 60f);
+			consumeItems(with(NHItems.titanium, 5));
+			outputItems = with(NHItems.tungsten, 4);
 
-            drawer = new DrawMulti(
-                    new DrawDefault()
-            );
-        }};
+			drawer = new DrawMulti(
+					new DrawDefault()
+			);
+		}};
 
-        titaniumReconstructor = new GenericCrafter("titanium-reconstructor") {{
-            requirements(Category.production, with(
-                    NHItems.tungsten, 30
-            ));
+		titaniumReconstructor = new GenericCrafter("titanium-reconstructor") {{
+			requirements(Category.production, with(
+					NHItems.tungsten, 30
+			));
 
-            size = 2;
-            health = 600;
-            itemCapacity = 30;
-            craftTime = 60f;
+			size = 2;
+			health = 600;
+			itemCapacity = 30;
+			craftTime = 60f;
 
-            consumePower(90f / 60f);
-            consumeItems(with(NHItems.tungsten, 5));
-            outputItems = with(NHItems.titanium, 4);
+			consumePower(90f / 60f);
+			consumeItems(with(NHItems.tungsten, 5));
+			outputItems = with(NHItems.titanium, 4);
 
-            drawer = new DrawMulti(
-                    new DrawDefault()
-            );
-        }};
+			drawer = new DrawMulti(
+					new DrawDefault()
+			);
+		}};
 
         /*resourceConvertor = new RecipeGenericCrafter("resource-convertor") {{
             requirements(Category.production, ItemStack.with(
@@ -184,35 +185,35 @@ public class ProductionBlock {
             drawer = new DrawMulti(new DrawDefault());
         }};*/
 
-        oilRefiner = new GenericCrafter("oil-refiner") {{
-            requirements(Category.production, ItemStack.with(
-                    NHItems.silicon, 40,
-                    NHItems.graphite, 40
-            ));
-            size = 2;
-            health = 300;
-            armor = 2;
-            itemCapacity = 20;
-            liquidCapacity = 30;
-            craftTime = 60f;
+		oilRefiner = new GenericCrafter("oil-refiner") {{
+			requirements(Category.production, ItemStack.with(
+					NHItems.silicon, 40,
+					NHItems.graphite, 40
+			));
+			size = 2;
+			health = 300;
+			armor = 2;
+			itemCapacity = 20;
+			liquidCapacity = 30;
+			craftTime = 60f;
 
-            consumePower(300f / 60f);
-            consumeItems(with(NHItems.sand, 3));
-            outputLiquids = LiquidStack.with(NHLiquids.oil, 15 / 60f);
+			consumePower(300f / 60f);
+			consumeItems(with(NHItems.sand, 3));
+			outputLiquids = LiquidStack.with(NHLiquids.oil, 15 / 60f);
 
-            drawer = new DrawMulti(
-                    new DrawBaseRegion("-2x2"),
-                    new DrawLiquidTile(NHLiquids.oil),
-                    new DrawCrucibleFlame() {{
-                        midColor = flameColor = Pal.accent;
-                        flameRad /= 1.585f;
-                        particleRad /= 1.5f;
-                    }},
-                    new DrawRegion()
-            );
+			drawer = new DrawMulti(
+					new DrawBaseRegion("-2x2"),
+					new DrawLiquidTile(NHLiquids.oil),
+					new DrawCrucibleFlame() {{
+						midColor = flameColor = Pal.accent;
+						flameRad /= 1.585f;
+						particleRad /= 1.5f;
+					}},
+					new DrawRegion()
+			);
 
-            craftEffect = updateEffect = NHFx.square(Pal.accent, 60, 6, 12, 2);
-        }};
+			craftEffect = updateEffect = NHFx.square(Pal.accent, 60, 6, 12, 2);
+		}};
         /*
 
         xenIterator = new RecipeGenericCrafter("xen-iterator"){{
@@ -232,281 +233,281 @@ public class ProductionBlock {
         }};
 
          */
-        interlockingDrill = new AdaptDrill("interlocking-drill") {{
-            requirements(Category.production, with(
-                    NHItems.silicar, 60
-            ));
+		interlockingDrill = new AdaptDrill("interlocking-drill") {{
+			requirements(Category.production, with(
+					NHItems.silicar, 60
+			));
 
-            size = 3;
-            tier = 3;
-            modulesEnabled = false;
+			size = 3;
+			tier = 3;
+			modulesEnabled = false;
 
-            drawRim = false;
-            hasPower = false;
-            hasLiquids = true;
-            itemCapacity = 30;
-            liquidCapacity = 60f;
+			drawRim = false;
+			hasPower = false;
+			hasLiquids = true;
+			itemCapacity = 30;
+			liquidCapacity = 60f;
 
-            drillTime = 337.5f;
-            liquidBoostIntensity = 1.6f;
-            warmupSpeed = 0.035f;
+			drillTime = 337.5f;
+			liquidBoostIntensity = 1.6f;
+			warmupSpeed = 0.035f;
 
-            drillEffect = Fx.mineHuge;
-            updateEffectChance = 0.06f;
+			drillEffect = Fx.mineHuge;
+			updateEffectChance = 0.06f;
 
-            drawer = new DrawMulti(
-                    new DrawRegion("-base"),
-                    new DrawRotator() {{
-                        suffix = "-rotor";
-                        rotateSpeed = 3f;
-                        usesSpinDraw = true;
-                        useDrillWarmup = true;
-                    }},
-                    new DrawRegion("-top"),
-                    new DrawTeamTop(),
-                    new DrawDrillOreTop()
-            );
+			drawer = new DrawMulti(
+					new DrawRegion("-base"),
+					new DrawRotator() {{
+						suffix = "-rotor";
+						rotateSpeed = 3f;
+						usesSpinDraw = true;
+						useDrillWarmup = true;
+					}},
+					new DrawRegion("-top"),
+					new DrawTeamTop(),
+					new DrawDrillOreTop()
+			);
 
-            consumeLiquid(NHLiquids.ammonia, 6f / 60f).boost();
-        }};
+			consumeLiquid(NHLiquids.ammonia, 6f / 60f).boost();
+		}};
 
 
-        resonanceMiningFacility = new AdaptDrill("resonance-mining-facility") {{
-            requirements(Category.production, with(
-                    NHItems.hardLight, 40,
-                    NHItems.presstanium, 30,
-                    NHItems.juniorProcessor, 30
-            ));
+		resonanceMiningFacility = new AdaptDrill("resonance-mining-facility") {{
+			requirements(Category.production, with(
+					NHItems.hardLight, 40,
+					NHItems.presstanium, 30,
+					NHItems.juniorProcessor, 30
+			));
 
-            size = 4;
-            tier = 5;
-            blockedItem = NHItems.thorium;
+			size = 4;
+			tier = 5;
+			blockedItem = NHItems.thorium;
 
-            drawRim = false;
-            hasPower = true;
+			drawRim = false;
+			hasPower = true;
 
-            maxModules = 2;
+			maxModules = 2;
 
-            drillTime = 240;
-            itemCapacity = 30;
-            warmupSpeed = 0.035f;
+			drillTime = 240;
+			itemCapacity = 30;
+			warmupSpeed = 0.035f;
 
-            drillEffect = Fx.mineHuge;
-            updateEffect = new Effect(30f, e -> {
-                Draw.color(e.color, Color.white, e.fout() * 0.66f);
-                Draw.alpha(0.55f * e.fout() + 0.5f);
-                Angles.randLenVectors(e.id, 2, 4f + e.finpow() * 17f, (x, y) -> {
-                    Fill.square(e.x + x, e.y + y, e.fout() * rand(e.id).random(2.5f, 4));
-                });
-            });
-            updateEffectChance = 0.06f;
+			drillEffect = Fx.mineHuge;
+			updateEffect = new Effect(30f, e -> {
+				Draw.color(e.color, Color.white, e.fout() * 0.66f);
+				Draw.alpha(0.55f * e.fout() + 0.5f);
+				Angles.randLenVectors(e.id, 2, 4f + e.finpow() * 17f, (x, y) -> {
+					Fill.square(e.x + x, e.y + y, e.fout() * rand(e.id).random(2.5f, 4));
+				});
+			});
+			updateEffectChance = 0.06f;
 
-            drawer = new DrawMulti(
-                    new DrawRegion("-base"),
-                    new DrawDrillPistonsInterp() {{
-                        sinScl = 4f;
-                        sinMag = 3.5f;
-                        suffix = "-piston0";
-                    }},
-                    new DrawDrillPistonsInterp() {{
-                        sinScl = 4f;
-                        sinMag = 3.5f;
-                        sinOffset = Mathf.pi * 8f;
-                        angleOffset = 45;
-                        suffix = "-piston1";
-                    }},
-                    new DrawRegion("-top"),
-                    new DrawTeamTop(),
-                    new DrawDrillOreTop()
-            );
+			drawer = new DrawMulti(
+					new DrawRegion("-base"),
+					new DrawDrillPistonsInterp() {{
+						sinScl = 4f;
+						sinMag = 3.5f;
+						suffix = "-piston0";
+					}},
+					new DrawDrillPistonsInterp() {{
+						sinScl = 4f;
+						sinMag = 3.5f;
+						sinOffset = Mathf.pi * 8f;
+						angleOffset = 45;
+						suffix = "-piston1";
+					}},
+					new DrawRegion("-top"),
+					new DrawTeamTop(),
+					new DrawDrillOreTop()
+			);
 
-            consumePower(1.5f);
-        }};
-        beamMiningFacility = new AdaptDrill("beam-mining-facility") {{
-            requirements(Category.production, with(
-                    NHItems.juniorProcessor, 50,
-                    NHItems.surgeAlloy, 50,
-                    NHItems.multipleSteel, 50
-            ));
+			consumePower(1.5f);
+		}};
+		beamMiningFacility = new AdaptDrill("beam-mining-facility") {{
+			requirements(Category.production, with(
+					NHItems.juniorProcessor, 50,
+					NHItems.surgeAlloy, 50,
+					NHItems.multipleSteel, 50
+			));
 
-            size = 4;
-            tier = 8;
+			size = 4;
+			tier = 8;
 
-            drawRim = false;
-            hasPower = true;
+			drawRim = false;
+			hasPower = true;
 
-            maxModules = 3;
+			maxModules = 3;
 
-            drillTime = 160f;
-            itemCapacity = 40;
-            warmupSpeed = 0.035f;
+			drillTime = 160f;
+			itemCapacity = 40;
+			warmupSpeed = 0.035f;
 
-            drillEffect = Fx.mineHuge;
-            updateEffect = new Effect(30f, e -> {
-                Draw.color(e.color, Color.white, e.fout() * 0.66f);
-                Draw.alpha(0.55f * e.fout() + 0.5f);
-                Angles.randLenVectors(e.id, 2, 4f + e.finpow() * 17f, (x, y) -> {
-                    Fill.square(e.x + x, e.y + y, e.fout() * rand(e.id).random(2.5f, 4), 45);
-                });
-            });
-            updateEffectChance = 0.06f;
+			drillEffect = Fx.mineHuge;
+			updateEffect = new Effect(30f, e -> {
+				Draw.color(e.color, Color.white, e.fout() * 0.66f);
+				Draw.alpha(0.55f * e.fout() + 0.5f);
+				Angles.randLenVectors(e.id, 2, 4f + e.finpow() * 17f, (x, y) -> {
+					Fill.square(e.x + x, e.y + y, e.fout() * rand(e.id).random(2.5f, 4), 45);
+				});
+			});
+			updateEffectChance = 0.06f;
 
-            drawer = new DrawMulti(
-                    new DrawBaseRegion("-4x4"),
-                    new DrawDrillMineBeam(),
-                    new DrawRegion("-top"),
-                    new DrawTeamTop(),
-                    new DrawDrillOreTop()
-            );
+			drawer = new DrawMulti(
+					new DrawBaseRegion("-4x4"),
+					new DrawDrillMineBeam(),
+					new DrawRegion("-top"),
+					new DrawTeamTop(),
+					new DrawDrillOreTop()
+			);
 
-            consumePower(5f);
-        }};
-        implosionMiningFacility = new AdaptDrill("implosion-mining-facility") {{
-            requirements(Category.production, with(
-                    NHItems.seniorProcessor, 100,
-                    NHItems.setonAlloy, 150,
-                    NHItems.zeta, 400
-            ));
+			consumePower(5f);
+		}};
+		implosionMiningFacility = new AdaptDrill("implosion-mining-facility") {{
+			requirements(Category.production, with(
+					NHItems.seniorProcessor, 100,
+					NHItems.setonAlloy, 150,
+					NHItems.zeta, 400
+			));
 
-            size = 4;
-            tier = 8;
+			size = 4;
+			tier = 8;
 
-            drawRim = false;
-            hasPower = true;
+			drawRim = false;
+			hasPower = true;
 
-            maxModules = 4;
+			maxModules = 4;
 
-            drillTime = 120f;
-            itemCapacity = 300;
-            warmupSpeed = 0.035f;
+			drillTime = 120f;
+			itemCapacity = 300;
+			warmupSpeed = 0.035f;
 
-            drillEffect = Fx.mineHuge;
-            updateEffect = new Effect(30f, e -> {
-                Draw.color(e.color, Color.white, e.fout() * 0.66f);
-                Draw.alpha(0.55f * e.fout() + 0.5f);
-                Angles.randLenVectors(e.id, 4, 4f + e.finpow() * 17f, (x, y) -> {
-                    Fill.poly(e.x + x, e.y + y, 3, e.fout() * rand(e.id).random(2.5f, 4), rand(e.id).random(360f));
-                });
-            });
-            updateEffectChance = 0.04f;
+			drillEffect = Fx.mineHuge;
+			updateEffect = new Effect(30f, e -> {
+				Draw.color(e.color, Color.white, e.fout() * 0.66f);
+				Draw.alpha(0.55f * e.fout() + 0.5f);
+				Angles.randLenVectors(e.id, 4, 4f + e.finpow() * 17f, (x, y) -> {
+					Fill.poly(e.x + x, e.y + y, 3, e.fout() * rand(e.id).random(2.5f, 4), rand(e.id).random(360f));
+				});
+			});
+			updateEffectChance = 0.04f;
 
-            drawer = new DrawMulti(
-                    new DrawRegion("-bottom"),
-                    new DrawBlock() {
-                        @Override
-                        public void draw(Building build) {
-                            if (!(build instanceof AdaptDrill.AdaptDrillBuild drill)
-                                    || drill.dominantItem == null
-                                    || drill.warmup <= 0.001f) return;
+			drawer = new DrawMulti(
+					new DrawRegion("-bottom"),
+					new DrawBlock() {
+						@Override
+						public void draw(Building build) {
+							if (!(build instanceof AdaptDrill.AdaptDrillBuild drill)
+									|| drill.dominantItem == null
+									|| drill.warmup <= 0.001f) return;
 
-                            float base = Time.time / 25f;
-                            Tmp.c1.set(drill.dominantItem.color).lerp(Color.white, 0.2f).a(drill.warmup);
-                            Draw.color(Tmp.c1);
-                            Lines.stroke(1.2f);
+							float base = Time.time / 25f;
+							Tmp.c1.set(drill.dominantItem.color).lerp(Color.white, 0.2f).a(drill.warmup);
+							Draw.color(Tmp.c1);
+							Lines.stroke(1.2f);
 
-                            for (int i = 0; i < 32; i++) {
-                                rand.setSeed(build.id + i);
-                                float fin = (rand.random(1f) + base) % 1f;
-                                float angle = rand.random(360f);
-                                float len = 13.5f * Interp.pow2.apply(1f - fin);
-                                Lines.lineAngle(
-                                        build.x + Angles.trnsx(angle, len),
-                                        build.y + Angles.trnsy(angle, len),
-                                        angle, 6f * fin
-                                );
-                            }
+							for (int i = 0; i < 32; i++) {
+								rand.setSeed(build.id + i);
+								float fin = (rand.random(1f) + base) % 1f;
+								float angle = rand.random(360f);
+								float len = 13.5f * Interp.pow2.apply(1f - fin);
+								Lines.lineAngle(
+										build.x + Angles.trnsx(angle, len),
+										build.y + Angles.trnsy(angle, len),
+										angle, 6f * fin
+								);
+							}
 
-                            float pulse = Mathf.sinDeg(Time.time * 1.2f);
-                            Tmp.c1.set(build.team.color).lerp(Color.white, 0.4f).a(drill.warmup / 1.1f);
-                            Draw.color(Tmp.c1);
-                            Fill.circle(build.x, build.y, 3f + pulse);
-                            Lines.stroke(1.3f);
-                            Lines.circle(build.x, build.y, 6f + pulse);
-                            Fill.light(build.x, build.y, Lines.circleVertices(15f), 15f, Color.clear, Tmp.c1);
+							float pulse = Mathf.sinDeg(Time.time * 1.2f);
+							Tmp.c1.set(build.team.color).lerp(Color.white, 0.4f).a(drill.warmup / 1.1f);
+							Draw.color(Tmp.c1);
+							Fill.circle(build.x, build.y, 3f + pulse);
+							Lines.stroke(1.3f);
+							Lines.circle(build.x, build.y, 6f + pulse);
+							Fill.light(build.x, build.y, Lines.circleVertices(15f), 15f, Color.clear, Tmp.c1);
 
-                            Lines.stroke(1f);
-                            Draw.reset();
-                        }
-                    },
-                    new DrawRegion("-top"),
-                    new DrawTeamTop(),
-                    new DrawDrillOreTop()
-            );
+							Lines.stroke(1f);
+							Draw.reset();
+						}
+					},
+					new DrawRegion("-top"),
+					new DrawTeamTop(),
+					new DrawDrillOreTop()
+			);
 
-            consumePower(10f);
-        }};
+			consumePower(10f);
+		}};
 
-        airRadiator = new DrillModule("air-radiator") {{
-            requirements(Category.production, with(
-                    NHItems.presstanium, 25,
-                    NHItems.juniorProcessor, 25
-            ));
+		airRadiator = new DrillModule("air-radiator") {{
+			requirements(Category.production, with(
+					NHItems.presstanium, 25,
+					NHItems.juniorProcessor, 25
+			));
 
-            size = 2;
+			size = 2;
 
-            consumePower(1.5f);
+			consumePower(1.5f);
 
-            drawer = new DrawMulti(
-                    new DrawRegion("-base"),
-                    new DrawRotator() {{
-                        suffix = "-rotator";
-                        rotateSpeed = 3f;
-                    }},
-                    new DrawRegion("-top"),
-                    new DrawTeamTop(),
-                    new DrawRotation() {
-                        {
-                            suffix = "-rot";
-                            layer = Layer.blockOver;
-                            drawType = DrawRotation.DRAW_Y_MIRROR;
-                        }
+			drawer = new DrawMulti(
+					new DrawRegion("-base"),
+					new DrawRotator() {{
+						suffix = "-rotator";
+						rotateSpeed = 3f;
+					}},
+					new DrawRegion("-top"),
+					new DrawTeamTop(),
+					new DrawRotation() {
+						{
+							suffix = "-rot";
+							layer = Layer.blockOver;
+							drawType = DrawRotation.DRAW_Y_MIRROR;
+						}
 
-                        @Override
-                        public void draw(Building build) {
-                            if (build instanceof DrillModule.DrillModuleBuild b && b.drillBuild != null) {
-                                super.draw(b);
-                            }
-                        }
-                    }
-            );
+						@Override
+						public void draw(Building build) {
+							if (build instanceof DrillModule.DrillModuleBuild b && b.drillBuild != null) {
+								super.draw(b);
+							}
+						}
+					}
+			);
 
-            buildType = () -> new DrillModuleBuild() {
-                @Override
-                public void updateDrill(AdaptDrill.AdaptDrillBuild drill) {
-                    drill.moduleBoost += 0.6f * efficiency;
-                }
-            };
-        }};
+			buildType = () -> new DrillModuleBuild() {
+				@Override
+				public void updateDrill(AdaptDrill.AdaptDrillBuild drill) {
+					drill.moduleBoost += 0.6f * efficiency;
+				}
+			};
+		}};
 
-        liquidRadiator = new LiquidRadiator("liquid-radiator") {{
-            requirements(Category.production, with(
-                    NHItems.multipleSteel, 25,
-                    NHItems.plastanium, 25
-            ));
+		liquidRadiator = new LiquidRadiator("liquid-radiator") {{
+			requirements(Category.production, with(
+					NHItems.multipleSteel, 25,
+					NHItems.plastanium, 25
+			));
 
-            size = 2;
-            drawer = new DrawMulti(
-                    new DrawBaseRegion("-2x2"),
-                    new DrawLiquidTile(),
-                    new DrawRegion("-top"),
-                    new DrawTeamTop(),
-                    new DrawRotation() {
-                        {
-                            suffix = "-rot";
-                            layer = Layer.blockOver;
-                            drawType = DrawRotation.DRAW_Y_MIRROR;
-                        }
+			size = 2;
+			drawer = new DrawMulti(
+					new DrawBaseRegion("-2x2"),
+					new DrawLiquidTile(),
+					new DrawRegion("-top"),
+					new DrawTeamTop(),
+					new DrawRotation() {
+						{
+							suffix = "-rot";
+							layer = Layer.blockOver;
+							drawType = DrawRotation.DRAW_Y_MIRROR;
+						}
 
-                        @Override
-                        public void draw(Building build) {
-                            if (build instanceof DrillModule.DrillModuleBuild b && b.drillBuild != null) {
-                                super.draw(b);
-                            }
-                        }
-                    }
-            );
+						@Override
+						public void draw(Building build) {
+							if (build instanceof DrillModule.DrillModuleBuild b && b.drillBuild != null) {
+								super.draw(b);
+							}
+						}
+					}
+			);
 
-        }};
+		}};
 
         /*
         beamMiningFacility = new AdaptDrill("beam-mining-facility") {{
@@ -817,5 +818,5 @@ public class ProductionBlock {
         }};
 
          */
-    }
+	}
 }

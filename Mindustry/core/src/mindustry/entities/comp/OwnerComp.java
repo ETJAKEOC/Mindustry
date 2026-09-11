@@ -4,6 +4,6 @@ import mindustry.annotations.Annotations.Component;
 import mindustry.gen.*;
 
 @Component
-class OwnerComp{
-    Entityc owner;
+class OwnerComp {
+	Entityc owner;
 }

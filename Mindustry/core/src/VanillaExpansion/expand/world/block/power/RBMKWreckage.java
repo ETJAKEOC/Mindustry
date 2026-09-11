@@ -11,23 +11,25 @@ import mindustry.world.meta.BuildVisibility;
  */
 public class RBMKWreckage extends SixteenDirectionBlock {
 
-    public RBMKWreckage(String name) {
-        super(name);
-        size = 1;
-        solid = false;
-        destructible = true;
-        update = false;
-        sync = true;
-        alwaysUnlocked = true;
-        buildVisibility = BuildVisibility.hidden;
-    }
+	public RBMKWreckage(String name) {
+		super(name);
+		size = 1;
+		solid = false;
+		destructible = true;
+		update = false;
+		sync = true;
+		alwaysUnlocked = true;
+		buildVisibility = BuildVisibility.hidden;
+	}
 
-    /** 手动加载贴图（兼容带/不带 mod 前缀的命名） */
-    @Override
-    public void load() {
-        super.load();
-        if (region == null || !region.found()) {
-            region = Core.atlas.find(name.substring(name.indexOf('-') + 1), region);
-        }
-    }
+	/**
+	 * 手动加载贴图（兼容带/不带 mod 前缀的命名）
+	 */
+	@Override
+	public void load() {
+		super.load();
+		if (region == null || !region.found()) {
+			region = Core.atlas.find(name.substring(name.indexOf('-') + 1), region);
+		}
+	}
 }

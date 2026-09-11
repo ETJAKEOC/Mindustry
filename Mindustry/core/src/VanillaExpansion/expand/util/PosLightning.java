@@ -20,40 +20,40 @@ import mindustry.gen.Bullet;
 import mindustry.graphics.Drawf;
 
 public class PosLightning {
-    public static final float WIDTH = 2.5f;
-    public static final float RANGE_RAND = 5f;
-    public static final float ROT_DST = 9f;
+	public static final float WIDTH = 2.5f;
+	public static final float RANGE_RAND = 5f;
+	public static final float ROT_DST = 9f;
 
-    public static void createEffect(Position from, Position to, Color color, int bolts, float thick) {
-        float fx = from.getX(), fy = from.getY();
-        float tx = to.getX(), ty = to.getY();
+	public static void createEffect(Position from, Position to, Color color, int bolts, float thick) {
+		float fx = from.getX(), fy = from.getY();
+		float tx = to.getX(), ty = to.getY();
 
-        for (int j = 0; j < bolts; j++) {
-            Lines.stroke(thick * Mathf.random(0.8f, 1.2f));
-            Draw.color(color);
+		for (int j = 0; j < bolts; j++) {
+			Lines.stroke(thick * Mathf.random(0.8f, 1.2f));
+			Draw.color(color);
 
-            Lines.line(fx, fy, tx, ty, false);
+			Lines.line(fx, fy, tx, ty, false);
 
-            float len = Mathf.dst(fx, fy, tx, ty);
-            float angle = Mathf.atan2(tx - fx, ty - fy);
+			float len = Mathf.dst(fx, fy, tx, ty);
+			float angle = Mathf.atan2(tx - fx, ty - fy);
 
-            Rand r = new Rand((long)fx + (long)fy * 1000 + j);
-            float px = fx, py = fy;
-            for (float i = ROT_DST; i < len; i += ROT_DST) {
-                float ox = px + Angles.trnsx(angle, ROT_DST) + r.range(RANGE_RAND);
-                float oy = py + Angles.trnsy(angle, ROT_DST) + r.range(RANGE_RAND);
-                Lines.line(px, py, ox, oy, false);
-                px = ox;
-                py = oy;
-            }
-            Lines.line(px, py, tx, ty, false);
-        }
-        Draw.reset();
+			Rand r = new Rand((long) fx + (long) fy * 1000 + j);
+			float px = fx, py = fy;
+			for (float i = ROT_DST; i < len; i += ROT_DST) {
+				float ox = px + Angles.trnsx(angle, ROT_DST) + r.range(RANGE_RAND);
+				float oy = py + Angles.trnsy(angle, ROT_DST) + r.range(RANGE_RAND);
+				Lines.line(px, py, ox, oy, false);
+				px = ox;
+				py = oy;
+			}
+			Lines.line(px, py, tx, ty, false);
+		}
+		Draw.reset();
 
-        Drawf.light(fx, fy, tx, ty, thick * 3f, color, 0.6f);
-    }
+		Drawf.light(fx, fy, tx, ty, thick * 3f, color, 0.6f);
+	}
 
-    public static Position findInterceptedPoint(Position from, Position to, mindustry.game.Team team) {
-        return to;
-    }
+	public static Position findInterceptedPoint(Position from, Position to, mindustry.game.Team team) {
+		return to;
+	}
 }

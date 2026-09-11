@@ -19,50 +19,50 @@ import static newhorizon.util.ui.TableFunc.LEN;
 import static newhorizon.util.ui.TableFunc.OFFSET;
 
 public class AdaptCore extends CoreBlock {
-    public static Rand rand = new Rand();
-    public Seq<Trail> trails = Seq.with(new Trail(30), new Trail(40), new Trail(50), new Trail(60), new Trail(70), new Trail(80), new Trail(90));
-    public Interp interp = Interp.pow2Out;
-    public float coreDelay = -1;
-    public int range = 40;
+	public static Rand rand = new Rand();
+	public Seq<Trail> trails = Seq.with(new Trail(30), new Trail(40), new Trail(50), new Trail(60), new Trail(70), new Trail(80), new Trail(90));
+	public Interp interp = Interp.pow2Out;
+	public float coreDelay = -1;
+	public int range = 40;
 
-    public TextureRegion base;
+	public TextureRegion base;
 
-    public AdaptCore(String name) {
-        super(name);
-    }
+	public AdaptCore(String name) {
+		super(name);
+	}
 
-    @Override
-    public void load() {
-        super.load();
-        base = Core.atlas.find(name + "-base");
-    }
+	@Override
+	public void load() {
+		super.load();
+		base = Core.atlas.find(name + "-base");
+	}
 
-    @Override
-    public void setStats() {
-        super.setStats();
-        stats.add(Stat.range, range, StatUnit.blocks);
-        stats.add(Stat.output, (t) -> {
-            t.row().left();
-            t.add("").row();
-            t.table(i -> {
-                i.image().size(LEN).color(Pal.lancerLaser).left();
-                i.add(Core.bundle.get("mod.ui.gravity-trap-field-friendly")).growX().padLeft(OFFSET / 2).row();
-            }).padTop(OFFSET).growX().fillY().row();
-            t.table(i -> {
-                i.image().size(LEN).color(Pal.redderDust).left();
-                i.add(Core.bundle.get("mod.ui.gravity-trap-field-hostile")).growX().padLeft(OFFSET / 2).row();
-            }).padTop(OFFSET).growX().fillY().row();
-        });
-        stats.add(Stat.abilities, t -> {
-            t.table(table -> {
-                table.left();
-                table.defaults().fill().pad(OFFSET / 3).left();
-                table.add("- " + Core.bundle.get("mod.ui.gravity-trap.ability-1")).row();
-                table.add("- " + Core.bundle.get("mod.ui.gravity-trap.ability-2")).row();
-                table.add("- " + Core.bundle.get("mod.ui.gravity-trap.ability-3")).row();
-            }).fill();
-        });
-    }
+	@Override
+	public void setStats() {
+		super.setStats();
+		stats.add(Stat.range, range, StatUnit.blocks);
+		stats.add(Stat.output, (t) -> {
+			t.row().left();
+			t.add("").row();
+			t.table(i -> {
+				i.image().size(LEN).color(Pal.lancerLaser).left();
+				i.add(Core.bundle.get("mod.ui.gravity-trap-field-friendly")).growX().padLeft(OFFSET / 2).row();
+			}).padTop(OFFSET).growX().fillY().row();
+			t.table(i -> {
+				i.image().size(LEN).color(Pal.redderDust).left();
+				i.add(Core.bundle.get("mod.ui.gravity-trap-field-hostile")).growX().padLeft(OFFSET / 2).row();
+			}).padTop(OFFSET).growX().fillY().row();
+		});
+		stats.add(Stat.abilities, t -> {
+			t.table(table -> {
+				table.left();
+				table.defaults().fill().pad(OFFSET / 3).left();
+				table.add("- " + Core.bundle.get("mod.ui.gravity-trap.ability-1")).row();
+				table.add("- " + Core.bundle.get("mod.ui.gravity-trap.ability-2")).row();
+				table.add("- " + Core.bundle.get("mod.ui.gravity-trap.ability-3")).row();
+			}).fill();
+		});
+	}
 
     /*
     public void drawLanding(CoreBuild build, float x, float y) {
@@ -102,7 +102,7 @@ public class AdaptCore extends CoreBlock {
 
      */
 
-    public class AdaptCoreBuild extends CoreBuild {
+	public class AdaptCoreBuild extends CoreBuild {
 
-    }
+	}
 }

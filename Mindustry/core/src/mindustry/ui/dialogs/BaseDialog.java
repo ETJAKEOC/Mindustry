@@ -14,74 +14,78 @@ import mindustry.game.EventType.ResizeEvent;
 import mindustry.gen.*;
 import mindustry.graphics.Pal;
 
-public class BaseDialog extends Dialog{
-    protected boolean wasPaused;
-    /** If true, this dialog will pause the game while open. */
-    protected boolean shouldPause;
-    protected Image titleImage;
+public class BaseDialog extends Dialog {
+	protected boolean wasPaused;
+	/**
+	 * If true, this dialog will pause the game while open.
+	 */
+	protected boolean shouldPause;
+	protected Image titleImage;
 
-    public BaseDialog(String title, DialogStyle style){
-        super(title, style);
-        setFillParent(true);
-        this.title.setAlignment(Align.center);
-        titleTable.row();
-        titleImage = titleTable.image(Tex.whiteui, Pal.accent).growX().height(3f).pad(4f).get();
+	public BaseDialog(String title, DialogStyle style) {
+		super(title, style);
+		setFillParent(true);
+		this.title.setAlignment(Align.center);
+		titleTable.row();
+		titleImage = titleTable.image(Tex.whiteui, Pal.accent).growX().height(3f).pad(4f).get();
 
-        hidden(() -> {
-            if(shouldPause && state.isGame() && !net.active() && !wasPaused){
-                state.set(State.playing);
-            }
-            Sounds.uiBack.play();
-        });
+		hidden(() -> {
+			if (shouldPause && state.isGame() && !net.active() && !wasPaused) {
+				state.set(State.playing);
+			}
+			Sounds.uiBack.play();
+		});
 
-        shown(() -> {
-            if(shouldPause && state.isGame() && !net.active()){
-                wasPaused = state.is(State.paused);
-                state.set(State.paused);
-            }
-        });
-    }
+		shown(() -> {
+			if (shouldPause && state.isGame() && !net.active()) {
+				wasPaused = state.is(State.paused);
+				state.set(State.paused);
+			}
+		});
+	}
 
-    public BaseDialog(String title){
-        this(title, Core.scene.getStyle(DialogStyle.class));
-    }
+	public BaseDialog(String title) {
+		this(title, Core.scene.getStyle(DialogStyle.class));
+	}
 
-    public void setTitleColor(Color color){
-        titleImage.setColor(color);
-        title.setColor(color);
-    }
+	public void setTitleColor(Color color) {
+		titleImage.setColor(color);
+		title.setColor(color);
+	}
 
-    /** Places the buttons as an overlay on top of the content. Used when the content can be scrolled through.*/
-    protected void makeButtonOverlay(){
-        clearChildren();
-        add(titleTable).growX().row();
-        stack(cont, buttons).grow();
-        buttons.bottom();
-    }
+	/**
+	 * Places the buttons as an overlay on top of the content. Used when the content can be scrolled through.
+	 */
+	protected void makeButtonOverlay() {
+		clearChildren();
+		add(titleTable).growX().row();
+		stack(cont, buttons).grow();
+		buttons.bottom();
+	}
 
-    protected void onResize(Runnable run){
-        Events.on(ResizeEvent.class, event -> {
-            //ignore resize events while the Android text input dialog is shown - this does lead to buggy layout when rotated, but it's better than clearing the text. I don't know of a better solution to the problem
-            if(isShown() && Core.scene.getDialog() == this && !Core.input.isShowingTextInput()){
-                run.run();
-                updateScrollFocus();
-            }
-        });
-    }
+	protected void onResize(Runnable run) {
+		Events.on(ResizeEvent.class, event -> {
+			//ignore resize events while the Android text input dialog is shown - this does lead to buggy layout when rotated, but it's better than clearing the text. I don't know of a better solution to the problem
+			if (isShown() && Core.scene.getDialog() == this && !Core.input.isShowingTextInput()) {
+				run.run();
+				updateScrollFocus();
+			}
+		});
+	}
 
-    public void addCloseListener(){
-       closeOnBack();
-    }
+	public void addCloseListener() {
+		closeOnBack();
+	}
 
-    public void addCloseButton(float width){
-        buttons.defaults().size(width, 64f);
-        buttons.button("@back", Icon.left, this::hide).size(width, 64f);
+	public void addCloseButton(float width) {
+		buttons.defaults().size(width, 64f);
+		buttons.button("@back", Icon.left, this::hide).size(width, 64f);
 
-        addCloseListener();
-    }
+		addCloseListener();
+	}
 
-    @Override
-    public void addCloseButton(){
-        addCloseButton(210f);
-    }
+	@Override
+	public void addCloseButton() {
+		addCloseButton(210f);
+	}
 }

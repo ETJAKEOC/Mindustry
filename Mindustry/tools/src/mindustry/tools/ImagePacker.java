@@ -65,13 +65,27 @@ public class ImagePacker{
         Core.atlas = new TextureAtlas(){
             @Override
             public AtlasRegion find(String name){
-                if(!cache.containsKey(name)){
+                String key = name;
+                if(!cache.containsKey(key)){
+                    if(key.startsWith("ve-") && cache.containsKey(key.substring(3))) key = key.substring(3);
+                    else if(key.startsWith("nh-") && cache.containsKey(key.substring(3))) key = key.substring(3);
+                    else if(key.startsWith("eu-") && cache.containsKey(key.substring(3))) key = key.substring(3);
+                    else if(key.startsWith("new-horizon-") && cache.containsKey(key.substring(12))) key = key.substring(12);
+                    else if(key.startsWith("extra-utilities-") && cache.containsKey(key.substring(16))) key = key.substring(16);
+                    else if(key.startsWith("vanilla-expansion-") && cache.containsKey(key.substring(18))) key = key.substring(18);
+                    else if(cache.containsKey("ve-" + key)) key = "ve-" + key;
+                    else if(cache.containsKey("nh-" + key)) key = "nh-" + key;
+                    else if(cache.containsKey("eu-" + key)) key = "eu-" + key;
+                    else if(cache.containsKey("new-horizon-" + key)) key = "new-horizon-" + key;
+                }
+
+                if(!cache.containsKey(key)){
                     GenRegion region = new GenRegion(name, null);
                     region.invalid = true;
                     return region;
                 }
 
-                PackIndex index = cache.get(name);
+                PackIndex index = cache.get(key);
                 if(index.pixmap == null){
                     index.pixmap = new Pixmap(index.file);
                     index.region = new GenRegion(name, index.file){{
@@ -86,7 +100,7 @@ public class ImagePacker{
 
             @Override
             public AtlasRegion find(String name, TextureRegion def){
-                if(!cache.containsKey(name)){
+                if(!has(name)){
                     return (AtlasRegion)def;
                 }
                 return find(name);
@@ -94,20 +108,26 @@ public class ImagePacker{
 
             @Override
             public AtlasRegion find(String name, String def){
-                if(!cache.containsKey(name)){
+                if(!has(name)){
                     return find(def);
                 }
                 return find(name);
             }
 
             @Override
-            public PixmapRegion getPixmap(AtlasRegion region){
-                return new PixmapRegion(get(region.name));
+            public boolean has(String s){
+                return cache.containsKey(s) ||
+                    (s.startsWith("ve-") && cache.containsKey(s.substring(3))) ||
+                    (s.startsWith("nh-") && cache.containsKey(s.substring(3))) ||
+                    (s.startsWith("eu-") && cache.containsKey(s.substring(3))) ||
+                    cache.containsKey("ve-" + s) ||
+                    cache.containsKey("nh-" + s) ||
+                    cache.containsKey("eu-" + s);
             }
 
             @Override
-            public boolean has(String s){
-                return cache.containsKey(s);
+            public PixmapRegion getPixmap(AtlasRegion region){
+                return new PixmapRegion(get(region.name));
             }
         };
 
@@ -248,9 +268,21 @@ public class ImagePacker{
     }
 
     static Pixmap get(TextureRegion region){
-        validate(region);
+        if(region == null || ((GenRegion)region).invalid) return new Pixmap(1, 1);
 
-        return cache.get(((AtlasRegion)region).name).pixmap.copy();
+        String name = ((AtlasRegion)region).name;
+        if(!cache.containsKey(name)){
+            if(name.startsWith("ve-") && cache.containsKey(name.substring(3))) name = name.substring(3);
+            else if(name.startsWith("nh-") && cache.containsKey(name.substring(3))) name = name.substring(3);
+            else if(name.startsWith("eu-") && cache.containsKey(name.substring(3))) name = name.substring(3);
+            else if(cache.containsKey("ve-" + name)) name = "ve-" + name;
+            else if(cache.containsKey("nh-" + name)) name = "nh-" + name;
+            else if(cache.containsKey("eu-" + name)) name = "eu-" + name;
+        }
+
+        PackIndex idx = cache.get(name);
+        if(idx == null || idx.pixmap == null) return new Pixmap(1, 1);
+        return idx.pixmap.copy();
     }
 
     static void save(Pixmap pix, String path){
@@ -276,7 +308,8 @@ public class ImagePacker{
     }
 
     static void delete(String name){
-        ((GenRegion)Core.atlas.find(name)).path.delete();
+        GenRegion region = (GenRegion)Core.atlas.find(name);
+        if(region != null && region.path != null) region.path.delete();
     }
 
     static void replace(String name, Pixmap image){
@@ -285,7 +318,8 @@ public class ImagePacker{
 
     static void replace(String path, String name, Pixmap image){
         Fi.get(path + ".png").writePng(image);
-        ((GenRegion)Core.atlas.find(name)).path.delete();
+        GenRegion region = (GenRegion)Core.atlas.find(name);
+        if(region != null && region.path != null) region.path.delete();
     }
 
     static void replace(TextureRegion region, Pixmap image){

@@ -12,88 +12,88 @@ import newhorizon.expand.block.stream.*;
 import static mindustry.type.ItemStack.with;
 
 public class LiquidBlock {
-    public static Block
-            streamSource, streamExtractor, streamReceiver, streamRepeater, streamRedirector, streamSplitter,
-            turboPumpSmall, turboPump, standardLiquidStorage, heavyLiquidStorage;
+	public static Block
+			streamSource, streamExtractor, streamReceiver, streamRepeater, streamRedirector, streamSplitter,
+			turboPumpSmall, turboPump, standardLiquidStorage, heavyLiquidStorage;
 
-    public static void load() {
-        streamSource = new StreamSource("stream-source") {{
-            requirements(Category.liquid, BuildVisibility.shown, with());
-            buildVisibility = BuildVisibility.sandboxOnly;
-        }};
+	public static void load() {
+		streamSource = new StreamSource("stream-source") {{
+			requirements(Category.liquid, BuildVisibility.shown, with());
+			buildVisibility = BuildVisibility.sandboxOnly;
+		}};
 
-        streamExtractor = new StreamExtractor("stream-extractor") {{
-            requirements(Category.liquid, BuildVisibility.shown, with());
+		streamExtractor = new StreamExtractor("stream-extractor") {{
+			requirements(Category.liquid, BuildVisibility.shown, with());
 
-            rotateDraw = true;
-        }};
+			rotateDraw = true;
+		}};
 
-        streamReceiver = new StreamReceiver("stream-receiver") {{
-            requirements(Category.liquid, BuildVisibility.shown, with());
-        }};
+		streamReceiver = new StreamReceiver("stream-receiver") {{
+			requirements(Category.liquid, BuildVisibility.shown, with());
+		}};
 
-        streamRepeater = new StreamRepeater("stream-repeater") {{
-            requirements(Category.liquid, BuildVisibility.shown, with());
+		streamRepeater = new StreamRepeater("stream-repeater") {{
+			requirements(Category.liquid, BuildVisibility.shown, with());
 
-            rotateDraw = true;
-        }};
+			rotateDraw = true;
+		}};
 
-        streamRedirector = new StreamRedirector("stream-redirector") {{
-            requirements(Category.liquid, BuildVisibility.shown, with());
+		streamRedirector = new StreamRedirector("stream-redirector") {{
+			requirements(Category.liquid, BuildVisibility.shown, with());
 
-            rotateDraw = true;
-        }};
+			rotateDraw = true;
+		}};
 
-        streamSplitter = new StreamSplitter("stream-splitter") {{
-            requirements(Category.liquid, BuildVisibility.shown, with());
+		streamSplitter = new StreamSplitter("stream-splitter") {{
+			requirements(Category.liquid, BuildVisibility.shown, with());
 
-            rotateDraw = true;
-        }};
+			rotateDraw = true;
+		}};
 
-        turboPumpSmall = new AdaptPump("turbo-pump-small") {{
-            requirements(Category.liquid, with(Items.silicon, 10));
-            consumePower(0.1f);
+		turboPumpSmall = new AdaptPump("turbo-pump-small") {{
+			requirements(Category.liquid, with(Items.silicon, 10));
+			consumePower(0.1f);
 
-            pumpAmount = 0.20f;
-            conductivePower = true;
-            liquidCapacity = 40f;
-            hasPower = true;
-            size = 1;
+			pumpAmount = 0.20f;
+			conductivePower = true;
+			liquidCapacity = 40f;
+			hasPower = true;
+			size = 1;
 
-            enableDrawStatus = false;
-            placeableLiquid = true;
-        }};
+			enableDrawStatus = false;
+			placeableLiquid = true;
+		}};
 
-        turboPump = new AdaptPump("turbo-pump") {{
-            requirements(Category.liquid, with(Items.titanium, 40, Items.tungsten, 30));
-            consumePower(0.5f);
+		turboPump = new AdaptPump("turbo-pump") {{
+			requirements(Category.liquid, with(Items.titanium, 40, Items.tungsten, 30));
+			consumePower(0.5f);
 
-            pumpAmount = 0.25f;
-            conductivePower = true;
-            liquidCapacity = 120f;
-            hasPower = true;
-            size = 2;
-            placeableLiquid = true;
-        }};
+			pumpAmount = 0.25f;
+			conductivePower = true;
+			liquidCapacity = 120f;
+			hasPower = true;
+			size = 2;
+			placeableLiquid = true;
+		}};
 
-        standardLiquidStorage = new LiquidRouter("standard-liquid-storage") {{
-            requirements(Category.liquid, with(NHItems.metalOxhydrigen, 10, NHItems.presstanium, 15));
-            health = 3200;
-            size = 2;
-            underBullets = true;
-            liquidCapacity = 2000;
-            armor = 20f;
-            placeableLiquid = true;
-        }};
+		standardLiquidStorage = new LiquidRouter("standard-liquid-storage") {{
+			requirements(Category.liquid, with(NHItems.metalOxhydrigen, 10, NHItems.presstanium, 15));
+			health = 3200;
+			size = 2;
+			underBullets = true;
+			liquidCapacity = 2000;
+			armor = 20f;
+			placeableLiquid = true;
+		}};
 
-        heavyLiquidStorage = new LiquidRouter("heavy-liquid-storage") {{
-            requirements(Category.liquid, with(NHItems.metalOxhydrigen, 40, NHItems.presstanium, 60));
-            health = 3200;
-            size = 3;
-            underBullets = true;
-            liquidCapacity = 6000;
-            armor = 20f;
-            placeableLiquid = true;
-        }};
-    }
+		heavyLiquidStorage = new LiquidRouter("heavy-liquid-storage") {{
+			requirements(Category.liquid, with(NHItems.metalOxhydrigen, 40, NHItems.presstanium, 60));
+			health = 3200;
+			size = 3;
+			underBullets = true;
+			liquidCapacity = 6000;
+			armor = 20f;
+			placeableLiquid = true;
+		}};
+	}
 }

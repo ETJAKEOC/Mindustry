@@ -8,28 +8,28 @@ import static mindustry.Vars.control;
 import static mindustry.Vars.headless;
 
 public class CameraZoomAction extends Action {
-    public float zoom = 3f;
+	public float zoom = 3f;
 
-    @Override
-    public String actionName() {
-        return "camera_zoom";
-    }
+	@Override
+	public String actionName() {
+		return "camera_zoom";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-        zoom = ParseUtil.getNextFloat(tokens);
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+		zoom = ParseUtil.getNextFloat(tokens);
+	}
 
-    @Override
-    public void begin() {
-        if (headless) return;
+	@Override
+	public void begin() {
+		if (headless) return;
 
-        control.input.logicCutsceneZoom = zoom;
-    }
+		control.input.logicCutsceneZoom = zoom;
+	}
 
-    @Override
-    public void act() {
-        control.input.logicCutscene = true;
-    }
+	@Override
+	public void act() {
+		control.input.logicCutscene = true;
+	}
 }

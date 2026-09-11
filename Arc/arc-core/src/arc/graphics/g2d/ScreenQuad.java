@@ -6,20 +6,20 @@ import arc.graphics.VertexAttribute;
 import arc.graphics.gl.Shader;
 import arc.util.Disposable;
 
-public class ScreenQuad implements Disposable{
-    public final Mesh mesh;
+public class ScreenQuad implements Disposable {
+	public final Mesh mesh;
 
-    public ScreenQuad(){
-        mesh = new Mesh(true, 4, 0, VertexAttribute.position, VertexAttribute.texCoords);
-        mesh.setVertices(new float[]{-1f, -1f, 0f, 0f, 1f, -1f, 1f, 0f, 1f, 1f, 1f, 1f, -1f, 1f, 0f, 1f});
-    }
+	public ScreenQuad() {
+		mesh = new Mesh(true, 4, 0, VertexAttribute.position, VertexAttribute.texCoords);
+		mesh.setVertices(new float[]{-1f, -1f, 0f, 0f, 1f, -1f, 1f, 0f, 1f, 1f, 1f, 1f, -1f, 1f, 0f, 1f});
+	}
 
-    public void render(Shader shader){
-        mesh.render(shader, Gl.triangleFan, 0, 4);
-    }
+	public void render(Shader shader) {
+		mesh.render(shader, Gl.triangleFan, 0, 4);
+	}
 
-    @Override
-    public void dispose(){
-        mesh.dispose();
-    }
+	@Override
+	public void dispose() {
+		mesh.dispose();
+	}
 }

@@ -16,69 +16,70 @@ import mindustry.type.SectorPreset;
 import mindustry.ui.Styles;
 
 //internal use only!
-public class SectorSelectDialog extends BaseDialog{
-    Table sectors = new Table();
-    Planet planet = Planets.serpulo;
-    Cons<SectorPreset> cons = s -> {};
-    TextField search;
+public class SectorSelectDialog extends BaseDialog {
+	Table sectors = new Table();
+	Planet planet = Planets.serpulo;
+	Cons<SectorPreset> cons = s -> {
+	};
+	TextField search;
 
-    public SectorSelectDialog(){
-        super("@database-category.sector");
+	public SectorSelectDialog() {
+		super("@database-category.sector");
 
-        cont.top();
-        cont.table(s -> {
-            s.image(Icon.zoom);
-            search = s.field("", ignored -> {
-                rebuild();
-            }).width(300f).get();
-            search.keyDown(KeyCode.enter, () -> {
-                String text = search.getText().toLowerCase(Locale.ROOT);
-                var found = Vars.content.sectors().find(sec -> matches(sec, text));
-                if(found != null){
-                    cons.get(found);
-                    hide();
-                }
-            });
-        });
-        cont.row();
+		cont.top();
+		cont.table(s -> {
+			s.image(Icon.zoom);
+			search = s.field("", ignored -> {
+				rebuild();
+			}).width(300f).get();
+			search.keyDown(KeyCode.enter, () -> {
+				String text = search.getText().toLowerCase(Locale.ROOT);
+				var found = Vars.content.sectors().find(sec -> matches(sec, text));
+				if (found != null) {
+					cons.get(found);
+					hide();
+				}
+			});
+		});
+		cont.row();
 
-        cont.pane(sectors).grow().top();
-        sectors.top();
+		cont.pane(sectors).grow().top();
+		sectors.top();
 
-        addCloseButton();
+		addCloseButton();
 
-        shown(() -> {
-            search.clearText();
-            search.requestKeyboard();
-            Core.app.post(() -> search.requestKeyboard());
-            rebuild();
-        });
-    }
+		shown(() -> {
+			search.clearText();
+			search.requestKeyboard();
+			Core.app.post(() -> search.requestKeyboard());
+			rebuild();
+		});
+	}
 
-    public void show(Planet planet, Cons<SectorPreset> cons){
-        this.planet = planet;
-        this.cons = cons;
+	public void show(Planet planet, Cons<SectorPreset> cons) {
+		this.planet = planet;
+		this.cons = cons;
 
-        show();
-    }
+		show();
+	}
 
-    void rebuild(){
-        sectors.clear();
+	void rebuild() {
+		sectors.clear();
 
-        String text = search.getText().toLowerCase(Locale.ROOT);
+		String text = search.getText().toLowerCase(Locale.ROOT);
 
-        for(var sector : Vars.content.sectors()){
-            if(matches(sector, text)){
-                sectors.button(sector.localizedName, new TextureRegionDrawable(sector.uiIcon), Styles.grayt, 32f, () -> {
-                    cons.get(sector);
-                    hide();
-                }).size(400f, 50f).margin(4f).pad(3f);
-                sectors.row();
-            }
-        }
-    }
+		for (var sector : Vars.content.sectors()) {
+			if (matches(sector, text)) {
+				sectors.button(sector.localizedName, new TextureRegionDrawable(sector.uiIcon), Styles.grayt, 32f, () -> {
+					cons.get(sector);
+					hide();
+				}).size(400f, 50f).margin(4f).pad(3f);
+				sectors.row();
+			}
+		}
+	}
 
-    boolean matches(SectorPreset sector, String text){
-        return sector.planet == planet && sector.requireUnlock && (text.isEmpty() || sector.name.toLowerCase(Locale.ROOT).contains(text) || sector.localizedName.toLowerCase(Locale.ROOT).contains(text));
-    }
+	boolean matches(SectorPreset sector, String text) {
+		return sector.planet == planet && sector.requireUnlock && (text.isEmpty() || sector.name.toLowerCase(Locale.ROOT).contains(text) || sector.localizedName.toLowerCase(Locale.ROOT).contains(text));
+	}
 }

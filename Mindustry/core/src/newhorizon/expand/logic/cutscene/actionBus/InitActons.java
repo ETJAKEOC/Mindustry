@@ -9,31 +9,31 @@ import newhorizon.expand.logic.ActionLStatement;
 //clear LExecutor text buffer, begin a new bus
 public class InitActons extends ActionLStatement {
 
-    public InitActons(String[] token) {
-    }
+	public InitActons(String[] token) {
+	}
 
-    public InitActons() {
-    }
+	public InitActons() {
+	}
 
-    @Override
-    public String getLStatementName() {
-        return "initactions";
-    }
+	@Override
+	public String getLStatementName() {
+		return "initactions";
+	}
 
-    @Override
-    public LCategory category() {
-        return NHLogic.nhcutscene;
-    }
+	@Override
+	public LCategory category() {
+		return NHLogic.nhcutscene;
+	}
 
-    @Override
-    public LExecutor.LInstruction build(LAssembler builder) {
-        return new InitBusI();
-    }
+	@Override
+	public LExecutor.LInstruction build(LAssembler builder) {
+		return new InitBusI();
+	}
 
-    public class InitBusI extends ActionInstruction {
-        @Override
-        public void run(LExecutor exec) {
-            exec.textBuffer.setLength(0);
-        }
-    }
+	public class InitBusI extends ActionInstruction {
+		@Override
+		public void run(LExecutor exec) {
+			exec.textBuffer.setLength(0);
+		}
+	}
 }

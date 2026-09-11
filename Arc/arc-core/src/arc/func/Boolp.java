@@ -1,5 +1,5 @@
 package arc.func;
 
-public interface Boolp{
-    boolean get();
+public interface Boolp {
+	boolean get();
 }

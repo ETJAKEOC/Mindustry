@@ -21,147 +21,159 @@ import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 
-public class ForceFieldAbility extends Ability{
-    /** Shield radius. */
-    public float radius = 60f;
-    /** Shield regen speed in damage/tick. */
-    public float regen = 0.1f;
-    /** Maximum shield. */
-    public float max = 200f;
-    /** Cooldown after the shield is broken, in ticks. */
-    public float cooldown = 60f * 5;
-    /** Sides of shield polygon. */
-    public int sides = 6;
-    /** Rotation of shield. */
-    public float rotation = 0f;
+public class ForceFieldAbility extends Ability {
+	private static float realRad;
+	private static Unit paramUnit;
+	private static ForceFieldAbility paramField;
+	private static final Cons<Bullet> shieldConsumer = b -> {
+		if (b.team != paramUnit.team && b.type.absorbable && Intersector.isInRegularPolygon(paramField.sides, paramUnit.x, paramUnit.y, realRad, paramField.rotation, b.x(), b.y()) && paramUnit.shield > 0) {
+			b.absorb();
+			Fx.absorb.at(b);
+			paramField.hitSound.at(b.x, b.y, 1f + Mathf.range(0.1f), paramField.hitSoundVolume);
+			paramUnit.shield -= b.type().shieldDamage(b);
+			paramField.alpha = 1f;
+		}
+	};
+	/**
+	 * Shield radius.
+	 */
+	public float radius = 60f;
+	/**
+	 * Shield regen speed in damage/tick.
+	 */
+	public float regen = 0.1f;
+	/**
+	 * Maximum shield.
+	 */
+	public float max = 200f;
+	/**
+	 * Cooldown after the shield is broken, in ticks.
+	 */
+	public float cooldown = 60f * 5;
+	/**
+	 * Sides of shield polygon.
+	 */
+	public int sides = 6;
+	/**
+	 * Rotation of shield.
+	 */
+	public float rotation = 0f;
+	public Sound breakSound = Sounds.shieldBreakSmall;
+	public Sound hitSound = Sounds.shieldHit;
+	public float hitSoundVolume = 0.12f;
+	/**
+	 * State.
+	 */
+	protected float radiusScale, alpha;
+	protected boolean wasBroken = true;
 
-    public Sound breakSound = Sounds.shieldBreakSmall;
-    public Sound hitSound = Sounds.shieldHit;
-    public float hitSoundVolume = 0.12f;
+	public ForceFieldAbility(float radius, float regen, float max, float cooldown) {
+		this.radius = radius;
+		this.regen = regen;
+		this.max = max;
+		this.cooldown = cooldown;
+	}
 
-    /** State. */
-    protected float radiusScale, alpha;
-    protected boolean wasBroken = true;
+	public ForceFieldAbility(float radius, float regen, float max, float cooldown, int sides, float rotation) {
+		this.radius = radius;
+		this.regen = regen;
+		this.max = max;
+		this.cooldown = cooldown;
+		this.sides = sides;
+		this.rotation = rotation;
+	}
 
-    private static float realRad;
-    private static Unit paramUnit;
-    private static ForceFieldAbility paramField;
-    private static final Cons<Bullet> shieldConsumer = b -> {
-        if(b.team != paramUnit.team && b.type.absorbable && Intersector.isInRegularPolygon(paramField.sides, paramUnit.x, paramUnit.y, realRad, paramField.rotation, b.x(), b.y()) && paramUnit.shield > 0){
-            b.absorb();
-            Fx.absorb.at(b);
-            paramField.hitSound.at(b.x, b.y, 1f + Mathf.range(0.1f), paramField.hitSoundVolume);
-            paramUnit.shield -= b.type().shieldDamage(b);
-            paramField.alpha = 1f;
-        }
-    };
+	ForceFieldAbility() {
+	}
 
-    public ForceFieldAbility(float radius, float regen, float max, float cooldown){
-        this.radius = radius;
-        this.regen = regen;
-        this.max = max;
-        this.cooldown = cooldown;
-    }
+	public float scaledMax(Unit unit) {
+		return max * Vars.state.rules.unitHealth(unit.team);
+	}
 
-    public ForceFieldAbility(float radius, float regen, float max, float cooldown, int sides, float rotation){
-        this.radius = radius;
-        this.regen = regen;
-        this.max = max;
-        this.cooldown = cooldown;
-        this.sides = sides;
-        this.rotation = rotation;
-    }
+	@Override
+	public void addStats(Table t) {
+		super.addStats(t);
+		t.add(Core.bundle.format("bullet.range", Strings.autoFixed(radius / tilesize, 2)));
+		t.row();
+		t.add(abilityStat("shield", Strings.autoFixed(max, 2)));
+		t.row();
+		t.add(abilityStat("repairspeed", Strings.autoFixed(regen * 60f, 2)));
+		t.row();
+		t.add(abilityStat("cooldown", Strings.autoFixed(cooldown / 60f, 2)));
+	}
 
-    ForceFieldAbility(){}
+	@Override
+	public void update(Unit unit) {
+		if (unit.shield <= 0f && !wasBroken) {
+			unit.shield -= cooldown * regen;
 
-    public float scaledMax(Unit unit){
-        return max * Vars.state.rules.unitHealth(unit.team);
-    }
+			Fx.shieldBreak.at(unit.x, unit.y, radius, unit.type.shieldColor(unit), this);
+			breakSound.at(unit.x, unit.y);
+		}
 
-    @Override
-    public void addStats(Table t){
-        super.addStats(t);
-        t.add(Core.bundle.format("bullet.range", Strings.autoFixed(radius / tilesize, 2)));
-        t.row();
-        t.add(abilityStat("shield", Strings.autoFixed(max, 2)));
-        t.row();
-        t.add(abilityStat("repairspeed", Strings.autoFixed(regen * 60f, 2)));
-        t.row();
-        t.add(abilityStat("cooldown", Strings.autoFixed(cooldown / 60f, 2)));
-    }
+		wasBroken = unit.shield <= 0f;
 
-    @Override
-    public void update(Unit unit){
-        if(unit.shield <= 0f && !wasBroken){
-            unit.shield -= cooldown * regen;
+		if (unit.shield < scaledMax(unit)) {
+			unit.shield += Time.delta * regen;
+		}
 
-            Fx.shieldBreak.at(unit.x, unit.y, radius, unit.type.shieldColor(unit), this);
-            breakSound.at(unit.x, unit.y);
-        }
+		alpha = Math.max(alpha - Time.delta / 10f, 0f);
 
-        wasBroken = unit.shield <= 0f;
+		if (unit.shield > 0) {
+			radiusScale = Mathf.lerpDelta(radiusScale, 1f, 0.06f);
+			paramUnit = unit;
+			paramField = this;
+			checkRadius(unit);
 
-        if(unit.shield < scaledMax(unit)){
-            unit.shield += Time.delta * regen;
-        }
+			Groups.bullet.intersect(unit.x - realRad, unit.y - realRad, realRad * 2f, realRad * 2f, shieldConsumer);
+		} else {
+			radiusScale = 0f;
+		}
+	}
 
-        alpha = Math.max(alpha - Time.delta/10f, 0f);
+	@Override
+	public void death(Unit unit) {
 
-        if(unit.shield > 0){
-            radiusScale = Mathf.lerpDelta(radiusScale, 1f, 0.06f);
-            paramUnit = unit;
-            paramField = this;
-            checkRadius(unit);
+		//self-destructing units can have a shield on death
+		if (unit.shield > 0f && !wasBroken) {
+			Fx.shieldBreak.at(unit.x, unit.y, radius, unit.type.shieldColor(unit), sides);
+			breakSound.at(unit.x, unit.y);
+		}
+	}
 
-            Groups.bullet.intersect(unit.x - realRad, unit.y - realRad, realRad * 2f, realRad * 2f, shieldConsumer);
-        }else{
-            radiusScale = 0f;
-        }
-    }
+	@Override
+	public void draw(Unit unit) {
+		checkRadius(unit);
 
-    @Override
-    public void death(Unit unit){
+		if (unit.shield > 0) {
+			Draw.color(unit.type.shieldColor(unit), Color.white, Mathf.clamp(alpha));
 
-        //self-destructing units can have a shield on death
-        if(unit.shield > 0f && !wasBroken){
-            Fx.shieldBreak.at(unit.x, unit.y, radius, unit.type.shieldColor(unit), sides);
-            breakSound.at(unit.x, unit.y);
-        }
-    }
+			if (Vars.renderer.animateShields) {
+				Draw.z(Layer.shields + 0.001f * alpha);
+				Fill.poly(unit.x, unit.y, sides, realRad, rotation);
+			} else {
+				Draw.z(Layer.shields);
+				Lines.stroke(1.5f);
+				Draw.alpha(0.09f);
+				Fill.poly(unit.x, unit.y, sides, radius, rotation);
+				Draw.alpha(1f);
+				Lines.poly(unit.x, unit.y, sides, radius, rotation);
+			}
+		}
+	}
 
-    @Override
-    public void draw(Unit unit){
-        checkRadius(unit);
+	@Override
+	public void displayBars(Unit unit, Table bars) {
+		bars.add(new Bar("stat.shieldhealth", Pal.accent, () -> unit.shield / scaledMax(unit))).row();
+	}
 
-        if(unit.shield > 0){
-            Draw.color(unit.type.shieldColor(unit), Color.white, Mathf.clamp(alpha));
+	@Override
+	public void created(Unit unit) {
+		unit.shield = scaledMax(unit);
+	}
 
-            if(Vars.renderer.animateShields){
-                Draw.z(Layer.shields + 0.001f * alpha);
-                Fill.poly(unit.x, unit.y, sides, realRad, rotation);
-            }else{
-                Draw.z(Layer.shields);
-                Lines.stroke(1.5f);
-                Draw.alpha(0.09f);
-                Fill.poly(unit.x, unit.y, sides, radius, rotation);
-                Draw.alpha(1f);
-                Lines.poly(unit.x, unit.y, sides, radius, rotation);
-            }
-        }
-    }
-
-    @Override
-    public void displayBars(Unit unit, Table bars){
-        bars.add(new Bar("stat.shieldhealth", Pal.accent, () -> unit.shield / scaledMax(unit))).row();
-    }
-
-    @Override
-    public void created(Unit unit){
-        unit.shield = scaledMax(unit);
-    }
-
-    public void checkRadius(Unit unit){
-        //timer2 is used to store radius scale as an effect
-        realRad = radiusScale * radius;
-    }
+	public void checkRadius(Unit unit) {
+		//timer2 is used to store radius scale as an effect
+		realRad = radiusScale * radius;
+	}
 }

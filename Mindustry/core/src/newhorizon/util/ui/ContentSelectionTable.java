@@ -17,50 +17,50 @@ import mindustry.world.Block;
 import static mindustry.Vars.control;
 
 public class ContentSelectionTable {
-    public static void buildModuleTable(@Nullable Block block, Table table, Seq<Block> items, Prov<Block> holder, Cons<Block> consumer) {
-        ButtonGroup<ImageButton> group = new ButtonGroup<>();
-        group.setMinCheckCount(0);
+	public static void buildModuleTable(@Nullable Block block, Table table, Seq<Block> items, Prov<Block> holder, Cons<Block> consumer) {
+		ButtonGroup<ImageButton> group = new ButtonGroup<>();
+		group.setMinCheckCount(0);
 
-        Table cont = new Table().top();
-        cont.defaults().size(240, 48);
+		Table cont = new Table().top();
+		cont.defaults().size(240, 48);
 
-        Runnable rebuild = () -> {
-            group.clear();
-            cont.clearChildren();
+		Runnable rebuild = () -> {
+			group.clear();
+			cont.clearChildren();
 
-            for (Block item : items) {
-                if (!item.unlockedNow()) continue;
+			for (Block item : items) {
+				if (!item.unlockedNow()) continue;
 
-                ImageButton button = cont.button(Tex.whiteui, Styles.clearNoneTogglei, 48f, () -> control.input.config.hideConfig()).group(group).get();
-                button.table(t -> t.label(() -> item.localizedName).size(180, 0)).padLeft(6).padRight(6);
+				ImageButton button = cont.button(Tex.whiteui, Styles.clearNoneTogglei, 48f, () -> control.input.config.hideConfig()).group(group).get();
+				button.table(t -> t.label(() -> item.localizedName).size(180, 0)).padLeft(6).padRight(6);
 
-                button.changed(() -> consumer.get(button.isChecked() ? item : null));
-                button.getStyle().imageUp = new TextureRegionDrawable(item.uiIcon);
-                button.update(() -> button.setChecked(holder.get() == item));
+				button.changed(() -> consumer.get(button.isChecked() ? item : null));
+				button.getStyle().imageUp = new TextureRegionDrawable(item.uiIcon);
+				button.update(() -> button.setChecked(holder.get() == item));
 
-                cont.row();
-            }
-        };
+				cont.row();
+			}
+		};
 
-        rebuild.run();
+		rebuild.run();
 
-        Table main = new Table().background(Styles.black6);
+		Table main = new Table().background(Styles.black6);
 
-        ScrollPane pane = new ScrollPane(cont, Styles.smallPane);
-        pane.setScrollingDisabled(true, false);
-        pane.exited(() -> {
-            if (pane.hasScroll()) {
-                Core.scene.setScrollFocus(null);
-            }
-        });
+		ScrollPane pane = new ScrollPane(cont, Styles.smallPane);
+		pane.setScrollingDisabled(true, false);
+		pane.exited(() -> {
+			if (pane.hasScroll()) {
+				Core.scene.setScrollFocus(null);
+			}
+		});
 
-        if (block != null) {
-            pane.setScrollYForce(block.selectScroll);
-            pane.update(() -> block.selectScroll = pane.getScrollY());
-        }
+		if (block != null) {
+			pane.setScrollYForce(block.selectScroll);
+			pane.update(() -> block.selectScroll = pane.getScrollY());
+		}
 
-        pane.setOverscroll(false, false);
-        main.add(pane).maxHeight(192);
-        table.top().add(main);
-    }
+		pane.setOverscroll(false, false);
+		main.add(pane).maxHeight(192);
+		table.top().add(main);
+	}
 }

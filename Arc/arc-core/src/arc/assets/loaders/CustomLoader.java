@@ -7,21 +7,22 @@ import arc.assets.AssetManager;
 import arc.files.Fi;
 import arc.struct.Seq;
 
-public abstract class CustomLoader extends AsynchronousAssetLoader{
-    public Runnable loaded = () -> {};
+public abstract class CustomLoader extends AsynchronousAssetLoader {
+	public Runnable loaded = () -> {
+	};
 
-    public CustomLoader(){
-        super(Core.files::internal);
-    }
+	public CustomLoader() {
+		super(Core.files::internal);
+	}
 
-    @Override
-    public Object loadSync(AssetManager manager, String fileName, Fi file, AssetLoaderParameters parameter){
-        loaded.run();
-        return this;
-    }
+	@Override
+	public Object loadSync(AssetManager manager, String fileName, Fi file, AssetLoaderParameters parameter) {
+		loaded.run();
+		return this;
+	}
 
-    @Override
-    public Seq<AssetDescriptor> getDependencies(String fileName, Fi file, AssetLoaderParameters parameter){
-        return null;
-    }
+	@Override
+	public Seq<AssetDescriptor> getDependencies(String fileName, Fi file, AssetLoaderParameters parameter) {
+		return null;
+	}
 }

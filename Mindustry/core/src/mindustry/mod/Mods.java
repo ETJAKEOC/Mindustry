@@ -138,6 +138,56 @@ public class Mods implements Loadable{
         });
     }
 
+    public static class PreinstalledMod {
+        public final String name;
+        public final String internalName;
+        public final String displayName;
+        public final String author;
+        public final String description;
+        public final Seq<String> aliases;
+
+        public PreinstalledMod(String name, String displayName, String author, String description, String... aliases) {
+            this.name = name;
+            this.internalName = name.toLowerCase(Locale.ROOT).replace(" ", "-");
+            this.displayName = displayName;
+            this.author = author;
+            this.description = description;
+            this.aliases = Seq.with(aliases);
+        }
+
+        public boolean matches(String query) {
+            if (query == null) return false;
+            String q = query.toLowerCase(Locale.ROOT).replace(" ", "").replace("-", "");
+            if (q.isEmpty()) return false;
+            if (name.toLowerCase(Locale.ROOT).replace(" ", "").replace("-", "").contains(q)) return true;
+            if (internalName.toLowerCase(Locale.ROOT).replace(" ", "").replace("-", "").contains(q)) return true;
+            if (displayName.toLowerCase(Locale.ROOT).replace(" ", "").replace("-", "").contains(q)) return true;
+            for (int i = 0; i < aliases.size; i++) {
+                if (aliases.items[i].toLowerCase(Locale.ROOT).replace(" ", "").replace("-", "").contains(q)) return true;
+            }
+            return false;
+        }
+    }
+
+    public static final Seq<PreinstalledMod> preinstalledMods = Seq.with(
+        new PreinstalledMod("ExtraUtilities", "Extra Utilities", "Extra Utilities Team", "Built-in core mod providing extra utility blocks, logic components, and structures.", "Extra-Utilities", "extra-utilities", "ExtraUtilitiesMod", "Anuken/ExtraUtilities"),
+        new PreinstalledMod("VanillaExpansion", "Vanilla Expansion", "Vanilla Expansion Team", "Built-in core mod expanding vanilla game content with new turrets, units, and defense options.", "Vanilla-Expansion", "vanilla-expansion", "VanillaExpansionMod", "Anuken/VanillaExpansion"),
+        new PreinstalledMod("NewHorizon", "New Horizon", "New Horizon Team", "Built-in core mod adding advanced technology, faction content, and new gameplay mechanics.", "newhorizon", "NHModCore", "New-Horizon", "YuruUnit/New-Horizon-Mod", "New-Horizon-Mod", "Anuken/New-Horizon")
+    );
+
+    public boolean isPreinstalled(String nameOrRepo) {
+        return getPreinstalledMod(nameOrRepo) != null;
+    }
+
+    public @Nullable PreinstalledMod getPreinstalledMod(String nameOrRepo) {
+        if (nameOrRepo == null) return null;
+        for (int i = 0; i < preinstalledMods.size; i++) {
+            PreinstalledMod p = preinstalledMods.get(i);
+            if (p.matches(nameOrRepo)) return p;
+        }
+        return null;
+    }
+
     /** @return the loaded mod found by name, or null if not found. */
     public @Nullable LoadedMod getMod(String name){
         return mods.find(m -> m.name.equals(name));

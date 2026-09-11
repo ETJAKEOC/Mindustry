@@ -12,12 +12,12 @@ import arc.util.Strings;
  * Fades the text's color from between colors or alphas. Doesn't repeat itself.
  */
 public class FadeEffect extends FEffect {
+	private final IntFloatMap timePassedByGlyphIndex = new IntFloatMap();
 	public float alpha1 = 0; // First alpha of the effect, in case a color isn't provided.
 	public float alpha2 = 1; // Second alpha of the effect, in case a color isn't provided.
 	public float fadeDuration = 1; // Duration of the fade effect
 	private Color color1 = null; // First color of the effect.
 	private Color color2 = null; // Second color of the effect.
-	private final IntFloatMap timePassedByGlyphIndex = new IntFloatMap();
 
 	@Override
 	public void applyParams(String[] params) {

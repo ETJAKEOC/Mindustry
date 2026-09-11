@@ -1,5 +1,5 @@
 package arc.func;
 
-public interface Boolc{
-    void get(boolean b);
+public interface Boolc {
+	void get(boolean b);
 }

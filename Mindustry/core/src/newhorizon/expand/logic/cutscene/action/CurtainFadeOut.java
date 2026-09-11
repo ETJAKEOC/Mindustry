@@ -10,56 +10,56 @@ import newhorizon.expand.logic.ActionLStatement;
 import newhorizon.expand.logic.ParseUtil;
 
 public class CurtainFadeOut extends ActionLStatement {
-    public String duration = "2";
+	public String duration = "2";
 
-    public CurtainFadeOut(String[] token) {
-        ParseUtil.getFirstFloat(token);
-        duration = ParseUtil.getNextToken(token);
-    }
+	public CurtainFadeOut(String[] token) {
+		ParseUtil.getFirstFloat(token);
+		duration = ParseUtil.getNextToken(token);
+	}
 
-    public CurtainFadeOut() {
-    }
+	public CurtainFadeOut() {
+	}
 
-    @Override
-    public String getLStatementName() {
-        return "curtainfadeout";
-    }
+	@Override
+	public String getLStatementName() {
+		return "curtainfadeout";
+	}
 
-    @Override
-    public void build(Table table) {
-        buildRowTable(table, t -> {
-            t.add(" Duration: ");
-            fields(t, duration, str -> duration = str);
-        });
-    }
+	@Override
+	public void build(Table table) {
+		buildRowTable(table, t -> {
+			t.add(" Duration: ");
+			fields(t, duration, str -> duration = str);
+		});
+	}
 
-    @Override
-    public LCategory category() {
-        return NHLogic.nhaction;
-    }
+	@Override
+	public LCategory category() {
+		return NHLogic.nhaction;
+	}
 
-    @Override
-    public void write(StringBuilder builder) {
-        super.write(builder);
-        writeTokens(builder, duration);
-    }
+	@Override
+	public void write(StringBuilder builder) {
+		super.write(builder);
+		writeTokens(builder, duration);
+	}
 
-    @Override
-    public LExecutor.LInstruction build(LAssembler builder) {
-        return new CurtainFadeOutI(builder.var(duration));
-    }
+	@Override
+	public LExecutor.LInstruction build(LAssembler builder) {
+		return new CurtainFadeOutI(builder.var(duration));
+	}
 
-    public class CurtainFadeOutI extends ActionInstruction {
-        public LVar duration;
+	public class CurtainFadeOutI extends ActionInstruction {
+		public LVar duration;
 
-        public CurtainFadeOutI(LVar duration) {
-            this.duration = duration;
-        }
+		public CurtainFadeOutI(LVar duration) {
+			this.duration = duration;
+		}
 
-        @Override
-        public void run(LExecutor exec) {
-            startExec(exec, "curtain_fade_out");
-            writeExec(exec, duration);
-        }
-    }
+		@Override
+		public void run(LExecutor exec) {
+			startExec(exec, "curtain_fade_out");
+			writeExec(exec, duration);
+		}
+	}
 }

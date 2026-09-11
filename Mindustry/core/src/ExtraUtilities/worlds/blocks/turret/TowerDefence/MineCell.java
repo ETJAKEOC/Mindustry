@@ -34,244 +34,244 @@ import mindustry.world.meta.StatValues;
 import static mindustry.Vars.*;
 
 public class MineCell extends Block {
-    public Seq<String> floors = new Seq<>();
-    public float mineInter = 120f;
-    public float range = 80;
+	public Seq<String> floors = new Seq<>();
+	public float mineInter = 120f;
+	public float range = 80;
 
-    public BulletType mine;
-    public int mines = 4;
-    public float mineSpread = 4;
-    public float mineRotationSpread = 120;
+	public BulletType mine;
+	public int mines = 4;
+	public float mineSpread = 4;
+	public float mineRotationSpread = 120;
 
-    public float moveTime = 30f;
+	public float moveTime = 30f;
 
-    public ItemStack[] mineConsumes = {};
+	public ItemStack[] mineConsumes = {};
 
-    public int fms = 5;
+	public int fms = 5;
 
-    public MineCell(String name) {
-        super(name);
-        solid = update = true;
-    }
+	public MineCell(String name) {
+		super(name);
+		solid = update = true;
+	}
 
-    @Override
-    public void drawPlace(int x, int y, int rotation, boolean valid) {
-        super.drawPlace(x, y, rotation, valid);
+	@Override
+	public void drawPlace(int x, int y, int rotation, boolean valid) {
+		super.drawPlace(x, y, rotation, valid);
 
-        Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.accent);
-    }
+		Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.accent);
+	}
 
-    @Override
-    public void setStats() {
-        super.setStats();
-        stats.add(Stat.range, range / tilesize, StatUnit.blocks);
-        stats.add(Stat.ammo, StatValues.ammo(ObjectMap.of(this, mine)));
-        stats.add(Stat.reload, 60f / mineInter, StatUnit.perSecond);
-        stats.add(Stat.input, t -> {
-            t.defaults().left();
-            t.row();
-            t.table(tx -> tx.add("[accent]自动从核心获取[]"));
-            t.row();
-            t.table(Styles.grayPanel, i -> {
-                int r = 0;
-                for(var is : mineConsumes){
-                    if(r % 3 == 0) i.row();
-                    i.add(new ItemImage(is)).pad(4);
-                    r++;
-                }
-            });
-        });
+	@Override
+	public void setStats() {
+		super.setStats();
+		stats.add(Stat.range, range / tilesize, StatUnit.blocks);
+		stats.add(Stat.ammo, StatValues.ammo(ObjectMap.of(this, mine)));
+		stats.add(Stat.reload, 60f / mineInter, StatUnit.perSecond);
+		stats.add(Stat.input, t -> {
+			t.defaults().left();
+			t.row();
+			t.table(tx -> tx.add("[accent]自动从核心获取[]"));
+			t.row();
+			t.table(Styles.grayPanel, i -> {
+				int r = 0;
+				for (var is : mineConsumes) {
+					if (r % 3 == 0) i.row();
+					i.add(new ItemImage(is)).pad(4);
+					r++;
+				}
+			});
+		});
 
-        if(floors.size > 0) {
+		if (floors.size > 0) {
 
-            stats.add(Stat.tiles, (t) -> {
-                t.row();
-                t.table(i -> {
-                    int r = 0;
-                    for(var s : floors) {
-                        var f = content.block(s);
-                        if(f != null) {
-                            if (r % 4 == 0) i.row();
-                            i.image(f.uiIcon).pad(3);
-                            r++;
-                        }
-                    }
-                });
-            });
-        }
-    }
+			stats.add(Stat.tiles, (t) -> {
+				t.row();
+				t.table(i -> {
+					int r = 0;
+					for (var s : floors) {
+						var f = content.block(s);
+						if (f != null) {
+							if (r % 4 == 0) i.row();
+							i.image(f.uiIcon).pad(3);
+							r++;
+						}
+					}
+				});
+			});
+		}
+	}
 
-    @Override
-    public void setBars() {
-        super.setBars();
+	@Override
+	public void setBars() {
+		super.setBars();
 
-        addBar("heat", (MineCellBuild entity) ->
-                new Bar(() ->
-                        "reload",
-                        () -> Pal.lightOrange,
-                        () -> entity.timeMine / mineInter));
-    }
+		addBar("heat", (MineCellBuild entity) ->
+				new Bar(() ->
+						"reload",
+						() -> Pal.lightOrange,
+						() -> entity.timeMine / mineInter));
+	}
 
-    @Override
-    protected TextureRegion[] icons() {
-        return new TextureRegion[]{
-                Core.atlas.find(name + "-bottom"),
-                Core.atlas.find(name + "-f0"),
-                Core.atlas.find(name)
-        };
-    }
+	@Override
+	protected TextureRegion[] icons() {
+		return new TextureRegion[]{
+				Core.atlas.find(name + "-bottom"),
+				Core.atlas.find(name + "-f0"),
+				Core.atlas.find(name)
+		};
+	}
 
-    public class MineCellBuild extends Building{
-        public float timeMine = 0;
+	public class MineCellBuild extends Building {
+		public float timeMine = 0;
 
-        public Seq<Tile> fs = new Seq<>();
+		public Seq<Tile> fs = new Seq<>();
 
-        public float fm = 0;
-        public boolean open = false;
+		public float fm = 0;
+		public boolean open = false;
 
-        @Override
-        public void draw() {
-            TextureRegion r = Core.atlas.find(name),
-                    bt = Core.atlas.find(name + "-bottom");
-            Draw.rect(bt, x, y);
-            TextureRegion f = Core.atlas.find(name + "-f" + (int)Math.min(fm * fms, fms - 1));
-            Draw.rect(f, x, y);
-            Draw.rect(r, x, y);
-        }
+		@Override
+		public void draw() {
+			TextureRegion r = Core.atlas.find(name),
+					bt = Core.atlas.find(name + "-bottom");
+			Draw.rect(bt, x, y);
+			TextureRegion f = Core.atlas.find(name + "-f" + (int) Math.min(fm * fms, fms - 1));
+			Draw.rect(f, x, y);
+			Draw.rect(r, x, y);
+		}
 
-        @Override
-        public void updateTile() {
-            super.updateTile();
+		@Override
+		public void updateTile() {
+			super.updateTile();
 
-            if(open) fm = Mathf.lerpDelta(fm, 1, 0.3f);
-            else fm = Mathf.lerpDelta(fm, 0, 0.15f);
-            if(fm >= 0.99f) open = false;
+			if (open) fm = Mathf.lerpDelta(fm, 1, 0.3f);
+			else fm = Mathf.lerpDelta(fm, 0, 0.15f);
+			if (fm >= 0.99f) open = false;
 
-            if(coreCanConsume()) timeMine += edelta();
-            if(timeMine >= mineInter){
-                initFloor();
-                creatMine();
-                coreConsume();
-                timeMine = 0;
-            }
-        }
+			if (coreCanConsume()) timeMine += edelta();
+			if (timeMine >= mineInter) {
+				initFloor();
+				creatMine();
+				coreConsume();
+				timeMine = 0;
+			}
+		}
 
-        public void creatMine(){
-            open = true;
-            if(fs.size > 0){
-                int i = Mathf.random(0, fs.size - 1);
-                var f = fs.get(i);
-                if(f != null){
-                    float dst = dst(f);
-                    float ang = angleTo(f);
-                    for(int m = 0; m < mines; m++){
-                        float rg = Mathf.random(mineRotationSpread);
-                        mine.create(this, team, x + Mathf.random(-mineSpread, mineSpread), y + Mathf.random(-mineSpread, mineSpread), ang, -1, 1, 1, rg, (b) ->{
-                            b.initVel(b.rotation(), dst/moveTime * 2 * Math.max(0, 1 - b.time/moveTime));
-                        });
-                    }
-                }
-            } else {
-                float dst = Mathf.random(size/2f * tilesize, range);
-                float ang = Mathf.random(360);
-                for(int m = 0; m < mines; m++){
-                    float rg = Mathf.random(mineRotationSpread);
-                    mine.create(this, team, x + Mathf.random(-mineSpread, mineSpread), y + Mathf.random(-mineSpread, mineSpread), ang, -1, 1, 1, rg, (b) ->{
-                        b.initVel(b.rotation(), dst/moveTime * 2 * Math.max(0, 1 - b.time/moveTime));
-                    });
-                }
-            }
-        }
+		public void creatMine() {
+			open = true;
+			if (fs.size > 0) {
+				int i = Mathf.random(0, fs.size - 1);
+				var f = fs.get(i);
+				if (f != null) {
+					float dst = dst(f);
+					float ang = angleTo(f);
+					for (int m = 0; m < mines; m++) {
+						float rg = Mathf.random(mineRotationSpread);
+						mine.create(this, team, x + Mathf.random(-mineSpread, mineSpread), y + Mathf.random(-mineSpread, mineSpread), ang, -1, 1, 1, rg, (b) -> {
+							b.initVel(b.rotation(), dst / moveTime * 2 * Math.max(0, 1 - b.time / moveTime));
+						});
+					}
+				}
+			} else {
+				float dst = Mathf.random(size / 2f * tilesize, range);
+				float ang = Mathf.random(360);
+				for (int m = 0; m < mines; m++) {
+					float rg = Mathf.random(mineRotationSpread);
+					mine.create(this, team, x + Mathf.random(-mineSpread, mineSpread), y + Mathf.random(-mineSpread, mineSpread), ang, -1, 1, 1, rg, (b) -> {
+						b.initVel(b.rotation(), dst / moveTime * 2 * Math.max(0, 1 - b.time / moveTime));
+					});
+				}
+			}
+		}
 
-        public void initFloor(){
-            fs.clear();
-            int tx = World.toTile(x), ty = World.toTile(y);
-            int tr = (int)(range / tilesize);
-            for(int x = -tr; x <= tr; x++){
-                for(int y = -tr; y <= tr; y++){
-                    var f = world.tile(x + tx, y + ty);
-                    if(f != null && within(f, range) && f.block().isAir() && floors.contains(f.floor().name)){
-                        fs.add(f);
-                    }
-                }
-            }
-        }
+		public void initFloor() {
+			fs.clear();
+			int tx = World.toTile(x), ty = World.toTile(y);
+			int tr = (int) (range / tilesize);
+			for (int x = -tr; x <= tr; x++) {
+				for (int y = -tr; y <= tr; y++) {
+					var f = world.tile(x + tx, y + ty);
+					if (f != null && within(f, range) && f.block().isAir() && floors.contains(f.floor().name)) {
+						fs.add(f);
+					}
+				}
+			}
+		}
 
-        public boolean coreCanConsume(){
-            if(core() == null) return false;
-            if(state.rules.infiniteResources || cheating()) return true;
-            for(var is : mineConsumes){
-                if(core().items.get(is.item) < is.amount){
-                    return false;
-                }
-            }
-            return true;
-        }
+		public boolean coreCanConsume() {
+			if (core() == null) return false;
+			if (state.rules.infiniteResources || cheating()) return true;
+			for (var is : mineConsumes) {
+				if (core().items.get(is.item) < is.amount) {
+					return false;
+				}
+			}
+			return true;
+		}
 
-        public void coreConsume(){
-            if(core() == null || state.rules.infiniteResources || cheating()) return;
-            if(coreCanConsume()) for(var is : mineConsumes){
-                core().items.remove(is);
-            }
-        }
+		public void coreConsume() {
+			if (core() == null || state.rules.infiniteResources || cheating()) return;
+			if (coreCanConsume()) for (var is : mineConsumes) {
+				core().items.remove(is);
+			}
+		}
 
-        @Override
-        public void drawSelect() {
-            super.drawSelect();
+		@Override
+		public void drawSelect() {
+			super.drawSelect();
 
-            if(fs.size > 0){
-                for(var f : fs){
-                    float sin = Mathf.absin(Time.time, 5, 1);
-                    Draw.color(Tmp.c1.set(team.color).a(sin * 0.6f));
-                    Fill.square(f.worldx(), f.worldy(), 2);
-                    Draw.reset();
-                }
-            }
+			if (fs.size > 0) {
+				for (var f : fs) {
+					float sin = Mathf.absin(Time.time, 5, 1);
+					Draw.color(Tmp.c1.set(team.color).a(sin * 0.6f));
+					Fill.square(f.worldx(), f.worldy(), 2);
+					Draw.reset();
+				}
+			}
 
-            Drawf.dashCircle(x, y, range, team.color);
-        }
+			Drawf.dashCircle(x, y, range, team.color);
+		}
 
-        @Override
-        public void displayConsumption(Table table) {
-            super.displayConsumption(table);
-            table.table(c -> {
-                int i = 0;
-                for(var stack : mineConsumes){
-                    c.add(new ReqImage(
-                            new ItemImage(stack.item.uiIcon, Math.round(stack.amount)),
-                            () -> (state.rules.infiniteResources || cheating()) ||
-                                    (core() != null && core().items.has(stack.item, Math.round(stack.amount)))
-                    )).padRight(8);
-                    if(++i % 4 == 0) c.row();
-                }
-            }).left();
-        }
+		@Override
+		public void displayConsumption(Table table) {
+			super.displayConsumption(table);
+			table.table(c -> {
+				int i = 0;
+				for (var stack : mineConsumes) {
+					c.add(new ReqImage(
+							new ItemImage(stack.item.uiIcon, Math.round(stack.amount)),
+							() -> (state.rules.infiniteResources || cheating()) ||
+									(core() != null && core().items.has(stack.item, Math.round(stack.amount)))
+					)).padRight(8);
+					if (++i % 4 == 0) c.row();
+				}
+			}).left();
+		}
 
-        @Override
-        public BlockStatus status() {
-            if (!enabled) {
-                return BlockStatus.logicDisable;
-            } else if (!shouldConsume()) {
-                return BlockStatus.noOutput;
-            } else if (!(this.efficiency <= 0) && productionValid() && coreCanConsume()) {
-                return Vars.state.tick / 30 % 1 < (double)efficiency ? BlockStatus.active : BlockStatus.noInput;
-            } else {
-                return BlockStatus.noInput;
-            }
-        }
+		@Override
+		public BlockStatus status() {
+			if (!enabled) {
+				return BlockStatus.logicDisable;
+			} else if (!shouldConsume()) {
+				return BlockStatus.noOutput;
+			} else if (!(this.efficiency <= 0) && productionValid() && coreCanConsume()) {
+				return Vars.state.tick / 30 % 1 < (double) efficiency ? BlockStatus.active : BlockStatus.noInput;
+			} else {
+				return BlockStatus.noInput;
+			}
+		}
 
-        @Override
-        public void write(Writes write) {
-            super.write(write);
+		@Override
+		public void write(Writes write) {
+			super.write(write);
 
-            write.f(timeMine);
-        }
+			write.f(timeMine);
+		}
 
-        @Override
-        public void read(Reads read, byte revision) {
-            super.read(read, revision);
+		@Override
+		public void read(Reads read, byte revision) {
+			super.read(read, revision);
 
-            timeMine = read.f();
-        }
-    }
+			timeMine = read.f();
+		}
+	}
 }

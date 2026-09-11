@@ -1,5 +1,5 @@
 package arc.net;
 
-public enum DcReason{
-    timeout, closed, error
+public enum DcReason {
+	timeout, closed, error
 }

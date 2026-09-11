@@ -11,43 +11,43 @@ import newhorizon.expand.block.production.factory.RecipeGenericCrafter;
 import newhorizon.expand.type.Recipe;
 
 public class RecipeRegister {
-    public static void load() {
+	public static void load() {
 
-        recipe(ProductionBlock.sandCracker, recipe -> {
-            recipe.inputItem = ItemStack.list(NHItems.scrap, 2);
-            recipe.outputItem = ItemStack.list(NHItems.sand, 5);
-            recipe.craftTime = 30f;
-        });
-        recipe(ProductionBlock.sandCracker, recipe -> {
-            recipe.inputItem = ItemStack.list(NHItems.copper, 3);
-            recipe.outputItem = ItemStack.list(NHItems.sand, 5);
-            recipe.craftTime = 30f;
-        });
-        recipe(ProductionBlock.sandCracker, recipe -> {
-            recipe.inputItem = ItemStack.list(NHItems.lead, 3);
-            recipe.outputItem = ItemStack.list(NHItems.sand, 5);
-            recipe.craftTime = 30f;
-        });
-        recipe(ProductionBlock.sandCracker, recipe -> {
-            recipe.inputItem = ItemStack.list(NHItems.beryllium, 3);
-            recipe.outputItem = ItemStack.list(NHItems.sand, 5);
-            recipe.craftTime = 30f;
-        });
-        recipe(ProductionBlock.sandCracker, recipe -> {
-            recipe.inputItem = ItemStack.list(NHItems.titanium, 2);
-            recipe.outputItem = ItemStack.list(NHItems.sand, 5);
-            recipe.craftTime = 30f;
-        });
-        recipe(ProductionBlock.sandCracker, recipe -> {
-            recipe.inputItem = ItemStack.list(NHItems.thorium, 2);
-            recipe.outputItem = ItemStack.list(NHItems.sand, 5);
-            recipe.craftTime = 30f;
-        });
-        recipe(ProductionBlock.sandCracker, recipe -> {
-            recipe.inputItem = ItemStack.list(NHItems.tungsten, 2);
-            recipe.outputItem = ItemStack.list(NHItems.sand, 5);
-            recipe.craftTime = 30f;
-        });
+		recipe(ProductionBlock.sandCracker, recipe -> {
+			recipe.inputItem = ItemStack.list(NHItems.scrap, 2);
+			recipe.outputItem = ItemStack.list(NHItems.sand, 5);
+			recipe.craftTime = 30f;
+		});
+		recipe(ProductionBlock.sandCracker, recipe -> {
+			recipe.inputItem = ItemStack.list(NHItems.copper, 3);
+			recipe.outputItem = ItemStack.list(NHItems.sand, 5);
+			recipe.craftTime = 30f;
+		});
+		recipe(ProductionBlock.sandCracker, recipe -> {
+			recipe.inputItem = ItemStack.list(NHItems.lead, 3);
+			recipe.outputItem = ItemStack.list(NHItems.sand, 5);
+			recipe.craftTime = 30f;
+		});
+		recipe(ProductionBlock.sandCracker, recipe -> {
+			recipe.inputItem = ItemStack.list(NHItems.beryllium, 3);
+			recipe.outputItem = ItemStack.list(NHItems.sand, 5);
+			recipe.craftTime = 30f;
+		});
+		recipe(ProductionBlock.sandCracker, recipe -> {
+			recipe.inputItem = ItemStack.list(NHItems.titanium, 2);
+			recipe.outputItem = ItemStack.list(NHItems.sand, 5);
+			recipe.craftTime = 30f;
+		});
+		recipe(ProductionBlock.sandCracker, recipe -> {
+			recipe.inputItem = ItemStack.list(NHItems.thorium, 2);
+			recipe.outputItem = ItemStack.list(NHItems.sand, 5);
+			recipe.craftTime = 30f;
+		});
+		recipe(ProductionBlock.sandCracker, recipe -> {
+			recipe.inputItem = ItemStack.list(NHItems.tungsten, 2);
+			recipe.outputItem = ItemStack.list(NHItems.sand, 5);
+			recipe.craftTime = 30f;
+		});
 
         /*recipe(ProductionBlock.resourceConvertor, recipe -> {
             recipe.inputItem = ItemStack.list(NHItems.graphite, 2, NHItems.silicon, 2);
@@ -91,7 +91,7 @@ public class RecipeRegister {
             recipe.outputItem = ItemStack.list(NHItems.zeta, 3);
             recipe.craftTime = 60f;
         });
-        
+
         recipe(ProductionBlock.titaniumReconstructor, recipe -> {
             recipe.inputItem = ItemStack.list(NHItems.beryllium, 3);
             //recipe.inputLiquid = LiquidStack.list(NHLiquids.quantumLiquid, 1 / 60f);
@@ -251,7 +251,7 @@ public class RecipeRegister {
             recipe.outputItem = ItemStack.list(NHItems.zeta, 4);
             recipe.craftTime = 60f;
         });
-        
+
         recipe(CraftingBlock.surgeRefactor, recipe -> {
             recipe.inputItem = ItemStack.list(NHItems.titanium, 3);
             recipe.inputLiquid = LiquidStack.list(NHLiquids.zetaFluidPositive, 4 / 60f);
@@ -315,7 +315,7 @@ public class RecipeRegister {
             recipe.craftTime = 60f;
             recipe.priority = 1;
         });
-        
+
         recipe(CraftingBlock.irdryonMixer, recipe -> {
             recipe.inputItem = ItemStack.list(NHItems.phaseFabric, 2);
             recipe.inputLiquid = LiquidStack.list(NHLiquids.xenFluid, 24 / 60f);
@@ -329,7 +329,7 @@ public class RecipeRegister {
             recipe.craftTime = 60f;
             recipe.priority = 1;
         });
-        
+
         recipe(CraftingBlock.hugeplastaniumFactory, recipe -> {
             recipe.inputItem = ItemStack.list(NHItems.tungsten, 6);
             recipe.inputLiquid = LiquidStack.list(NHLiquids.cyanogen, 3 / 60f);
@@ -386,7 +386,7 @@ public class RecipeRegister {
             recipe.craftTime = 60f;
             recipe.priority = 1;
         });
-        
+
         recipe(CraftingBlock.upgradeSortFactory, recipe -> {
             recipe.inputItem = ItemStack.list(NHItems.setonAlloy, 4, NHItems.seniorProcessor, 4);
             recipe.outputItem = ItemStack.list(NHItems.nodexPlate, 2);
@@ -425,7 +425,7 @@ public class RecipeRegister {
             recipe.outputItem = ItemStack.list(NHItems.hyperProcessor, 2);
             recipe.craftTime = 60f;
         });
-       
+
 
         recipe(CraftingBlock.factory0, recipe -> {
             recipe.inputItem = ItemStack.list(NHItems.tungsten, 4);
@@ -529,7 +529,7 @@ public class RecipeRegister {
             recipe.inputLiquid = LiquidStack.list(NHLiquids.quantumLiquid ,12 / 60f);
             recipe.craftTime = 120f;
         });
-        
+
         recipe(PowerBlock.nitrogenDissociator, recipe -> {
             recipe.inputLiquid = LiquidStack.list(NHLiquids.slag, 40 / 60f);
             recipe.outputLiquid = LiquidStack.list(NHLiquids.nitrogen, 12 / 60f);
@@ -621,15 +621,15 @@ public class RecipeRegister {
         });
 
          */
-    }
+	}
 
-    public static void recipe(Block block, Cons<Recipe> recipe) {
-        if (block instanceof RecipeGenericCrafter crafter) {
-            Recipe r = new Recipe();
-            recipe.get(r);
-            //auto ignore zeta fluid
-            crafter.recipes.add(r);
-        }
-    }
+	public static void recipe(Block block, Cons<Recipe> recipe) {
+		if (block instanceof RecipeGenericCrafter crafter) {
+			Recipe r = new Recipe();
+			recipe.get(r);
+			//auto ignore zeta fluid
+			crafter.recipes.add(r);
+		}
+	}
 
 }

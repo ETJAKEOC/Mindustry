@@ -23,259 +23,258 @@ import static mindustry.Vars.state;
 
 public class RaidMarker extends HudMarker {
 
-    private static int nextMinimapId = Integer.MIN_VALUE;
-    private RaidIndicator minimapMarker;
-    private int minimapId;
-    private Team markerTeam = Team.crux;
-    private String minimapIconName = "";
+	private static final float LINE_BOOST = 1.35f;
+	private static final float BREATHE_SPEED = 4f;
+	private static final float BREATHE_AMP = 0.04f;
+	private static final float END_FADE_TIME = 3f;
+	private static final float RING_SCL = 1.65f;
+	private static final float OUTER_RING_SCL = 1.1f;
+	private static final float OUTER_ARC_SCL = 1.18f;
+	private static final float ARROW_OUTER_PAD = 16f;
+	private static final float ARROW_SPACING = 40f;
+	private static int nextMinimapId = Integer.MIN_VALUE;
+	protected Prov<Float> alertTimeProv;
+	private RaidIndicator minimapMarker;
+	private int minimapId;
+	private Team markerTeam = Team.crux;
+	private String minimapIconName = "";
 
-    public RaidMarker setMarkerTeam(Team team) {
-        markerTeam = team == null ? Team.crux : team;
-        return this;
-    }
+	public static String formatEta(float remainTicks) {
+		float remainSec = remainTicks / Time.toSeconds;
+		int min = (int) (remainSec / 60f);
+		int sec = (int) (remainSec % 60f);
+		return min + ":" + (sec < 10 ? "0" : "") + sec;
+	}
 
-    public RaidMarker setMinimapIcon(String iconName) {
-        minimapIconName = iconName == null ? "" : iconName;
-        return this;
-    }
+	public RaidMarker setMarkerTeam(Team team) {
+		markerTeam = team == null ? Team.crux : team;
+		return this;
+	}
 
-    private static final float LINE_BOOST = 1.35f;
-    private static final float BREATHE_SPEED = 4f;
-    private static final float BREATHE_AMP = 0.04f;
-    private static final float END_FADE_TIME = 3f;
-    private static final float RING_SCL = 1.65f;
-    private static final float OUTER_RING_SCL = 1.1f;
-    private static final float OUTER_ARC_SCL = 1.18f;
-    private static final float ARROW_OUTER_PAD = 16f;
-    private static final float ARROW_SPACING = 40f;
+	public RaidMarker setMinimapIcon(String iconName) {
+		minimapIconName = iconName == null ? "" : iconName;
+		return this;
+	}
 
-    protected Prov<Float> alertTimeProv;
+	public RaidMarker bindAlertTime(Prov<Float> prov) {
+		alertTimeProv = prov;
+		return this;
+	}
 
-    public RaidMarker bindAlertTime(Prov<Float> prov) {
-        alertTimeProv = prov;
-        return this;
-    }
+	protected float remainAlertTicks() {
+		float end = alertTimeProv != null ? alertTimeProv.get() : duration + 1f;
+		return Mathf.maxZero(end - elapsed());
+	}
 
-    protected float remainAlertTicks() {
-        float end = alertTimeProv != null ? alertTimeProv.get() : duration + 1f;
-        return Mathf.maxZero(end - elapsed());
-    }
+	@Override
+	public void drawOnWorld() {
+		drawCrossHair();
+		drawProcessBar();
+		drawArrow();
+	}
 
-    public static String formatEta(float remainTicks) {
-        float remainSec = remainTicks / Time.toSeconds;
-        int min = (int) (remainSec / 60f);
-        int sec = (int) (remainSec % 60f);
-        return min + ":" + (sec < 10 ? "0" : "") + sec;
-    }
+	@Override
+	public void act(float delta) {
+		if (minimapMarker != null) {
+			minimapMarker.setProgress(progress());
+		}
+		super.act(delta);
+	}
 
-    @Override
-    public void drawOnWorld() {
-        drawCrossHair();
-        drawProcessBar();
-        drawArrow();
-    }
+	@Override
+	public void addMarker() {
+		super.addMarker();
+		if (headless || state == null || state.markers == null
+				|| (kind != Kind.RAID && kind != Kind.INTERVENTION && kind != Kind.SPECIAL)) return;
 
-    @Override
-    public void act(float delta) {
-        if (minimapMarker != null) {
-            minimapMarker.setProgress(progress());
-        }
-        super.act(delta);
-    }
+		if (syncSeed != 0) {
+			for (var marker : state.markers.mapMarkers) {
+				if (!(marker instanceof RaidIndicator existing) || existing.eventSeed != syncSeed)
+					continue;
+				minimapMarker = existing;
+				minimapId = existing.markerId;
+				configureMinimapMarker(existing);
+				return;
+			}
+		}
 
-    @Override
-    public void addMarker() {
-        super.addMarker();
-        if (headless || state == null || state.markers == null
-                || (kind != Kind.RAID && kind != Kind.INTERVENTION && kind != Kind.SPECIAL)) return;
+		do {
+			minimapId = nextMinimapId++;
+		} while (state.markers.has(minimapId));
+		minimapMarker = new RaidIndicator()
+				.init(markerTeam.id,
+						kind == Kind.RAID ? 1 : 2, radius, "")
+				.setPosition(markPoint, markPoint)
+				.setProgress(progress())
+				.setIconName(minimapIconName)
+				.setEventSeed(syncSeed)
+				.setMarkerId(minimapId);
+		configureMinimapMarker(minimapMarker);
+		state.markers.add(minimapId, minimapMarker);
+	}
 
-        if (syncSeed != 0) {
-            for (var marker : state.markers.mapMarkers) {
-                if (!(marker instanceof RaidIndicator existing) || existing.eventSeed != syncSeed) continue;
-                minimapMarker = existing;
-                minimapId = existing.markerId;
-                configureMinimapMarker(existing);
-                return;
-            }
-        }
+	private void configureMinimapMarker(RaidIndicator marker) {
+		marker.teamID = markerTeam.id;
+		marker.icon = kind == Kind.RAID ? 1 : 2;
+		marker.radius = radius;
+		marker.setPosition(markPoint, markPoint)
+				.setProgress(progress())
+				.setIconName(minimapIconName)
+				.setEventSeed(syncSeed);
+		marker.world = -1;
+		marker.minimap = 0;
+	}
 
-        do {
-            minimapId = nextMinimapId++;
-        } while (state.markers.has(minimapId));
-        minimapMarker = new RaidIndicator()
-                .init(markerTeam.id,
-                        kind == Kind.RAID ? 1 : 2, radius, "")
-                .setPosition(markPoint, markPoint)
-                .setProgress(progress())
-                .setIconName(minimapIconName)
-                .setEventSeed(syncSeed)
-                .setMarkerId(minimapId);
-        configureMinimapMarker(minimapMarker);
-        state.markers.add(minimapId, minimapMarker);
-    }
+	private void removeMinimapMarker() {
+		if (minimapMarker != null && state != null && state.markers != null) {
+			state.markers.remove(minimapId);
+		}
+		minimapMarker = null;
+	}
 
-    private void configureMinimapMarker(RaidIndicator marker) {
-        marker.teamID = markerTeam.id;
-        marker.icon = kind == Kind.RAID ? 1 : 2;
-        marker.radius = radius;
-        marker.setPosition(markPoint, markPoint)
-                .setProgress(progress())
-                .setIconName(minimapIconName)
-                .setEventSeed(syncSeed);
-        marker.world = -1;
-        marker.minimap = 0;
-    }
+	public void clearMinimapMarker() {
+		removeMinimapMarker();
+	}
 
-    private void removeMinimapMarker() {
-        if (minimapMarker != null && state != null && state.markers != null) {
-            state.markers.remove(minimapId);
-        }
-        minimapMarker = null;
-    }
+	@Override
+	public boolean remove() {
+		removeMinimapMarker();
+		return super.remove();
+	}
 
-    public void clearMinimapMarker() {
-        removeMinimapMarker();
-    }
+	public Prov<String> displayText() {
+		return () -> "ETA: " + formatEta(remainAlertTicks());
+	}
 
-    @Override
-    public boolean remove() {
-        removeMinimapMarker();
-        return super.remove();
-    }
+	public float progress() {
+		return Mathf.clamp(elapsed() / duration);
+	}
 
-    public Prov<String> displayText() {
-        return () -> "ETA: " + formatEta(remainAlertTicks());
-    }
+	public float arrowScale() {
+		return Interp.pow3Out.apply(Mathf.curve(1 - progress(), 0, 0.05f));
+	}
 
-    public float progress() {
-        return Mathf.clamp(elapsed() / duration);
-    }
+	@Override
+	public void drawLineStroke(boolean outer, boolean center) {
+		Lines.stroke((outer ? strokeOuter : strokeInner) * getScale() * LINE_BOOST, outer ? Pal.gray : markColor);
+		Draw.alpha(color.a * Mathf.clamp(displayAlpha, center ? 0.5f : 0.1f, 1f) * endFade());
+	}
 
-    public float arrowScale() {
-        return Interp.pow3Out.apply(Mathf.curve(1 - progress(), 0, 0.05f));
-    }
+	@Override
+	public void drawCrossHair() {
+		float outer = crosshairRadius();
 
-    @Override
-    public void drawLineStroke(boolean outer, boolean center) {
-        Lines.stroke((outer ? strokeOuter : strokeInner) * getScale() * LINE_BOOST, outer ? Pal.gray : markColor);
-        Draw.alpha(color.a * Mathf.clamp(displayAlpha, center ? 0.5f : 0.1f, 1f) * endFade());
-    }
+		drawLineStroke(true, false);
+		for (int i : Mathf.signs) {
+			Lines.line(i > 0 ? 0 : width, originVec.y, originVec.x - outer * i, originVec.y);
+			Lines.line(originVec.x, i > 0 ? 0 : height, originVec.x, originVec.y - outer * i);
+		}
 
-    @Override
-    public void drawCrossHair() {
-        float outer = crosshairRadius();
+		drawLineStroke(false, false);
+		for (int i : Mathf.signs) {
+			Lines.line(i > 0 ? 0 : width, originVec.y, originVec.x - outer * i, originVec.y);
+			Lines.line(originVec.x, i > 0 ? 0 : height, originVec.x, originVec.y - outer * i);
+		}
+	}
 
-        drawLineStroke(true, false);
-        for (int i : Mathf.signs) {
-            Lines.line(i > 0 ? 0 : width, originVec.y, originVec.x - outer * i, originVec.y);
-            Lines.line(originVec.x, i > 0 ? 0 : height, originVec.x, originVec.y - outer * i);
-        }
+	private float ringRadius() {
+		return getCenterSize() * RING_SCL * breatheScl();
+	}
 
-        drawLineStroke(false, false);
-        for (int i : Mathf.signs) {
-            Lines.line(i > 0 ? 0 : width, originVec.y, originVec.x - outer * i, originVec.y);
-            Lines.line(originVec.x, i > 0 ? 0 : height, originVec.x, originVec.y - outer * i);
-        }
-    }
+	private float crosshairRadius() {
+		return ringRadius() * OUTER_RING_SCL;
+	}
 
-    private float ringRadius() {
-        return getCenterSize() * RING_SCL * breatheScl();
-    }
+	private float endFade() {
+		float remain = Mathf.maxZero(duration - elapsed());
+		if (remain >= END_FADE_TIME) return 1f;
+		return Interp.pow2In.apply(Mathf.clamp(remain / END_FADE_TIME));
+	}
 
-    private float crosshairRadius() {
-        return ringRadius() * OUTER_RING_SCL;
-    }
+	private float breatheScl() {
+		float fade = endFade();
+		return 1f + Mathf.absin(Time.time, BREATHE_SPEED, BREATHE_AMP * fade);
+	}
 
-    private float endFade() {
-        float remain = Mathf.maxZero(duration - elapsed());
-        if (remain >= END_FADE_TIME) return 1f;
-        return Interp.pow2In.apply(Mathf.clamp(remain / END_FADE_TIME));
-    }
+	private Color chargeColor() {
+		return Tmp.c1.set(markColor).lerp(Color.white, Mathf.absin(4f, 0.15f * endFade()));
+	}
 
-    private float breatheScl() {
-        float fade = endFade();
-        return 1f + Mathf.absin(Time.time, BREATHE_SPEED, BREATHE_AMP * fade);
-    }
+	private float chargeAlpha() {
+		return color.a * Mathf.clamp(displayAlpha, 0.5f, 1f) * endFade();
+	}
 
-    private Color chargeColor() {
-        return Tmp.c1.set(markColor).lerp(Color.white, Mathf.absin(4f, 0.15f * endFade()));
-    }
+	@Override
+	public void drawProcessBar() {
+		float fin = progress();
+		float fout = 1f - fin;
+		float f = Interp.pow3Out.apply(Mathf.curve(1 - fin, 0, 0.01f));
+		float breath = breatheScl();
+		float ring = getCenterSize() * RING_SCL * breath;
+		Color charge = chargeColor();
+		float alpha = chargeAlpha();
+		float scl = getScale();
+		float iconScl = 96f * scl * breath * (1f + 0.03f * Mathf.absin(8f, 1f) * fout * endFade());
+		float iconScale = iconScl / Math.max(Math.max(icon.width, icon.height), 1f);
+		float iconW = icon.width * iconScale;
+		float iconH = icon.height * iconScale;
 
-    private float chargeAlpha() {
-        return color.a * Mathf.clamp(displayAlpha, 0.5f, 1f) * endFade();
-    }
+		Draw.blend(Blending.additive);
+		Draw.color(markColor, Color.white, 0.075f);
+		Draw.alpha(alpha * 0.65f);
 
-    @Override
-    public void drawProcessBar() {
-        float fin = progress();
-        float fout = 1f - fin;
-        float f = Interp.pow3Out.apply(Mathf.curve(1 - fin, 0, 0.01f));
-        float breath = breatheScl();
-        float ring = getCenterSize() * RING_SCL * breath;
-        Color charge = chargeColor();
-        float alpha = chargeAlpha();
-        float scl = getScale();
-        float iconScl = 96f * scl * breath * (1f + 0.03f * Mathf.absin(8f, 1f) * fout * endFade());
-        float iconScale = iconScl / Math.max(Math.max(icon.width, icon.height), 1f);
-        float iconW = icon.width * iconScale;
-        float iconH = icon.height * iconScale;
+		drawLineStroke(true, true);
+		Lines.circle(originVec.x, originVec.y, ring * OUTER_RING_SCL);
+		drawLineStroke(false, true);
+		Lines.circle(originVec.x, originVec.y, ring);
 
-        Draw.blend(Blending.additive);
-        Draw.color(markColor, Color.white, 0.075f);
-        Draw.alpha(alpha * 0.65f);
+		float pulse = 0.035f * endFade();
+		float arcFin = fin * endFade();
+		Lines.stroke(5f * f * scl, markColor);
+		Lines.circle(originVec.x, originVec.y, getCenterSize() * (1 + Mathf.absin(4f, pulse)));
 
-        drawLineStroke(true, true);
-        Lines.circle(originVec.x, originVec.y, ring * OUTER_RING_SCL);
-        drawLineStroke(false, true);
-        Lines.circle(originVec.x, originVec.y, ring);
+		Draw.color(charge, alpha);
+		DrawFunc.circlePercent(originVec.x, originVec.y, getCenterSize() * 0.875f, arcFin, 0);
+		DrawFunc.circlePercent(originVec.x, originVec.y, ring * OUTER_ARC_SCL, arcFin, Time.time / 2.5f);
+		DrawFunc.circlePercent(originVec.x, originVec.y, ring, arcFin, -Time.time / 2.5f);
 
-        float pulse = 0.035f * endFade();
-        float arcFin = fin * endFade();
-        Lines.stroke(5f * f * scl, markColor);
-        Lines.circle(originVec.x, originVec.y, getCenterSize() * (1 + Mathf.absin(4f, pulse)));
+		Draw.color(Color.black, alpha * 0.75f);
+		Fill.circle(originVec.x, originVec.y, Math.max(iconW, iconH) * 0.42f);
+		Draw.color(charge, alpha);
+		Draw.rect(icon, originVec.x, originVec.y, iconW, iconH);
 
-        Draw.color(charge, alpha);
-        DrawFunc.circlePercent(originVec.x, originVec.y, getCenterSize() * 0.875f, arcFin, 0);
-        DrawFunc.circlePercent(originVec.x, originVec.y, ring * OUTER_ARC_SCL, arcFin, Time.time / 2.5f);
-        DrawFunc.circlePercent(originVec.x, originVec.y, ring, arcFin, -Time.time / 2.5f);
+		Draw.reset();
+		Draw.blend();
+		Lines.stroke(1f);
+	}
 
-        Draw.color(Color.black, alpha * 0.75f);
-        Fill.circle(originVec.x, originVec.y, Math.max(iconW, iconH) * 0.42f);
-        Draw.color(charge, alpha);
-        Draw.rect(icon, originVec.x, originVec.y, iconW, iconH);
+	private float outerRingWorldRadius() {
+		return radius * RING_SCL * breatheScl() * OUTER_RING_SCL;
+	}
 
-        Draw.reset();
-        Draw.blend();
-        Lines.stroke(1f);
-    }
+	private void projectAlongSource(float worldDist, Vec2 out) {
+		Tmp.v2.trns(angle + 180, worldDist).add(markPoint);
+		out.set(Core.camera.project(Tmp.v2.x, Tmp.v2.y));
+	}
 
-    private float outerRingWorldRadius() {
-        return radius * RING_SCL * breatheScl() * OUTER_RING_SCL;
-    }
+	@Override
+	public void drawArrow() {
+		float f = arrowScale();
+		Color charge = chargeColor();
+		float alpha = chargeAlpha();
+		float scl = getScale();
+		float outerWorld = outerRingWorldRadius();
 
-    private void projectAlongSource(float worldDist, Vec2 out) {
-        Tmp.v2.trns(angle + 180, worldDist).add(markPoint);
-        out.set(Core.camera.project(Tmp.v2.x, Tmp.v2.y));
-    }
+		Draw.blend(Blending.additive);
+		Draw.color(charge, alpha);
 
-    @Override
-    public void drawArrow() {
-        float f = arrowScale();
-        Color charge = chargeColor();
-        float alpha = chargeAlpha();
-        float scl = getScale();
-        float outerWorld = outerRingWorldRadius();
+		for (int i = 0; i < 4; i++) {
+			float s = (1 - ((Time.time + 25 * i) % 100) / 100) * f * scl * 1.75f;
+			projectAlongSource(outerWorld + ARROW_OUTER_PAD + ARROW_SPACING * i, Tmp.v1);
+			Draw.rect(NHContent.arrowRegion, Tmp.v1.x, Tmp.v1.y, NHContent.arrowRegion.width * s, NHContent.arrowRegion.height * s, angle - 90);
+		}
 
-        Draw.blend(Blending.additive);
-        Draw.color(charge, alpha);
-
-        for (int i = 0; i < 4; i++) {
-            float s = (1 - ((Time.time + 25 * i) % 100) / 100) * f * scl * 1.75f;
-            projectAlongSource(outerWorld + ARROW_OUTER_PAD + ARROW_SPACING * i, Tmp.v1);
-            Draw.rect(NHContent.arrowRegion, Tmp.v1.x, Tmp.v1.y, NHContent.arrowRegion.width * s, NHContent.arrowRegion.height * s, angle - 90);
-        }
-
-        Draw.blend();
-        Draw.reset();
-    }
+		Draw.blend();
+		Draw.reset();
+	}
 }

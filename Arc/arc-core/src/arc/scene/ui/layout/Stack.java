@@ -37,92 +37,93 @@ import arc.struct.SnapshotSeq;
  * <p>
  * The preferred and min size of the stack is the largest preferred and min size of any children. The max size of the stack is the
  * smallest max size of any children.
+ *
  * @author Nathan Sweet
  */
-public class Stack extends WidgetGroup{
-    private float prefWidth, prefHeight, minWidth, minHeight;
-    private boolean sizeInvalid = true;
+public class Stack extends WidgetGroup {
+	private float prefWidth, prefHeight, minWidth, minHeight;
+	private boolean sizeInvalid = true;
 
-    public Stack(){
-        setTransform(false);
-        setWidth(150);
-        setHeight(150);
-        this.touchable = Touchable.childrenOnly;
-    }
+	public Stack() {
+		setTransform(false);
+		setWidth(150);
+		setHeight(150);
+		this.touchable = Touchable.childrenOnly;
+	}
 
-    public Stack(Element... actors){
-        this();
-        for(Element actor : actors)
-            addChild(actor);
-    }
+	public Stack(Element... actors) {
+		this();
+		for (Element actor : actors)
+			addChild(actor);
+	}
 
-    @Override
-    public void invalidate(){
-        super.invalidate();
-        sizeInvalid = true;
-    }
+	@Override
+	public void invalidate() {
+		super.invalidate();
+		sizeInvalid = true;
+	}
 
-    private void computeSize(){
-        sizeInvalid = false;
-        prefWidth = 0;
-        prefHeight = 0;
-        minWidth = 0;
-        minHeight = 0;
-        SnapshotSeq<Element> children = getChildren();
-        for(int i = 0, n = children.size; i < n; i++){
-            Element child = children.get(i);
-            if(child != null){
-                prefWidth = Math.max(prefWidth, (child).getPrefWidth());
-                prefHeight = Math.max(prefHeight, (child).getPrefHeight());
-                minWidth = Math.max(minWidth, (child).getMinWidth());
-                minHeight = Math.max(minHeight, (child).getMinHeight());
-            }else{
-                prefWidth = Math.max(prefWidth, child.getWidth());
-                prefHeight = Math.max(prefHeight, child.getHeight());
-                minWidth = Math.max(minWidth, child.getWidth());
-                minHeight = Math.max(minHeight, child.getHeight());
-            }
-        }
-    }
+	private void computeSize() {
+		sizeInvalid = false;
+		prefWidth = 0;
+		prefHeight = 0;
+		minWidth = 0;
+		minHeight = 0;
+		SnapshotSeq<Element> children = getChildren();
+		for (int i = 0, n = children.size; i < n; i++) {
+			Element child = children.get(i);
+			if (child != null) {
+				prefWidth = Math.max(prefWidth, (child).getPrefWidth());
+				prefHeight = Math.max(prefHeight, (child).getPrefHeight());
+				minWidth = Math.max(minWidth, (child).getMinWidth());
+				minHeight = Math.max(minHeight, (child).getMinHeight());
+			} else {
+				prefWidth = Math.max(prefWidth, child.getWidth());
+				prefHeight = Math.max(prefHeight, child.getHeight());
+				minWidth = Math.max(minWidth, child.getWidth());
+				minHeight = Math.max(minHeight, child.getHeight());
+			}
+		}
+	}
 
-    public void add(Element actor){
-        addChild(actor);
-    }
+	public void add(Element actor) {
+		addChild(actor);
+	}
 
-    @Override
-    public void layout(){
-        if(sizeInvalid) computeSize();
-        float width = getWidth(), height = getHeight();
-        Seq<Element> children = getChildren();
-        for(int i = 0, n = children.size; i < n; i++){
-            Element child = children.get(i);
-            child.setBounds(0, 0, width, height);
-            if(child != null) child.validate();
-        }
-    }
+	@Override
+	public void layout() {
+		if (sizeInvalid) computeSize();
+		float width = getWidth(), height = getHeight();
+		Seq<Element> children = getChildren();
+		for (int i = 0, n = children.size; i < n; i++) {
+			Element child = children.get(i);
+			child.setBounds(0, 0, width, height);
+			if (child != null) child.validate();
+		}
+	}
 
-    @Override
-    public float getPrefWidth(){
-        if(sizeInvalid) computeSize();
-        return prefWidth;
-    }
+	@Override
+	public float getPrefWidth() {
+		if (sizeInvalid) computeSize();
+		return prefWidth;
+	}
 
-    @Override
-    public float getPrefHeight(){
-        if(sizeInvalid) computeSize();
-        return prefHeight;
-    }
+	@Override
+	public float getPrefHeight() {
+		if (sizeInvalid) computeSize();
+		return prefHeight;
+	}
 
-    @Override
-    public float getMinWidth(){
-        if(sizeInvalid) computeSize();
-        return minWidth;
-    }
+	@Override
+	public float getMinWidth() {
+		if (sizeInvalid) computeSize();
+		return minWidth;
+	}
 
-    @Override
-    public float getMinHeight(){
-        if(sizeInvalid) computeSize();
-        return minHeight;
-    }
+	@Override
+	public float getMinHeight() {
+		if (sizeInvalid) computeSize();
+		return minHeight;
+	}
 
 }

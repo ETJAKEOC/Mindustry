@@ -14,68 +14,69 @@ import mindustry.graphics.Pal;
 import newhorizon.NewHorizon;
 
 public class CustomProgressBarEntry {
-    private Object iconValue;
-    private TextureRegion icon = Icon.chartBar.getRegion();
-    private float current;
-    private float maximum = 1f;
-    private boolean completed;
+	private Object iconValue;
+	private TextureRegion icon = Icon.chartBar.getRegion();
+	private float current;
+	private float maximum = 1f;
+	private boolean completed;
 
-    public void update(Object iconValue, float current, float maximum) {
-        if (this.iconValue != iconValue) {
-            this.iconValue = iconValue;
-            icon = resolveIcon(iconValue);
-        }
+	private static String format(float value) {
+		return Strings.fixed(value, Mathf.equal(value, Mathf.round(value)) ? 0 : 1);
+	}
 
-        this.current = Float.isFinite(current) ? current : 0f;
-        this.maximum = Float.isFinite(maximum) ? maximum : 0f;
-    }
+	private static TextureRegion resolveIcon(Object value) {
+		if (value instanceof UnlockableContent content && content.uiIcon != null)
+			return content.uiIcon;
+		if (value instanceof TextureRegion region) return region;
+		if (value instanceof TextureRegionDrawable drawable) return drawable.getRegion();
 
-    public void complete() {
-        completed = true;
-    }
+		if (value instanceof String string) {
+			String name = string.startsWith("@") ? string.substring(1) : string;
+			TextureRegionDrawable iconDrawable = Icon.icons.get(name);
+			if (iconDrawable != null) return iconDrawable.getRegion();
 
-    public boolean completed() {
-        return completed;
-    }
+			TextureRegion region = Core.atlas.find(name);
+			if (region.found()) return region;
 
-    public Table getDisplayStack() {
-        return new Table(table -> table.add(new Stack(
-                new Table(bar -> bar.add(new DelaySlideBar(
-                        () -> Pal.accent,
-                        () -> "     " + format(current) + " / " + format(maximum),
-                        () -> current,
-                        () -> Math.max(maximum, Mathf.FLOAT_ROUNDING_ERROR)
-                )).padLeft(20f).height(40f).expandX().fillX()),
-                new Table(iconTable -> iconTable.image(() -> icon)
-                        .scaling(Scaling.fit)
-                        .size(32f)
-                        .pad(4f)
-                        .expandX()
-                        .left())
-        )).growX());
-    }
+			region = Core.atlas.find(NewHorizon.name(name));
+			if (region.found()) return region;
+		}
 
-    private static String format(float value) {
-        return Strings.fixed(value, Mathf.equal(value, Mathf.round(value)) ? 0 : 1);
-    }
+		return Icon.chartBar.getRegion();
+	}
 
-    private static TextureRegion resolveIcon(Object value) {
-        if (value instanceof UnlockableContent content && content.uiIcon != null) return content.uiIcon;
-        if (value instanceof TextureRegion region) return region;
-        if (value instanceof TextureRegionDrawable drawable) return drawable.getRegion();
+	public void update(Object iconValue, float current, float maximum) {
+		if (this.iconValue != iconValue) {
+			this.iconValue = iconValue;
+			icon = resolveIcon(iconValue);
+		}
 
-        if (value instanceof String string) {
-            String name = string.startsWith("@") ? string.substring(1) : string;
-            TextureRegionDrawable iconDrawable = Icon.icons.get(name);
-            if (iconDrawable != null) return iconDrawable.getRegion();
+		this.current = Float.isFinite(current) ? current : 0f;
+		this.maximum = Float.isFinite(maximum) ? maximum : 0f;
+	}
 
-            TextureRegion region = Core.atlas.find(name);
-            if (region.found()) return region;
+	public void complete() {
+		completed = true;
+	}
 
-            region = Core.atlas.find(NewHorizon.name(name));
-            if (region.found()) return region;
-        }
+	public boolean completed() {
+		return completed;
+	}
 
-        return Icon.chartBar.getRegion();
-    }
+	public Table getDisplayStack() {
+		return new Table(table -> table.add(new Stack(
+				new Table(bar -> bar.add(new DelaySlideBar(
+						() -> Pal.accent,
+						() -> "     " + format(current) + " / " + format(maximum),
+						() -> current,
+						() -> Math.max(maximum, Mathf.FLOAT_ROUNDING_ERROR)
+				)).padLeft(20f).height(40f).expandX().fillX()),
+				new Table(iconTable -> iconTable.image(() -> icon)
+						.scaling(Scaling.fit)
+						.size(32f)
+						.pad(4f)
+						.expandX()
+						.left())
+		)).growX());
+	}
 }

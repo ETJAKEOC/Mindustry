@@ -1,5 +1,5 @@
 package arc.func;
 
-public interface Intp{
-    int get();
+public interface Intp {
+	int get();
 }

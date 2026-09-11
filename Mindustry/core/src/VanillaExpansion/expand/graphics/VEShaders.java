@@ -16,249 +16,253 @@ import static mindustry.Vars.*;
 // Neutron star rendering library — see ns/ package for full implementation
 
 public class VEShaders {
-    public static HarshShadowShader harshShadow;
-    public static AlphaCut alphaCut;
-    public static ChainShader chainShader;
-    public static PinkShader pinkShader;
-    public static BlackHoleShader blackholeShader;
-    public static ChaosShader chaosShader;
-    public static OrderShader orderShader;
-    public static ThirdImpactShader thirdImpactShader;
-    public static Shaders.SurfaceShader dysharmony, lava, acid;
+	public static HarshShadowShader harshShadow;
+	public static AlphaCut alphaCut;
+	public static ChainShader chainShader;
+	public static PinkShader pinkShader;
+	public static BlackHoleShader blackholeShader;
+	public static ChaosShader chaosShader;
+	public static OrderShader orderShader;
+	public static ThirdImpactShader thirdImpactShader;
+	public static Shaders.SurfaceShader dysharmony, lava, acid;
 
-    static String defaultVert = """
-                    attribute vec4 a_position;
-                    attribute vec4 a_color;
-                    attribute vec2 a_texCoord0;
-                    attribute vec4 a_mix_color;
-                    uniform mat4 u_projTrans;
-                    varying vec4 v_color;
-                    varying vec4 v_mix_color;
-                    varying vec2 v_texCoords;
+	static String defaultVert = """
+			attribute vec4 a_position;
+			attribute vec4 a_color;
+			attribute vec2 a_texCoord0;
+			attribute vec4 a_mix_color;
+			uniform mat4 u_projTrans;
+			varying vec4 v_color;
+			varying vec4 v_mix_color;
+			varying vec2 v_texCoords;
+			
+			void main(){
+			   v_color = a_color;
+			   v_color.a = v_color.a * (255.0/254.0);
+			   v_mix_color = a_mix_color;
+			   v_mix_color.a *= (255.0/254.0);
+			   v_texCoords = a_texCoord0;
+			   gl_Position = u_projTrans * a_position;
+			}""";
 
-                    void main(){
-                       v_color = a_color;
-                       v_color.a = v_color.a * (255.0/254.0);
-                       v_mix_color = a_mix_color;
-                       v_mix_color.a *= (255.0/254.0);
-                       v_texCoords = a_texCoord0;
-                       gl_Position = u_projTrans * a_position;
-                    }""";
+	public static void load() {
+		harshShadow = new HarshShadowShader();
+		alphaCut = new AlphaCut();
+		chainShader = new ChainShader();
+		pinkShader = new PinkShader();
+		blackholeShader = new BlackHoleShader();
+		chaosShader = new ChaosShader();
+		orderShader = new OrderShader();
+		thirdImpactShader = new ThirdImpactShader();
+		dysharmony = new Shaders.SurfaceShader("dysharmony");
+		lava = new Shaders.SurfaceShader("lava");
+		acid = new Shaders.SurfaceShader("acid");
+	}
 
-    public static void load(){
-        harshShadow = new HarshShadowShader();
-        alphaCut = new AlphaCut();
-        chainShader = new ChainShader();
-        pinkShader = new PinkShader();
-        blackholeShader = new BlackHoleShader();
-        chaosShader = new ChaosShader();
-        orderShader = new OrderShader();
-        thirdImpactShader = new ThirdImpactShader();
-        dysharmony = new Shaders.SurfaceShader("dysharmony");
-        lava = new Shaders.SurfaceShader("lava");
-        acid = new Shaders.SurfaceShader("acid");
-    }
+	public static Fi file(String path) {
+		return tree.get("shaders/" + path);
+	}
 
-    public static Fi file(String path){
-        return tree.get("shaders/" + path);
-    }
-    public static Fi intFile(String path){
-        return Core.files.internal("shaders/" + path);
-    }
+	public static Fi intFile(String path) {
+		return Core.files.internal("shaders/" + path);
+	}
 
-    public static class AlphaCut extends Shader{
-        AlphaCut(){
-            super(defaultVert, file("alphacut.frag").readString());
-        }
-    }
+	public static class AlphaCut extends Shader {
+		AlphaCut() {
+			super(defaultVert, file("alphacut.frag").readString());
+		}
+	}
 
-    public static class HarshShadowShader extends Shader{
-        static final int maxLights = 16 * 3;
-        FloatSeq lights = new FloatSeq(maxLights), uniforms = new FloatSeq(maxLights);
+	public static class HarshShadowShader extends Shader {
+		static final int maxLights = 16 * 3;
+		FloatSeq lights = new FloatSeq(maxLights), uniforms = new FloatSeq(maxLights);
 
-        HarshShadowShader(){
-            super(intFile("screenspace.vert"), file("harshshadow.frag"));
-        }
+		HarshShadowShader() {
+			super(intFile("screenspace.vert"), file("harshshadow.frag"));
+		}
 
-        public void clear(){
-            lights.clear();
-        }
-        public void addLight(float x, float y, float intensity){
-            if(lights.size < maxLights){
-                lights.add(x, y, intensity);
-            }
-        }
+		public void clear() {
+			lights.clear();
+		}
 
-        @Override
-        public void apply(){
-            FrameBuffer b = VESFX.inst.buffer;
-            setUniformf("u_texsize", b.getWidth(), b.getHeight());
-            setUniformf("u_invsize", 1f / Core.camera.width, 1f / Core.camera.height);
+		public void addLight(float x, float y, float intensity) {
+			if (lights.size < maxLights) {
+				lights.add(x, y, intensity);
+			}
+		}
 
-            uniforms.clear();
+		@Override
+		public void apply() {
+			FrameBuffer b = VESFX.inst.buffer;
+			setUniformf("u_texsize", b.getWidth(), b.getHeight());
+			setUniformf("u_invsize", 1f / Core.camera.width, 1f / Core.camera.height);
 
-            float[] items = lights.items;
-            for(int i = 0; i < lights.size; i += 3){
-                Vec2 v = Core.camera.project(items[i], items[i + 1]);
-                //uniforms.add(items[i], items[i + 1], items[i + 2]);
-                uniforms.add(v.x, v.y, items[i + 2]);
-            }
+			uniforms.clear();
 
-            setUniformi("u_lights_count", lights.size / 3);
-            setUniform3fv("u_lights", uniforms.items, 0, uniforms.size);
-        }
-    }
+			float[] items = lights.items;
+			for (int i = 0; i < lights.size; i += 3) {
+				Vec2 v = Core.camera.project(items[i], items[i + 1]);
+				//uniforms.add(items[i], items[i + 1], items[i + 2]);
+				uniforms.add(v.x, v.y, items[i + 2]);
+			}
 
-    public static class ChainShader extends Shader{
-        public TextureRegion region;
-        public float length = 0f;
+			setUniformi("u_lights_count", lights.size / 3);
+			setUniform3fv("u_lights", uniforms.items, 0, uniforms.size);
+		}
+	}
 
-        ChainShader(){
-            super(defaultVert, file("chain.frag").readString());
-        }
+	public static class ChainShader extends Shader {
+		public TextureRegion region;
+		public float length = 0f;
 
-        @Override
-        public void apply(){
-            setUniformf("u_uv", region.u, region.v);
-            setUniformf("u_uv2", region.u2, region.v2);
-            setUniformf("u_length", length);
-            setUniformf("u_texlen", region.width * Draw.scl);
-        }
-    }
+		ChainShader() {
+			super(defaultVert, file("chain.frag").readString());
+		}
 
-    public static class PinkShader extends Shader{
-        PinkShader(){
-            super(defaultVert, file("pinkshader.frag").readString());
-        }
+		@Override
+		public void apply() {
+			setUniformf("u_uv", region.u, region.v);
+			setUniformf("u_uv2", region.u2, region.v2);
+			setUniformf("u_length", length);
+			setUniformf("u_texlen", region.width * Draw.scl);
+		}
+	}
 
-        @Override
-        public void apply(){
-            setUniformf("u_main_color", VEPal.empathyAdd);
-        }
-    }
+	public static class PinkShader extends Shader {
+		PinkShader() {
+			super(defaultVert, file("pinkshader.frag").readString());
+		}
 
-    public static class BlackHoleShader extends Shader{
-        static final int maxHoles = 8 * 4;
-        public FloatSeq holes = new FloatSeq(maxHoles), uniforms = new FloatSeq(maxHoles);
+		@Override
+		public void apply() {
+			setUniformf("u_main_color", VEPal.empathyAdd);
+		}
+	}
 
-        BlackHoleShader(){
-            super(intFile("screenspace.vert"), file("blackholeshader.frag"));
-        }
+	public static class BlackHoleShader extends Shader {
+		static final int maxHoles = 8 * 4;
+		public FloatSeq holes = new FloatSeq(maxHoles), uniforms = new FloatSeq(maxHoles);
 
-        public void add(float x, float y, float intensity, float swirl){
-            if(holes.size >= maxHoles || intensity <= 0) return;
-            holes.add(x, y, intensity, swirl);
-        }
+		BlackHoleShader() {
+			super(intFile("screenspace.vert"), file("blackholeshader.frag"));
+		}
 
-        @Override
-        public void apply(){
-            FrameBuffer b = VESFX.inst.buffer;
-            setUniformf("u_texsize", b.getWidth(), b.getHeight());
-            setUniformf("u_invsize", 1f / Core.camera.width, 1f / Core.camera.height);
-            setUniformf("u_camscl", renderer.getDisplayScale());
+		public void add(float x, float y, float intensity, float swirl) {
+			if (holes.size >= maxHoles || intensity <= 0) return;
+			holes.add(x, y, intensity, swirl);
+		}
 
-            uniforms.clear();
+		@Override
+		public void apply() {
+			FrameBuffer b = VESFX.inst.buffer;
+			setUniformf("u_texsize", b.getWidth(), b.getHeight());
+			setUniformf("u_invsize", 1f / Core.camera.width, 1f / Core.camera.height);
+			setUniformf("u_camscl", renderer.getDisplayScale());
 
-            float[] items = holes.items;
-            for(int i = 0; i < holes.size; i += 4){
-                Vec2 v = Core.camera.project(items[i], items[i + 1]);
-                //uniforms.add(items[i], items[i + 1], items[i + 2]);
-                uniforms.add(v.x, v.y, items[i + 2], items[i + 3]);
-            }
+			uniforms.clear();
 
-            setUniformi("u_holes_count", holes.size / 4);
-            setUniform4fv("u_holes", uniforms.items, 0, uniforms.size);
-        }
-    }
+			float[] items = holes.items;
+			for (int i = 0; i < holes.size; i += 4) {
+				Vec2 v = Core.camera.project(items[i], items[i + 1]);
+				//uniforms.add(items[i], items[i + 1], items[i + 2]);
+				uniforms.add(v.x, v.y, items[i + 2], items[i + 3]);
+			}
 
-    public static class ChaosShader extends Shader{
-        Texture texture;
-        public TextureRegion region;
-        public float width, height;
-        public float srcX, srcY;
+			setUniformi("u_holes_count", holes.size / 4);
+			setUniform4fv("u_holes", uniforms.items, 0, uniforms.size);
+		}
+	}
 
-        ChaosShader(){
-            super(defaultVert, file("chaosshader.frag").readString());
-            texture = new Texture(file("flameout-chaos-dimension.png"));
-        }
+	public static class ChaosShader extends Shader {
+		public TextureRegion region;
+		public float width, height;
+		public float srcX, srcY;
+		Texture texture;
 
-        @Override
-        public void apply(){
-            texture.bind(1);
-            region.texture.bind(0);
+		ChaosShader() {
+			super(defaultVert, file("chaosshader.frag").readString());
+			texture = new Texture(file("flameout-chaos-dimension.png"));
+		}
 
-            setUniformi("u_texture2", 1);
-            setUniformf("u_uv", region.u, region.v);
-            setUniformf("u_uv2", region.u2, region.v2);
-            setUniformf("u_regionsize", width, height);
-            setUniformf("u_srcpos", srcX, srcY);
-            setUniformf("u_campos", Core.camera.position);
-            setUniformf("u_viewport", Core.camera.width, Core.camera.height);
-            setUniformf("u_time", Time.time);
-        }
-    }
-    public static class OrderShader extends Shader{
-        Texture texture;
-        public TextureRegion region;
-        public float width, height;
-        public float srcX, srcY;
+		@Override
+		public void apply() {
+			texture.bind(1);
+			region.texture.bind(0);
 
-        OrderShader(){
-            super(defaultVert, file("ordershader.frag").readString());
-            texture = new Texture(file("flameout-order-dimension.png"));
-        }
+			setUniformi("u_texture2", 1);
+			setUniformf("u_uv", region.u, region.v);
+			setUniformf("u_uv2", region.u2, region.v2);
+			setUniformf("u_regionsize", width, height);
+			setUniformf("u_srcpos", srcX, srcY);
+			setUniformf("u_campos", Core.camera.position);
+			setUniformf("u_viewport", Core.camera.width, Core.camera.height);
+			setUniformf("u_time", Time.time);
+		}
+	}
 
-        @Override
-        public void apply(){
-            texture.bind(1);
-            region.texture.bind(0);
+	public static class OrderShader extends Shader {
+		public TextureRegion region;
+		public float width, height;
+		public float srcX, srcY;
+		Texture texture;
 
-            setUniformi("u_texture2", 1);
-            setUniformf("u_uv", region.u, region.v);
-            setUniformf("u_uv2", region.u2, region.v2);
-            setUniformf("u_regionsize", width, height);
-            setUniformf("u_srcpos", srcX, srcY);
-            setUniformf("u_campos", Core.camera.position);
-            setUniformf("u_viewport", Core.camera.width, Core.camera.height);
-            setUniformf("u_time", Time.time);
-        }
-    }
-    public static class ThirdImpactShader extends Shader{
-        Texture texture;
-        float x, y;
-        float radius, scl, alpha;
+		OrderShader() {
+			super(defaultVert, file("ordershader.frag").readString());
+			texture = new Texture(file("flameout-order-dimension.png"));
+		}
 
-        ThirdImpactShader(){
-            super(intFile("screenspace.vert"), file("thirdimpactshader.frag"));
-            texture = new Texture(file("flameout-impact-texture.png"));
-        }
+		@Override
+		public void apply() {
+			texture.bind(1);
+			region.texture.bind(0);
 
-        public void draw(float z, float x, float y, float radius, float scl, float alpha){
-            //Draw.blend();
-            Draw.draw(z, () -> {
-                this.x = x;
-                this.y = y;
-                this.radius = radius;
-                this.scl = scl;
-                this.alpha = alpha;
+			setUniformi("u_texture2", 1);
+			setUniformf("u_uv", region.u, region.v);
+			setUniformf("u_uv2", region.u2, region.v2);
+			setUniformf("u_regionsize", width, height);
+			setUniformf("u_srcpos", srcX, srcY);
+			setUniformf("u_campos", Core.camera.position);
+			setUniformf("u_viewport", Core.camera.width, Core.camera.height);
+			setUniformf("u_time", Time.time);
+		}
+	}
 
-                Draw.flush();
-                Blending.normal.apply();
-                Draw.blit(texture, this);
-            });
-        }
+	public static class ThirdImpactShader extends Shader {
+		Texture texture;
+		float x, y;
+		float radius, scl, alpha;
 
-        @Override
-        public void apply(){
-            Camera cam = Core.camera;
-            
-            setUniformf("u_viewport", Core.camera.width, Core.camera.height);
+		ThirdImpactShader() {
+			super(intFile("screenspace.vert"), file("thirdimpactshader.frag"));
+			texture = new Texture(file("flameout-impact-texture.png"));
+		}
 
-            //Vec2 v = Core.camera.project(x, y);
-            setUniformf("u_position", (x - cam.position.x) + cam.width / 2f, (y - cam.position.y) + cam.height / 2f);
-            setUniformf("u_radius", radius);
-            setUniformf("u_scl", scl);
-            setUniformf("u_alpha", alpha);
-        }
-    }
+		public void draw(float z, float x, float y, float radius, float scl, float alpha) {
+			//Draw.blend();
+			Draw.draw(z, () -> {
+				this.x = x;
+				this.y = y;
+				this.radius = radius;
+				this.scl = scl;
+				this.alpha = alpha;
+
+				Draw.flush();
+				Blending.normal.apply();
+				Draw.blit(texture, this);
+			});
+		}
+
+		@Override
+		public void apply() {
+			Camera cam = Core.camera;
+
+			setUniformf("u_viewport", Core.camera.width, Core.camera.height);
+
+			//Vec2 v = Core.camera.project(x, y);
+			setUniformf("u_position", (x - cam.position.x) + cam.width / 2f, (y - cam.position.y) + cam.height / 2f);
+			setUniformf("u_radius", radius);
+			setUniformf("u_scl", scl);
+			setUniformf("u_alpha", alpha);
+		}
+	}
 }

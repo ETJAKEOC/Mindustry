@@ -8,53 +8,53 @@ import mindustry.logic.LStatement;
 import newhorizon.content.NHLogic;
 
 public class GravityWell extends LStatement {
-    public String x = "0", y = "0", out = "0";
+	public String x = "0", y = "0", out = "0";
 
-    public GravityWell(String[] tokens) {
-        x = tokens[1];
-        y = tokens[2];
-        out = tokens[3];
-    }
+	public GravityWell(String[] tokens) {
+		x = tokens[1];
+		y = tokens[2];
+		out = tokens[3];
+	}
 
-    public GravityWell() {
-    }
+	public GravityWell() {
+	}
 
-    @Override
-    public void build(Table table) {
-        rebuild(table);
-    }
+	@Override
+	public void build(Table table) {
+		rebuild(table);
+	}
 
-    void rebuild(Table table) {
-        table.add(" Pos: ");
-        fields(table, x, str -> x = str);
-        table.add(", ");
-        fields(table, y, str -> y = str);
-        table.add(" Is Gravity: ");
-        fields(table, out, str -> out = str);
-    }
+	void rebuild(Table table) {
+		table.add(" Pos: ");
+		fields(table, x, str -> x = str);
+		table.add(", ");
+		fields(table, y, str -> y = str);
+		table.add(" Is Gravity: ");
+		fields(table, out, str -> out = str);
+	}
 
-    @Override
-    public boolean privileged() {
-        return true;
-    }
+	@Override
+	public boolean privileged() {
+		return true;
+	}
 
-    @Override
-    public LExecutor.LInstruction build(LAssembler builder) {
-        return new GravityWellI(builder.var(x), builder.var(y), builder.var(out));
-    }
+	@Override
+	public LExecutor.LInstruction build(LAssembler builder) {
+		return new GravityWellI(builder.var(x), builder.var(y), builder.var(out));
+	}
 
-    @Override
-    public LCategory category() {
-        return NHLogic.nhwproc;
-    }
+	@Override
+	public LCategory category() {
+		return NHLogic.nhwproc;
+	}
 
-    public void write(StringBuilder builder) {
-        builder.append("gravitywell");
-        builder.append(" ");
-        builder.append(x);
-        builder.append(" ");
-        builder.append(y);
-        builder.append(" ");
-        builder.append(out);
-    }
+	public void write(StringBuilder builder) {
+		builder.append("gravitywell");
+		builder.append(" ");
+		builder.append(x);
+		builder.append(" ");
+		builder.append(y);
+		builder.append(" ");
+		builder.append(out);
+	}
 }

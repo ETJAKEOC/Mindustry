@@ -9,25 +9,25 @@ import static mindustry.Vars.headless;
 import static mindustry.Vars.tilesize;
 
 public class CameraControlAction extends Action {
-    public float worldX, worldY;
+	public float worldX, worldY;
 
-    @Override
-    public String actionName() {
-        return "camera_control";
-    }
+	@Override
+	public String actionName() {
+		return "camera_control";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-        worldX = ParseUtil.getNextFloat(tokens) * tilesize;
-        worldY = ParseUtil.getNextFloat(tokens) * tilesize;
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+		worldX = ParseUtil.getNextFloat(tokens) * tilesize;
+		worldY = ParseUtil.getNextFloat(tokens) * tilesize;
+	}
 
-    @Override
-    public void act() {
-        if (headless) return;
+	@Override
+	public void act() {
+		if (headless) return;
 
-        control.input.logicCutscene = true;
-        control.input.logicCamPan.set(worldX, worldY);
-    }
+		control.input.logicCutscene = true;
+		control.input.logicCamPan.set(worldX, worldY);
+	}
 }

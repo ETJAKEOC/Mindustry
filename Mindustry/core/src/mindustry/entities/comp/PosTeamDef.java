@@ -5,5 +5,5 @@ import mindustry.gen.*;
 
 //dummy target definition
 @EntityDef(value = Teamc.class, genio = false, isFinal = false)
-public class PosTeamDef{
+public class PosTeamDef {
 }

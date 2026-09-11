@@ -654,7 +654,7 @@ public class Generators{
                 }
 
                 //generate tank animation
-                if(sample instanceof Tankc){
+                if(sample instanceof Tankc && get(type.treadRegion).width > 1){
                     Pixmap pix = get(type.treadRegion);
 
                     for(int r = 0; r < type.treadRects.length; r++){
@@ -845,9 +845,9 @@ public class Generators{
                     int offset = image.width / tilesize - 1;
 
                     for(int x = 0; x < image.width; x++){
-                        for(int y = offset; y < image.height; y++){
+                        for(int y = Math.max(0, offset); y < image.height; y++){
                             //draw semi transparent background
-                            if(base.getA(x, y - offset) != 0){
+                            if(x < base.width && y - offset >= 0 && y - offset < base.height && base.getA(x, y - offset) != 0){
                                 image.setRaw(x, y, Pixmap.blend(shadowColor, base.getRaw(x, y)));
                             }
                         }

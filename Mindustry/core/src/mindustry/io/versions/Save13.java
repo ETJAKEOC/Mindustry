@@ -2,10 +2,12 @@ package mindustry.io.versions;
 
 import mindustry.io.SaveVersion;
 
-/** New asset-based data patch system. */
-public class Save13 extends SaveVersion{
+/**
+ * New asset-based data patch system.
+ */
+public class Save13 extends SaveVersion {
 
-    public Save13(){
-        super(13);
-    }
+	public Save13() {
+		super(13);
+	}
 }

@@ -1,12 +1,12 @@
 /*
  * Copyright (C) 2013-2015 RoboVM AB
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,78 +31,79 @@ import org.robovm.rt.bro.ptr.Ptr;
 /*<javadoc>*/
 
 /*</javadoc>*/
-/*<annotations>*/@NativeClass
+/*<annotations>*/
+@NativeClass
 /* </annotations> */
-/* <visibility> */public/* </visibility> */ class /* <name> */ MGLLayer/* </name> */
-	extends /* <extends> */CALayer/* </extends> */
-/* <implements> *//* </implements> */ {
-
-	/* <ptr> */public static class MGLLayerPtr extends Ptr<MGLLayer, MGLLayerPtr> {
-	}
+/* <visibility> */ public/* </visibility> */ class /* <name> */ MGLLayer/* </name> */
+		extends /* <extends> */CALayer/* </extends> */
+		/* <implements> *//* </implements> */ {
 
 	/* </ptr> */
 	/* <bind> */static {
 		ObjCRuntime.bind(MGLLayer.class);
 	}/* </bind> */
+
+	protected MGLLayer() {
+	}
 	/* <constants> *//* </constants> */
 	/* <constructors> */
 
-	protected MGLLayer () {
-	}
-
-	protected MGLLayer (Handle h, long handle) {
+	protected MGLLayer(Handle h, long handle) {
 		super(h, handle);
 	}
 
-	protected MGLLayer (SkipInit skipInit) {
+	protected MGLLayer(SkipInit skipInit) {
 		super(skipInit);
 	}
 
 	/* </constructors> */
 	/* <properties> */
 	@Property(selector = "drawableSize")
-	public native @ByVal CGSize getDrawableSize ();
+	public native @ByVal CGSize getDrawableSize();
 
 	@Property(selector = "defaultOpenGLFrameBufferID")
-	public native int getDefaultOpenGLFrameBufferID ();
+	public native int getDefaultOpenGLFrameBufferID();
 
 	@Property(selector = "drawableColorFormat")
-	public native MGLDrawableColorFormat getDrawableColorFormat ();
+	public native MGLDrawableColorFormat getDrawableColorFormat();
 
 	@Property(selector = "setDrawableColorFormat:")
-	public native void setDrawableColorFormat (MGLDrawableColorFormat v);
+	public native void setDrawableColorFormat(MGLDrawableColorFormat v);
 
 	@Property(selector = "drawableDepthFormat")
-	public native MGLDrawableDepthFormat getDrawableDepthFormat ();
+	public native MGLDrawableDepthFormat getDrawableDepthFormat();
 
 	@Property(selector = "setDrawableDepthFormat:")
-	public native void setDrawableDepthFormat (MGLDrawableDepthFormat v);
+	public native void setDrawableDepthFormat(MGLDrawableDepthFormat v);
 
 	@Property(selector = "drawableStencilFormat")
-	public native MGLDrawableStencilFormat getDrawableStencilFormat ();
+	public native MGLDrawableStencilFormat getDrawableStencilFormat();
 
 	@Property(selector = "setDrawableStencilFormat:")
-	public native void setDrawableStencilFormat (MGLDrawableStencilFormat v);
+	public native void setDrawableStencilFormat(MGLDrawableStencilFormat v);
 
 	@Property(selector = "drawableMultisample")
-	public native MGLDrawableMultisample getDrawableMultisample ();
+	public native MGLDrawableMultisample getDrawableMultisample();
 
 	@Property(selector = "setDrawableMultisample:")
-	public native void setDrawableMultisample (MGLDrawableMultisample v);
+	public native void setDrawableMultisample(MGLDrawableMultisample v);
 
 	@Property(selector = "retainedBacking")
-	public native boolean isRetainedBacking ();
+	public native boolean isRetainedBacking();
 
 	@Property(selector = "setRetainedBacking:")
-	public native void setRetainedBacking (boolean v);
+	public native void setRetainedBacking(boolean v);
 
 	/* </properties> */
 	/* <members> *//* </members> */
 	/* <methods> */
 	@Method(selector = "present")
-	public native boolean present ();
+	public native boolean present();
 
 	@Method(selector = "bindDefaultFrameBuffer")
-	public native void bindDefaultFrameBuffer ();
+	public native void bindDefaultFrameBuffer();
+
+	/* <ptr> */public static class MGLLayerPtr extends Ptr<MGLLayer, MGLLayerPtr> {
+	}
 	/* </methods> */
 }

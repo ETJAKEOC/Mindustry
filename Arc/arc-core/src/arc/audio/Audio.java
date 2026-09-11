@@ -32,179 +32,198 @@ import arc.util.Disposable;
 import arc.util.Log;
 import arc.util.Nullable;
 
-/** High-level wrapper for the Soloud library. */
-public class Audio implements Disposable{
-    public float globalPitch = 1f;
-    /** Falloff when playing audio.*/
-    public float falloff = 16000f;
-    /** Default value for maximum instances of a sound. Must be set before a sound is loaded. */
-    public int defaultSoundMaxConcurrent = 6;
+/**
+ * High-level wrapper for the Soloud library.
+ */
+public class Audio implements Disposable {
+	public float globalPitch = 1f;
+	/**
+	 * Falloff when playing audio.
+	 */
+	public float falloff = 16000f;
+	/**
+	 * Default value for maximum instances of a sound. Must be set before a sound is loaded.
+	 */
+	public int defaultSoundMaxConcurrent = 6;
+	public float sfxVolume = 0f;
+	/**
+	 * Global bus for all sounds.
+	 */
+	public AudioBus soundBus = new AudioBus();
+	/**
+	 * Global bus for all music.
+	 */
+	public AudioBus musicBus = new AudioBus();
+	boolean initialized;
 
-    boolean initialized;
+	/**
+	 * Initializes Soloud audio by default. May throw an exception if initialization fails.
+	 */
+	public Audio() {
+		initialize();
+	}
 
-    public float sfxVolume = 0f;
-    /** Global bus for all sounds. */
-    public AudioBus soundBus = new AudioBus();
-    /** Global bus for all music. */
-    public AudioBus musicBus = new AudioBus();
+	/**
+	 * Conditionally initializes audio. If enabled is false, does nothing.
+	 */
+	public Audio(boolean enabled) {
+		if (enabled) {
+			initialize();
+		}
+	}
 
-    /** Initializes Soloud audio by default. May throw an exception if initialization fails. */
-    public Audio(){
-        initialize();
-    }
+	public boolean initialized() {
+		return initialized;
+	}
 
-    /** Conditionally initializes audio. If enabled is false, does nothing. */
-    public Audio(boolean enabled){
-        if(enabled){
-            initialize();
-        }
-    }
+	/**
+	 * Intializes Soloud audio. If this fails, prints an error and disables audio.
+	 */
+	protected void initialize() {
+		try {
+			init();
+			Log.info("[Audio] Initialized SoLoud @ using @ at @hz / @ samples / @ channels",
+					version(), backendString(), backendSamplerate(), backendBufferSize(), backendChannels());
 
-    public boolean initialized(){
-        return initialized;
-    }
+			initialized = true;
+			soundBus = new AudioBus().init();
+			musicBus = new AudioBus().init();
 
-    /** Intializes Soloud audio. If this fails, prints an error and disables audio. */
-    protected void initialize(){
-        try{
-            init();
-            Log.info("[Audio] Initialized SoLoud @ using @ at @hz / @ samples / @ channels",
-            version(), backendString(), backendSamplerate(), backendBufferSize(), backendChannels());
+			Core.app.addListener(new ApplicationListener() {
 
-            initialized = true;
-            soundBus = new AudioBus().init();
-            musicBus = new AudioBus().init();
+				@Override
+				public void update() {
+					sfxVolume = Core.settings.getInt("sfxvol") / 100f;
+				}
 
-            Core.app.addListener(new ApplicationListener(){
+				@Override
+				public void pause() {
+					if (Core.app.isMobile()) {
+						pauseAll(true);
+					}
+				}
 
-                @Override
-                public void update(){
-                    sfxVolume = Core.settings.getInt("sfxvol") / 100f;
-                }
+				@Override
+				public void resume() {
+					if (Core.app.isMobile()) {
+						pauseAll(false);
+					}
+				}
+			});
+		} catch (Throwable error) {
+			Log.err("Failed to initialize audio, disabling sound", error);
+		}
+	}
 
-                @Override
-                public void pause(){
-                    if(Core.app.isMobile()){
-                        pauseAll(true);
-                    }
-                }
+	/**
+	 * Loads a sound, logging an error and returning a dummy track upon failure.
+	 */
+	public Sound newSound(Fi file) {
+		if (!initialized) return new Sound();
+		try {
+			return new Sound(file);
+		} catch (Throwable t) {
+			Log.err("Error loading sound: " + file, t);
+			return new Sound();
+		}
+	}
 
-                @Override
-                public void resume(){
-                    if(Core.app.isMobile()){
-                        pauseAll(false);
-                    }
-                }
-            });
-        }catch(Throwable error){
-            Log.err("Failed to initialize audio, disabling sound", error);
-        }
-    }
+	/**
+	 * Loads music, logging an error and returning a dummy track upon failure.
+	 */
+	public Music newMusic(Fi file) {
+		if (!initialized) return new Music();
+		try {
+			return new Music(file);
+		} catch (Throwable t) {
+			Log.err("Error loading music: " + file, t);
+			return new Music();
+		}
+	}
 
-    /** Loads a sound, logging an error and returning a dummy track upon failure. */
-    public Sound newSound(Fi file){
-        if(!initialized) return new Sound();
-        try{
-            return new Sound(file);
-        }catch(Throwable t){
-            Log.err("Error loading sound: " + file, t);
-            return new Sound();
-        }
-    }
+	public boolean isPlaying(int soundId) {
+		if (!initialized) return false;
+		return soundId > 0 && idValid(soundId);
+	}
 
-    /** Loads music, logging an error and returning a dummy track upon failure. */
-    public Music newMusic(Fi file){
-        if(!initialized) return new Music();
-        try{
-            return new Music(file);
-        }catch(Throwable t){
-            Log.err("Error loading music: " + file, t);
-            return new Music();
-        }
-    }
+	public void protect(int voice, boolean protect) {
+		if (!initialized) return;
+		idProtected(voice, protect);
+	}
 
-    public boolean isPlaying(int soundId){
-        if(!initialized) return false;
-        return soundId > 0 && idValid(soundId);
-    }
+	public int play(AudioSource source, float volume, float pitch, float pan, boolean loop) {
+		if (!initialized || source.handle == 0) return -1;
+		return sourcePlay(source.handle, volume, pitch, pan, loop);
+	}
 
-    public void protect(int voice, boolean protect){
-        if(!initialized) return;
-        idProtected(voice, protect);
-    }
+	public void stop(AudioSource source) {
+		if (!initialized || source.handle == 0) return;
+		sourceStop(source.handle);
+	}
 
-    public int play(AudioSource source, float volume, float pitch, float pan, boolean loop){
-        if(!initialized || source.handle == 0) return -1;
-        return sourcePlay(source.handle, volume, pitch, pan, loop);
-    }
+	public void stop(int soundId) {
+		if (!initialized) return;
+		idStop(soundId);
+	}
 
-    public void stop(AudioSource source){
-        if(!initialized || source.handle == 0) return;
-        sourceStop(source.handle);
-    }
+	public void setPaused(int soundId, boolean paused) {
+		if (!initialized) return;
+		idPause(soundId, paused);
+	}
 
-    public void stop(int soundId){
-        if(!initialized) return;
-        idStop(soundId);
-    }
+	public void setLooping(int soundId, boolean looping) {
+		if (!initialized) return;
+		idLooping(soundId, looping);
+	}
 
-    public void setPaused(int soundId, boolean paused){
-        if(!initialized) return;
-        idPause(soundId, paused);
-    }
+	public void setPitch(int soundId, float pitch) {
+		if (!initialized) return;
+		if (!Float.isInfinite(pitch) && !Float.isNaN(pitch))
+			idPitch(soundId, Math.max(pitch, 0.001f));
+	}
 
-    public void setLooping(int soundId, boolean looping){
-        if(!initialized) return;
-        idLooping(soundId, looping);
-    }
+	public void setVolume(int soundId, float volume) {
+		if (!initialized) return;
+		if (!Float.isInfinite(volume) && !Float.isNaN(volume)) idVolume(soundId, volume);
+	}
 
-    public void setPitch(int soundId, float pitch){
-        if(!initialized) return;
-        if(!Float.isInfinite(pitch) && !Float.isNaN(pitch)) idPitch(soundId, Math.max(pitch, 0.001f));
-    }
+	public void set(int soundId, float pan, float volume) {
+		if (!initialized) return;
+		if (!Float.isInfinite(volume) && !Float.isNaN(volume)) idVolume(soundId, volume);
+		if (!Float.isInfinite(pan) && !Float.isNaN(pan)) idPan(soundId, pan);
+	}
 
-    public void setVolume(int soundId, float volume){
-        if(!initialized) return;
-        if(!Float.isInfinite(volume) && !Float.isNaN(volume)) idVolume(soundId, volume);
-    }
+	public void fadeFilterParam(int voice, int filter, int attribute, float value, float timeSec) {
+		if (!initialized) return;
+		filterFade(voice, filter, attribute, value, timeSec);
+	}
 
-    public void set(int soundId, float pan, float volume){
-        if(!initialized) return;
-        if(!Float.isInfinite(volume) && !Float.isNaN(volume)) idVolume(soundId, volume);
-        if(!Float.isInfinite(pan) && !Float.isNaN(pan)) idPan(soundId, pan);
-    }
+	public void setFilterParam(int voice, int filter, int attribute, float value) {
+		if (!initialized) return;
+		filterSet(voice, filter, attribute, value);
+	}
 
-    public void fadeFilterParam(int voice, int filter, int attribute, float value, float timeSec){
-        if(!initialized) return;
-        filterFade(voice, filter, attribute, value, timeSec);
-    }
+	public void setFilter(int index, @Nullable AudioFilter filter) {
+		if (!initialized) return;
+		setGlobalFilter(index, filter == null ? 0 : filter.handle);
+	}
 
-    public void setFilterParam(int voice, int filter, int attribute, float value){
-        if(!initialized) return;
-        filterSet(voice, filter, attribute, value);
-    }
+	public int countPlaying(AudioSource source) {
+		if (!initialized || source.handle <= 0) return 0;
+		return sourceCount(source.handle);
+	}
 
-    public void setFilter(int index, @Nullable AudioFilter filter){
-        if(!initialized) return;
-        setGlobalFilter(index, filter == null ? 0 : filter.handle);
-    }
+	public int countTotalPlaying() {
+		if (!initialized) return 0;
+		return activeVoiceCount();
+	}
 
-    public int countPlaying(AudioSource source){
-        if(!initialized || source.handle <= 0) return 0;
-        return sourceCount(source.handle);
-    }
-
-    public int countTotalPlaying(){
-        if(!initialized) return 0;
-        return activeVoiceCount();
-    }
-
-    @Override
-    public void dispose(){
-        if(!initialized) return;
-        stopAll();
-        deinit();
-        initialized = false;
-    }
+	@Override
+	public void dispose() {
+		if (!initialized) return;
+		stopAll();
+		deinit();
+		initialized = false;
+	}
 
 }

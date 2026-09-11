@@ -11,30 +11,30 @@ import mindustry.world.draw.DrawRegion;
 import newhorizon.NewHorizon;
 
 public class DrawBaseRegion extends DrawRegion {
-    public DrawBaseRegion(String suffix) {
-        super(suffix);
-    }
+	public DrawBaseRegion(String suffix) {
+		super(suffix);
+	}
 
-    @Override
-    public void load(Block block) {
-        region = Core.atlas.find(NewHorizon.name("bottom" + suffix));
-    }
+	@Override
+	public void load(Block block) {
+		region = Core.atlas.find(NewHorizon.name("bottom" + suffix));
+	}
 
-    @Override
-    public void drawPlan(Block block, BuildPlan plan, Eachable<BuildPlan> list) {
-        if (!drawPlan) return;
-        Tmp.v1.set(x, y).rotate(plan.rotation * 90).add(plan.drawx(), plan.drawy());
-        Draw.rect(region, Tmp.v1.x, Tmp.v1.y, plan.rotation * 90);
-    }
+	@Override
+	public void drawPlan(Block block, BuildPlan plan, Eachable<BuildPlan> list) {
+		if (!drawPlan) return;
+		Tmp.v1.set(x, y).rotate(plan.rotation * 90).add(plan.drawx(), plan.drawy());
+		Draw.rect(region, Tmp.v1.x, Tmp.v1.y, plan.rotation * 90);
+	}
 
-    @Override
-    public void draw(Building build) {
-        float z = Draw.z();
-        if (layer > 0) Draw.z(layer);
-        if (color != null) Draw.color(color);
-        Tmp.v1.set(x, y).rotate(build.rotdeg()).add(build.x, build.y);
-        Draw.rect(region, Tmp.v1.x, Tmp.v1.y, build.rotdeg());
-        if (color != null) Draw.color();
-        Draw.z(z);
-    }
+	@Override
+	public void draw(Building build) {
+		float z = Draw.z();
+		if (layer > 0) Draw.z(layer);
+		if (color != null) Draw.color(color);
+		Tmp.v1.set(x, y).rotate(build.rotdeg()).add(build.x, build.y);
+		Draw.rect(region, Tmp.v1.x, Tmp.v1.y, build.rotdeg());
+		if (color != null) Draw.color();
+		Draw.z(z);
+	}
 }

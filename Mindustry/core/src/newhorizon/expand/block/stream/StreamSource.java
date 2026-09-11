@@ -19,105 +19,105 @@ import static mindustry.Vars.content;
 import static mindustry.Vars.tilesize;
 
 public class StreamSource extends StreamBlock {
-    public TextureRegion rotRegion;
+	public TextureRegion rotRegion;
 
-    public StreamSource(String name) {
-        super(name);
-        configurable = true;
-        saveConfig = true;
-        noUpdateDisabled = true;
-        displayFlow = false;
-        clearOnDoubleTap = true;
+	public StreamSource(String name) {
+		super(name);
+		configurable = true;
+		saveConfig = true;
+		noUpdateDisabled = true;
+		displayFlow = false;
+		clearOnDoubleTap = true;
 
-        config(Liquid.class, (StreamSourceBuild tile, Liquid l) -> {
-            if (l instanceof NHLiquids.Stream) {
-                tile.source = l;
-            } else {
-                tile.liquids.clear();
-                tile.source = null;
-            }
-        });
-        configClear((StreamSourceBuild tile) -> tile.source = null);
-    }
+		config(Liquid.class, (StreamSourceBuild tile, Liquid l) -> {
+			if (l instanceof NHLiquids.Stream) {
+				tile.source = l;
+			} else {
+				tile.liquids.clear();
+				tile.source = null;
+			}
+		});
+		configClear((StreamSourceBuild tile) -> tile.source = null);
+	}
 
-    @Override
-    public void load() {
-        super.load();
-        rotRegion = Core.atlas.find(name + "-rot");
-    }
+	@Override
+	public void load() {
+		super.load();
+		rotRegion = Core.atlas.find(name + "-rot");
+	}
 
-    @Override
-    public void setStats() {
-        super.setStats();
-        stats.add(NHStats.streamLength, streamLength[0]);
-        stats.add(NHStats.streamCap, streamCap[0] * Time.toSeconds, StatUnit.perSecond);
-    }
+	@Override
+	public void setStats() {
+		super.setStats();
+		stats.add(NHStats.streamLength, streamLength[0]);
+		stats.add(NHStats.streamCap, streamCap[0] * Time.toSeconds, StatUnit.perSecond);
+	}
 
-    @Override
-    public TextureRegion[] icons() {
-        return new TextureRegion[]{region};
-    }
+	@Override
+	public TextureRegion[] icons() {
+		return new TextureRegion[]{region};
+	}
 
-    public class StreamSourceBuild extends StreamBuild {
-        public @Nullable Liquid source;
+	public class StreamSourceBuild extends StreamBuild {
+		public @Nullable Liquid source;
 
-        @Override
-        public void updateTile() {
-            super.updateTile();
+		@Override
+		public void updateTile() {
+			super.updateTile();
 
-            if (source == null) liquids.clear();
-            else liquids.set(source, liquidCapacity);
-        }
+			if (source == null) liquids.clear();
+			else liquids.set(source, liquidCapacity);
+		}
 
-        @Override
-        public void draw() {
-            if (rotation == 0) Draw.rect(region, x, y, rotdeg());
-            else if (rotation == 1) Draw.rect(region, x, y, tilesize, -tilesize, rotdeg());
-            else if (rotation == 2) Draw.rect(rotRegion, x, y, rotdeg());
-            else Draw.rect(rotRegion, x, y, tilesize, -tilesize, rotdeg());
+		@Override
+		public void draw() {
+			if (rotation == 0) Draw.rect(region, x, y, rotdeg());
+			else if (rotation == 1) Draw.rect(region, x, y, tilesize, -tilesize, rotdeg());
+			else if (rotation == 2) Draw.rect(rotRegion, x, y, rotdeg());
+			else Draw.rect(rotRegion, x, y, tilesize, -tilesize, rotdeg());
 
-            for (StreamBeam stream : streams) {
-                if (stream != null && streams.length > 0) stream.draw();
-            }
-        }
+			for (StreamBeam stream : streams) {
+				if (stream != null && streams.length > 0) stream.draw();
+			}
+		}
 
-        public void drawItemSelection(UnlockableContent selection) {
-            if (selection != null) {
-                float dx = x - 4f;
-                float dy = y + 4f;
-                Draw.reset();
-                Draw.rect(selection.fullIcon, dx, dy);
-            }
-        }
+		public void drawItemSelection(UnlockableContent selection) {
+			if (selection != null) {
+				float dx = x - 4f;
+				float dy = y + 4f;
+				Draw.reset();
+				Draw.rect(selection.fullIcon, dx, dy);
+			}
+		}
 
-        @Override
-        public boolean acceptStream(StreamBeam stream) {
-            return false;
-        }
+		@Override
+		public boolean acceptStream(StreamBeam stream) {
+			return false;
+		}
 
-        @Override
-        public void buildConfiguration(Table table) {
-            ItemSelection.buildTable(StreamSource.this, table,
-                    content.liquids().select(liquid -> liquid instanceof NHLiquids.Stream),
-                    () -> source, this::configure, selectionRows, selectionColumns);
-        }
+		@Override
+		public void buildConfiguration(Table table) {
+			ItemSelection.buildTable(StreamSource.this, table,
+					content.liquids().select(liquid -> liquid instanceof NHLiquids.Stream),
+					() -> source, this::configure, selectionRows, selectionColumns);
+		}
 
-        @Override
-        public Liquid config() {
-            return source;
-        }
+		@Override
+		public Liquid config() {
+			return source;
+		}
 
-        @Override
-        public void write(Writes write) {
-            super.write(write);
-            write.s(source == null ? -1 : source.id);
-        }
+		@Override
+		public void write(Writes write) {
+			super.write(write);
+			write.s(source == null ? -1 : source.id);
+		}
 
-        @Override
-        public void read(Reads read, byte revision) {
-            super.read(read, revision);
-            int id = read.s();
-            source = id == -1 ? null : content.liquid(id);
-        }
-    }
+		@Override
+		public void read(Reads read, byte revision) {
+			super.read(read, revision);
+			int id = read.s();
+			source = id == -1 ? null : content.liquid(id);
+		}
+	}
 }

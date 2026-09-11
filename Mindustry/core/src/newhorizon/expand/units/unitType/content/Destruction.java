@@ -27,145 +27,145 @@ import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.stroke;
 
 public class Destruction extends NHUnitType {
-    public BulletType gauss = new RailBulletType() {
-        {
-            length = 360f;
-            damage = 300f;
+	public BulletType gauss = new RailBulletType() {
+		{
+			length = 360f;
+			damage = 300f;
 
-            hitColor = Pal.techBlue;
-            hitEffect = endEffect = Fx.hitBulletColor;
-            pierceDamageFactor = 0.4f;
+			hitColor = Pal.techBlue;
+			hitEffect = endEffect = Fx.hitBulletColor;
+			pierceDamageFactor = 0.4f;
 
-            status = NHStatusEffects.emp1;
-            statusDuration = 180f;
+			status = NHStatusEffects.emp1;
+			statusDuration = 180f;
 
-            smokeEffect = Fx.colorSpark;
+			smokeEffect = Fx.colorSpark;
 
-            endEffect = new Effect(16f, e -> {
-                color(e.color);
-                Drawf.tri(e.x, e.y, e.fout() * 1.5f, 6f, e.rotation);
-            });
+			endEffect = new Effect(16f, e -> {
+				color(e.color);
+				Drawf.tri(e.x, e.y, e.fout() * 1.5f, 6f, e.rotation);
+			});
 
-            shootEffect = new Effect(16f, e -> {
-                color(e.color);
-                float w = 1.2f + 4 * e.fout();
+			shootEffect = new Effect(16f, e -> {
+				color(e.color);
+				float w = 1.2f + 4 * e.fout();
 
-                Drawf.tri(e.x, e.y, w, 30f * e.fout(), e.rotation);
-                color(e.color);
+				Drawf.tri(e.x, e.y, w, 30f * e.fout(), e.rotation);
+				color(e.color);
 
-                for (int i : Mathf.signs) {
-                    Drawf.tri(e.x, e.y, w * 0.9f, 22f * e.fout(), e.rotation + i * 60f);
-                }
+				for (int i : Mathf.signs) {
+					Drawf.tri(e.x, e.y, w * 0.9f, 22f * e.fout(), e.rotation + i * 60f);
+				}
 
-                Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
-            });
+				Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
+			});
 
-            lineEffect = new Effect(25f, 1200, e -> {
-                if (!(e.data instanceof Vec2)) return;
+			lineEffect = new Effect(25f, 1200, e -> {
+				if (!(e.data instanceof Vec2)) return;
 
-                Vec2 v = (Vec2) e.data;
+				Vec2 v = (Vec2) e.data;
 
-                color(e.color);
-                stroke((e.fout() + 0.5f) * 2f);
+				color(e.color);
+				stroke((e.fout() + 0.5f) * 2f);
 
-                Fx.rand.setSeed(e.id);
-                for (int i = 0; i < 40; i++) {
-                    Fx.v.trns(e.rotation, Fx.rand.random(8f, v.dst(e.x, e.y) - 8f));
-                    Lines.lineAngleCenter(e.x + Fx.v.x, e.y + Fx.v.y, e.rotation + e.finpow(), e.foutpowdown() * 20f * Fx.rand.random(0.5f, 1f) + 0.3f);
-                }
+				Fx.rand.setSeed(e.id);
+				for (int i = 0; i < 40; i++) {
+					Fx.v.trns(e.rotation, Fx.rand.random(8f, v.dst(e.x, e.y) - 8f));
+					Lines.lineAngleCenter(e.x + Fx.v.x, e.y + Fx.v.y, e.rotation + e.finpow(), e.foutpowdown() * 20f * Fx.rand.random(0.5f, 1f) + 0.3f);
+				}
 
-                e.scaled(16f, b -> {
-                    stroke(b.fout() * 3f);
-                    color(e.color);
-                    Lines.line(e.x, e.y, v.x, v.y);
-                });
-            });
-        }
+				e.scaled(16f, b -> {
+					stroke(b.fout() * 3f);
+					color(e.color);
+					Lines.line(e.x, e.y, v.x, v.y);
+				});
+			});
+		}
 
-        @Override
-        public void hitTile(Bullet b, Building build, float x, float y, float initialHealth, boolean direct) {
-            super.hitTile(b, build, x, y, initialHealth, direct);
+		@Override
+		public void hitTile(Bullet b, Building build, float x, float y, float initialHealth, boolean direct) {
+			super.hitTile(b, build, x, y, initialHealth, direct);
 
-            build.applySlowdown(0.25f, 180f);
-        }
-    };
+			build.applySlowdown(0.25f, 180f);
+		}
+	};
 
-    public Destruction() {
-        super("destruction");
+	public Destruction() {
+		super("destruction");
 
-        outlineColor = grayOutline;
+		outlineColor = grayOutline;
 
-        aiController = SniperAI::new;
+		aiController = SniperAI::new;
 
-        weapons.addAll(
-                new Weapon(NewHorizon.name("gauss-cannon")) {{
-                    alternate = mirror = top = rotate = true;
-                    rotationLimit = 10f;
+		weapons.addAll(
+				new Weapon(NewHorizon.name("gauss-cannon")) {{
+					alternate = mirror = top = rotate = true;
+					rotationLimit = 10f;
 
-                    x = 15f;
-                    y = 2f;
-                    recoil = 3f;
-                    shootCone = 20f;
-                    reload = 25f;
-                    shoot = new ShootPattern();
-                    inaccuracy = 6f;
-                    shake = 5f;
-                    shootY = 5f;
-                    ejectEffect = Fx.none;
-                    predictTarget = false;
-                    bullet = gauss;
+					x = 15f;
+					y = 2f;
+					recoil = 3f;
+					shootCone = 20f;
+					reload = 25f;
+					shoot = new ShootPattern();
+					inaccuracy = 6f;
+					shake = 5f;
+					shootY = 5f;
+					ejectEffect = Fx.none;
+					predictTarget = false;
+					bullet = gauss;
 
-                    shootSound = NHSounds.shootCoil2;
-                }},
-                new Weapon(NewHorizon.name("gauss-cannon")) {{
-                    alternate = mirror = top = rotate = true;
-                    rotationLimit = 30f;
+					shootSound = NHSounds.shootCoil2;
+				}},
+				new Weapon(NewHorizon.name("gauss-cannon")) {{
+					alternate = mirror = top = rotate = true;
+					rotationLimit = 30f;
 
-                    x = 30f;
-                    y = -5f;
-                    recoil = 3f;
-                    shootCone = 15f;
-                    reload = 25f;
-                    inaccuracy = 6f;
-                    shake = 5f;
-                    shootY = 5f;
-                    ejectEffect = Fx.none;
-                    predictTarget = false;
-                    bullet = gauss;
+					x = 30f;
+					y = -5f;
+					recoil = 3f;
+					shootCone = 15f;
+					reload = 25f;
+					inaccuracy = 6f;
+					shake = 5f;
+					shootY = 5f;
+					ejectEffect = Fx.none;
+					predictTarget = false;
+					bullet = gauss;
 
-                    shootSound = NHSounds.shootCoil1;
-                }}
-        );
+					shootSound = NHSounds.shootCoil1;
+				}}
+		);
 
-        armor = 15.0f;
-        health = 15000.0f;
-        speed = 3f;
-        rotateSpeed = 1.0f;
-        accel = 0.04f;
-        drag = 0.02f;
-        engineOffset = 13f;
-        engineSize = 9f;
-        hitSize = 36.0f;
-        buildBeamOffset = 15f;
-        ammoCapacity = 800;
+		armor = 15.0f;
+		health = 15000.0f;
+		speed = 3f;
+		rotateSpeed = 1.0f;
+		accel = 0.04f;
+		drag = 0.02f;
+		engineOffset = 13f;
+		engineSize = 9f;
+		hitSize = 36.0f;
+		buildBeamOffset = 15f;
+		ammoCapacity = 800;
 
-        flying = true;
-        drawShields = false;
-        lowAltitude = true;
-        singleTarget = false;
+		flying = true;
+		drawShields = false;
+		lowAltitude = true;
+		singleTarget = false;
 
-        abilities.add(
-                new RepairFieldAbility(500f, 160f, 240f) {{
-                    healEffect = NHFx.healEffectSky;
-                    activeEffect = NHFx.activeEffectSky;
-                }},
-                //new RepulsionWaveAbility()
-                new AccumulateAccelerate()
-        );
+		abilities.add(
+				new RepairFieldAbility(500f, 160f, 240f) {{
+					healEffect = NHFx.healEffectSky;
+					activeEffect = NHFx.activeEffectSky;
+				}},
+				//new RepulsionWaveAbility()
+				new AccumulateAccelerate()
+		);
 
-        trailLength = 30;
-        trailScl = 0.8f;
+		trailLength = 30;
+		trailScl = 0.8f;
 
-        targetFlags = new BlockFlag[]{BlockFlag.turret, BlockFlag.factory, BlockFlag.reactor, BlockFlag.generator, BlockFlag.core, null};
-    }
+		targetFlags = new BlockFlag[]{BlockFlag.turret, BlockFlag.factory, BlockFlag.reactor, BlockFlag.generator, BlockFlag.core, null};
+	}
 }

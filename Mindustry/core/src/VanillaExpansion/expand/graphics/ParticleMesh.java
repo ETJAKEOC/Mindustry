@@ -9,100 +9,98 @@ import mindustry.Vars;
 import mindustry.graphics.g3d.*;
 import mindustry.type.Planet;
 
-public abstract class ParticleMesh implements GenericMesh{
-    protected Particle[] particles;
-    protected int particleCount;
-    protected Planet planet;
+public abstract class ParticleMesh implements GenericMesh {
+	public static float activeTiltX, activeTiltZ;
+	protected Particle[] particles;
+	protected int particleCount;
+	protected Planet planet;
+	protected float time;
+	protected float tiltDeg;
+	protected float wobbleAmp = 5f;
+	protected float wobbleSpeed = 45f;
 
-    protected float time;
-    protected float tiltDeg;
-    protected float wobbleAmp = 5f;
-    protected float wobbleSpeed = 45f;
+	public ParticleMesh(Planet planet, int maxParticles) {
+		this.planet = planet;
+		this.particleCount = maxParticles;
+		this.particles = new Particle[maxParticles];
+		for (int i = 0; i < maxParticles; i++) {
+			particles[i] = new Particle();
+		}
+	}
 
-    public static float activeTiltX, activeTiltZ;
+	public abstract void updateParticles(float delta);
 
-    protected static class Particle{
-        public float x, y, z;
-        public float size;
-        public float life, maxLife;
-        public Color color = new Color();
-    }
+	@Override
+	public void render(PlanetParams params, Mat3D projection, Mat3D transform) {
+		updateParticles(Time.delta / 60f);
 
-    public ParticleMesh(Planet planet, int maxParticles){
-        this.planet = planet;
-        this.particleCount = maxParticles;
-        this.particles = new Particle[maxParticles];
-        for(int i = 0; i < maxParticles; i++){
-            particles[i] = new Particle();
-        }
-    }
+		Vec3 cpos = Vars.renderer.planets.cam.position;
+		VertexBatch3D b = Vars.renderer.planets.batch;
+		float tx = transform.val[12], ty = transform.val[13], tz = transform.val[14];
 
-    public abstract void updateParticles(float delta);
+		Gl.enable(Gl.depthTest);
+		Gl.depthFunc(Gl.lequal);
+		Gl.disable(Gl.cullFace);
+		Gl.enable(Gl.blend);
+		Gl.blendFunc(Gl.srcAlpha, Gl.one);
+		Gl.depthMask(false);
 
-    @Override
-    public void render(PlanetParams params, Mat3D projection, Mat3D transform){
-        updateParticles(Time.delta / 60f);
+		b.proj(projection);
 
-        Vec3 cpos = Vars.renderer.planets.cam.position;
-        VertexBatch3D b = Vars.renderer.planets.batch;
-        float tx = transform.val[12], ty = transform.val[13], tz = transform.val[14];
+		float wobble = time * wobbleSpeed;
+		float tiltX = tiltDeg + wobbleAmp * Mathf.cos(wobble);
+		float tiltZ = wobbleAmp * Mathf.sin(wobble);
+		activeTiltX = tiltX;
+		activeTiltZ = tiltZ;
 
-        Gl.enable(Gl.depthTest);
-        Gl.depthFunc(Gl.lequal);
-        Gl.disable(Gl.cullFace);
-        Gl.enable(Gl.blend);
-        Gl.blendFunc(Gl.srcAlpha, Gl.one);
-        Gl.depthMask(false);
+		float cosTx = Mathf.cosDeg(tiltX), sinTx = Mathf.sinDeg(tiltX);
+		float cosTz = Mathf.cosDeg(tiltZ), sinTz = Mathf.sinDeg(tiltZ);
 
-        b.proj(projection);
+		for (int i = 0; i < particleCount; i++) {
+			Particle p = particles[i];
+			float ly = p.y * cosTx - p.z * sinTx;
+			float lz = p.y * sinTx + p.z * cosTx;
+			float lx = p.x * cosTz - ly * sinTz;
+			ly = p.x * sinTz + ly * cosTz;
+			float wx = tx + lx, wy = ty + ly, wz = tz + lz;
 
-        float wobble = time * wobbleSpeed;
-        float tiltX = tiltDeg + wobbleAmp * Mathf.cos(wobble);
-        float tiltZ = wobbleAmp * Mathf.sin(wobble);
-        activeTiltX = tiltX;
-        activeTiltZ = tiltZ;
+			Vec3 dir = new Vec3(cpos.x - wx, cpos.y - wy, cpos.z - wz).nor();
+			Vec3 rv = new Vec3(dir).crs(Vec3.Y).nor();
+			if (rv.isZero()) rv.set(1, 0, 0);
+			Vec3 uv = new Vec3(rv).crs(dir).nor();
 
-        float cosTx = Mathf.cosDeg(tiltX), sinTx = Mathf.sinDeg(tiltX);
-        float cosTz = Mathf.cosDeg(tiltZ), sinTz = Mathf.sinDeg(tiltZ);
+			float hs = p.size * 0.5f;
 
-        for(int i = 0; i < particleCount; i++){
-            Particle p = particles[i];
-            float ly = p.y * cosTx - p.z * sinTx;
-            float lz = p.y * sinTx + p.z * cosTx;
-            float lx = p.x * cosTz - ly * sinTz;
-            ly = p.x * sinTz + ly * cosTz;
-            float wx = tx + lx, wy = ty + ly, wz = tz + lz;
+			b.tri(
+					wx - rv.x * hs - uv.x * hs, wy - rv.y * hs - uv.y * hs, wz - rv.z * hs - uv.z * hs,
+					wx + rv.x * hs - uv.x * hs, wy + rv.y * hs - uv.y * hs, wz + rv.z * hs - uv.z * hs,
+					wx + rv.x * hs + uv.x * hs, wy + rv.y * hs + uv.y * hs, wz + rv.z * hs + uv.z * hs,
+					p.color
+			);
+			b.tri(
+					wx - rv.x * hs - uv.x * hs, wy - rv.y * hs - uv.y * hs, wz - rv.z * hs - uv.z * hs,
+					wx + rv.x * hs + uv.x * hs, wy + rv.y * hs + uv.y * hs, wz + rv.z * hs + uv.z * hs,
+					wx - rv.x * hs + uv.x * hs, wy - rv.y * hs + uv.y * hs, wz - rv.z * hs + uv.z * hs,
+					p.color
+			);
+		}
 
-            Vec3 dir = new Vec3(cpos.x - wx, cpos.y - wy, cpos.z - wz).nor();
-            Vec3 rv = new Vec3(dir).crs(Vec3.Y).nor();
-            if(rv.isZero()) rv.set(1, 0, 0);
-            Vec3 uv = new Vec3(rv).crs(dir).nor();
+		b.flush(Gl.triangles);
 
-            float hs = p.size * 0.5f;
+		Gl.depthMask(true);
+		Gl.blendFunc(Gl.srcAlpha, Gl.oneMinusSrcAlpha);
+		Gl.enable(Gl.cullFace);
+		Gl.enable(Gl.depthTest);
+	}
 
-            b.tri(
-                wx - rv.x*hs - uv.x*hs, wy - rv.y*hs - uv.y*hs, wz - rv.z*hs - uv.z*hs,
-                wx + rv.x*hs - uv.x*hs, wy + rv.y*hs - uv.y*hs, wz + rv.z*hs - uv.z*hs,
-                wx + rv.x*hs + uv.x*hs, wy + rv.y*hs + uv.y*hs, wz + rv.z*hs + uv.z*hs,
-                p.color
-            );
-            b.tri(
-                wx - rv.x*hs - uv.x*hs, wy - rv.y*hs - uv.y*hs, wz - rv.z*hs - uv.z*hs,
-                wx + rv.x*hs + uv.x*hs, wy + rv.y*hs + uv.y*hs, wz + rv.z*hs + uv.z*hs,
-                wx - rv.x*hs + uv.x*hs, wy - rv.y*hs + uv.y*hs, wz - rv.z*hs + uv.z*hs,
-                p.color
-            );
-        }
+	@Override
+	public void dispose() {
+	}
 
-        b.flush(Gl.triangles);
-
-        Gl.depthMask(true);
-        Gl.blendFunc(Gl.srcAlpha, Gl.oneMinusSrcAlpha);
-        Gl.enable(Gl.cullFace);
-        Gl.enable(Gl.depthTest);
-    }
-
-    @Override
-    public void dispose(){
-    }
+	protected static class Particle {
+		public float x, y, z;
+		public float size;
+		public float life, maxLife;
+		public Color color = new Color();
+	}
 }

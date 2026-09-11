@@ -7,33 +7,33 @@ import mindustry.net.Packet;
 import mindustry.ui.dialogs.BaseDialog;
 
 public class LongInfoMessageCallPacket extends Packet {
-    public String message;
-    private byte[] DATA;
+	public String message;
+	private byte[] DATA;
 
-    public LongInfoMessageCallPacket() {
-        this.DATA = NODATA;
-    }
+	public LongInfoMessageCallPacket() {
+		this.DATA = NODATA;
+	}
 
-    public void write(Writes WRITE) {
-        TypeIO.writeString(WRITE, this.message);
-    }
+	public void write(Writes WRITE) {
+		TypeIO.writeString(WRITE, this.message);
+	}
 
-    public void read(Reads READ, int LENGTH) {
-        this.DATA = READ.b(LENGTH);
-    }
+	public void read(Reads READ, int LENGTH) {
+		this.DATA = READ.b(LENGTH);
+	}
 
-    public void handled() {
-        BAIS.setBytes(this.DATA);
-        this.message = TypeIO.readString(READ);
-    }
+	public void handled() {
+		BAIS.setBytes(this.DATA);
+		this.message = TypeIO.readString(READ);
+	}
 
-    public void handleClient() {
-        new BaseDialog("@message") {{
-            addCloseButton();
-            cont.margin(6f);
-            cont.pane(t -> {
-                t.add(message).expandX().fillY();
-            }).grow();
-        }}.show();
-    }
+	public void handleClient() {
+		new BaseDialog("@message") {{
+			addCloseButton();
+			cont.margin(6f);
+			cont.pane(t -> {
+				t.add(message).expandX().fillY();
+			}).grow();
+		}}.show();
+	}
 }

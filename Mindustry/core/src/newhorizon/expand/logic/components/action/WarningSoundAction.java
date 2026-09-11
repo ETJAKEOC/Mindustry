@@ -12,41 +12,41 @@ import static mindustry.Vars.headless;
 import static mindustry.Vars.player;
 
 public class WarningSoundAction extends Action {
-    public int allySound, enemySound;
-    public Team team;
+	public int allySound, enemySound;
+	public Team team;
 
-    @Override
-    public String actionName() {
-        return "warning_sound";
-    }
+	@Override
+	public String actionName() {
+		return "warning_sound";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-        allySound = ParseUtil.getNextInt(tokens);
-        enemySound = ParseUtil.getNextInt(tokens);
-        team = ParseUtil.getNextTeam(tokens);
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+		allySound = ParseUtil.getNextInt(tokens);
+		enemySound = ParseUtil.getNextInt(tokens);
+		team = ParseUtil.getNextTeam(tokens);
+	}
 
 
-    public Sound warningSound(int soundID) {
-        return switch (soundID) {
-            case 0 -> NHSounds.uiAlert1;
-            case 1 -> NHSounds.uiAlarm1;
-            case 2 -> Sounds.uiUnlock;
-            case 3 -> Sounds.wind3;
-            default -> Sounds.none;
-        };
-    }
+	public Sound warningSound(int soundID) {
+		return switch (soundID) {
+			case 0 -> NHSounds.uiAlert1;
+			case 1 -> NHSounds.uiAlarm1;
+			case 2 -> Sounds.uiUnlock;
+			case 3 -> Sounds.wind3;
+			default -> Sounds.none;
+		};
+	}
 
-    @Override
-    public void begin() {
-        if (headless) return;
+	@Override
+	public void begin() {
+		if (headless) return;
 
-        if (player.team() == team) {
-            warningSound(allySound).play();
-        } else {
-            warningSound(enemySound).play();
-        }
-    }
+		if (player.team() == team) {
+			warningSound(allySound).play();
+		} else {
+			warningSound(enemySound).play();
+		}
+	}
 }

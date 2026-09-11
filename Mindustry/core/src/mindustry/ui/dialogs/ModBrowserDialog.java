@@ -46,337 +46,406 @@ import mindustry.mod.ModListing;
 import mindustry.ui.BorderImage;
 import mindustry.ui.Styles;
 
-public class ModBrowserDialog extends BaseDialog{
-    protected Table browserTable;
+public class ModBrowserDialog extends BaseDialog {
+	protected Table browserTable;
 
-    protected String searchtxt = "";
-    protected @Nullable Seq<ModListing> modList;
-    protected Seq<Cons<Seq<ModListing>>> fetchCallbacks = new Seq<>();
-    protected boolean orderDate = true, fetchingMods;
+	protected String searchtxt = "";
+	protected @Nullable Seq<ModListing> modList;
+	protected Seq<Cons<Seq<ModListing>>> fetchCallbacks = new Seq<>();
+	protected boolean orderDate = true, fetchingMods;
 
-    protected ObjectMap<String, TextureRegion> textureCache = new ObjectMap<>();
+	protected ObjectMap<String, TextureRegion> textureCache = new ObjectMap<>();
 
-    public ModBrowserDialog(){
-        super("@mods.browser");
+	public ModBrowserDialog() {
+		super("@mods.browser");
 
-        cont.table(table -> {
-            table.left();
-            table.image(Icon.zoom);
-            table.field(searchtxt, res -> {
-                searchtxt = res;
-                rebuildBrowser();
-            }).growX().get();
-            table.button(Icon.list, Styles.emptyi, 32f, () -> {
-                orderDate = !orderDate;
-                rebuildBrowser();
-            }).update(b -> b.getStyle().imageUp = (orderDate ? Icon.list : Icon.star)).size(40f).get()
-            .addListener(new Tooltip(tip -> tip.label(() -> orderDate ? "@mods.browser.sortdate" : "@mods.browser.sortstars").left()));
-        }).fillX().padBottom(4);
+		cont.table(table -> {
+			table.left();
+			table.image(Icon.zoom);
+			table.field(searchtxt, res -> {
+				searchtxt = res;
+				rebuildBrowser();
+			}).growX().get();
+			table.button(Icon.list, Styles.emptyi, 32f, () -> {
+						orderDate = !orderDate;
+						rebuildBrowser();
+					}).update(b -> b.getStyle().imageUp = (orderDate ? Icon.list : Icon.star)).size(40f).get()
+					.addListener(new Tooltip(tip -> tip.label(() -> orderDate ? "@mods.browser.sortdate" : "@mods.browser.sortstars").left()));
+		}).fillX().padBottom(4);
 
-        cont.row();
-        cont.pane(tablebrow -> {
-            tablebrow.margin(10f).top();
-            browserTable = tablebrow;
-        }).scrollX(false);
-        addCloseButton();
-        makeButtonOverlay();
+		cont.row();
+		cont.pane(tablebrow -> {
+			tablebrow.margin(10f).top();
+			browserTable = tablebrow;
+		}).scrollX(false);
+		addCloseButton();
+		makeButtonOverlay();
 
-        onResize(this::rebuildBrowser);
+		onResize(this::rebuildBrowser);
 
-        shown(this::rebuildBrowser);
-    }
+		shown(this::rebuildBrowser);
+	}
 
-    public void getModList(Cons<Seq<ModListing>> listener){
-        //mods already fetched, use that
-        if(modList != null){
-            listener.get(modList);
-            return;
-        }
+	public void getModList(Cons<Seq<ModListing>> listener) {
+		//mods already fetched, use that
+		if (modList != null) {
+			listener.get(modList);
+			return;
+		}
 
-        //queue more callbacks
-        fetchCallbacks.add(listener);
+		//queue more callbacks
+		fetchCallbacks.add(listener);
 
-        if(fetchingMods) return;
+		if (fetchingMods) return;
 
-        getModListInternal(0);
-    }
+		getModListInternal(0);
+	}
 
-    protected void getModListInternal(int index){
-        if(index >= modJsonURLs.length) return;
+	protected void getModListInternal(int index) {
+		if (index >= modJsonURLs.length) return;
 
-        //use a custom instance, since this is run in a new thread
-        Json json = new Json();
-        fetchingMods = true;
+		//use a custom instance, since this is run in a new thread
+		Json json = new Json();
+		fetchingMods = true;
 
-        Http.get(modJsonURLs[index], response -> {
-            String strResult = response.getResultAsString();
+		Http.get(modJsonURLs[index], response -> {
+			String strResult = response.getResultAsString();
 
-            try{
-                Seq<ModListing> mods = json.fromJson(Seq.class, ModListing.class, strResult);
+			try {
+				Seq<ModListing> mods = json.fromJson(Seq.class, ModListing.class, strResult);
 
-                var d = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-                Func<String, Date> parser = text -> {
-                    try{
-                        return d.parse(text);
-                    }catch(Exception e){
-                        return new Date();
-                    }
-                };
+				var d = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+				Func<String, Date> parser = text -> {
+					try {
+						return d.parse(text);
+					} catch (Exception e) {
+						return new Date();
+					}
+				};
 
-                mods.sortComparing(m -> parser.get(m.lastUpdated)).reverse();
-                Core.app.post(() -> {
-                    fetchingMods = false;
-                    modList = mods;
+				mods.sortComparing(m -> parser.get(m.lastUpdated)).reverse();
+				Core.app.post(() -> {
+					fetchingMods = false;
+					modList = mods;
 
-                    fetchCallbacks.each(c -> c.get(mods));
-                    fetchCallbacks.clear();
-                });
-            }catch(Exception e){ //failed to parse, should not happen
-                Log.err(e);
-                Core.app.post(() -> {
-                    fetchCallbacks.clear();
-                    fetchingMods = false;
-                    ui.showException(e);
-                });
-            }
-        }, error -> {
-            if(index < modJsonURLs.length - 1){
-                getModListInternal(index + 1);
-            }else{
-                Core.app.post(() -> { //failed to fetch (different kind of error)
-                    fetchCallbacks.clear();
-                    fetchingMods = false;
-                    ui.mods.showModError(error);
-                    hide();
-                });
-            }
-        });
-    }
+					fetchCallbacks.each(c -> c.get(mods));
+					fetchCallbacks.clear();
+				});
+			} catch (Exception e) { //failed to parse, should not happen
+				Log.err(e);
+				Core.app.post(() -> {
+					fetchCallbacks.clear();
+					fetchingMods = false;
+					ui.showException(e);
+				});
+			}
+		}, error -> {
+			if (index < modJsonURLs.length - 1) {
+				getModListInternal(index + 1);
+			} else {
+				Core.app.post(() -> { //failed to fetch (different kind of error)
+					fetchCallbacks.clear();
+					fetchingMods = false;
+					ui.mods.showModError(error);
+					hide();
+				});
+			}
+		});
+	}
 
 
-    public void downloadDependencies(Seq<String> toImport, Cons<Seq<String>> imported){
-        Seq<String> remaining = toImport.copy();
-        getModList(listings -> {
-            listings.each(l -> remaining.contains(l.internalName), l -> {
-                remaining.remove(l.internalName);
-                ui.mods.githubImportMod(l.repo, l.hasJava, true);
-            });
-            toImport.removeAll(remaining);
-            imported.get(toImport);
-            displayDependencyImportStatus(remaining, toImport);
-        });
-    }
+	public void downloadDependencies(Seq<String> toImport, Cons<Seq<String>> imported) {
+		Seq<String> remaining = toImport.copy();
+		getModList(listings -> {
+			listings.each(l -> remaining.contains(l.internalName), l -> {
+				remaining.remove(l.internalName);
+				ui.mods.githubImportMod(l.repo, l.hasJava, true);
+			});
+			toImport.removeAll(remaining);
+			imported.get(toImport);
+			displayDependencyImportStatus(remaining, toImport);
+		});
+	}
 
-    public void displayDependencyImportStatus(Seq<String> failed, Seq<String> success){
-        new Dialog(""){{
-            setFillParent(true);
-            cont.margin(15);
+	public void displayDependencyImportStatus(Seq<String> failed, Seq<String> success) {
+		new Dialog("") {{
+			setFillParent(true);
+			cont.margin(15);
 
-            cont.add("@mod.dependencies.status").color(Pal.accent).center();
-            cont.row();
-            cont.image().width(300f).pad(2).height(4f).color(Pal.accent);
-            cont.row();
+			cont.add("@mod.dependencies.status").color(Pal.accent).center();
+			cont.row();
+			cont.image().width(300f).pad(2).height(4f).color(Pal.accent);
+			cont.row();
 
-            cont.pane(p -> {
-                if(success.any()){
-                    p.add("@mod.dependencies.success").color(Pal.accent).wrap().fillX().left().labelAlign(Align.left);
-                    p.row();
-                    p.table(t -> {
-                        success.each(d -> {
-                            t.add("[accent] > []" + d).wrap().growX().left().labelAlign(Align.left);
-                            t.row();
-                        });
-                    }).growX().padBottom(8f).padLeft(8f);
-                    p.row();
-                }
+			cont.pane(p -> {
+				if (success.any()) {
+					p.add("@mod.dependencies.success").color(Pal.accent).wrap().fillX().left().labelAlign(Align.left);
+					p.row();
+					p.table(t -> {
+						success.each(d -> {
+							t.add("[accent] > []" + d).wrap().growX().left().labelAlign(Align.left);
+							t.row();
+						});
+					}).growX().padBottom(8f).padLeft(8f);
+					p.row();
+				}
 
-                if(failed.any()){
-                    p.add("@mod.dependencies.failure").color(Color.scarlet).wrap().fillX().left().labelAlign(Align.left);
-                    p.row();
-                    p.table(t -> {
-                        failed.each(d -> {
-                            t.add("[scarlet] > []" + d).wrap().growX().left().labelAlign(Align.left);
-                            t.row();
-                        });
-                    }).growX().padBottom(8f).padLeft(8f);
-                }
-            }).fillX();
-            cont.row();
+				if (failed.any()) {
+					p.add("@mod.dependencies.failure").color(Color.scarlet).wrap().fillX().left().labelAlign(Align.left);
+					p.row();
+					p.table(t -> {
+						failed.each(d -> {
+							t.add("[scarlet] > []" + d).wrap().growX().left().labelAlign(Align.left);
+							t.row();
+						});
+					}).growX().padBottom(8f).padLeft(8f);
+				}
+			}).fillX();
+			cont.row();
 
-            if(success.any()){
-                cont.image().width(300f).pad(2).height(4f).color(Pal.accent);
-                cont.row();
-                cont.add("@mods.reloadexit").center();
-                cont.row();
+			if (success.any()) {
+				cont.image().width(300f).pad(2).height(4f).color(Pal.accent);
+				cont.row();
+				cont.add("@mods.reloadexit").center();
+				cont.row();
 
-                hidden(() -> {
-                    Log.info("Exiting to reload mods after dependency auto-import.");
-                    Core.app.exit();
-                });
-            }
+				hidden(() -> {
+					Log.info("Exiting to reload mods after dependency auto-import.");
+					Core.app.exit();
+				});
+			}
 
-            cont.button("@ok", this::hide).size(300, 50);
-            closeOnBack();
-        }}.show();
-    }
+			cont.button("@ok", this::hide).size(300, 50);
+			closeOnBack();
+		}}.show();
+	}
 
-    protected void rebuildBrowser(){
-        ObjectSet<String> installed = mods.list().map(m -> m.getRepo()).asSet();
+	protected void rebuildBrowser() {
+		ObjectSet<String> installed = mods.list().map(m -> m.getRepo()).asSet();
 
-        browserTable.clear();
-        browserTable.add("@loading");
+		browserTable.clear();
+		browserTable.add("@loading");
 
-        int cols = (int)Math.max(Core.graphics.getWidth() / Scl.scl(480), 1);
+		int cols = (int) Math.max(Core.graphics.getWidth() / Scl.scl(480), 1);
 
-        getModList(rlistings -> {
-            browserTable.clear();
-            int i = 0;
+		getModList(rlistings -> {
+			browserTable.clear();
 
-            var listings = rlistings;
-            if(!orderDate){
-                listings = rlistings.copy();
-                listings.sortComparing(m1 -> -m1.stars);
-            }
+			var matchedPreinstalled = new Seq<mindustry.mod.Mods.PreinstalledMod>();
+			for (int j = 0; j < mods.preinstalledMods.size; j++) {
+				var pre = mods.preinstalledMods.get(j);
+				if (searchtxt.isEmpty() || pre.matches(searchtxt)) {
+					matchedPreinstalled.add(pre);
+				}
+			}
 
-            for(ModListing mod : listings){
-                if(((mod.hasJava || mod.hasScripts && !mod.iosCompatible) && Vars.ios) ||
-                (!Strings.matches(searchtxt, mod.name) && !Strings.matches(searchtxt, mod.repo))
-                ) continue;
+			if (matchedPreinstalled.size > 0) {
+				browserTable.add("@mod.preinstalled.title").color(Pal.accent).left().padLeft(8f).colspan(cols).row();
+				browserTable.image().color(Pal.accent).growX().height(3f).pad(4f).colspan(cols).row();
 
-                float s = 64f;
+				int preCols = 0;
+				for (int j = 0; j < matchedPreinstalled.size; j++) {
+					var pre = matchedPreinstalled.get(j);
+					float s = 64f;
 
-                browserTable.button(con -> {
-                    con.margin(0f);
-                    con.left();
+					browserTable.button(con -> {
+						con.margin(0f);
+						con.left();
 
-                    String repo = mod.repo;
-                    con.add(new BorderImage(){
-                        TextureRegion last;
+						con.add(new BorderImage() {
+							{
+								border(Pal.accent);
+								setDrawable(Tex.nomap);
+								pad = Scl.scl(4f);
+							}
+						}).size(s).pad(4f * 2f);
 
-                        {
-                            border(installed.contains(repo) ? Pal.accent : Color.lightGray);
-                            setDrawable(Tex.nomap);
-                            pad = Scl.scl(4f);
-                        }
+						String infoText = "[accent]" + pre.displayName + "\n[accent]" + Core.bundle.get("mod.preinstalled") + "\n[lightgray]" + pre.description;
+						con.add(infoText).width(358f).wrap().grow().pad(4f, 2f, 4f, 6f).top().left().labelAlign(Align.topLeft);
 
-                        @Override
-                        public void draw(){
-                            super.draw();
+					}, Styles.grayt, () -> {
+						var sel = new BaseDialog(pre.displayName);
+						sel.cont.pane(p -> p.add(pre.description + "\n\n[accent]" + Core.bundle.get("editor.author") + "[lightgray] " + pre.author + "\n\n[accent]" + Core.bundle.get("mod.preinstalled.details"))
+								.width(mobile ? 400f : 500f).wrap().pad(4f).labelAlign(Align.center, Align.left)).grow();
+						sel.buttons.defaults().size(220f, 54f).pad(2f);
+						sel.buttons.button("@back", Icon.left, () -> {
+							sel.clear();
+							sel.hide();
+						});
+						sel.buttons.button("@mod.preinstalled.cannotinstall", Icon.lock, () -> {
+							ui.showInfo("@mod.preinstalled.details");
+						}).disabled(true);
+						sel.keyDown(KeyCode.escape, sel::hide);
+						sel.keyDown(KeyCode.back, sel::hide);
+						sel.show();
+					}).width(438f).pad(4).growX().left().height(s + 8 * 2f).fillY();
 
-                            //textures are only requested when the rendering happens; this assists with culling
-                            if(!textureCache.containsKey(repo)){
-                                textureCache.put(repo, last = Core.atlas.find("nomap"));
+					if (++preCols % cols == 0) browserTable.row();
+				}
 
-                                if(mod.hasIcon){
-                                    Fi cacheFolder = Vars.mobile ? Core.files.cache("modIconCache"): dataDirectory.child("modIconCache");
-                                    cacheFolder.mkdirs();
-                                    Fi cacheFile = cacheFolder.child(Strings.sanitizeFilename(mod.repo + mod.lastUpdated) + ".png");
+				if (preCols % cols != 0) browserTable.row();
+				browserTable.image().color(Pal.gray).growX().height(2f).pad(8f).colspan(cols).row();
+			}
 
-                                    if(!cacheFile.exists()){ //fetch from Github
-                                        ConsT<HttpResponse, Exception> fetch = res -> {
-                                            byte[] bytes = res.getResult();
-                                            Pixmap pix = new Pixmap(bytes);
-                                            cacheFile.writeBytes(bytes);
-                                            Core.app.post(() -> {
-                                                try{
-                                                    var tex = new Texture(pix);
-                                                    tex.setFilter(TextureFilter.linear);
-                                                    textureCache.put(repo, new TextureRegion(tex));
-                                                    pix.dispose();
-                                                }catch(Exception e){
-                                                    Log.err(e);
-                                                }
-                                            });
-                                        };
+			int i = 0;
 
-                                        String repoName = repo.replace("/", "_");
+			var listings = rlistings;
+			if (!orderDate) {
+				listings = rlistings.copy();
+				listings.sortComparing(m1 -> -m1.stars);
+			}
 
-                                        Http.get("https://raw.githubusercontent.com/Anuken/MindustryMods/master/icons/" + repoName)
-                                        .error(err -> {
-                                            //github ratelimited the client, try jsdelivr instead
-                                            if(!(err instanceof HttpStatusException s && s.status == HttpStatus.NOT_FOUND)){
-                                                Http.get("https://cdn.jsdelivr.net/gh/anuken/mindustrymods/icons/" + repoName)
-                                                .error(err2 -> {}) //nothing I can do about it
-                                                .timeout(15_000)
-                                                .submit(fetch);
-                                            }
-                                        })
-                                        .timeout(15_000)
-                                        .submit(fetch);
-                                    }else{ //load from cache
-                                        mainExecutor.submit(() -> {
-                                            try{
-                                                Pixmap pix = new Pixmap(cacheFile);
-                                                Core.app.post(() -> {
-                                                    try{
-                                                        var tex = new Texture(pix);
-                                                        tex.setFilter(TextureFilter.linear);
-                                                        textureCache.put(repo, new TextureRegion(tex));
-                                                        pix.dispose();
-                                                    }catch(Exception e){
-                                                        Log.err(e);
-                                                    }
-                                                });
-                                            }catch(Exception e){
-                                                Log.err(e);
-                                                cacheFile.delete();
-                                            }
-                                        });
-                                    }
-                                }
-                            }
+			for (ModListing mod : listings) {
+				if (((mod.hasJava || mod.hasScripts && !mod.iosCompatible) && Vars.ios) ||
+						(!Strings.matches(searchtxt, mod.name) && !Strings.matches(searchtxt, mod.repo))
+				) continue;
 
-                            var next = textureCache.get(repo);
-                            if(last != next){
-                                last = next;
-                                setDrawable(next);
-                            }
-                        }
-                    }).size(s).pad(4f * 2f);
+				var preMatch = mods.getPreinstalledMod(mod.repo);
+				if (preMatch == null) preMatch = mods.getPreinstalledMod(mod.name);
+				if (preMatch == null) preMatch = mods.getPreinstalledMod(mod.internalName);
+				boolean isPreinstalledMod = preMatch != null;
 
-                    String infoText =
-                    "[accent]" + mod.name.replace("\n", "") +
+				float s = 64f;
 
-                    (installed.contains(mod.repo) ? "\n[lightgray]" + Core.bundle.get("mod.installed") : "") +
-                    "\n[lightgray]\uE809 " + mod.stars +
+				browserTable.button(con -> {
+					con.margin(0f);
+					con.left();
 
-                    (!Version.isAtLeast(mod.minGameVersion) ? "\n" + Core.bundle.format("mod.requiresversion", mod.minGameVersion) :
-                    ((mod.hasJava && Strings.parseDouble(mod.minGameVersion, 0) < minJavaModGameVersion && !mod.legacyCompatible) ? "\n" + Core.bundle.get("mod.incompatiblemod") : ""));
+					String repo = mod.repo;
+					con.add(new BorderImage() {
+						TextureRegion last;
 
-                    con.add(infoText).width(358f).wrap().grow().pad(4f, 2f, 4f, 6f).top().left().labelAlign(Align.topLeft);
+						{
+							border(installed.contains(repo) || isPreinstalledMod ? Pal.accent : Color.lightGray);
+							setDrawable(Tex.nomap);
+							pad = Scl.scl(4f);
+						}
 
-                }, Styles.grayt, () -> {
-                    var sel = new BaseDialog(mod.name);
-                    sel.cont.pane(p -> p.add(mod.description + "\n\n[accent]" + Core.bundle.get("editor.author") + "[lightgray] " + mod.author)
-                    .width(mobile ? 400f : 500f).wrap().pad(4f).labelAlign(Align.center, Align.left)).grow();
-                    sel.buttons.defaults().size(150f, 54f).pad(2f);
-                    sel.buttons.button("@back", Icon.left, () -> {
-                        sel.clear();
-                        sel.hide();
-                    });
+						@Override
+						public void draw() {
+							super.draw();
 
-                    var found = mods.list().find(l -> mod.repo != null && mod.repo.equals(l.getRepo()));
-                    sel.buttons.button(found == null ? "@mods.browser.add" : "@mods.browser.reinstall", Icon.download, () -> {
-                        sel.hide();
-                        ui.mods.githubImportMod(mod.repo, mod.hasJava, null, true);
-                    });
+							//textures are only requested when the rendering happens; this assists with culling
+							if (!textureCache.containsKey(repo)) {
+								textureCache.put(repo, last = Core.atlas.find("nomap"));
 
-                    if(Core.graphics.isPortrait()){
-                        sel.buttons.row();
-                    }
+								if (mod.hasIcon) {
+									Fi cacheFolder = Vars.mobile ? Core.files.cache("modIconCache") : dataDirectory.child("modIconCache");
+									cacheFolder.mkdirs();
+									Fi cacheFile = cacheFolder.child(Strings.sanitizeFilename(mod.repo + mod.lastUpdated) + ".png");
 
-                    sel.buttons.button("@mods.github.open", Icon.link, () -> {
-                        Core.app.openURI("https://github.com/" + mod.repo);
-                    });
+									if (!cacheFile.exists()) { //fetch from Github
+										ConsT<HttpResponse, Exception> fetch = res -> {
+											byte[] bytes = res.getResult();
+											Pixmap pix = new Pixmap(bytes);
+											cacheFile.writeBytes(bytes);
+											Core.app.post(() -> {
+												try {
+													var tex = new Texture(pix);
+													tex.setFilter(TextureFilter.linear);
+													textureCache.put(repo, new TextureRegion(tex));
+													pix.dispose();
+												} catch (Exception e) {
+													Log.err(e);
+												}
+											});
+										};
 
-                    sel.buttons.button("@mods.browser.view-releases", Icon.zoom, () -> ui.mods.viewReleases(mod.repo, mod.hasJava, false));
-                    sel.keyDown(KeyCode.escape, sel::hide);
-                    sel.keyDown(KeyCode.back, sel::hide);
-                    sel.show();
-                }).width(438f).pad(4).growX().left().height(s + 8*2f).fillY();
+										String repoName = repo.replace("/", "_");
 
-                if(++i % cols == 0) browserTable.row();
-            }
-        });
-    }
+										Http.get("https://raw.githubusercontent.com/Anuken/MindustryMods/master/icons/" + repoName)
+												.error(err -> {
+													//github ratelimited the client, try jsdelivr instead
+													if (!(err instanceof HttpStatusException s && s.status == HttpStatus.NOT_FOUND)) {
+														Http.get("https://cdn.jsdelivr.net/gh/anuken/mindustrymods/icons/" + repoName)
+																.error(err2 -> {
+																}) //nothing I can do about it
+																.timeout(15_000)
+																.submit(fetch);
+													}
+												})
+												.timeout(15_000)
+												.submit(fetch);
+									} else { //load from cache
+										mainExecutor.submit(() -> {
+											try {
+												Pixmap pix = new Pixmap(cacheFile);
+												Core.app.post(() -> {
+													try {
+														var tex = new Texture(pix);
+														tex.setFilter(TextureFilter.linear);
+														textureCache.put(repo, new TextureRegion(tex));
+														pix.dispose();
+													} catch (Exception e) {
+														Log.err(e);
+													}
+												});
+											} catch (Exception e) {
+												Log.err(e);
+												cacheFile.delete();
+											}
+										});
+									}
+								}
+							}
+
+							var next = textureCache.get(repo);
+							if (last != next) {
+								last = next;
+								setDrawable(next);
+							}
+						}
+					}).size(s).pad(4f * 2f);
+
+					String infoText =
+							"[accent]" + mod.name.replace("\n", "") +
+
+									(isPreinstalledMod ? "\n[accent]" + Core.bundle.get("mod.preinstalled") : (installed.contains(mod.repo) ? "\n[lightgray]" + Core.bundle.get("mod.installed") : "")) +
+									"\n[lightgray]\uE809 " + mod.stars +
+
+									(!Version.isAtLeast(mod.minGameVersion) ? "\n" + Core.bundle.format("mod.requiresversion", mod.minGameVersion) :
+											((mod.hasJava && Strings.parseDouble(mod.minGameVersion, 0) < minJavaModGameVersion && !mod.legacyCompatible) ? "\n" + Core.bundle.get("mod.incompatiblemod") : ""));
+
+					con.add(infoText).width(358f).wrap().grow().pad(4f, 2f, 4f, 6f).top().left().labelAlign(Align.topLeft);
+
+				}, Styles.grayt, () -> {
+					var sel = new BaseDialog(mod.name);
+					sel.cont.pane(p -> p.add(mod.description + "\n\n[accent]" + Core.bundle.get("editor.author") + "[lightgray] " + mod.author)
+							.width(mobile ? 400f : 500f).wrap().pad(4f).labelAlign(Align.center, Align.left)).grow();
+					sel.buttons.defaults().size(150f, 54f).pad(2f);
+					sel.buttons.button("@back", Icon.left, () -> {
+						sel.clear();
+						sel.hide();
+					});
+
+					if (isPreinstalledMod) {
+						sel.buttons.button("@mod.preinstalled.cannotinstall", Icon.lock, () -> {
+							ui.showInfo("@mod.preinstalled.details");
+						}).disabled(true);
+					} else {
+						var found = mods.list().find(l -> mod.repo != null && mod.repo.equals(l.getRepo()));
+						sel.buttons.button(found == null ? "@mods.browser.add" : "@mods.browser.reinstall", Icon.download, () -> {
+							sel.hide();
+							ui.mods.githubImportMod(mod.repo, mod.hasJava, null, true);
+						});
+					}
+
+					if (Core.graphics.isPortrait()) {
+						sel.buttons.row();
+					}
+
+					sel.buttons.button("@mods.github.open", Icon.link, () -> {
+						Core.app.openURI("https://github.com/" + mod.repo);
+					});
+
+					sel.buttons.button("@mods.browser.view-releases", Icon.zoom, () -> ui.mods.viewReleases(mod.repo, mod.hasJava, false));
+					sel.keyDown(KeyCode.escape, sel::hide);
+					sel.keyDown(KeyCode.back, sel::hide);
+					sel.show();
+				}).width(438f).pad(4).growX().left().height(s + 8 * 2f).fillY();
+
+				if (++i % cols == 0) browserTable.row();
+			}
+		});
+	}
 }

@@ -3,7 +3,7 @@ package arc.filedialogs;
 import arc.util.Nullable;
 import arc.util.SharedLibraryLoader;
 
-public class FileDialogs{
+public class FileDialogs {
     /*JNI
 
 	#include <tinyfiledialogs.h>
@@ -14,13 +14,13 @@ public class FileDialogs{
 
 	 */
 
-    public static void loadNatives() throws UnsatisfiedLinkError{
-        new SharedLibraryLoader().load("arc-filedialogs");
-    }
+	public static void loadNatives() throws UnsatisfiedLinkError {
+		new SharedLibraryLoader().load("arc-filedialogs");
+	}
 
-    //note: windows versions have to manually use UTF-16 versions of string because windows sucks
+	//note: windows versions have to manually use UTF-16 versions of string because windows sucks
 
-    public static native @Nullable String saveFileDialog(String obj_title, String obj_defaultPathAndFile, String[] patterns, String obj_filterDescription); /*MANUAL
+	public static native @Nullable String saveFileDialog(String obj_title, String obj_defaultPathAndFile, String[] patterns, String obj_filterDescription); /*MANUAL
         #ifdef __WIN32__
             const jchar* title = env->GetStringChars(obj_title, 0);
 	        const jchar* defaultPathAndFile = env->GetStringChars(obj_defaultPathAndFile, 0);
@@ -83,7 +83,7 @@ public class FileDialogs{
         #endif
     */
 
-    public static native @Nullable String openFileDialog(String obj_title, String obj_defaultPathAndFile, String[] patterns, String obj_filterDescription, boolean allowMultipleSelects); /*MANUAL
+	public static native @Nullable String openFileDialog(String obj_title, String obj_defaultPathAndFile, String[] patterns, String obj_filterDescription, boolean allowMultipleSelects); /*MANUAL
         #ifdef __WIN32__
             const jchar* title = env->GetStringChars(obj_title, 0);
 	        const jchar* defaultPathAndFile = env->GetStringChars(obj_defaultPathAndFile, 0);

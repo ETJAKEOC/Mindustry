@@ -25,121 +25,121 @@ import static mindustry.Vars.world;
 
 public class UpdateProxy {
 
-    private static final Interval timer = new Interval(10);
-    private static final ObjectFloatMap<Item> oreRawCount = new ObjectFloatMap<>();
-    private static final ObjectFloatMap<Item> oreCount = new ObjectFloatMap<>();
-    private static final Seq<Item> itemArray = new Seq<>();
-    private static final Seq<Tile> tempTiles = new Seq<>();
-    private static final Seq<Drill> registerDrills = new Seq<>();
-    private static @Nullable Item returnItem;
-    private static float returnCount, returnRawCount;
+	private static final Interval timer = new Interval(10);
+	private static final ObjectFloatMap<Item> oreRawCount = new ObjectFloatMap<>();
+	private static final ObjectFloatMap<Item> oreCount = new ObjectFloatMap<>();
+	private static final Seq<Item> itemArray = new Seq<>();
+	private static final Seq<Tile> tempTiles = new Seq<>();
+	private static final Seq<Drill> registerDrills = new Seq<>();
+	private static @Nullable Item returnItem;
+	private static float returnCount, returnRawCount;
 
-    public static void init() {
-        Vars.content.blocks().each(block -> {
-            if (block instanceof Drill) {
-                registerDrills.add((Drill) block);
-            }
-        });
+	public static void init() {
+		Vars.content.blocks().each(block -> {
+			if (block instanceof Drill) {
+				registerDrills.add((Drill) block);
+			}
+		});
 
-        Events.run(EventType.Trigger.draw, () -> {
-            var input = Vars.control.input;
-            if (input.block instanceof Drill drill) {
-                Tile tile = null;
-                if (Vars.mobile) {
-                    for (BuildPlan plan : input.selectPlans) {
-                        if (!plan.breaking && plan == ((MobileInput) input).lastPlaced && plan.block != null) {
-                            tile = plan.tile();
-                        }
-                    }
-                } else {
-                    Vec2 vec = Core.input.mouseWorld(Core.input.mouseX(), Core.input.mouseY());
-                    if (input.selectedBlock()) vec.sub(input.block.offset, input.block.offset);
-                    int worldX = World.toTile(vec.x), worldY = World.toTile(vec.y);
-                    tile = world.tile(worldX, worldY);
-                }
-                if (tile != null) {
-                    countOreForDrill(drill, tile);
-                    drawDrillStat(drill, tile);
-                }
-            }
-        });
+		Events.run(EventType.Trigger.draw, () -> {
+			var input = Vars.control.input;
+			if (input.block instanceof Drill drill) {
+				Tile tile = null;
+				if (Vars.mobile) {
+					for (BuildPlan plan : input.selectPlans) {
+						if (!plan.breaking && plan == ((MobileInput) input).lastPlaced && plan.block != null) {
+							tile = plan.tile();
+						}
+					}
+				} else {
+					Vec2 vec = Core.input.mouseWorld(Core.input.mouseX(), Core.input.mouseY());
+					if (input.selectedBlock()) vec.sub(input.block.offset, input.block.offset);
+					int worldX = World.toTile(vec.x), worldY = World.toTile(vec.y);
+					tile = world.tile(worldX, worldY);
+				}
+				if (tile != null) {
+					countOreForDrill(drill, tile);
+					drawDrillStat(drill, tile);
+				}
+			}
+		});
 
-        Thread thread = new Thread(() -> {
-            Events.run(EventType.Trigger.afterGameUpdate, () -> {
-                if (timer.get(0, 60)) {
-                    Vars.state.teams.getActive().each(teamData -> {
-                        registerDrills.each(drill -> {
-                            Seq<Building> buildings = teamData.buildingTypes.get(drill);
-                            if (buildings != null && !buildings.isEmpty()) {
-                                teamData.buildingTypes.get(drill).each(building -> {
-                                    if (building instanceof Drill.DrillBuild drillBuild) {
-                                        countOreForDrill(drill, drillBuild.tile);
-                                        updateDrill(drillBuild);
-                                    }
-                                });
-                            }
-                        });
-                    });
-                }
-                ;
-            });
-        });
+		Thread thread = new Thread(() -> {
+			Events.run(EventType.Trigger.afterGameUpdate, () -> {
+				if (timer.get(0, 60)) {
+					Vars.state.teams.getActive().each(teamData -> {
+						registerDrills.each(drill -> {
+							Seq<Building> buildings = teamData.buildingTypes.get(drill);
+							if (buildings != null && !buildings.isEmpty()) {
+								teamData.buildingTypes.get(drill).each(building -> {
+									if (building instanceof Drill.DrillBuild drillBuild) {
+										countOreForDrill(drill, drillBuild.tile);
+										updateDrill(drillBuild);
+									}
+								});
+							}
+						});
+					});
+				}
+				;
+			});
+		});
 
-        thread.setPriority(Thread.NORM_PRIORITY - 1);
-        thread.setDaemon(true);
-        thread.start();
-    }
+		thread.setPriority(Thread.NORM_PRIORITY - 1);
+		thread.setDaemon(true);
+		thread.start();
+	}
 
-    public static void countOreForDrill(Drill drill, Tile tile) {
-        returnItem = null;
-        returnCount = 0;
+	public static void countOreForDrill(Drill drill, Tile tile) {
+		returnItem = null;
+		returnCount = 0;
 
-        oreCount.clear();
-        oreRawCount.clear();
-        itemArray.clear();
+		oreCount.clear();
+		oreRawCount.clear();
+		itemArray.clear();
 
-        for (Tile other : tile.getLinkedTilesAs(drill, tempTiles)) {
-            if (drill.canMine(other)) {
-                float density = other.overlay().attributes.get(NHContent.density);
-                oreCount.increment(drill.getDrop(other), 0, density + 1f);
-                oreRawCount.increment(drill.getDrop(other), 0, 1f);
-            }
-        }
+		for (Tile other : tile.getLinkedTilesAs(drill, tempTiles)) {
+			if (drill.canMine(other)) {
+				float density = other.overlay().attributes.get(NHContent.density);
+				oreCount.increment(drill.getDrop(other), 0, density + 1f);
+				oreRawCount.increment(drill.getDrop(other), 0, 1f);
+			}
+		}
 
-        for (Item item : oreCount.keys()) {
-            itemArray.add(item);
-        }
+		for (Item item : oreCount.keys()) {
+			itemArray.add(item);
+		}
 
-        itemArray.sort((item1, item2) -> {
-            int type = Boolean.compare(!item1.lowPriority, !item2.lowPriority);
-            if (type != 0) return type;
-            int amounts = Integer.compare(Mathf.round(oreCount.get(item1, 0)), Mathf.round(oreCount.get(item2, 0)));
-            if (amounts != 0) return amounts;
-            return Integer.compare(item1.id, item2.id);
-        });
+		itemArray.sort((item1, item2) -> {
+			int type = Boolean.compare(!item1.lowPriority, !item2.lowPriority);
+			if (type != 0) return type;
+			int amounts = Integer.compare(Mathf.round(oreCount.get(item1, 0)), Mathf.round(oreCount.get(item2, 0)));
+			if (amounts != 0) return amounts;
+			return Integer.compare(item1.id, item2.id);
+		});
 
-        if (itemArray.size == 0) {
-            return;
-        }
+		if (itemArray.size == 0) {
+			return;
+		}
 
-        returnItem = itemArray.peek();
-        returnCount = Mathf.round(oreCount.get(itemArray.peek(), 0));
-        returnRawCount = Mathf.round(oreRawCount.get(itemArray.peek(), 0));
-    }
+		returnItem = itemArray.peek();
+		returnCount = Mathf.round(oreCount.get(itemArray.peek(), 0));
+		returnRawCount = Mathf.round(oreRawCount.get(itemArray.peek(), 0));
+	}
 
-    public static void updateDrillStat(Drill drill) {
-        Reflect.set(Drill.class, drill, "returnItem", returnItem);
-        Reflect.set(Drill.class, drill, "returnCount", (int) returnCount);
-    }
+	public static void updateDrillStat(Drill drill) {
+		Reflect.set(Drill.class, drill, "returnItem", returnItem);
+		Reflect.set(Drill.class, drill, "returnCount", (int) returnCount);
+	}
 
-    private static void drawDrillStat(Drill drill, Tile tile) {
-        if (returnCount > 0) {
-            drill.drawPlaceText(Core.bundle.format("nh.ore-density-multiplier", Strings.fixed(returnCount / returnRawCount * 100, 0)), tile.x, tile.y + 1, true);
-        }
-    }
+	private static void drawDrillStat(Drill drill, Tile tile) {
+		if (returnCount > 0) {
+			drill.drawPlaceText(Core.bundle.format("nh.ore-density-multiplier", Strings.fixed(returnCount / returnRawCount * 100, 0)), tile.x, tile.y + 1, true);
+		}
+	}
 
-    public static void updateDrill(Drill.DrillBuild building) {
-        building.dominantItems = (int) returnCount;
-        building.dominantItem = returnItem;
-    }
+	public static void updateDrill(Drill.DrillBuild building) {
+		building.dominantItems = (int) returnCount;
+		building.dominantItem = returnItem;
+	}
 }

@@ -43,9 +43,6 @@ public class MapAssetsDialog extends BaseDialog {
 			Icon.volumeUp,
 			Icon.music
 	};
-	TextField searchField;
-	@Nullable
-	String searchString;
 	private final AssetView[] views = {
 			new MapPatchesView(),
 			new MapContentView(),
@@ -54,6 +51,9 @@ public class MapAssetsDialog extends BaseDialog {
 			new MapAudioView(DataAssetType.sound),
 			new MapAudioView(DataAssetType.music),
 	};
+	TextField searchField;
+	@Nullable
+	String searchString;
 	private Table list;
 	private DataAssetType currentType = DataAssetType.music;
 

@@ -26,214 +26,218 @@ import mindustry.ui.Styles;
 import mindustry.ui.dialogs.SchematicsDialog.SchematicImage;
 import mindustry.world.blocks.storage.CoreBlock;
 
-/** Dialog for selecting loadout at sector launch. */
-public class LaunchLoadoutDialog extends BaseDialog{
-    LoadoutDialog loadout = new LoadoutDialog();
-    //total required items
-    ItemSeq total = new ItemSeq();
-    //currently selected schematic
-    Schematic selected;
-    //validity of loadout items
-    boolean valid;
-    //last calculated capacity
-    int lastCapacity;
+/**
+ * Dialog for selecting loadout at sector launch.
+ */
+public class LaunchLoadoutDialog extends BaseDialog {
+	LoadoutDialog loadout = new LoadoutDialog();
+	//total required items
+	ItemSeq total = new ItemSeq();
+	//currently selected schematic
+	Schematic selected;
+	//validity of loadout items
+	boolean valid;
+	//last calculated capacity
+	int lastCapacity;
 
-    public LaunchLoadoutDialog(){
-        super("@configure");
-    }
+	public LaunchLoadoutDialog() {
+		super("@configure");
+	}
 
-    public void show(CoreBlock core, Sector sector, Sector destination, Runnable confirm){
-        cont.clear();
-        buttons.clear();
+	public void show(CoreBlock core, Sector sector, Sector destination, Runnable confirm) {
+		cont.clear();
+		buttons.clear();
 
-        buttons.defaults().size(160f, 64f);
-        buttons.button("@back", Icon.left, this::hide);
+		buttons.defaults().size(160f, 64f);
+		buttons.button("@back", Icon.left, this::hide);
 
-        addCloseListener();
+		addCloseListener();
 
-        ItemSeq sitems = sector.items();
+		ItemSeq sitems = sector.items();
 
-        //hide nonsensical items
-        ItemSeq launch = universe.getLaunchResources();
-        if(sector.planet.allowLaunchLoadout){
-            for(var item : content.items()){
-                if(!item.isOnPlanet(sector.planet)){
-                    launch.set(item, 0);
-                }
-            }
-            universe.updateLaunchResources(launch);
-        }
+		//hide nonsensical items
+		ItemSeq launch = universe.getLaunchResources();
+		if (sector.planet.allowLaunchLoadout) {
+			for (var item : content.items()) {
+				if (!item.isOnPlanet(sector.planet)) {
+					launch.set(item, 0);
+				}
+			}
+			universe.updateLaunchResources(launch);
+		}
 
-        //updates sum requirements
-        Runnable update = () -> {
-            int cap = lastCapacity = (int)(sector.planet.launchCapacityMultiplier * selected.findCore().itemCapacity);
+		//updates sum requirements
+		Runnable update = () -> {
+			int cap = lastCapacity = (int) (sector.planet.launchCapacityMultiplier * selected.findCore().itemCapacity);
 
-            //cap resources based on core type
-            ItemSeq schems = selected.requirements();
-            ItemSeq resources = universe.getLaunchResources();
-            resources.min(cap);
+			//cap resources based on core type
+			ItemSeq schems = selected.requirements();
+			ItemSeq resources = universe.getLaunchResources();
+			resources.min(cap);
 
-            int capacity = lastCapacity;
+			int capacity = lastCapacity;
 
-            if(!destination.allowLaunchLoadout()){
-                resources.clear();
-                if(destination.preset != null){
-                    var rules = destination.preset.generator.map().rules();
-                    for(var stack : rules.loadout){
-                        if(stack.item.isOnPlanet(sector.planet)){
-                            resources.add(stack.item, stack.amount);
-                        }
-                    }
-                }
+			if (!destination.allowLaunchLoadout()) {
+				resources.clear();
+				if (destination.preset != null) {
+					var rules = destination.preset.generator.map().rules();
+					for (var stack : rules.loadout) {
+						if (stack.item.isOnPlanet(sector.planet)) {
+							resources.add(stack.item, stack.amount);
+						}
+					}
+				}
 
-            }else if(getMax()){
-                for(Item item : content.items()){
-                    resources.set(item, Mathf.clamp(sitems.get(item) - schems.get(item), 0, capacity));
-                }
-            }
+			} else if (getMax()) {
+				for (Item item : content.items()) {
+					resources.set(item, Mathf.clamp(sitems.get(item) - schems.get(item), 0, capacity));
+				}
+			}
 
-            universe.updateLaunchResources(resources);
+			universe.updateLaunchResources(resources);
 
-            total.clear();
-            selected.requirements().each(total::add);
-            universe.getLaunchResources().each(total::add);
-            valid = sitems.has(total) || PlanetDialog.debugSelect;
-        };
+			total.clear();
+			selected.requirements().each(total::add);
+			universe.getLaunchResources().each(total::add);
+			valid = sitems.has(total) || PlanetDialog.debugSelect;
+		};
 
-        Cons<Table> rebuild = table -> {
-            table.clearChildren();
-            int i = 0;
+		Cons<Table> rebuild = table -> {
+			table.clearChildren();
+			int i = 0;
 
-            ItemSeq schems = selected.requirements();
-            ItemSeq launches = universe.getLaunchResources();
+			ItemSeq schems = selected.requirements();
+			ItemSeq launches = universe.getLaunchResources();
 
-            for(ItemStack s : total){
-                int as = schems.get(s.item), al = launches.get(s.item);
+			for (ItemStack s : total) {
+				int as = schems.get(s.item), al = launches.get(s.item);
 
-                if(as + al == 0) continue;
+				if (as + al == 0) continue;
 
-                table.image(s.item.uiIcon).left().size(iconSmall);
+				table.image(s.item.uiIcon).left().size(iconSmall);
 
-                String amountStr = (al + as) + (destination.allowLaunchLoadout() ? "[gray] (" + (al + " + " + as + ")") : "");
+				String amountStr = (al + as) + (destination.allowLaunchLoadout() ? "[gray] (" + (al + " + " + as + ")") : "");
 
-                table.add(
-                    sitems.has(s.item, s.amount) ? amountStr :
-                    "[scarlet]" + (Math.min(sitems.get(s.item), s.amount) + "[lightgray]/" + amountStr)).padLeft(2).left().padRight(4);
+				table.add(
+						sitems.has(s.item, s.amount) ? amountStr :
+								"[scarlet]" + (Math.min(sitems.get(s.item), s.amount) + "[lightgray]/" + amountStr)).padLeft(2).left().padRight(4);
 
-                if(++i % 4 == 0){
-                    table.row();
-                }
-            }
-        };
+				if (++i % 4 == 0) {
+					table.row();
+				}
+			}
+		};
 
-        Table items = new Table();
+		Table items = new Table();
 
-        Runnable rebuildItems = () -> rebuild.get(items);
+		Runnable rebuildItems = () -> rebuild.get(items);
 
-        if(destination.allowLaunchLoadout()){
-            buttons.button("@resources.max", Icon.add, Styles.togglet, () -> {
-                setMax(!getMax());
-                update.run();
-                rebuildItems.run();
-            }).checked(b -> getMax());
+		if (destination.allowLaunchLoadout()) {
+			buttons.button("@resources.max", Icon.add, Styles.togglet, () -> {
+				setMax(!getMax());
+				update.run();
+				rebuildItems.run();
+			}).checked(b -> getMax());
 
-            buttons.button("@resources", Icon.edit, () -> {
-                ItemSeq stacks = universe.getLaunchResources();
-                Seq<ItemStack> out = stacks.toSeq();
+			buttons.button("@resources", Icon.edit, () -> {
+				ItemSeq stacks = universe.getLaunchResources();
+				Seq<ItemStack> out = stacks.toSeq();
 
-                ItemSeq realItems = sitems.copy();
-                selected.requirements().each(realItems::remove);
+				ItemSeq realItems = sitems.copy();
+				selected.requirements().each(realItems::remove);
 
-                loadout.show(lastCapacity, realItems, out, i -> i.unlocked() && i.isOnPlanet(sector.planet), out::clear, () -> {}, () -> {
-                    universe.updateLaunchResources(new ItemSeq(out));
-                    update.run();
-                    rebuildItems.run();
-                });
-            }).disabled(b -> getMax());
-        }
+				loadout.show(lastCapacity, realItems, out, i -> i.unlocked() && i.isOnPlanet(sector.planet), out::clear, () -> {
+				}, () -> {
+					universe.updateLaunchResources(new ItemSeq(out));
+					update.run();
+					rebuildItems.run();
+				});
+			}).disabled(b -> getMax());
+		}
 
-        boolean rows = Core.graphics.isPortrait() && mobile;
+		boolean rows = Core.graphics.isPortrait() && mobile;
 
-        if(rows) buttons.row();
+		if (rows) buttons.row();
 
-        var cell = buttons.button("@launch.text", Icon.ok, () -> {
-            universe.updateLoadout(core, selected);
-            confirm.run();
-            hide();
-        }).disabled(b -> !valid);
+		var cell = buttons.button("@launch.text", Icon.ok, () -> {
+			universe.updateLoadout(core, selected);
+			confirm.run();
+			hide();
+		}).disabled(b -> !valid);
 
-        if(rows){
-            cell.colspan(2).size(160f + 160f + 4f, 64f);
-        }
+		if (rows) {
+			cell.colspan(2).size(160f + 160f + 4f, 64f);
+		}
 
-        int cols = Math.max((int)(Core.graphics.getWidth() / Scl.scl(230)), 1);
-        ButtonGroup<Button> group = new ButtonGroup<>();
-        selected = universe.getLoadout(core);
-        if(selected == null) selected = schematics.getLoadouts().get((CoreBlock)Blocks.coreShard).first();
+		int cols = Math.max((int) (Core.graphics.getWidth() / Scl.scl(230)), 1);
+		ButtonGroup<Button> group = new ButtonGroup<>();
+		selected = universe.getLoadout(core);
+		if (selected == null)
+			selected = schematics.getLoadouts().get((CoreBlock) Blocks.coreShard).first();
 
-        cont.add(Core.bundle.format("launch.from", sector.name())).row();
+		cont.add(Core.bundle.format("launch.from", sector.name())).row();
 
-        if(destination.allowLaunchSchematics()){
-            cont.pane(t -> {
-                int[] i = {0};
+		if (destination.allowLaunchSchematics()) {
+			cont.pane(t -> {
+				int[] i = {0};
 
-                Cons<Schematic> handler = s -> {
-                    if(s.tiles.contains(tile -> !tile.block.supportsEnv(sector.planet.defaultEnv) ||
-                    //make sure block can be built here.
-                    !tile.block.isOnPlanet(sector.planet))){
-                        return;
-                    }
+				Cons<Schematic> handler = s -> {
+					if (s.tiles.contains(tile -> !tile.block.supportsEnv(sector.planet.defaultEnv) ||
+							//make sure block can be built here.
+							!tile.block.isOnPlanet(sector.planet))) {
+						return;
+					}
 
-                    t.button(b -> b.add(new SchematicImage(s)), Styles.togglet, () -> {
-                        selected = s;
-                        update.run();
-                        rebuildItems.run();
-                    }).group(group).pad(4).checked(s == selected).size(200f);
+					t.button(b -> b.add(new SchematicImage(s)), Styles.togglet, () -> {
+						selected = s;
+						update.run();
+						rebuildItems.run();
+					}).group(group).pad(4).checked(s == selected).size(200f);
 
-                    if(++i[0] % cols == 0){
-                        t.row();
-                    }
-                };
+					if (++i[0] % cols == 0) {
+						t.row();
+					}
+				};
 
-                if(destination.allowLaunchSchematics() || schematics.getDefaultLoadout(core) == null){
-                    for(var entry : schematics.getLoadouts()){
-                        if(entry.key.size <= core.size){
-                            for(Schematic s : entry.value){
-                                handler.get(s);
-                            }
-                        }
-                    }
-                }else{
-                    //only allow launching with the standard loadout schematic
-                    handler.get(schematics.getDefaultLoadout(core));
-                }
-            }).growX().scrollX(false);
+				if (destination.allowLaunchSchematics() || schematics.getDefaultLoadout(core) == null) {
+					for (var entry : schematics.getLoadouts()) {
+						if (entry.key.size <= core.size) {
+							for (Schematic s : entry.value) {
+								handler.get(s);
+							}
+						}
+					}
+				} else {
+					//only allow launching with the standard loadout schematic
+					handler.get(schematics.getDefaultLoadout(core));
+				}
+			}).growX().scrollX(false);
 
-            cont.row();
+			cont.row();
 
-            cont.label(() -> Core.bundle.format("launch.capacity", lastCapacity)).row();
-            cont.row();
-        }else if(destination.preset != null && destination.preset.description != null){
-            cont.pane(p -> {
-                p.add(destination.preset.description).grow().wrap().labelAlign(Align.center);
-            }).pad(10f).grow().row();
-        }
+			cont.label(() -> Core.bundle.format("launch.capacity", lastCapacity)).row();
+			cont.row();
+		} else if (destination.preset != null && destination.preset.description != null) {
+			cont.pane(p -> {
+				p.add(destination.preset.description).grow().wrap().labelAlign(Align.center);
+			}).pad(10f).grow().row();
+		}
 
-        cont.pane(items);
-        cont.row();
-        cont.add("@sector.missingresources").visible(() -> !valid);
+		cont.pane(items);
+		cont.row();
+		cont.add("@sector.missingresources").visible(() -> !valid);
 
-        update.run();
-        rebuildItems.run();
+		update.run();
+		rebuildItems.run();
 
-        show();
-    }
+		show();
+	}
 
-    void setMax(boolean max){
-        Core.settings.put("maxresources", max);
-    }
+	boolean getMax() {
+		return Core.settings.getBool("maxresources", true);
+	}
 
-    boolean getMax(){
-        return Core.settings.getBool("maxresources", true);
-    }
+	void setMax(boolean max) {
+		Core.settings.put("maxresources", max);
+	}
 }

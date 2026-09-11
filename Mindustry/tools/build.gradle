@@ -119,13 +119,17 @@ tasks.register('pack') {
 		//replace config file contents
 		new File(root, 'core/assets-raw/sprites_out/').eachFileRecurse(groovy.io.FileType.FILES) { file ->
 			if (file.name.endsWith(".json")) {
-				file.text = file.text.replace("4096", "2048")
+				file.text = file.text.replace("4096", "2048").replace("duplicatePadding: true", "duplicatePadding: false, paddingX: 0, paddingY: 0")
 			}
 		}
 
 		//pack fallback 2048x2048 sprites - disabled when debugging
 		if (!isDebugArgs) {
-			TexturePacker.process(new File(root, "core/assets-raw/sprites_out/").absolutePath, new File(root, "core/assets/sprites/fallback/").absolutePath, "sprites.aatls")
+			try {
+				TexturePacker.process(new File(root, "core/assets-raw/sprites_out/").absolutePath, new File(root, "core/assets/sprites/fallback/").absolutePath, "sprites.aatls")
+			} catch (Exception e) {
+				println "Fallback 2048 packing skipped/failed: " + e.getMessage()
+			}
 		}
 	}
 }

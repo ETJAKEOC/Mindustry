@@ -1,12 +1,12 @@
 /*
  * Copyright (C) 2013-2015 RoboVM AB
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,117 +35,118 @@ import org.robovm.rt.bro.ptr.Ptr;
 /*<javadoc>*/
 
 /*</javadoc>*/
-/*<annotations>*/@NativeClass
+/*<annotations>*/
+@NativeClass
 /* </annotations> */
-/* <visibility> */public/* </visibility> */ class /* <name> */ MGLKView/* </name> */
-	extends /* <extends> */UIView/* </extends> */
-/* <implements> *//* </implements> */ {
-
-	/* <ptr> */public static class MGLKViewPtr extends Ptr<MGLKView, MGLKViewPtr> {
-	}
+/* <visibility> */ public/* </visibility> */ class /* <name> */ MGLKView/* </name> */
+		extends /* <extends> */UIView/* </extends> */
+		/* <implements> *//* </implements> */ {
 
 	/* </ptr> */
 	/* <bind> */static {
 		ObjCRuntime.bind(MGLKView.class);
 	}/* </bind> */
+
+	protected MGLKView() {
+	}
 	/* <constants> *//* </constants> */
 	/* <constructors> */
 
-	protected MGLKView () {
-	}
-
-	protected MGLKView (Handle h, long handle) {
+	protected MGLKView(Handle h, long handle) {
 		super(h, handle);
 	}
 
-	protected MGLKView (SkipInit skipInit) {
+	protected MGLKView(SkipInit skipInit) {
 		super(skipInit);
 	}
 
 	@Method(selector = "initWithFrame:context:")
-	public MGLKView (@ByVal CGRect frame, MGLContext context) {
-		super((SkipInit)null);
+	public MGLKView(@ByVal CGRect frame, MGLContext context) {
+		super((SkipInit) null);
 		initObject(initWithFrameContext(frame, context));
 	}
 
 	/* </constructors> */
 	/* <properties> */
 	@Property(selector = "context")
-	public native MGLContext getContext ();
+	public native MGLContext getContext();
 
 	@Property(selector = "setContext:")
-	public native void setContext (MGLContext v);
+	public native void setContext(MGLContext v);
 
 	@Property(selector = "delegate")
-	public native MGLKViewDelegate getDelegate ();
+	public native MGLKViewDelegate getDelegate();
 
 	@Property(selector = "setDelegate:", strongRef = true)
-	public native void setDelegate (MGLKViewDelegate v);
+	public native void setDelegate(MGLKViewDelegate v);
 
 	@Property(selector = "retainedBacking")
-	public native boolean isRetainedBacking ();
+	public native boolean isRetainedBacking();
 
 	@Property(selector = "setRetainedBacking:")
-	public native void setRetainedBacking (boolean v);
+	public native void setRetainedBacking(boolean v);
 
 	@Property(selector = "drawableColorFormat")
-	public native MGLDrawableColorFormat getDrawableColorFormat ();
+	public native MGLDrawableColorFormat getDrawableColorFormat();
 
 	@Property(selector = "setDrawableColorFormat:")
-	public native void setDrawableColorFormat (MGLDrawableColorFormat v);
+	public native void setDrawableColorFormat(MGLDrawableColorFormat v);
 
 	@Property(selector = "drawableDepthFormat")
-	public native MGLDrawableDepthFormat getDrawableDepthFormat ();
+	public native MGLDrawableDepthFormat getDrawableDepthFormat();
 
 	@Property(selector = "setDrawableDepthFormat:")
-	public native void setDrawableDepthFormat (MGLDrawableDepthFormat v);
+	public native void setDrawableDepthFormat(MGLDrawableDepthFormat v);
 
 	@Property(selector = "drawableStencilFormat")
-	public native MGLDrawableStencilFormat getDrawableStencilFormat ();
+	public native MGLDrawableStencilFormat getDrawableStencilFormat();
 
 	@Property(selector = "setDrawableStencilFormat:")
-	public native void setDrawableStencilFormat (MGLDrawableStencilFormat v);
+	public native void setDrawableStencilFormat(MGLDrawableStencilFormat v);
 
 	@Property(selector = "drawableMultisample")
-	public native MGLDrawableMultisample getDrawableMultisample ();
+	public native MGLDrawableMultisample getDrawableMultisample();
 
 	@Property(selector = "setDrawableMultisample:")
-	public native void setDrawableMultisample (MGLDrawableMultisample v);
+	public native void setDrawableMultisample(MGLDrawableMultisample v);
 
 	@Property(selector = "glLayer")
-	public native MGLLayer getGlLayer ();
+	public native MGLLayer getGlLayer();
 
 	@Property(selector = "drawableSize")
-	public native @ByVal CGSize getDrawableSize ();
+	public native @ByVal CGSize getDrawableSize();
 
 	@Property(selector = "drawableWidth")
-	public native @MachineSizedSInt long getDrawableWidth ();
+	public native @MachineSizedSInt long getDrawableWidth();
 
 	@Property(selector = "drawableHeight")
-	public native @MachineSizedSInt long getDrawableHeight ();
+	public native @MachineSizedSInt long getDrawableHeight();
 
 	@Property(selector = "defaultOpenGLFrameBufferID")
-	public native int getDefaultOpenGLFrameBufferID ();
+	public native int getDefaultOpenGLFrameBufferID();
 
 	@Property(selector = "enableSetNeedsDisplay")
-	public native boolean isEnableSetNeedsDisplay ();
+	public native boolean isEnableSetNeedsDisplay();
 
 	@Property(selector = "setEnableSetNeedsDisplay:")
-	public native void setEnableSetNeedsDisplay (boolean v);
+	public native void setEnableSetNeedsDisplay(boolean v);
 
 	@Property(selector = "snapshot")
-	public native UIImage getSnapshot ();
+	public native UIImage getSnapshot();
 
 	/* </properties> */
 	/* <members> *//* </members> */
 	/* <methods> */
 	@Method(selector = "initWithFrame:context:")
-	protected native @Pointer long initWithFrameContext (@ByVal CGRect frame, MGLContext context);
+	protected native @Pointer long initWithFrameContext(@ByVal CGRect frame, MGLContext context);
 
 	@Method(selector = "display")
-	public native void display ();
+	public native void display();
 
 	@Method(selector = "bindDrawable")
-	public native void bindDrawable ();
+	public native void bindDrawable();
+
+	/* <ptr> */public static class MGLKViewPtr extends Ptr<MGLKView, MGLKViewPtr> {
+	}
 	/* </methods> */
 }

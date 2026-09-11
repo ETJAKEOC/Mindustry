@@ -80,6 +80,7 @@ import mindustry.world.meta.BlockFlag;
 abstract class UnitComp implements Healthc, Physicsc, Hitboxc, Statusc, Teamc, Itemsc, Rotc, Unitc, Weaponsc, Drawc, Syncc, Shieldc, Displayable, Ranged, Minerc, Builderc, Senseable, Settable {
 	static final float warpDst = 8f;
 	private static final Vec2 tmp1 = new Vec2(), tmp2 = new Vec2();
+	private final transient float resupplyTime = Mathf.random(10f);
 	@Import
 	boolean dead, disarmed;
 	@Import
@@ -117,7 +118,6 @@ abstract class UnitComp implements Healthc, Physicsc, Hitboxc, Statusc, Teamc, I
 	transient float splashTimer;
 	transient @Nullable Floor lastDrownFloor;
 	private UnitController controller;
-	private final transient float resupplyTime = Mathf.random(10f);
 	private transient boolean wasPlayer;
 	private transient boolean wasHealed;
 	private transient boolean wasFlying;

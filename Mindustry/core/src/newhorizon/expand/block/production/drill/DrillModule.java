@@ -22,119 +22,119 @@ import mindustry.world.meta.BlockGroup;
 import static mindustry.Vars.world;
 
 public class DrillModule extends Block {
-    public DrawBlock drawer = new DrawDefault();
+	public DrawBlock drawer = new DrawDefault();
 
-    public DrillModule(String name) {
-        super(name);
-        size = 2;
-        solid = true;
-        rotate = true;
-        update = true;
-        destructible = true;
-        canOverdrive = false;
-        enableDrawStatus = false;
-        group = BlockGroup.drills;
-        flags = EnumSet.of(BlockFlag.drill);
-    }
+	public DrillModule(String name) {
+		super(name);
+		size = 2;
+		solid = true;
+		rotate = true;
+		update = true;
+		destructible = true;
+		canOverdrive = false;
+		enableDrawStatus = false;
+		group = BlockGroup.drills;
+		flags = EnumSet.of(BlockFlag.drill);
+	}
 
-    @Override
-    public void load() {
-        super.load();
-        drawer.load(this);
-    }
+	@Override
+	public void load() {
+		super.load();
+		drawer.load(this);
+	}
 
-    @Override
-    public void loadIcon() {
-        super.loadIcon();
-        uiIcon = Core.atlas.find(name + "-icon", name);
-    }
+	@Override
+	public void loadIcon() {
+		super.loadIcon();
+		uiIcon = Core.atlas.find(name + "-icon", name);
+	}
 
-    @Override
-    public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
-        drawer.drawPlan(this, plan, list);
-    }
+	@Override
+	public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
+		drawer.drawPlan(this, plan, list);
+	}
 
-    @Override
-    public TextureRegion[] icons() {
-        return drawer.finalIcons(this);
-    }
+	@Override
+	public TextureRegion[] icons() {
+		return drawer.finalIcons(this);
+	}
 
-    @Override
-    public void getRegionsToOutline(Seq<TextureRegion> out) {
-        drawer.getRegionsToOutline(this, out);
-    }
+	@Override
+	public void getRegionsToOutline(Seq<TextureRegion> out) {
+		drawer.getRegionsToOutline(this, out);
+	}
 
-    public class DrillModuleBuild extends Building {
-        public @Nullable AdaptDrill.AdaptDrillBuild drillBuild;
-        public float totalProgress;
-        public float warmup;
+	public class DrillModuleBuild extends Building {
+		public @Nullable AdaptDrill.AdaptDrillBuild drillBuild;
+		public float totalProgress;
+		public float warmup;
 
-        @Override
-        public void draw() {
-            drawer.draw(this);
-        }
+		@Override
+		public void draw() {
+			drawer.draw(this);
+		}
 
-        @Override
-        public void drawLight() {
-            super.drawLight();
-            drawer.drawLight(this);
-        }
+		@Override
+		public void drawLight() {
+			super.drawLight();
+			drawer.drawLight(this);
+		}
 
-        @Override
-        public void updateTile() {
-            if (drillBuild != null) {
-                warmup = Mathf.approachDelta(warmup, efficiency * drillBuild.warmup, 0.02f);
-            } else {
-                warmup = Mathf.approachDelta(warmup, 0, 0.02f);
-            }
-            totalProgress += warmup * edelta();
-        }
+		@Override
+		public void updateTile() {
+			if (drillBuild != null) {
+				warmup = Mathf.approachDelta(warmup, efficiency * drillBuild.warmup, 0.02f);
+			} else {
+				warmup = Mathf.approachDelta(warmup, 0, 0.02f);
+			}
+			totalProgress += warmup * edelta();
+		}
 
-        @Override
-        public float warmup() {
-            return warmup;
-        }
+		@Override
+		public float warmup() {
+			return warmup;
+		}
 
-        @Override
-        public float totalProgress() {
-            return totalProgress;
-        }
+		@Override
+		public float totalProgress() {
+			return totalProgress;
+		}
 
-        public boolean canApply(AdaptDrill.AdaptDrillBuild drill) {
-            for (int i = 0; i < size; i++) {
-                Point2 p = Edges.getEdges(size)[rotation * size + i];
-                Building t = world.build(tileX() + p.x, tileY() + p.y);
-                if (t != drill) {
-                    return false;
-                }
-            }
-            return drill.modules.size < drill.maxModules();
-        }
+		public boolean canApply(AdaptDrill.AdaptDrillBuild drill) {
+			for (int i = 0; i < size; i++) {
+				Point2 p = Edges.getEdges(size)[rotation * size + i];
+				Building t = world.build(tileX() + p.x, tileY() + p.y);
+				if (t != drill) {
+					return false;
+				}
+			}
+			return drill.modules.size < drill.maxModules();
+		}
 
-        @Override
-        public boolean shouldConsume() {
-            return drillBuild != null && drillBuild.warmup > 0;
-        }
+		@Override
+		public boolean shouldConsume() {
+			return drillBuild != null && drillBuild.warmup > 0;
+		}
 
-        public void apply(AdaptDrill.AdaptDrillBuild drill) {
+		public void apply(AdaptDrill.AdaptDrillBuild drill) {
 
-        }
+		}
 
-        public void updateDrill(AdaptDrill.AdaptDrillBuild drill) {
+		public void updateDrill(AdaptDrill.AdaptDrillBuild drill) {
 
-        }
+		}
 
-        @Override
-        public void write(Writes write) {
-            write.f(warmup);
-            write.f(totalProgress);
-        }
+		@Override
+		public void write(Writes write) {
+			write.f(warmup);
+			write.f(totalProgress);
+		}
 
-        @Override
-        public void read(Reads read, byte revision) {
-            super.read(read, revision);
-            warmup = read.f();
-            totalProgress = read.f();
-        }
-    }
+		@Override
+		public void read(Reads read, byte revision) {
+			super.read(read, revision);
+			warmup = read.f();
+			totalProgress = read.f();
+		}
+	}
 }

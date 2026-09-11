@@ -5,21 +5,22 @@ import arc.fx.FxFilter;
 
 /**
  * Bias filter.
+ *
  * @author Toni Sagrista
  */
-public final class BiasFilter extends FxFilter{
-    public float bias;
+public final class BiasFilter extends FxFilter {
+	public float bias;
 
-    public BiasFilter(){
-        super(compileShader(
-        Core.files.classpath("vfxshaders/screenspace.vert"),
-        Core.files.classpath("bias")));
-        rebind();
-    }
+	public BiasFilter() {
+		super(compileShader(
+				Core.files.classpath("vfxshaders/screenspace.vert"),
+				Core.files.classpath("bias")));
+		rebind();
+	}
 
-    @Override
-    public void setParams(){
-        shader.setUniformi("u_texture0", u_texture0);
-        shader.setUniformf("u_bias", bias);
-    }
+	@Override
+	public void setParams() {
+		shader.setUniformi("u_texture0", u_texture0);
+		shader.setUniformf("u_bias", bias);
+	}
 }

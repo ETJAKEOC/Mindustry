@@ -80,344 +80,346 @@ import static newhorizon.util.ui.TableFunc.OFFSET;
 import static newhorizon.util.ui.TableFunc.ui;
 
 public class AirRaider extends CommandableBlock {
-    public static final int SLOT_COUNT = 4;
-    public static final int WEAPON_COUNT = 6;
-    public static final float MAX_ALERT_SECONDS = 240f;
-    public static final float BASE_ALERT_SECONDS = 120f;
-    public static final float MIN_ALERT_SECONDS = 12f;
-    /** Payload-derived spread at full load, maximum item threat and an inaccuracy multiplier of 1. */
-    public static final float MAX_SPREAD = 360f;
-    public static final float MAX_BULLET_SPEED = 36f;
-    public static final float MIN_BULLET_SPEED = 2.5f;
-    public static final float MAX_BULLET_SIZE = 48f;
-    public static final float MIN_BULLET_SIZE = 8f;
-    public static final float MAX_DAMAGE = 10000f;
-    public static final float MAX_SPLASH = 5000f;
-    public static final float MIN_SPLASH_RADIUS = 20f;
-    public static final float MAX_SPLASH_RADIUS = 220f;
-    public static final int MAX_ITEM_THREAT = 12;
-    public static final float DAMAGE_QUALITY_REF = 5.2f;
-    public static final float SPLASH_QUALITY_REF = 4.5f;
-    public static final float ACCEL_POWER = 1.55f;
+	public static final int SLOT_COUNT = 4;
+	public static final int WEAPON_COUNT = 6;
+	public static final float MAX_ALERT_SECONDS = 240f;
+	public static final float BASE_ALERT_SECONDS = 120f;
+	public static final float MIN_ALERT_SECONDS = 12f;
+	/**
+	 * Payload-derived spread at full load, maximum item threat and an inaccuracy multiplier of 1.
+	 */
+	public static final float MAX_SPREAD = 360f;
+	public static final float MAX_BULLET_SPEED = 36f;
+	public static final float MIN_BULLET_SPEED = 2.5f;
+	public static final float MAX_BULLET_SIZE = 48f;
+	public static final float MIN_BULLET_SIZE = 8f;
+	public static final float MAX_DAMAGE = 10000f;
+	public static final float MAX_SPLASH = 5000f;
+	public static final float MIN_SPLASH_RADIUS = 20f;
+	public static final float MAX_SPLASH_RADIUS = 220f;
+	public static final int MAX_ITEM_THREAT = 12;
+	public static final float DAMAGE_QUALITY_REF = 5.2f;
+	public static final float SPLASH_QUALITY_REF = 4.5f;
+	public static final float ACCEL_POWER = 1.55f;
 
-    private static final ObjectMap<Item, Integer> itemTechDepth = new ObjectMap<>();
+	private static final ObjectMap<Item, Integer> itemTechDepth = new ObjectMap<>();
 
-    public final WeaponMode[] weapons = new WeaponMode[WEAPON_COUNT];
-    public final SlotDef[] slotDefs = new SlotDef[SLOT_COUNT];
-    public TextureRegion[] weaponIcons = new TextureRegion[WEAPON_COUNT];
-    public TextureRegion[][] shellIcons = new TextureRegion[WEAPON_COUNT][SLOT_COUNT];
+	public final WeaponMode[] weapons = new WeaponMode[WEAPON_COUNT];
+	public final SlotDef[] slotDefs = new SlotDef[SLOT_COUNT];
+	public TextureRegion[] weaponIcons = new TextureRegion[WEAPON_COUNT];
+	public TextureRegion[][] shellIcons = new TextureRegion[WEAPON_COUNT][SLOT_COUNT];
 
-    public AirRaider(String name) {
-        super(name);
-        replaceable = true;
-        canOverdrive = false;
-        reloadTime = 600f;
-        range = 999999f;
-        unloadable = false;
-        hasItems = false;
-        itemCapacity = 0;
-        configurable = true;
-        saveConfig = false;
-        clearOnDoubleTap = false;
+	public AirRaider(String name) {
+		super(name);
+		replaceable = true;
+		canOverdrive = false;
+		reloadTime = 600f;
+		range = 999999f;
+		unloadable = false;
+		hasItems = false;
+		itemCapacity = 0;
+		configurable = true;
+		saveConfig = false;
+		clearOnDoubleTap = false;
 
-        config(IntSeq.class, AirRaiderBuild::handleConfig);
-        config(Boolean.class, (AirRaiderBuild b, Boolean launch) -> {
-            if (launch) b.tryLaunchRaid();
-            else b.cancelRaidEvent();
-        });
-        initDefs();
-    }
+		config(IntSeq.class, AirRaiderBuild::handleConfig);
+		config(Boolean.class, (AirRaiderBuild b, Boolean launch) -> {
+			if (launch) b.tryLaunchRaid();
+			else b.cancelRaidEvent();
+		});
+		initDefs();
+	}
 
-    private void initDefs() {
-        weapons[0] = new WeaponMode("nh.air-raid.weapon-1", RaidBullets.defaultRaidBullet1, 1f, 0.01f, 0.2f, 1f, 1f, 8f, 1f, 0.5f, 80f, 10);
-        weapons[1] = new WeaponMode("nh.air-raid.weapon-2", NHBullets.arc_9000, 0.8f, 0.2f, 1f, 1.2f, 0.4f, 8f, 1.25f, 4f, 250f, 1);
-        weapons[2] = new WeaponMode("nh.air-raid.weapon-3", RaidBullets.raidBullet_9, 0.6f, 0.2f, 0.5f, 0.5f, 2f, 8f, 2f, 1f, 100f, 4, 40);
-        weapons[3] = new WeaponMode("nh.air-raid.weapon-4", NHBullets.blastEnergyNgt, 0.1f, 0.05f, 0.4f, 0.2f, 4f, 8f, 0.625f, 2f, 80f, 40, 120);
-        weapons[4] = new WeaponMode("nh.air-raid.weapon-5", NHBullets.railGun1, 3f, 1f, 1.2f, 0.4f, 8f, 8f, 0.125f, 5f, 640f, 1);
-        weapons[5] = new WeaponMode("nh.air-raid.weapon-6", NHBullets.airRaidBomb, 1.2f, 0.8f, 0.8f, 1.3f, 2f, 8f, 1.2f, 10f, 120f, 2, 20);
+	private void initDefs() {
+		weapons[0] = new WeaponMode("nh.air-raid.weapon-1", RaidBullets.defaultRaidBullet1, 1f, 0.01f, 0.2f, 1f, 1f, 8f, 1f, 0.5f, 80f, 10);
+		weapons[1] = new WeaponMode("nh.air-raid.weapon-2", NHBullets.arc_9000, 0.8f, 0.2f, 1f, 1.2f, 0.4f, 8f, 1.25f, 4f, 250f, 1);
+		weapons[2] = new WeaponMode("nh.air-raid.weapon-3", RaidBullets.raidBullet_9, 0.6f, 0.2f, 0.5f, 0.5f, 2f, 8f, 2f, 1f, 100f, 4, 40);
+		weapons[3] = new WeaponMode("nh.air-raid.weapon-4", NHBullets.blastEnergyNgt, 0.1f, 0.05f, 0.4f, 0.2f, 4f, 8f, 0.625f, 2f, 80f, 40, 120);
+		weapons[4] = new WeaponMode("nh.air-raid.weapon-5", NHBullets.railGun1, 3f, 1f, 1.2f, 0.4f, 8f, 8f, 0.125f, 5f, 640f, 1);
+		weapons[5] = new WeaponMode("nh.air-raid.weapon-6", NHBullets.airRaidBomb, 1.2f, 0.8f, 0.8f, 1.3f, 2f, 8f, 1.2f, 10f, 120f, 2, 20);
 
-        slotDefs[0] = new SlotDef("nh.air-raid.slot-charge", 280, new Seq<>());
-        slotDefs[1] = new SlotDef("nh.air-raid.slot-control", 240, new Seq<>());
-        slotDefs[2] = new SlotDef("nh.air-raid.slot-fuel", 320, new Seq<>());
-        slotDefs[3] = new SlotDef("nh.air-raid.slot-shell", 300, new Seq<>());
-    }
+		slotDefs[0] = new SlotDef("nh.air-raid.slot-charge", 280, new Seq<>());
+		slotDefs[1] = new SlotDef("nh.air-raid.slot-control", 240, new Seq<>());
+		slotDefs[2] = new SlotDef("nh.air-raid.slot-fuel", 320, new Seq<>());
+		slotDefs[3] = new SlotDef("nh.air-raid.slot-shell", 300, new Seq<>());
+	}
 
-    @Override
-    public void init() {
-        super.init();
-        range = 999999f;
-        classifyItems();
-    }
+	@Override
+	public void init() {
+		super.init();
+		range = 999999f;
+		classifyItems();
+	}
 
-    @Override
-    public void drawPlace(int x, int y, int rotation, boolean valid) {
-    }
+	@Override
+	public void drawPlace(int x, int y, int rotation, boolean valid) {
+	}
 
-    private void classifyItems() {
-        Seq<Item> charge = new Seq<>();
-        Seq<Item> control = new Seq<>();
-        Seq<Item> fuel = new Seq<>();
-        Seq<Item> shell = new Seq<>();
+	private void classifyItems() {
+		Seq<Item> charge = new Seq<>();
+		Seq<Item> control = new Seq<>();
+		Seq<Item> fuel = new Seq<>();
+		Seq<Item> shell = new Seq<>();
 
-        for (Item item : content.items()) {
-            if (item == null || item.isHidden()) continue;
+		for (Item item : content.items()) {
+			if (item == null || item.isHidden()) continue;
 
-            if (item.explosiveness > 0.15f || item.charge > 0.15f) {
-                charge.add(item);
-            }
-            if (item == Items.silicon || item.name.contains("processor")) {
-                control.add(item);
-            }
-            if (item.flammability > 0.15f || item == Items.coal || item == Items.sporePod || item == Items.thorium || item == NHItems.zeta
-                    || item == NHItems.fusionEnergy || item == NHItems.thermoCorePositive || item == NHItems.thermoCoreNegative 
-                    || item == NHItems.darkEnergy) {
-                fuel.add(item);
-            }
-            if (item == Items.copper || item == Items.lead || item == Items.metaglass
-                    || item == Items.beryllium || item == Items.tungsten || item == Items.carbide
-                    || item == NHItems.silicar || item == NHItems.presstanium || item == NHItems.multipleSteel
-                    || item == NHItems.irayrondPanel || item == NHItems.setonAlloy || item == NHItems.nodexPlate
-                    || item == NHItems.ancimembrane || item == NHItems.hadronicomp || item == Items.plastanium
-                    || item == Items.surgeAlloy || item == Items.titanium || item == Items.thorium) {
-                shell.add(item);
-            }
-        }
+			if (item.explosiveness > 0.15f || item.charge > 0.15f) {
+				charge.add(item);
+			}
+			if (item == Items.silicon || item.name.contains("processor")) {
+				control.add(item);
+			}
+			if (item.flammability > 0.15f || item == Items.coal || item == Items.sporePod || item == Items.thorium || item == NHItems.zeta
+					|| item == NHItems.fusionEnergy || item == NHItems.thermoCorePositive || item == NHItems.thermoCoreNegative
+					|| item == NHItems.darkEnergy) {
+				fuel.add(item);
+			}
+			if (item == Items.copper || item == Items.lead || item == Items.metaglass
+					|| item == Items.beryllium || item == Items.tungsten || item == Items.carbide
+					|| item == NHItems.silicar || item == NHItems.presstanium || item == NHItems.multipleSteel
+					|| item == NHItems.irayrondPanel || item == NHItems.setonAlloy || item == NHItems.nodexPlate
+					|| item == NHItems.ancimembrane || item == NHItems.hadronicomp || item == Items.plastanium
+					|| item == Items.surgeAlloy || item == Items.titanium || item == Items.thorium) {
+				shell.add(item);
+			}
+		}
 
-        slotDefs[0].allowed.set(charge);
-        slotDefs[1].allowed.set(control);
-        slotDefs[2].allowed.set(fuel);
-        slotDefs[3].allowed.set(shell);
-    }
+		slotDefs[0].allowed.set(charge);
+		slotDefs[1].allowed.set(control);
+		slotDefs[2].allowed.set(fuel);
+		slotDefs[3].allowed.set(shell);
+	}
 
-    private static void ensureTechDepth() {
-        if (itemTechDepth.size > 0) return;
-        if (NHTechTree.itemProductionTree == null) return;
-        for (NHTechTree.ProductionNode root : NHTechTree.itemProductionTree) {
-            walkTech(root, 0);
-        }
-    }
+	private static void ensureTechDepth() {
+		if (itemTechDepth.size > 0) return;
+		if (NHTechTree.itemProductionTree == null) return;
+		for (NHTechTree.ProductionNode root : NHTechTree.itemProductionTree) {
+			walkTech(root, 0);
+		}
+	}
 
-    private static void walkTech(NHTechTree.ProductionNode node, int depth) {
-        if (node == null || node.content == null) return;
-        UnlockableContent content = node.content;
-        if (content instanceof Item item) {
-            int prev = itemTechDepth.get(item, -1);
-            if (depth > prev) itemTechDepth.put(item, depth);
-        }
-        if (node.children != null) {
-            for (NHTechTree.ProductionNode child : node.children) {
-                walkTech(child, depth + 1);
-            }
-        }
-    }
+	private static void walkTech(NHTechTree.ProductionNode node, int depth) {
+		if (node == null || node.content == null) return;
+		UnlockableContent content = node.content;
+		if (content instanceof Item item) {
+			int prev = itemTechDepth.get(item, -1);
+			if (depth > prev) itemTechDepth.put(item, depth);
+		}
+		if (node.children != null) {
+			for (NHTechTree.ProductionNode child : node.children) {
+				walkTech(child, depth + 1);
+			}
+		}
+	}
 
-    public static int techDepth(Item item) {
-        ensureTechDepth();
-        return itemTechDepth.get(item, 0);
-    }
+	public static int techDepth(Item item) {
+		ensureTechDepth();
+		return itemTechDepth.get(item, 0);
+	}
 
-    public static int itemThreat(Item item) {
-        if (item == null) return 0;
-        int threat = 0;
-        for (var entry : ThreatLevel.threatMap) {
-            if (entry.value.contains(item)) {
-                threat = Math.max(threat, entry.key);
-            }
-        }
-        if (threat > 0) return Mathf.clamp(threat, 0, MAX_ITEM_THREAT);
-        return Mathf.clamp(techDepth(item), 0, MAX_ITEM_THREAT);
-    }
+	public static int itemThreat(Item item) {
+		if (item == null) return 0;
+		int threat = 0;
+		for (var entry : ThreatLevel.threatMap) {
+			if (entry.value.contains(item)) {
+				threat = Math.max(threat, entry.key);
+			}
+		}
+		if (threat > 0) return Mathf.clamp(threat, 0, MAX_ITEM_THREAT);
+		return Mathf.clamp(techDepth(item), 0, MAX_ITEM_THREAT);
+	}
 
-    public static float accel01(float x) {
-        return Mathf.pow(Mathf.clamp(x, 0f, 1f), ACCEL_POWER);
-    }
+	public static float accel01(float x) {
+		return Mathf.pow(Mathf.clamp(x, 0f, 1f), ACCEL_POWER);
+	}
 
-    public static float utilAccel01(float x) {
-        x = Mathf.clamp(x, 0f, 1f);
-        return Mathf.lerp(x, x * x, 0.38f);
-    }
+	public static float utilAccel01(float x) {
+		x = Mathf.clamp(x, 0f, 1f);
+		return Mathf.lerp(x, x * x, 0.38f);
+	}
 
-    public static float threatFactor(Item item) {
-        return accel01(itemThreat(item) / (float) MAX_ITEM_THREAT);
-    }
+	public static float threatFactor(Item item) {
+		return accel01(itemThreat(item) / (float) MAX_ITEM_THREAT);
+	}
 
-    public static float utilThreatFactor(Item item) {
-        return utilAccel01(itemThreat(item) / (float) MAX_ITEM_THREAT);
-    }
+	public static float utilThreatFactor(Item item) {
+		return utilAccel01(itemThreat(item) / (float) MAX_ITEM_THREAT);
+	}
 
-    public static float techMul(Item item) {
-        return threatFactor(item);
-    }
+	public static float techMul(Item item) {
+		return threatFactor(item);
+	}
 
-    @Override
-    public void load() {
-        super.load();
-        for (int w = 0; w < WEAPON_COUNT; w++) {
-            weaponIcons[w] = Core.atlas.find(NewHorizon.name("w" + (w + 1)));
-            for (int s = 0; s < SLOT_COUNT; s++) {
-                shellIcons[w][s] = Core.atlas.find(NewHorizon.name("w" + (w + 1) + "-s" + (s + 1)), Core.atlas.find(NewHorizon.name("s" + (s + 1))));
-            }
-        }
-    }
+	@Override
+	public void load() {
+		super.load();
+		for (int w = 0; w < WEAPON_COUNT; w++) {
+			weaponIcons[w] = Core.atlas.find(NewHorizon.name("w" + (w + 1)));
+			for (int s = 0; s < SLOT_COUNT; s++) {
+				shellIcons[w][s] = Core.atlas.find(NewHorizon.name("w" + (w + 1) + "-s" + (s + 1)), Core.atlas.find(NewHorizon.name("s" + (s + 1))));
+			}
+		}
+	}
 
-    public class AirRaiderBuild extends CommandableBlockBuild {
-        public int weaponIndex = -1;
-        public int selectedSlot = 0;
-        public final ItemModule[] slots = new ItemModule[SLOT_COUNT];
-        public transient ActionBus raidBus;
-        public transient EventRaidAction raidAction;
-        public transient boolean raidActive;
-        public transient float raidExpectEnd;
+	public class AirRaiderBuild extends CommandableBlockBuild {
+		public int weaponIndex = -1;
+		public int selectedSlot = 0;
+		public final ItemModule[] slots = new ItemModule[SLOT_COUNT];
+		public transient ActionBus raidBus;
+		public transient EventRaidAction raidAction;
+		public transient boolean raidActive;
+		public transient float raidExpectEnd;
 
-        public AirRaiderBuild() {
-            for (int i = 0; i < SLOT_COUNT; i++) {
-                slots[i] = new ItemModule();
-            }
-        }
+		public AirRaiderBuild() {
+			for (int i = 0; i < SLOT_COUNT; i++) {
+				slots[i] = new ItemModule();
+			}
+		}
 
-        @Override
-        public boolean isCharging() {
-            return false;
-        }
+		@Override
+		public boolean isCharging() {
+			return false;
+		}
 
-        @Override
-        public boolean shouldCharge() {
-            return false;
-        }
+		@Override
+		public boolean shouldCharge() {
+			return false;
+		}
 
-        @Override
-        public BlockStatus status() {
-            if (raidActive) return BlockStatus.active;
-            if (!isPowered()) return BlockStatus.noInput;
-            if (weaponIndex < 0) return BlockStatus.noInput;
-            if (!hasPayload() || !canAffordPayload()) return BlockStatus.noInput;
-            return BlockStatus.noOutput;
-        }
+		@Override
+		public BlockStatus status() {
+			if (raidActive) return BlockStatus.active;
+			if (!isPowered()) return BlockStatus.noInput;
+			if (weaponIndex < 0) return BlockStatus.noInput;
+			if (!hasPayload() || !canAffordPayload()) return BlockStatus.noInput;
+			return BlockStatus.noOutput;
+		}
 
-        @Override
-        public void updateTile() {
-            super.updateTile();
-            if (!raidActive) return;
-            if (!RaidLogic.isLogicSide()) {
-                if (Time.time >= raidExpectEnd) clearRaidRefs();
-                return;
-            }
-            if (raidBus == null || raidBus.complete()) {
-                clearRaidRefs();
-            }
-        }
+		@Override
+		public void updateTile() {
+			super.updateTile();
+			if (!raidActive) return;
+			if (!RaidLogic.isLogicSide()) {
+				if (Time.time >= raidExpectEnd) clearRaidRefs();
+				return;
+			}
+			if (raidBus == null || raidBus.complete()) {
+				clearRaidRefs();
+			}
+		}
 
-        @Override
-        public void command(Vec2 pos) {
-            lastConfirmedTarget.set(pos);
-            targetVec.set(pos);
-            target = Point2.pack(World.toTile(pos.x), World.toTile(pos.y));
-        }
+		@Override
+		public void command(Vec2 pos) {
+			lastConfirmedTarget.set(pos);
+			targetVec.set(pos);
+			target = Point2.pack(World.toTile(pos.x), World.toTile(pos.y));
+		}
 
-        @Override
-        public void commandAll(Vec2 pos) {
-            if (canCommand(pos)) command(pos);
-        }
+		@Override
+		public void commandAll(Vec2 pos) {
+			if (canCommand(pos)) command(pos);
+		}
 
-        @Override
-        public void setTarget(Point2 point2) {
-            super.setTarget(point2);
-            lastConfirmedTarget.set(World.unconv(point2.x), World.unconv(point2.y));
-        }
+		@Override
+		public void setTarget(Point2 point2) {
+			super.setTarget(point2);
+			lastConfirmedTarget.set(World.unconv(point2.x), World.unconv(point2.y));
+		}
 
-        @Override
-        public boolean canCommand(Vec2 target) {
-            return !raidActive && isPowered() && weaponIndex >= 0 && hasPayload() && canAffordPayload() && !target.epsilonEquals(x, y, 0.1f);
-        }
+		@Override
+		public boolean canCommand(Vec2 target) {
+			return !raidActive && isPowered() && weaponIndex >= 0 && hasPayload() && canAffordPayload() && !target.epsilonEquals(x, y, 0.1f);
+		}
 
-        @Override
-        public void drawSelect() {
-            super.drawSelect();
-            drawTargetPreview();
-        }
+		@Override
+		public void drawSelect() {
+			super.drawSelect();
+			drawTargetPreview();
+		}
 
-        @Override
-        public void drawConfigure() {
-            drawTargetPreview();
-        }
+		@Override
+		public void drawConfigure() {
+			drawTargetPreview();
+		}
 
-        private void drawTargetPreview() {
-            if (!hasTarget()) return;
-            float tx = lastConfirmedTarget.x;
-            float ty = lastConfirmedTarget.y;
-            float spread = previewSpread();
+		private void drawTargetPreview() {
+			if (!hasTarget()) return;
+			float tx = lastConfirmedTarget.x;
+			float ty = lastConfirmedTarget.y;
+			float spread = previewSpread();
 
-            Draw.z(Layer.effect);
-            DrawFunc.posSquareLink(Pal.accent, 1.25f, 2.5f, true, x, y, tx, ty);
-            DrawFunc.drawConnected(tx, ty, 12f, Pal.accent);
-            Drawf.dashCircle(tx, ty, spread, team.color);
-            Drawf.circles(tx, ty, Math.min(spread * 0.22f, 18f), Pal.accent);
-            Draw.reset();
-        }
+			Draw.z(Layer.effect);
+			DrawFunc.posSquareLink(Pal.accent, 1.25f, 2.5f, true, x, y, tx, ty);
+			DrawFunc.drawConnected(tx, ty, 12f, Pal.accent);
+			Drawf.dashCircle(tx, ty, spread, team.color);
+			Drawf.circles(tx, ty, Math.min(spread * 0.22f, 18f), Pal.accent);
+			Draw.reset();
+		}
 
-        private float previewSpread() {
-            if (weaponIndex < 0 || weaponIndex >= WEAPON_COUNT) {
-                return 40f;
-            }
-            return calcStats().inaccuracy;
-        }
+		private float previewSpread() {
+			if (weaponIndex < 0 || weaponIndex >= WEAPON_COUNT) {
+				return 40f;
+			}
+			return calcStats().inaccuracy;
+		}
 
-        public boolean hasPayload() {
-            for (ItemModule slot : slots) {
-                if (slot.total() <= 0) return false;
-            }
-            return true;
-        }
+		public boolean hasPayload() {
+			for (ItemModule slot : slots) {
+				if (slot.total() <= 0) return false;
+			}
+			return true;
+		}
 
-        public boolean isPowered() {
-            return efficiency > 0.001f;
-        }
+		public boolean isPowered() {
+			return efficiency > 0.001f;
+		}
 
-        public boolean canAffordPayload() {
-            if (!hasPayload()) return false;
-            if (state.rules.infiniteResources || team.rules().cheat) return true;
-            Building core = team.core();
-            if (core == null) return false;
-            ItemModule need = new ItemModule();
-            for (ItemModule slot : slots) {
-                slot.each(need::add);
-            }
-            boolean[] ok = {true};
-            need.each((item, amount) -> {
-                if (amount > 0 && !core.items.has(item, amount)) ok[0] = false;
-            });
-            return ok[0];
-        }
+		public boolean canAffordPayload() {
+			if (!hasPayload()) return false;
+			if (state.rules.infiniteResources || team.rules().cheat) return true;
+			Building core = team.core();
+			if (core == null) return false;
+			ItemModule need = new ItemModule();
+			for (ItemModule slot : slots) {
+				slot.each(need::add);
+			}
+			boolean[] ok = {true};
+			need.each((item, amount) -> {
+				if (amount > 0 && !core.items.has(item, amount)) ok[0] = false;
+			});
+			return ok[0];
+		}
 
-        public boolean consumePayloadFromCore() {
-            if (!canAffordPayload()) return false;
-            if (state.rules.infiniteResources || team.rules().cheat) {
-                for (ItemModule slot : slots) slot.clear();
-                return true;
-            }
-            if (!net.client()) {
-                Building core = team.core();
-                if (core == null) return false;
-                for (ItemModule slot : slots) {
-                    slot.each((item, amount) -> {
-                        if (amount > 0) core.items.remove(item, amount);
-                    });
-                }
-            }
-            for (ItemModule slot : slots) slot.clear();
-            return true;
-        }
+		public boolean consumePayloadFromCore() {
+			if (!canAffordPayload()) return false;
+			if (state.rules.infiniteResources || team.rules().cheat) {
+				for (ItemModule slot : slots) slot.clear();
+				return true;
+			}
+			if (!net.client()) {
+				Building core = team.core();
+				if (core == null) return false;
+				for (ItemModule slot : slots) {
+					slot.each((item, amount) -> {
+						if (amount > 0) core.items.remove(item, amount);
+					});
+				}
+			}
+			for (ItemModule slot : slots) slot.clear();
+			return true;
+		}
 
-        public boolean hasTarget() {
-            return target >= 0 && !lastConfirmedTarget.epsilonEquals(x, y, 0.1f) && !targetVec.epsilonEquals(x, y, 0.1f);
-        }
+		public boolean hasTarget() {
+			return target >= 0 && !lastConfirmedTarget.epsilonEquals(x, y, 0.1f) && !targetVec.epsilonEquals(x, y, 0.1f);
+		}
 
-        public void handleConfig(IntSeq seq) {
-            if (seq == null || seq.size < 1) return;
-            int mode = seq.get(0);
-            switch (mode) {
-                case 0 -> {
-                    if (seq.size < 2) return;
+		public void handleConfig(IntSeq seq) {
+			if (seq == null || seq.size < 1) return;
+			int mode = seq.get(0);
+			switch (mode) {
+				case 0 -> {
+					if (seq.size < 2) return;
                     int idx = seq.get(1);
                     if (idx >= -1 && idx < WEAPON_COUNT) {
                         weaponIndex = idx;
@@ -1517,9 +1519,13 @@ public class AirRaider extends CommandableBlock {
         public final String bundleKey;
         public final BulletType bullet;
         public final float damageMul, splashDamageMul, splashRangeMul, sizeMul, speedMul;
-        /** Minimum raid spread radius in world units, independent of payload. */
+        /**
+         * Minimum raid spread radius in world units, independent of payload.
+         */
         public final float baseInaccuracy;
-        /** Multiplier applied to the payload-derived spread before adding {@link #baseInaccuracy}. */
+        /**
+         * Multiplier applied to the payload-derived spread before adding {@link #baseInaccuracy}.
+         */
         public final float inaccuracy;
         public final float costMul, maxLightningDmg;
         public final int shotCountMin, shotCountMax;

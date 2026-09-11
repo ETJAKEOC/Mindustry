@@ -10,26 +10,26 @@ import static mindustry.Vars.headless;
 import static newhorizon.NHVars.cutsceneUI;
 
 public class InfoTextAction extends Action {
-    public String text;
+	public String text;
 
-    @Override
-    public String actionName() {
-        return "info_text";
-    }
+	@Override
+	public String actionName() {
+		return "info_text";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-        text = ParseUtil.getNextString(tokens);
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+		text = ParseUtil.getNextString(tokens);
+	}
 
-    @Override
-    public void begin() {
-        if (headless) return;
+	@Override
+	public void begin() {
+		if (headless) return;
 
-        cutsceneUI.infoLabel = new FLabel(text);
-        cutsceneUI.infoLabel.setStyle(Styles.techLabel);
-        cutsceneUI.infoTable.clear();
-        cutsceneUI.infoTable.add(cutsceneUI.infoLabel);
-    }
+		cutsceneUI.infoLabel = new FLabel(text);
+		cutsceneUI.infoLabel.setStyle(Styles.techLabel);
+		cutsceneUI.infoTable.clear();
+		cutsceneUI.infoTable.add(cutsceneUI.infoLabel);
+	}
 }

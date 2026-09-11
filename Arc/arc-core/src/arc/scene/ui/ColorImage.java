@@ -2,16 +2,16 @@ package arc.scene.ui;
 
 import arc.graphics.Color;
 
-public class ColorImage extends Image{
-    private Color set;
+public class ColorImage extends Image {
+	private final Color set;
 
-    public ColorImage(Color set){
-        this.set = new Color(set);
-    }
+	public ColorImage(Color set) {
+		this.set = new Color(set);
+	}
 
-    @Override
-    public void draw(){
-        setColor(set);
-        super.draw();
-    }
+	@Override
+	public void draw() {
+		setColor(set);
+		super.draw();
+	}
 }

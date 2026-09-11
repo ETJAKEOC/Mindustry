@@ -10,34 +10,34 @@ import newhorizon.content.NHStats;
 
 public class StreamExtractor extends StreamRepeater {
 
-    public StreamExtractor(String name) {
-        super(name);
+	public StreamExtractor(String name) {
+		super(name);
 
-        streamLength = new int[]{5, -1, -1, -1};
-        streamCap = new float[]{0.5f, -1, -1, -1};
-    }
+		streamLength = new int[]{5, -1, -1, -1};
+		streamCap = new float[]{0.5f, -1, -1, -1};
+	}
 
-    @Override
-    public void setStats() {
-        super.setStats();
-        stats.add(NHStats.streamCap, streamCap[0] * Time.toSeconds, StatUnit.perSecond);
-    }
+	@Override
+	public void setStats() {
+		super.setStats();
+		stats.add(NHStats.streamCap, streamCap[0] * Time.toSeconds, StatUnit.perSecond);
+	}
 
-    @Override
-    public TextureRegion[] icons() {
-        return new TextureRegion[]{region};
-    }
+	@Override
+	public TextureRegion[] icons() {
+		return new TextureRegion[]{region};
+	}
 
-    public class StreamExtractorBuild extends StreamRepeaterBuild {
+	public class StreamExtractorBuild extends StreamRepeaterBuild {
 
-        @Override
-        public boolean acceptStream(StreamBeam stream) {
-            return false;
-        }
+		@Override
+		public boolean acceptStream(StreamBeam stream) {
+			return false;
+		}
 
-        @Override
-        public boolean acceptLiquid(Building source, Liquid liquid) {
-            return liquid instanceof NHLiquids.Stream;
-        }
-    }
+		@Override
+		public boolean acceptLiquid(Building source, Liquid liquid) {
+			return liquid instanceof NHLiquids.Stream;
+		}
+	}
 }

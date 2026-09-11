@@ -10,26 +10,26 @@ import static mindustry.Vars.headless;
 import static newhorizon.NHVars.cutsceneUI;
 
 public class SignalTextAction extends Action {
-    public String text;
+	public String text;
 
-    @Override
-    public String actionName() {
-        return "signal_text";
-    }
+	@Override
+	public String actionName() {
+		return "signal_text";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-        text = ParseUtil.getNextString(tokens);
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+		text = ParseUtil.getNextString(tokens);
+	}
 
-    @Override
-    public void begin() {
-        if (headless) return;
+	@Override
+	public void begin() {
+		if (headless) return;
 
-        Sounds.uiChat.play();
-        cutsceneUI.textLabel = new FLabel(text);
-        cutsceneUI.textArea.clear();
-        cutsceneUI.textArea.add(cutsceneUI.textLabel).pad(4f, 32f, 4f, 32f);
-    }
+		Sounds.uiChat.play();
+		cutsceneUI.textLabel = new FLabel(text);
+		cutsceneUI.textArea.clear();
+		cutsceneUI.textArea.add(cutsceneUI.textLabel).pad(4f, 32f, 4f, 32f);
+	}
 }

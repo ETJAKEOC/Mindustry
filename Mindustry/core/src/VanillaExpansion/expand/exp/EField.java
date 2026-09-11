@@ -10,278 +10,283 @@ import VanillaExpansion.expand.ui.Graph;
 import mindustry.world.meta.*;
 
 public abstract class EField<T> {
-    public static final float graphWidth = 330f, graphHeight = 160f;
-    public @Nullable
-    Stat stat;
-    public boolean hasTable = true;
-    public boolean formatAll = true;
-    public EField(Stat stat){
-        this.stat = stat;
-    }
+	public static final float graphWidth = 330f, graphHeight = 160f;
+	public @Nullable
+	Stat stat;
+	public boolean hasTable = true;
+	public boolean formatAll = true;
 
-    public abstract T fromLevel(int l);
-    public abstract void setLevel(int l);
-    public void buildTable(Table table, int end){}
+	public EField(Stat stat) {
+		this.stat = stat;
+	}
 
-    public EField<T> formatAll(boolean f){
-        this.formatAll = f;
-        return this;
-    }
+	public abstract T fromLevel(int l);
 
-    @Override
-    public String toString(){
-        return "[#84ff00]NULL[]";
-    }
+	public abstract void setLevel(int l);
 
-    //f(x) = scale * x + start
-    public static class ELinear extends EField<Float> {
-        public Floatc set;
-        public float start, scale;
-        public Func<Float, String> format;
+	public void buildTable(Table table, int end) {
+	}
 
-        public ELinear(Floatc set, float start, float scale, Stat stat, Func<Float, String> format){
-            super(stat);
-            this.start = start;
-            this.scale = scale;
-            this.set = set;
-            this.format = format;
-        }
+	public EField<T> formatAll(boolean f) {
+		this.formatAll = f;
+		return this;
+	}
 
-        public ELinear(Floatc set, float start, float scale, Stat stat){
-            this(set, start, scale, stat, f -> Strings.autoFixed(f, 1));
-        }
+	@Override
+	public String toString() {
+		return "[#84ff00]NULL[]";
+	}
 
-        @Override
-        public Float fromLevel(int l){
-            return start + l * scale;
-        }
+	//f(x) = scale * x + start
+	public static class ELinear extends EField<Float> {
+		public Floatc set;
+		public float start, scale;
+		public Func<Float, String> format;
 
-        @Override
-        public void setLevel(int l){
-            set.get(fromLevel(l));
-        }
+		public ELinear(Floatc set, float start, float scale, Stat stat, Func<Float, String> format) {
+			super(stat);
+			this.start = start;
+			this.scale = scale;
+			this.set = set;
+			this.format = format;
+		}
 
-        @Override
-        public String toString(){
-            return Core.bundle.format("field.linear", format.get(start), formatAll ? format.get(scale) : Strings.autoFixed(scale, 2));
-        }
+		public ELinear(Floatc set, float start, float scale, Stat stat) {
+			this(set, start, scale, stat, f -> Strings.autoFixed(f, 1));
+		}
 
-        @Override
-        public void buildTable(Table table, int end){
-            table.left();
-            Graph g = new Graph(this::fromLevel, end, VEPal.exp);
-            table.add(g).size(graphWidth, graphHeight).left();
-            table.row();
-            table.label(() -> g.lastMouseOver ? (Core.bundle.format("ui.graph.label", g.lastMouseStep, formatAll ? format.get(g.mouseValue()) : Strings.autoFixed(g.mouseValue(), 2))) : Core.bundle.get("ui.graph.hover"));
-        }
-    }
+		@Override
+		public Float fromLevel(int l) {
+			return start + l * scale;
+		}
 
-    public static class ELinearCap extends ELinear {
-        public int cap; //after this level, the stats do not rise
+		@Override
+		public void setLevel(int l) {
+			set.get(fromLevel(l));
+		}
 
-        public ELinearCap(Floatc set, float start, float scale, int cap, Stat stat, Func<Float, String> format){
-            super(set, start, scale, stat, format);
-            this.cap = cap;
-        }
+		@Override
+		public String toString() {
+			return Core.bundle.format("field.linear", format.get(start), formatAll ? format.get(scale) : Strings.autoFixed(scale, 2));
+		}
 
-        public ELinearCap(Floatc set, float start, float scale, int cap, Stat stat){
-            this(set, start, scale, cap, stat, f -> Strings.autoFixed(f, 1));
-        }
+		@Override
+		public void buildTable(Table table, int end) {
+			table.left();
+			Graph g = new Graph(this::fromLevel, end, VEPal.exp);
+			table.add(g).size(graphWidth, graphHeight).left();
+			table.row();
+			table.label(() -> g.lastMouseOver ? (Core.bundle.format("ui.graph.label", g.lastMouseStep, formatAll ? format.get(g.mouseValue()) : Strings.autoFixed(g.mouseValue(), 2))) : Core.bundle.get("ui.graph.hover"));
+		}
+	}
 
-        @Override
-        public Float fromLevel(int l){
-            return start + Math.min(l, cap) * scale;
-        }
+	public static class ELinearCap extends ELinear {
+		public int cap; //after this level, the stats do not rise
 
-        @Override
-        public void setLevel(int l){
-            set.get(fromLevel(l));
-        }
+		public ELinearCap(Floatc set, float start, float scale, int cap, Stat stat, Func<Float, String> format) {
+			super(set, start, scale, stat, format);
+			this.cap = cap;
+		}
 
-        @Override
-        public String toString(){
-            return Core.bundle.format("field.linearcap", format.get(start), formatAll ? format.get(scale) : Strings.autoFixed(scale, 2), cap);
-        }
-    }
+		public ELinearCap(Floatc set, float start, float scale, int cap, Stat stat) {
+			this(set, start, scale, cap, stat, f -> Strings.autoFixed(f, 1));
+		}
 
-    //f(x) = start * scale ^ x
-    public static class EExpo extends EField<Float> {
-        public Floatc set;
-        public float start, scale;
-        public Func<Float, String> format;
+		@Override
+		public Float fromLevel(int l) {
+			return start + Math.min(l, cap) * scale;
+		}
 
-        public EExpo(Floatc set, float start, float scale, Stat stat, Func<Float, String> format){
-            super(stat);
-            this.start = start;
-            this.scale = scale;
-            this.set = set;
-            this.format = format;
-        }
+		@Override
+		public void setLevel(int l) {
+			set.get(fromLevel(l));
+		}
 
-        public EExpo(Floatc set, float start, float scale, Stat stat){
-            this(set, start, scale, stat, f -> Strings.autoFixed(f, 1));
-        }
+		@Override
+		public String toString() {
+			return Core.bundle.format("field.linearcap", format.get(start), formatAll ? format.get(scale) : Strings.autoFixed(scale, 2), cap);
+		}
+	}
 
-        @Override
-        public Float fromLevel(int l){
-            return start * Mathf.pow(scale, l);
-        }
+	//f(x) = start * scale ^ x
+	public static class EExpo extends EField<Float> {
+		public Floatc set;
+		public float start, scale;
+		public Func<Float, String> format;
 
-        @Override
-        public void setLevel(int l){
-            set.get(fromLevel(l));
-        }
+		public EExpo(Floatc set, float start, float scale, Stat stat, Func<Float, String> format) {
+			super(stat);
+			this.start = start;
+			this.scale = scale;
+			this.set = set;
+			this.format = format;
+		}
 
-        @Override
-        public String toString(){
-            return Core.bundle.format("field.exponent", format.get(start), scale);
-        }
+		public EExpo(Floatc set, float start, float scale, Stat stat) {
+			this(set, start, scale, stat, f -> Strings.autoFixed(f, 1));
+		}
 
-        @Override
-        public void buildTable(Table table, int end){
-            table.left();
-            Graph g = new Graph(this::fromLevel, end, VEPal.exp);
-            table.add(g).size(graphWidth, graphHeight).left();
-            table.row();
-            table.label(() -> g.lastMouseOver ? (Core.bundle.format("ui.graph.label", g.lastMouseStep, formatAll ? format.get(g.mouseValue()) : Strings.autoFixed(g.mouseValue(), 2))) : Core.bundle.get("ui.graph.hover"));
-        }
-    }
+		@Override
+		public Float fromLevel(int l) {
+			return start * Mathf.pow(scale, l);
+		}
 
-    public static class EExpoZero extends EExpo{
-        public boolean clamp;
-        public EExpoZero(Floatc set, float start, float scale, boolean clamp, Stat stat, Func<Float, String> format){
-            super(set, start, scale, stat, format);
-            this.clamp = clamp;
-        }
+		@Override
+		public void setLevel(int l) {
+			set.get(fromLevel(l));
+		}
 
-        public EExpoZero(Floatc set, float start, float scale, Stat stat){
-            this(set, start, scale, false, stat, f -> Strings.autoFixed(f, 1));
-        }
+		@Override
+		public String toString() {
+			return Core.bundle.format("field.exponent", format.get(start), scale);
+		}
 
-        @Override
-        public Float fromLevel(int l){
-            return clamp ? Mathf.clamp(super.fromLevel(l) - start) : super.fromLevel(l) - start;
-        }
+		@Override
+		public void buildTable(Table table, int end) {
+			table.left();
+			Graph g = new Graph(this::fromLevel, end, VEPal.exp);
+			table.add(g).size(graphWidth, graphHeight).left();
+			table.row();
+			table.label(() -> g.lastMouseOver ? (Core.bundle.format("ui.graph.label", g.lastMouseStep, formatAll ? format.get(g.mouseValue()) : Strings.autoFixed(g.mouseValue(), 2))) : Core.bundle.get("ui.graph.hover"));
+		}
+	}
 
-        @Override
-        public String toString(){
-            return Core.bundle.format("field.exponentzero", format.get(start), scale);
-        }
-    }
+	public static class EExpoZero extends EExpo {
+		public boolean clamp;
 
-    //f(x) = a / (x - axis) + end, a = a(start) -> f(0) = start (axis != 0)
-    public static class ERational extends EField<Float> {
-        public Floatc set;
-        public float start, end, axis, a;
-        public Func<Float, String> format;
+		public EExpoZero(Floatc set, float start, float scale, boolean clamp, Stat stat, Func<Float, String> format) {
+			super(set, start, scale, stat, format);
+			this.clamp = clamp;
+		}
 
-        public ERational(Floatc set, float start, float end, float axis, Stat stat, Func<Float, String> format){
-            super(stat);
-            this.start = start;
-            this.end = end;
-            if(axis == 0) throw new ArithmeticException("Vertical asymptote cannot be x = 0");
-            this.axis = axis;
-            a = (end - start) * axis;
-            this.set = set;
-            this.format = format;
-        }
+		public EExpoZero(Floatc set, float start, float scale, Stat stat) {
+			this(set, start, scale, false, stat, f -> Strings.autoFixed(f, 1));
+		}
 
-        public ERational(Floatc set, float start, float end, Stat stat, Func<Float, String> format){
-            this(set, start, end, -1, stat, format);
-        }
+		@Override
+		public Float fromLevel(int l) {
+			return clamp ? Mathf.clamp(super.fromLevel(l) - start) : super.fromLevel(l) - start;
+		}
 
-        public ERational(Floatc set, float start, float end, Stat stat){
-            this(set, start, end, stat, f -> Strings.autoFixed(f, 1));
-        }
+		@Override
+		public String toString() {
+			return Core.bundle.format("field.exponentzero", format.get(start), scale);
+		}
+	}
 
-        @Override
-        public Float fromLevel(int l){
-            return a / (l - axis) + end;
-        }
+	//f(x) = a / (x - axis) + end, a = a(start) -> f(0) = start (axis != 0)
+	public static class ERational extends EField<Float> {
+		public Floatc set;
+		public float start, end, axis, a;
+		public Func<Float, String> format;
 
-        @Override
-        public void setLevel(int l){
-            set.get(fromLevel(l));
-        }
+		public ERational(Floatc set, float start, float end, float axis, Stat stat, Func<Float, String> format) {
+			super(stat);
+			this.start = start;
+			this.end = end;
+			if (axis == 0) throw new ArithmeticException("Vertical asymptote cannot be x = 0");
+			this.axis = axis;
+			a = (end - start) * axis;
+			this.set = set;
+			this.format = format;
+		}
 
-        @Override
-        public String toString(){
-            return Core.bundle.format("field.rational", format.get(start), formatAll ? format.get(end) : Strings.autoFixed(end, 2));
-        }
+		public ERational(Floatc set, float start, float end, Stat stat, Func<Float, String> format) {
+			this(set, start, end, -1, stat, format);
+		}
 
-        @Override
-        public void buildTable(Table table, int end){
-            table.left();
-            Graph g = new Graph(this::fromLevel, end, VEPal.exp);
-            table.add(g).size(graphWidth, graphHeight).left();
-            table.row();
-            table.label(() -> g.lastMouseOver ? (Core.bundle.format("ui.graph.label", g.lastMouseStep, formatAll ? format.get(g.mouseValue()) : Strings.autoFixed(g.mouseValue(), 2))) : Core.bundle.get("ui.graph.hover"));
-        }
-    }
+		public ERational(Floatc set, float start, float end, Stat stat) {
+			this(set, start, end, stat, f -> Strings.autoFixed(f, 1));
+		}
 
-    public static class EBool extends EField<Boolean> {
-        public Boolc set;
-        public boolean start;
-        public int thresh;
+		@Override
+		public Float fromLevel(int l) {
+			return a / (l - axis) + end;
+		}
 
-        public EBool(Boolc set, boolean start, int thresh, Stat stat){
-            super(stat);
-            this.start = start;
-            this.thresh = thresh;
-            this.set = set;
-            this.hasTable = false;
-        }
+		@Override
+		public void setLevel(int l) {
+			set.get(fromLevel(l));
+		}
 
-        @Override
-        public Boolean fromLevel(int l){
-            return (l >= thresh) != start;
-        }
+		@Override
+		public String toString() {
+			return Core.bundle.format("field.rational", format.get(start), formatAll ? format.get(end) : Strings.autoFixed(end, 2));
+		}
 
-        @Override
-        public void setLevel(int l){
-            set.get(fromLevel(l));
-        }
+		@Override
+		public void buildTable(Table table, int end) {
+			table.left();
+			Graph g = new Graph(this::fromLevel, end, VEPal.exp);
+			table.add(g).size(graphWidth, graphHeight).left();
+			table.row();
+			table.label(() -> g.lastMouseOver ? (Core.bundle.format("ui.graph.label", g.lastMouseStep, formatAll ? format.get(g.mouseValue()) : Strings.autoFixed(g.mouseValue(), 2))) : Core.bundle.get("ui.graph.hover"));
+		}
+	}
 
-        @Override
-        public String toString(){
-            return Core.bundle.format("field.bool", bs(start), bs(!start), thresh);
-        }
+	public static class EBool extends EField<Boolean> {
+		public Boolc set;
+		public boolean start;
+		public int thresh;
 
-        public String bs(boolean b){
-            return Core.bundle.get(b ? "yes" : "no");
-        }
-    }
+		public EBool(Boolc set, boolean start, int thresh, Stat stat) {
+			super(stat);
+			this.start = start;
+			this.thresh = thresh;
+			this.set = set;
+			this.hasTable = false;
+		}
 
-    public static class EList<T> extends EField<T> {
-        public Cons<T> set;
-        public T[] list;
-        public String unit;
+		@Override
+		public Boolean fromLevel(int l) {
+			return (l >= thresh) != start;
+		}
 
-        public EList(Cons<T> set, T[] list, Stat stat, String unit){
-            super(stat);
-            this.set = set;
-            this.list = list;
-            this.unit = unit;
-            this.hasTable = false;
-        }
+		@Override
+		public void setLevel(int l) {
+			set.get(fromLevel(l));
+		}
 
-        public EList(Cons<T> set, T[] list, Stat stat){
-            this(set, list, stat, "");
-        }
+		@Override
+		public String toString() {
+			return Core.bundle.format("field.bool", bs(start), bs(!start), thresh);
+		}
 
-        @Override
-        public T fromLevel(int l){
-            return list[Math.min(list.length - 1, l)];
-        }
+		public String bs(boolean b) {
+			return Core.bundle.get(b ? "yes" : "no");
+		}
+	}
 
-        @Override
-        public void setLevel(int l){
-            set.get(fromLevel(l));
-        }
+	public static class EList<T> extends EField<T> {
+		public Cons<T> set;
+		public T[] list;
+		public String unit;
 
-        @Override
-        public String toString(){
-            return Core.bundle.format("field.list", list[0], list[list.length - 1], unit);
-        }
-    }
+		public EList(Cons<T> set, T[] list, Stat stat, String unit) {
+			super(stat);
+			this.set = set;
+			this.list = list;
+			this.unit = unit;
+			this.hasTable = false;
+		}
+
+		public EList(Cons<T> set, T[] list, Stat stat) {
+			this(set, list, stat, "");
+		}
+
+		@Override
+		public T fromLevel(int l) {
+			return list[Math.min(list.length - 1, l)];
+		}
+
+		@Override
+		public void setLevel(int l) {
+			set.get(fromLevel(l));
+		}
+
+		@Override
+		public String toString() {
+			return Core.bundle.format("field.list", list[0], list[list.length - 1], unit);
+		}
+	}
 }

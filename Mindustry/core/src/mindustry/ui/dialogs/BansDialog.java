@@ -8,49 +8,49 @@ import arc.scene.ui.layout.Table;
 import mindustry.gen.*;
 import mindustry.net.Administration.PlayerInfo;
 
-public class BansDialog extends BaseDialog{
+public class BansDialog extends BaseDialog {
 
-    public BansDialog(){
-        super("@server.bans");
+	public BansDialog() {
+		super("@server.bans");
 
-        addCloseButton();
+		addCloseButton();
 
-        setup();
+		setup();
 
-        shown(this::setup);
-    }
+		shown(this::setup);
+	}
 
-    private void setup(){
-        cont.clear();
+	private void setup() {
+		cont.clear();
 
-        float w = 400f, h = 80f;
+		float w = 400f, h = 80f;
 
-        Table table = new Table();
+		Table table = new Table();
 
-        ScrollPane pane = new ScrollPane(table);
-        pane.setFadeScrollBars(false);
+		ScrollPane pane = new ScrollPane(table);
+		pane.setFadeScrollBars(false);
 
-        if(netServer.admins.getBanned().size == 0){
-            table.add("@server.bans.none");
-        }
+		if (netServer.admins.getBanned().size == 0) {
+			table.add("@server.bans.none");
+		}
 
-        for(PlayerInfo info : netServer.admins.getBanned()){
-            Table res = new Table(Tex.button);
-            res.margin(14f);
+		for (PlayerInfo info : netServer.admins.getBanned()) {
+			Table res = new Table(Tex.button);
+			res.margin(14f);
 
-            res.labelWrap("IP: [lightgray]" + info.lastIP + "\n[]Name: [lightgray]" + info.lastName).width(w - h - 24f);
-            res.add().growX();
-            res.button(Icon.cancel, () -> {
-                ui.showConfirm("@confirm", "@confirmunban", () -> {
-                    netServer.admins.unbanPlayerID(info.id);
-                    setup();
-                });
-            }).size(h).pad(-14f);
+			res.labelWrap("IP: [lightgray]" + info.lastIP + "\n[]Name: [lightgray]" + info.lastName).width(w - h - 24f);
+			res.add().growX();
+			res.button(Icon.cancel, () -> {
+				ui.showConfirm("@confirm", "@confirmunban", () -> {
+					netServer.admins.unbanPlayerID(info.id);
+					setup();
+				});
+			}).size(h).pad(-14f);
 
-            table.add(res).width(w).height(h);
-            table.row();
-        }
+			table.add(res).width(w).height(h);
+			table.row();
+		}
 
-        cont.add(pane);
-    }
+		cont.add(pane);
+	}
 }

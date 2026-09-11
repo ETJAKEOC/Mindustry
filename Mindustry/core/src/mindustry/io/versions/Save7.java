@@ -1,8 +1,8 @@
 package mindustry.io.versions;
 
-public class Save7 extends ShortChunkSaveVersion{
+public class Save7 extends ShortChunkSaveVersion {
 
-    public Save7(){
-        super(7);
-    }
+	public Save7() {
+		super(7);
+	}
 }

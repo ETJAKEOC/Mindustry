@@ -45,158 +45,159 @@ import java.nio.FloatBuffer;
 import static mindustry.Vars.net;
 
 public class ReleaseShieldWall extends Wall {
-    public float chargeChance = 0.8f;
-    public float maxHandle = 180;
-    public float lifetime = 150;
+	public float chargeChance = 0.8f;
+	public float maxHandle = 180;
+	public float lifetime = 150;
 
-    public ReleaseShieldWall(String name) {
-        super(name);
-        update = true;
-    }
+	public ReleaseShieldWall(String name) {
+		super(name);
+		update = true;
+	}
 
-    @Override
-    public void setBars() {
-        super.setBars();
-        addBar("charge", (ReleaseShieldWallBuild entity) ->
-             new Bar(() ->
-                     Core.bundle.get("bar.extra-utilities-charge"),
-                     () -> EUItems.lightninAlloy.color,
-                     entity::getCharge
-             )
-        );
-    }
+	public static void setDamage(Tile tile, float damage) {
+		if (tile == null || !(tile.build instanceof ReleaseShieldWallBuild)) return;
+		((ReleaseShieldWallBuild) tile.build).setDamage(damage);
+	}
 
-    @Override
-    public void setStats() {
-        super.setStats();
-        this.stats.add(Stat.abilities, Core.bundle.format("stat.extra-utilities-charge", maxHandle, chargeChance * 100));
-    }
+	@Override
+	public void setBars() {
+		super.setBars();
+		addBar("charge", (ReleaseShieldWallBuild entity) ->
+				new Bar(() ->
+						Core.bundle.get("bar.extra-utilities-charge"),
+						() -> EUItems.lightninAlloy.color,
+						entity::getCharge
+				)
+		);
+	}
 
-    public static void setDamage(Tile tile, float damage){
-        if(tile == null || !(tile.build instanceof  ReleaseShieldWallBuild)) return;
-        ((ReleaseShieldWallBuild) tile.build).setDamage(damage);
-    }
+	@Override
+	public void setStats() {
+		super.setStats();
+		this.stats.add(Stat.abilities, Core.bundle.format("stat.extra-utilities-charge", maxHandle, chargeChance * 100));
+	}
 
-    public class ReleaseShieldWallBuild extends WallBuild{
-        public float totalDamage = 0;
-        public float clientDamage = 0;
-        public float shieldLife = 0;
-        public Bullet shieldBullet = null;
-        public boolean acceptDamage = true;
-        public float rePacketTimer = 0;
+	public static class ShieldBullet extends BulletType {
+		public float range;
+		public Effect openEffect;
 
-        public float getCharge(){
-            return (net.client() ? clientDamage : totalDamage) / maxHandle;
-        }
+		public ShieldBullet(float range) {
+			this.range = range;
+			openEffect = new Effect(35, e -> {
+				Draw.color(e.color);
+				Lines.stroke(e.fout() * 4);
+				Lines.poly(e.x, e.y, 6, range * 0.525f + 75 * e.fin());
+			});
+			hittable = false;
+			absorbable = false;
+			hitEffect = despawnEffect = Fx.none;
+			lifetime = 60;
+			speed = damage = 0;
+			collides = false;
+			collidesAir = false;
+			collidesGround = false;
+			keepVelocity = false;
+			reflectable = false;
+		}
 
-        @Override
-        public void updateTile() {
-            rePacketTimer = Math.min(rePacketTimer + Time.delta, 60);
-            //用于逻辑显示屏显示，显示接口为timeScale
-            timeScale = getCharge();
-            if(totalDamage > maxHandle){
-                EUCall.ReleaseShieldWallBuildSync(tile, totalDamage);
-                shieldBullet = new ShieldBullet(size * 64).create(this.tile.build, this.team, this.x, this.y, 0);
-                shieldLife = lifetime;
-                acceptDamage = false;
-                totalDamage = 0;
-                clientDamage = 0;
-            }
-            if(shieldLife > 0){
-                if(shieldBullet != null){
-                    shieldBullet.set(this.x, this.y);
-                    shieldBullet.time = 0;
-                }
-                shieldLife -= Time.delta;
-            } else {
-                shieldBullet = null;
-                acceptDamage = true;
-            }
-        }
+		@Override
+		public void update(Bullet b) {
+			float realRange = range * b.fout();
+			Groups.bullet.intersect(b.x - realRange, b.y - realRange, realRange * 2, realRange * 2, trait -> {
+				if (trait.type.absorbable && trait.team != b.team && Intersector.isInsideHexagon(trait.getX(), trait.getY(), realRange, b.x, b.y)) {
+					trait.absorb();
+					EUFx.shieldDefense.at(trait.getX(), trait.getY(), EUItems.lightninAlloy.color);
+				}
+			});
+		}
 
-        @Override
-        public void damage(float damage) {
-            super.damage(damage);
-            if(acceptDamage){
-                if(!net.client()) {
-                    if (Mathf.chance(chargeChance)) totalDamage += damage;
+		@Override
+		public void init(Bullet b) {
+			if (b == null) return;
+			openEffect.at(b.x, b.y, b.fout(), EUItems.lightninAlloy.color);
+		}
+
+		@Override
+		public void draw(Bullet b) {
+			Draw.color(EUItems.lightninAlloy.color);
+			float fout = Math.min(b.fout(), 0.5f) * 2;
+			Lines.stroke(fout * 3);
+			Lines.poly(b.x, b.y, 6, (range * 0.525f) * fout * fout);
+//            Draw.alpha(fout * fout * 0.15f);
+//            Fill.poly(b.x, b.y, 6, (this.splashDamageRadius * 0.525f) * fout * fout);
+		}
+	}
+
+	public class ReleaseShieldWallBuild extends WallBuild {
+		public float totalDamage = 0;
+		public float clientDamage = 0;
+		public float shieldLife = 0;
+		public Bullet shieldBullet = null;
+		public boolean acceptDamage = true;
+		public float rePacketTimer = 0;
+
+		public float getCharge() {
+			return (net.client() ? clientDamage : totalDamage) / maxHandle;
+		}
+
+		@Override
+		public void updateTile() {
+			rePacketTimer = Math.min(rePacketTimer + Time.delta, 60);
+			//用于逻辑显示屏显示，显示接口为timeScale
+			timeScale = getCharge();
+			if (totalDamage > maxHandle) {
+				EUCall.ReleaseShieldWallBuildSync(tile, totalDamage);
+				shieldBullet = new ShieldBullet(size * 64).create(this.tile.build, this.team, this.x, this.y, 0);
+				shieldLife = lifetime;
+				acceptDamage = false;
+				totalDamage = 0;
+				clientDamage = 0;
+			}
+			if (shieldLife > 0) {
+				if (shieldBullet != null) {
+					shieldBullet.set(this.x, this.y);
+					shieldBullet.time = 0;
+				}
+				shieldLife -= Time.delta;
+			} else {
+				shieldBullet = null;
+				acceptDamage = true;
+			}
+		}
+
+		@Override
+		public void damage(float damage) {
+			super.damage(damage);
+			if (acceptDamage) {
+				if (!net.client()) {
+					if (Mathf.chance(chargeChance)) totalDamage += damage;
 //                    if(rePacketTimer >= 60){//最多每秒发一次同步包
 //                        EUCall.ReleaseShieldWallBuildSync(tile, totalDamage);
 //                        rePacketTimer = 0;
 //                    }
-                } else {
-                    if (Mathf.chance(chargeChance)) clientDamage += damage;
-                }
-            }
-        }
+				} else {
+					if (Mathf.chance(chargeChance)) clientDamage += damage;
+				}
+			}
+		}
 
-        public void setDamage(float v){
-            if(net.client()) {
-                totalDamage = v;
-                //clientDamage = v;
-            }
-        }
+		public void setDamage(float v) {
+			if (net.client()) {
+				totalDamage = v;
+				//clientDamage = v;
+			}
+		}
 
-        @Override
-        public void write(Writes write) {
-            super.write(write);
-            write.f(totalDamage);
-        }
+		@Override
+		public void write(Writes write) {
+			super.write(write);
+			write.f(totalDamage);
+		}
 
-        @Override
-        public void read(Reads read, byte revision) {
-            super.read(read, revision);
-            totalDamage = read.f();
-        }
-    }
-    public static class ShieldBullet extends BulletType{
-        public float range;
-        public Effect openEffect;
-
-        public ShieldBullet(float range){
-            this.range = range;
-            openEffect = new Effect(35, e -> {
-                Draw.color(e.color);
-                Lines.stroke(e.fout() * 4);
-                Lines.poly(e.x, e.y, 6, range * 0.525f + 75 * e.fin());
-            });
-            hittable = false;
-            absorbable = false;
-            hitEffect = despawnEffect = Fx.none;
-            lifetime = 60;
-            speed = damage = 0;
-            collides = false;
-            collidesAir = false;
-            collidesGround = false;
-            keepVelocity = false;
-            reflectable = false;
-        }
-
-        @Override
-        public void update(Bullet b) {
-            float realRange = range * b.fout();
-            Groups.bullet.intersect(b.x - realRange, b.y - realRange, realRange * 2, realRange * 2, trait ->{
-                if(trait.type.absorbable && trait.team != b.team && Intersector.isInsideHexagon(trait.getX(), trait.getY(), realRange, b.x, b.y) ){
-                    trait.absorb();
-                    EUFx.shieldDefense.at(trait.getX(), trait.getY(), EUItems.lightninAlloy.color);
-                }
-            });
-        }
-
-        @Override
-        public void init(Bullet b) {
-            if(b == null) return;
-            openEffect.at(b.x, b.y, b.fout(), EUItems.lightninAlloy.color);
-        }
-
-        @Override
-        public void draw(Bullet b) {
-            Draw.color(EUItems.lightninAlloy.color);
-            float fout = Math.min(b.fout(), 0.5f) *2;
-            Lines.stroke(fout * 3);
-            Lines.poly(b.x, b.y, 6, (range * 0.525f) * fout * fout);
-//            Draw.alpha(fout * fout * 0.15f);
-//            Fill.poly(b.x, b.y, 6, (this.splashDamageRadius * 0.525f) * fout * fout);
-        }
-    }
+		@Override
+		public void read(Reads read, byte revision) {
+			super.read(read, revision);
+			totalDamage = read.f();
+		}
+	}
 }

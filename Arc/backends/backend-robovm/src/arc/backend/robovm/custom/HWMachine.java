@@ -10,23 +10,23 @@ import org.robovm.rt.bro.ptr.MachineSizedUIntPtr;
 import org.robovm.rt.bro.ptr.VoidPtr;
 
 @Library("c")
-public class HWMachine{
-    static{
-        Bro.bind();
-    }
+public class HWMachine {
+	static {
+		Bro.bind();
+	}
 
-    @Bridge
-    public static native int sysctlbyname(BytePtr name, VoidPtr oldp,
-                                          MachineSizedUIntPtr oldlenp, VoidPtr newp,
-                                          @MachineSizedSInt long newlen);
+	@Bridge
+	public static native int sysctlbyname(BytePtr name, VoidPtr oldp,
+	                                      MachineSizedUIntPtr oldlenp, VoidPtr newp,
+	                                      @MachineSizedSInt long newlen);
 
-    public static String getMachineString(){
-        BytePtr name = BytePtr.toBytePtrAsciiZ("hw.machine");
-        MachineSizedUIntPtr size = new MachineSizedUIntPtr();
-        sysctlbyname(name, null, size, null, 0);
-        BytePtr machine = Struct.allocate(BytePtr.class, (int)size.get());
-        sysctlbyname(name, machine.as(VoidPtr.class), size, null, 0);
-        return machine.toStringAsciiZ();
-    }
+	public static String getMachineString() {
+		BytePtr name = BytePtr.toBytePtrAsciiZ("hw.machine");
+		MachineSizedUIntPtr size = new MachineSizedUIntPtr();
+		sysctlbyname(name, null, size, null, 0);
+		BytePtr machine = Struct.allocate(BytePtr.class, (int) size.get());
+		sysctlbyname(name, machine.as(VoidPtr.class), size, null, 0);
+		return machine.toStringAsciiZ();
+	}
 
 }

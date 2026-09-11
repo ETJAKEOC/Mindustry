@@ -16,44 +16,45 @@ import mindustry.world.draw.DrawBlock;
 
 
 public class DrawPhaseNode extends DrawBlock {
-    public TextureRegion bridgeRegion;
-    public TextureRegion endRegion;
+	public TextureRegion bridgeRegion;
+	public TextureRegion endRegion;
 
-    @Override
-    public void draw(Building build) {
-        if(!(build instanceof PhaseNodeBuild)) return;
-        drawR((PhaseNodeBuild) build);
-    }
-    public void drawR(PhaseNodeBuild build){
-        Draw.z(Layer.power);
-        Building other = Vars.world.build(build.link);
-        if(other == null) return;
-        float op = Core.settings.getInt("bridgeopacity") / 100f;
-        if(Mathf.zero(op)) return;
+	@Override
+	public void draw(Building build) {
+		if (!(build instanceof PhaseNodeBuild)) return;
+		drawR((PhaseNodeBuild) build);
+	}
 
-        Draw.color(Color.white);
-        float ot = build.power != null ? build.power.status : 1;
-        if(build.block.hasPower) Draw.alpha(Math.max(ot, 0.25f) * op);
-        else Draw.alpha(op);
+	public void drawR(PhaseNodeBuild build) {
+		Draw.z(Layer.power);
+		Building other = Vars.world.build(build.link);
+		if (other == null) return;
+		float op = Core.settings.getInt("bridgeopacity") / 100f;
+		if (Mathf.zero(op)) return;
 
-        Draw.rect(endRegion, build.x, build.y);
-        Draw.rect(endRegion, other.x, other.y);
+		Draw.color(Color.white);
+		float ot = build.power != null ? build.power.status : 1;
+		if (build.block.hasPower) Draw.alpha(Math.max(ot, 0.25f) * op);
+		else Draw.alpha(op);
 
-        Lines.stroke(8);
+		Draw.rect(endRegion, build.x, build.y);
+		Draw.rect(endRegion, other.x, other.y);
 
-        Tmp.v1.set(build.x, build.y).sub(other.x, other.y).setLength(Vars.tilesize/2f).scl(-1);
+		Lines.stroke(8);
 
-        Lines.line(bridgeRegion,
-                build.x,
-                build.y,
-                other.x,
-                other.y, false);
-        Draw.reset();
-    }
+		Tmp.v1.set(build.x, build.y).sub(other.x, other.y).setLength(Vars.tilesize / 2f).scl(-1);
 
-    @Override
-    public void load(Block block) {
-        bridgeRegion = Core.atlas.find(block.name + "-bridge");
-        endRegion = Core.atlas.find(block.name + "-end");
-    }
+		Lines.line(bridgeRegion,
+				build.x,
+				build.y,
+				other.x,
+				other.y, false);
+		Draw.reset();
+	}
+
+	@Override
+	public void load(Block block) {
+		bridgeRegion = Core.atlas.find(block.name + "-bridge");
+		endRegion = Core.atlas.find(block.name + "-end");
+	}
 }

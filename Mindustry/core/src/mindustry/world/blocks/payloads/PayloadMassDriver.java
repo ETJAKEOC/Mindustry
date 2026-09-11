@@ -171,8 +171,8 @@ public class PayloadMassDriver extends PayloadBlock {
 		public int link = -1;
 		public float turretRotation = 90;
 		public float reloadCounter = 0f, charge = 0f;
-		public float payLength = 0f, effectDelayTimer = -1f;		public float targetSize = grabWidth * 2f, curSize = targetSize;
-		public PayloadDriverBuild lastOther;
+		public float payLength = 0f, effectDelayTimer = -1f;
+		public PayloadDriverBuild lastOther;		public float targetSize = grabWidth * 2f, curSize = targetSize;
 		public boolean loaded;
 		public boolean charging;
 		public PayloadDriverState state = idle;
@@ -547,6 +547,8 @@ public class PayloadMassDriver extends PayloadBlock {
 				charging = read.bool();
 			}
 		}
+
+
 
 
 	}

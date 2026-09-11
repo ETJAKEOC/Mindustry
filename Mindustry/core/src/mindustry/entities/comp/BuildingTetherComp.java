@@ -7,18 +7,21 @@ import mindustry.game.Team;
 import mindustry.gen.*;
 import mindustry.type.UnitType;
 
-/** A unit that depends on a building's existence; if that building is removed, it despawns. */
+/**
+ * A unit that depends on a building's existence; if that building is removed, it despawns.
+ */
 @Component
-abstract class BuildingTetherComp implements Unitc{
-    @Import UnitType type;
-    @Import Team team;
+abstract class BuildingTetherComp implements Unitc {
+	public @Nullable Building building;
+	@Import
+	UnitType type;
+	@Import
+	Team team;
 
-    public @Nullable Building building;
-
-    @Override
-    public void update(){
-        if(building == null || !building.isValid() || building.team != team){
-            Call.unitDespawn(self());
-        }
-    }
+	@Override
+	public void update() {
+		if (building == null || !building.isValid() || building.team != team) {
+			Call.unitDespawn(self());
+		}
+	}
 }

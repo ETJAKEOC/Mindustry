@@ -24,130 +24,147 @@ import arc.util.ArcRuntimeException;
  * <p>
  * A FrameBuffer must be disposed if it is no longer needed
  * </p>
+ *
  * @author mzechner, realitix
  */
-public class FrameBuffer extends GLFrameBuffer<Texture>{
-    private Format format;
+public class FrameBuffer extends GLFrameBuffer<Texture> {
+	private Format format;
 
-    /**
-     * Creates a GLFrameBuffer from the specifications provided by bufferBuilder
-     **/
-    protected FrameBuffer(GLFrameBufferBuilder<? extends GLFrameBuffer<Texture>> bufferBuilder){
-        super(bufferBuilder);
-    }
+	/**
+	 * Creates a GLFrameBuffer from the specifications provided by bufferBuilder
+	 **/
+	protected FrameBuffer(GLFrameBufferBuilder<? extends GLFrameBuffer<Texture>> bufferBuilder) {
+		super(bufferBuilder);
+	}
 
-    /** Creates a new 2x2 buffer. Resize before use. */
-    public FrameBuffer(){
-        this(2, 2);
-    }
+	/**
+	 * Creates a new 2x2 buffer. Resize before use.
+	 */
+	public FrameBuffer() {
+		this(2, 2);
+	}
 
-    /** Creates a new FrameBuffer having the given dimensions in the format RGBA8888 and no depth buffer.*/
-    public FrameBuffer(int width, int height){
-        this(Format.rgba8888, width, height, false, false);
-    }
+	/**
+	 * Creates a new FrameBuffer having the given dimensions in the format RGBA8888 and no depth buffer.
+	 */
+	public FrameBuffer(int width, int height) {
+		this(Format.rgba8888, width, height, false, false);
+	}
 
-    /** Creates a new FrameBuffer having the given dimensions and no depth buffer. */
-    public FrameBuffer(Pixmap.Format format, int width, int height){
-        this(format, width, height, false, false);
-    }
+	/**
+	 * Creates a new FrameBuffer having the given dimensions and no depth buffer.
+	 */
+	public FrameBuffer(Pixmap.Format format, int width, int height) {
+		this(format, width, height, false, false);
+	}
 
-    /** Creates a new FrameBuffer having the given dimensions and potentially a depth buffer attached. */
-    public FrameBuffer(Pixmap.Format format, int width, int height, boolean hasDepth){
-        this(format, width, height, hasDepth, false);
-    }
+	/**
+	 * Creates a new FrameBuffer having the given dimensions and potentially a depth buffer attached.
+	 */
+	public FrameBuffer(Pixmap.Format format, int width, int height, boolean hasDepth) {
+		this(format, width, height, hasDepth, false);
+	}
 
-    /** Creates a new FrameBuffer having the given dimensions and potentially a depth buffer attached. */
-    public FrameBuffer(int width, int height, boolean hasDepth){
-        this(Format.rgba8888, width, height, hasDepth, false);
-    }
+	/**
+	 * Creates a new FrameBuffer having the given dimensions and potentially a depth buffer attached.
+	 */
+	public FrameBuffer(int width, int height, boolean hasDepth) {
+		this(Format.rgba8888, width, height, hasDepth, false);
+	}
 
-    /**
-     * Creates a new FrameBuffer having the given dimensions and potentially a depth and a stencil buffer attached.
-     * @param format the format of the color buffer; according to the OpenGL ES 2.0 spec, only RGB565, RGBA4444 and RGB5_A1 are
-     * color-renderable
-     * @param width the width of the framebuffer in pixels
-     * @param height the height of the framebuffer in pixels
-     * @param hasDepth whether to attach a depth buffer
-     * @throws ArcRuntimeException in case the FrameBuffer could not be created
-     */
-    public FrameBuffer(Pixmap.Format format, int width, int height, boolean hasDepth, boolean hasStencil){
-        create(format, width, height, hasDepth, hasStencil);
-    }
+	/**
+	 * Creates a new FrameBuffer having the given dimensions and potentially a depth and a stencil buffer attached.
+	 *
+	 * @param format   the format of the color buffer; according to the OpenGL ES 2.0 spec, only RGB565, RGBA4444 and RGB5_A1 are
+	 *                 color-renderable
+	 * @param width    the width of the framebuffer in pixels
+	 * @param height   the height of the framebuffer in pixels
+	 * @param hasDepth whether to attach a depth buffer
+	 * @throws ArcRuntimeException in case the FrameBuffer could not be created
+	 */
+	public FrameBuffer(Pixmap.Format format, int width, int height, boolean hasDepth, boolean hasStencil) {
+		create(format, width, height, hasDepth, hasStencil);
+	}
 
-    protected void create(Pixmap.Format format, int width, int height, boolean hasDepth, boolean hasStencil){
-        width = Math.max(width, 2);
-        height = Math.max(height, 2);
-        this.format = format;
-        FrameBufferBuilder frameBufferBuilder = new FrameBufferBuilder(width, height);
-        frameBufferBuilder.addBasicColorTextureAttachment(format);
-        if(hasDepth) frameBufferBuilder.addBasicDepthRenderBuffer();
-        if(hasStencil) frameBufferBuilder.addBasicStencilRenderBuffer();
-        this.bufferBuilder = frameBufferBuilder;
-        build();
-    }
+	/**
+	 * See {@link GLFrameBuffer#unbind()}
+	 */
+	public static void unbind() {
+		GLFrameBuffer.unbind();
+	}
 
-    /** Blits this buffer onto the screen using the specified shader. */
-    public void blit(Shader shader){
-        Draw.blit(this, shader);
-    }
+	protected void create(Pixmap.Format format, int width, int height, boolean hasDepth, boolean hasStencil) {
+		width = Math.max(width, 2);
+		height = Math.max(height, 2);
+		this.format = format;
+		FrameBufferBuilder frameBufferBuilder = new FrameBufferBuilder(width, height);
+		frameBufferBuilder.addBasicColorTextureAttachment(format);
+		if (hasDepth) frameBufferBuilder.addBasicDepthRenderBuffer();
+		if (hasStencil) frameBufferBuilder.addBasicStencilRenderBuffer();
+		this.bufferBuilder = frameBufferBuilder;
+		build();
+	}
 
-    public boolean resizeCheck(int width, int height){
-        int lastWidth = getWidth(), lastHeight = getHeight();
-        resize(width, height);
-        return lastWidth != getWidth() || lastHeight != getHeight();
-    }
+	/**
+	 * Blits this buffer onto the screen using the specified shader.
+	 */
+	public void blit(Shader shader) {
+		Draw.blit(this, shader);
+	}
 
-    /**
-     * Note that this does nothing if the width and height are the same.
-     * */
-    public void resize(int width, int height){
-        //prevent incomplete attachment issues.
-        width = Math.max(width, 2);
-        height = Math.max(height, 2);
+	public boolean resizeCheck(int width, int height) {
+		int lastWidth = getWidth(), lastHeight = getHeight();
+		resize(width, height);
+		return lastWidth != getWidth() || lastHeight != getHeight();
+	}
 
-        //ignore pointless resizing
-        if(width == getWidth() && height == getHeight()) return;
+	/**
+	 * Note that this does nothing if the width and height are the same.
+	 *
+	 */
+	public void resize(int width, int height) {
+		//prevent incomplete attachment issues.
+		width = Math.max(width, 2);
+		height = Math.max(height, 2);
 
-        TextureFilter min = getTexture().getMinFilter(), mag = getTexture().getMagFilter();
-        boolean hasDepth = depthbufferHandle != 0, hasStencil = stencilbufferHandle != 0;
-        dispose();
+		//ignore pointless resizing
+		if (width == getWidth() && height == getHeight()) return;
 
-        FrameBufferBuilder frameBufferBuilder = new FrameBufferBuilder(width, height);
-        frameBufferBuilder.addBasicColorTextureAttachment(format);
-        if(hasDepth) frameBufferBuilder.addBasicDepthRenderBuffer();
-        if(hasStencil) frameBufferBuilder.addBasicStencilRenderBuffer();
-        this.bufferBuilder = frameBufferBuilder;
-        this.textureAttachments.clear();
-        this.framebufferHandle = 0;
-        this.depthbufferHandle = 0;
-        this.stencilbufferHandle = 0;
-        this.depthStencilPackedBufferHandle = 0;
-        this.hasDepthStencilPackedBuffer = this.isMRT = false;
-        build();
-        getTexture().setFilter(min, mag);
-    }
+		TextureFilter min = getTexture().getMinFilter(), mag = getTexture().getMagFilter();
+		boolean hasDepth = depthbufferHandle != 0, hasStencil = stencilbufferHandle != 0;
+		dispose();
 
-    /** See {@link GLFrameBuffer#unbind()} */
-    public static void unbind(){
-        GLFrameBuffer.unbind();
-    }
+		FrameBufferBuilder frameBufferBuilder = new FrameBufferBuilder(width, height);
+		frameBufferBuilder.addBasicColorTextureAttachment(format);
+		if (hasDepth) frameBufferBuilder.addBasicDepthRenderBuffer();
+		if (hasStencil) frameBufferBuilder.addBasicStencilRenderBuffer();
+		this.bufferBuilder = frameBufferBuilder;
+		this.textureAttachments.clear();
+		this.framebufferHandle = 0;
+		this.depthbufferHandle = 0;
+		this.stencilbufferHandle = 0;
+		this.depthStencilPackedBufferHandle = 0;
+		this.hasDepthStencilPackedBuffer = this.isMRT = false;
+		build();
+		getTexture().setFilter(min, mag);
+	}
 
-    @Override
-    protected Texture createTexture(FrameBufferTextureAttachmentSpec attachmentSpec){
-        GLOnlyTextureData data = new GLOnlyTextureData(bufferBuilder.width, bufferBuilder.height, 0, attachmentSpec.internalFormat, attachmentSpec.format, attachmentSpec.type);
-        Texture result = new Texture(data);
-        result.setFilter(TextureFilter.linear, TextureFilter.linear);
-        result.setWrap(TextureWrap.clampToEdge, TextureWrap.clampToEdge);
-        return result;
-    }
+	@Override
+	protected Texture createTexture(FrameBufferTextureAttachmentSpec attachmentSpec) {
+		GLOnlyTextureData data = new GLOnlyTextureData(bufferBuilder.width, bufferBuilder.height, 0, attachmentSpec.internalFormat, attachmentSpec.format, attachmentSpec.type);
+		Texture result = new Texture(data);
+		result.setFilter(TextureFilter.linear, TextureFilter.linear);
+		result.setWrap(TextureWrap.clampToEdge, TextureWrap.clampToEdge);
+		return result;
+	}
 
-    @Override
-    protected void disposeTexture(Texture colorTexture){
-        colorTexture.dispose();
-    }
+	@Override
+	protected void disposeTexture(Texture colorTexture) {
+		colorTexture.dispose();
+	}
 
-    @Override
-    protected void attachTexture(int attachment, Texture texture){
-        Gl.framebufferTexture2D(Gl.framebuffer, attachment, Gl.texture2d, texture.getTextureObjectHandle(), 0);
-    }
+	@Override
+	protected void attachTexture(int attachment, Texture texture) {
+		Gl.framebufferTexture2D(Gl.framebuffer, attachment, Gl.texture2d, texture.getTextureObjectHandle(), 0);
+	}
 }

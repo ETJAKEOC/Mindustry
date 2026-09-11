@@ -6,37 +6,38 @@ import mindustry.game.MapObjectives;
 import static mindustry.Vars.state;
 
 public class ReuseObjective extends MapObjectives.MapObjective {
-    public @MapObjectives.Second float duration = 60f * 30f;
-    public String trigger = "trigger";
-    public String executor = "executor";
+	public @MapObjectives.Second float duration = 60f * 30f;
+	public String trigger = "trigger";
+	public String executor = "executor";
 
-    protected float countup;
+	protected float countup;
 
-    public ReuseObjective(float duration, String trigger, String executor) {
-        this.duration = duration;
-        this.trigger = trigger;
-        this.executor = executor;
-    }
+	public ReuseObjective(float duration, String trigger, String executor) {
+		this.duration = duration;
+		this.trigger = trigger;
+		this.executor = executor;
+	}
 
-    public ReuseObjective() {}
+	public ReuseObjective() {
+	}
 
-    @Override
-    public boolean update() {
-        if (countup <= duration) {
-            countup += Time.delta;
-        } else {
-            countup %= duration;
-            state.rules.objectiveFlags.addAll(executor);
-        }
-        return false;
-    }
+	@Override
+	public boolean update() {
+		if (countup <= duration) {
+			countup += Time.delta;
+		} else {
+			countup %= duration;
+			state.rules.objectiveFlags.addAll(executor);
+		}
+		return false;
+	}
 
-    public float getCountup() {
-        return countup;
-    }
+	public float getCountup() {
+		return countup;
+	}
 
-    @Override
-    public boolean qualified() {
-        return state.rules.objectiveFlags.contains(trigger);
-    }
+	@Override
+	public boolean qualified() {
+		return state.rules.objectiveFlags.contains(trigger);
+	}
 }

@@ -10,20 +10,20 @@ import static mindustry.Vars.headless;
 import static newhorizon.NHVars.cutsceneUI;
 
 public class InfoFadeInAction extends Action {
-    @Override
-    public String actionName() {
-        return "info_fade_in";
-    }
+	@Override
+	public String actionName() {
+		return "info_fade_in";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+	}
 
-    @Override
-    public void begin() {
-        if (headless) return;
+	@Override
+	public void begin() {
+		if (headless) return;
 
-        cutsceneUI.infoTable.actions(Actions.fadeIn(duration / Time.toSeconds, NHInterp.bounce5Out));
-    }
+		cutsceneUI.infoTable.actions(Actions.fadeIn(duration / Time.toSeconds, NHInterp.bounce5Out));
+	}
 }

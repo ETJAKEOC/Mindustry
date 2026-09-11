@@ -30,233 +30,231 @@ import mindustry.world.meta.*;
 import static mindustry.Vars.*;
 
 public class TestPullRequestForceProjector extends ForceProjector {
+	protected static TestPullRequestForceProjector paramBlock;
+	protected static TestPullRequestForceBuild paramEntity;
+	protected static final Cons<Bullet> shieldConsumer = bullet -> {
+		if (bullet.team != paramEntity.team && bullet.type.absorbable && !bullet.absorbed &&
+				Intersector.isInRegularPolygon(paramBlock.sides, paramEntity.x, paramEntity.y, paramEntity.realRadius(), paramBlock.shieldRotation, bullet.x, bullet.y)) {
 
-    public int sides = 6;
-    public float shieldRotation = 0f;
-    public float cooldownNormal = 1.75f;
-    public float cooldownLiquid = 1.5f;
-    public float cooldownBrokenBase = 1.0f;
-    public Effect shieldBreakEffect = CustomFx.shieldBreakProjector;
+			bullet.absorb();
+			paramBlock.hitSound.at(bullet.x, bullet.y, 1f + Mathf.range(0.1f), paramBlock.hitSoundVolume);
+			paramBlock.absorbEffect.at(bullet);
+			paramEntity.hit = 1f;
+			paramEntity.buildup += bullet.type.shieldDamage(bullet);
+		}
+	};
+	public int sides = 6;
+	public float shieldRotation = 0f;
+	public float cooldownNormal = 1.75f;
+	public float cooldownLiquid = 1.5f;
+	public float cooldownBrokenBase = 1.0f;
+	public Effect shieldBreakEffect = CustomFx.shieldBreakProjector;
+	public TestPullRequestForceProjector(String name) {
+		super(name);
+	}
 
-    public TestPullRequestForceProjector(String name){
-        super(name);
-    }
+	@Override
+	public void setBars() {
+		super.setBars();
+		removeBar("shield");
+		addBar("shield", (TestPullRequestForceBuild entity) -> new Bar("stat.shieldhealth", Pal.accent, () -> entity.broken ? 0f : 1f - entity.buildup / (shieldHealth + phaseShieldBoost * entity.phaseHeat)).blink(Color.white));
+	}
 
-    protected static TestPullRequestForceProjector paramBlock;
-    protected static TestPullRequestForceBuild paramEntity;
-    protected static final Cons<Bullet> shieldConsumer = bullet -> {
-        if(bullet.team != paramEntity.team && bullet.type.absorbable && !bullet.absorbed &&
-                Intersector.isInRegularPolygon(paramBlock.sides, paramEntity.x, paramEntity.y, paramEntity.realRadius(), paramBlock.shieldRotation, bullet.x, bullet.y)){
+	public class TestPullRequestForceBuild extends Building implements Ranged, ExplosionShield {
+		public boolean broken = true;
+		public float buildup, radscl, hit, warmup, phaseHeat;
 
-            bullet.absorb();
-            paramBlock.hitSound.at(bullet.x, bullet.y, 1f + Mathf.range(0.1f), paramBlock.hitSoundVolume);
-            paramBlock.absorbEffect.at(bullet);
-            paramEntity.hit = 1f;
-            paramEntity.buildup += bullet.type.shieldDamage(bullet);
-        }
-    };
+		@Override
+		public void setProp(LAccess prop, double value) {
+			if (prop == LAccess.shield) {
+				buildup = Math.max(shieldHealth + phaseShieldBoost * phaseHeat - (float) value, 0f);
+			} else {
+				super.setProp(prop, value);
+			}
+		}
 
-    @Override
-    public void setBars(){
-        super.setBars();
-        removeBar("shield");
-        addBar("shield", (TestPullRequestForceBuild entity) -> new Bar("stat.shieldhealth", Pal.accent, () -> entity.broken ? 0f : 1f - entity.buildup / (shieldHealth + phaseShieldBoost * entity.phaseHeat)).blink(Color.white));
-    }
+		@Override
+		public float range() {
+			return realRadius();
+		}
 
-    public class TestPullRequestForceBuild extends Building implements Ranged, ExplosionShield{
-        public boolean broken = true;
-        public float buildup, radscl, hit, warmup, phaseHeat;
+		@Override
+		public boolean shouldAmbientSound() {
+			return !broken && realRadius() > 1f;
+		}
 
-        @Override
-        public void setProp(LAccess prop, double value){
-            if(prop == LAccess.shield){
-                buildup = Math.max(shieldHealth + phaseShieldBoost * phaseHeat - (float)value, 0f);
-            }else{
-                super.setProp(prop, value);
-            }
-        }
+		@Override
+		public void onRemoved() {
+			float radius = realRadius();
+			if (!broken && radius > 1f) Fx.forceShrink.at(x, y, radius, team.color);
+			super.onRemoved();
+		}
 
-        @Override
-        public float range(){
-            return realRadius();
-        }
+		@Override
+		public void pickedUp() {
+			super.pickedUp();
+			radscl = warmup = 0f;
+		}
 
-        @Override
-        public boolean shouldAmbientSound(){
-            return !broken && realRadius() > 1f;
-        }
+		@Override
+		public boolean inFogTo(Team viewer) {
+			return false;
+		}
 
-        @Override
-        public void onRemoved(){
-            float radius = realRadius();
-            if(!broken && radius > 1f) Fx.forceShrink.at(x, y, radius, team.color);
-            super.onRemoved();
-        }
+		@Override
+		public void updateTile() {
+			boolean phaseValid = itemConsumer != null && itemConsumer.efficiency(this) > 0;
 
-        @Override
-        public void pickedUp(){
-            super.pickedUp();
-            radscl = warmup = 0f;
-        }
+			phaseHeat = Mathf.lerpDelta(phaseHeat, Mathf.num(phaseValid), 0.1f);
 
-        @Override
-        public boolean inFogTo(Team viewer){
-            return false;
-        }
+			if (phaseValid && !broken && timer(timerUse, phaseUseTime / timeScale) && efficiency > 0) {
+				consume();
+			}
 
-        @Override
-        public void updateTile(){
-            boolean phaseValid = itemConsumer != null && itemConsumer.efficiency(this) > 0;
+			radscl = Mathf.lerpDelta(radscl, broken ? 0f : warmup, 0.05f);
 
-            phaseHeat = Mathf.lerpDelta(phaseHeat, Mathf.num(phaseValid), 0.1f);
+			if (Mathf.chanceDelta(buildup / shieldHealth * 0.1f)) {
+				Fx.reactorsmoke.at(x + Mathf.range(tilesize / 2f), y + Mathf.range(tilesize / 2f));
+			}
 
-            if(phaseValid && !broken && timer(timerUse, phaseUseTime / timeScale) && efficiency > 0){
-                consume();
-            }
+			warmup = Mathf.lerpDelta(warmup, efficiency, 0.1f);
 
-            radscl = Mathf.lerpDelta(radscl, broken ? 0f : warmup, 0.05f);
+			if (buildup > 0) {
+				float scale = !broken ? cooldownNormal : cooldownBrokenBase;
 
-            if(Mathf.chanceDelta(buildup / shieldHealth * 0.1f)){
-                Fx.reactorsmoke.at(x + Mathf.range(tilesize / 2f), y + Mathf.range(tilesize / 2f));
-            }
+				//TODO I hate this system
+				if (coolantConsumer != null) {
+					if (coolantConsumer.efficiency(this) > 0) {
+						coolantConsumer.update(this);
+						scale *= (cooldownLiquid * (1f + (liquids.current().heatCapacity - 0.4f) * 0.9f));
+					}
+				}
 
-            warmup = Mathf.lerpDelta(warmup, efficiency, 0.1f);
+				buildup -= delta() * scale;
+			}
 
-            if(buildup > 0){
-                float scale = !broken ? cooldownNormal : cooldownBrokenBase;
+			if (broken && buildup <= 0) {
+				broken = false;
+			}
 
-                //TODO I hate this system
-                if(coolantConsumer != null){
-                    if(coolantConsumer.efficiency(this) > 0){
-                        coolantConsumer.update(this);
-                        scale *= (cooldownLiquid * (1f + (liquids.current().heatCapacity - 0.4f) * 0.9f));
-                    }
-                }
+			if (buildup >= shieldHealth + phaseShieldBoost * phaseHeat && !broken) {
+				broken = true;
+				buildup = shieldHealth;
+				shieldBreakEffect.at(x, y, realRadius(), team.color, this.block);
+				breakSound.at(x, y);
+				if (team != state.rules.defaultTeam) {
+					Events.fire(Trigger.forceProjectorBreak);
+				}
+			}
 
-                buildup -= delta() * scale;
-            }
+			if (hit > 0f) {
+				hit -= 1f / 5f * Time.delta;
+			}
 
-            if(broken && buildup <= 0){
-                broken = false;
-            }
+			deflectBullets();
+		}
 
-            if(buildup >= shieldHealth + phaseShieldBoost * phaseHeat && !broken){
-                broken = true;
-                buildup = shieldHealth;
-                shieldBreakEffect.at(x, y, realRadius(), team.color, this.block);
-                breakSound.at(x, y);
-                if(team != state.rules.defaultTeam){
-                    Events.fire(Trigger.forceProjectorBreak);
-                }
-            }
+		public void deflectBullets() {
+			float realRadius = realRadius();
 
-            if(hit > 0f){
-                hit -= 1f / 5f * Time.delta;
-            }
+			if (realRadius > 0 && !broken) {
+				paramBlock = TestPullRequestForceProjector.this;
+				paramEntity = this;
+				Groups.bullet.intersect(x - realRadius, y - realRadius, realRadius * 2f, realRadius * 2f, shieldConsumer);
+			}
+		}
 
-            deflectBullets();
-        }
+		@Override
+		public boolean absorbExplosion(float ex, float ey, float damage) {
+			boolean absorb = !broken && Intersector.isInRegularPolygon(sides, x, y, realRadius(), shieldRotation, ex, ey);
+			if (absorb) {
+				absorbEffect.at(ex, ey);
+				hit = 1f;
+				buildup += damage * crashDamageMultiplier;
+			}
+			return absorb;
+		}
 
-        public void deflectBullets(){
-            float realRadius = realRadius();
+		public float realRadius() {
+			return (radius + phaseHeat * phaseRadiusBoost) * radscl;
+		}
 
-            if(realRadius > 0 && !broken){
-                paramBlock = TestPullRequestForceProjector.this;
-                paramEntity = this;
-                Groups.bullet.intersect(x - realRadius, y - realRadius, realRadius * 2f, realRadius * 2f, shieldConsumer);
-            }
-        }
+		@Override
+		public double sense(LAccess sensor) {
+			if (sensor == LAccess.heat) return buildup;
+			if (sensor == LAccess.shield)
+				return broken ? 0f : Math.max(shieldHealth + phaseShieldBoost * phaseHeat - buildup, 0);
+			return super.sense(sensor);
+		}
 
-        @Override
-        public boolean absorbExplosion(float ex, float ey, float damage){
-            boolean absorb = !broken && Intersector.isInRegularPolygon(sides, x, y, realRadius(), shieldRotation, ex, ey);
-            if(absorb){
-                absorbEffect.at(ex, ey);
-                hit = 1f;
-                buildup += damage * crashDamageMultiplier;
-            }
-            return absorb;
-        }
+		@Override
+		public void draw() {
+			super.draw();
 
-        public float realRadius(){
-            return (radius + phaseHeat * phaseRadiusBoost) * radscl;
-        }
+			if (buildup > 0f) {
+				Draw.alpha(buildup / shieldHealth * 0.75f);
+				Draw.z(Layer.blockAdditive);
+				Draw.blend(Blending.additive);
+				Draw.rect(topRegion, x, y);
+				Draw.blend();
+				Draw.z(Layer.block);
+				Draw.reset();
+			}
 
-        @Override
-        public double sense(LAccess sensor){
-            if(sensor == LAccess.heat) return buildup;
-            if(sensor == LAccess.shield) return broken ? 0f : Math.max(shieldHealth + phaseShieldBoost * phaseHeat - buildup, 0);
-            return super.sense(sensor);
-        }
+			drawShield();
+		}
 
-        @Override
-        public void draw(){
-            super.draw();
+		public void drawShield() {
+			if (!broken) {
+				float radius = realRadius();
 
-            if(buildup > 0f){
-                Draw.alpha(buildup / shieldHealth * 0.75f);
-                Draw.z(Layer.blockAdditive);
-                Draw.blend(Blending.additive);
-                Draw.rect(topRegion, x, y);
-                Draw.blend();
-                Draw.z(Layer.block);
-                Draw.reset();
-            }
+				if (radius > 0.001f) {
+					Draw.color(team.color, Color.white, Mathf.clamp(hit));
 
-            drawShield();
-        }
+					if (renderer.animateShields) {
+						Draw.z(Layer.shields + 0.001f * hit);
+						Fill.poly(x, y, sides, radius, shieldRotation);
+					} else {
+						Draw.z(Layer.shields);
+						Lines.stroke(1.5f);
+						Draw.alpha(0.09f + Mathf.clamp(0.08f * hit));
+						Fill.poly(x, y, sides, radius, shieldRotation);
+						Draw.alpha(1f);
+						Lines.poly(x, y, sides, radius, shieldRotation);
+						Draw.reset();
+					}
+				}
+			}
 
-        public void drawShield(){
-            if(!broken){
-                float radius = realRadius();
+			Draw.reset();
+		}
 
-                if(radius > 0.001f){
-                    Draw.color(team.color, Color.white, Mathf.clamp(hit));
+		@Override
+		public void overwrote(Seq<Building> previous) {
+			if (previous.size > 0 && previous.first().block == block && previous.first() instanceof TestPullRequestForceBuild b) {
+				broken = b.broken;
+				buildup = b.buildup;
+			}
+		}
 
-                    if(renderer.animateShields){
-                        Draw.z(Layer.shields + 0.001f * hit);
-                        Fill.poly(x, y, sides, radius, shieldRotation);
-                    }else{
-                        Draw.z(Layer.shields);
-                        Lines.stroke(1.5f);
-                        Draw.alpha(0.09f + Mathf.clamp(0.08f * hit));
-                        Fill.poly(x, y, sides, radius, shieldRotation);
-                        Draw.alpha(1f);
-                        Lines.poly(x, y, sides, radius, shieldRotation);
-                        Draw.reset();
-                    }
-                }
-            }
+		@Override
+		public void write(Writes write) {
+			super.write(write);
+			write.bool(broken);
+			write.f(buildup);
+			write.f(radscl);
+			write.f(warmup);
+			write.f(phaseHeat);
+		}
 
-            Draw.reset();
-        }
-
-        @Override
-        public void overwrote(Seq<Building> previous){
-            if(previous.size > 0 && previous.first().block == block && previous.first() instanceof TestPullRequestForceBuild b){
-                broken = b.broken;
-                buildup = b.buildup;
-            }
-        }
-
-        @Override
-        public void write(Writes write){
-            super.write(write);
-            write.bool(broken);
-            write.f(buildup);
-            write.f(radscl);
-            write.f(warmup);
-            write.f(phaseHeat);
-        }
-
-        @Override
-        public void read(Reads read, byte revision){
-            super.read(read, revision);
-            broken = read.bool();
-            buildup = read.f();
-            radscl = read.f();
-            warmup = read.f();
-            phaseHeat = read.f();
-        }
-    }
+		@Override
+		public void read(Reads read, byte revision) {
+			super.read(read, revision);
+			broken = read.bool();
+			buildup = read.f();
+			radscl = read.f();
+			warmup = read.f();
+			phaseHeat = read.f();
+		}
+	}
 }

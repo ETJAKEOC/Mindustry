@@ -396,7 +396,10 @@ public class Units {
 		result = null;
 		cdist = 0f;
 
-		for (Unit e : Groups.unit) {
+		Seq<Unit> raw = Groups.unit.rawSeq();
+		Unit[] items = raw.items;
+		for (int i = 0, n = raw.size; i < n; i++) {
+			Unit e = items[i];
 			if (!predicate.get(e) || e.team() != team) continue;
 
 			float dist = e.dst2(x, y);
@@ -504,8 +507,10 @@ public class Units {
 		if (team != null) {
 			team.data().tree().intersect(x, y, width, height, cons);
 		} else {
-			for (var other : state.teams.present) {
-				other.tree().intersect(x, y, width, height, cons);
+			Seq<TeamData> present = state.teams.present;
+			TeamData[] items = present.items;
+			for (int i = 0, n = present.size; i < n; i++) {
+				items[i].tree().intersect(x, y, width, height, cons);
 			}
 		}
 	}

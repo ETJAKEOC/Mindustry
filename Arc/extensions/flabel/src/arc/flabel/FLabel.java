@@ -32,9 +32,9 @@ public class FLabel extends Label {
 	private final IntSeq offsetCache = new IntSeq();
 	private final IntSeq layoutLineBreaks = new IntSeq();
 	private final Seq<FEffect> activeEffects = new Seq<>();
-	boolean forceMarkupColor = FConfig.forceColorMarkupByDefault;
 	// Config
 	private final Color clearColor = new Color(FConfig.defaultClearColor);
+	boolean forceMarkupColor = FConfig.forceColorMarkupByDefault;
 	private FListener listener = null;
 	private float textSpeed = FConfig.defaultSpeedPerChar;
 	private float charCooldown = textSpeed;

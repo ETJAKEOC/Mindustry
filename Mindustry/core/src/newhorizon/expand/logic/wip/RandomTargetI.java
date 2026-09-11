@@ -17,49 +17,49 @@ import static mindustry.Vars.state;
 import static mindustry.Vars.world;
 
 public class RandomTargetI implements LExecutor.LInstruction {
-    public LVar team, x, y, seed, w1, w2, w3, w4;
+	public LVar team, x, y, seed, w1, w2, w3, w4;
 
-    public RandomTargetI(LVar team, LVar seed, LVar x, LVar y, LVar w1, LVar w2, LVar w3, LVar w4) {
-        this.team = team;
-        this.seed = seed;
-        this.x = x;
-        this.y = y;
-        this.w1 = w1;
-        this.w2 = w2;
-        this.w3 = w3;
-        this.w4 = w4;
-    }
+	public RandomTargetI(LVar team, LVar seed, LVar x, LVar y, LVar w1, LVar w2, LVar w3, LVar w4) {
+		this.team = team;
+		this.seed = seed;
+		this.x = x;
+		this.y = y;
+		this.w1 = w1;
+		this.w2 = w2;
+		this.w3 = w3;
+		this.w4 = w4;
+	}
 
-    public RandomTargetI() {
-    }
+	public RandomTargetI() {
+	}
 
-    @Override
-    public void run(LExecutor exec) {
-        if (!exec.privileged) return;
+	@Override
+	public void run(LExecutor exec) {
+		if (!exec.privileged) return;
 
-        Team wave = state.rules.waveTeam;
-        Team player = state.rules.defaultTeam;
-        if (wave == null || player == null) return;
+		Team wave = state.rules.waveTeam;
+		Team player = state.rules.defaultTeam;
+		if (wave == null || player == null) return;
 
-        int s = seed.numi();
-        Rand r = new Rand(s);
-        float wx = r.random(0, world.unitWidth());
-        float wy = r.random(0, world.unitHeight());
+		int s = seed.numi();
+		Rand r = new Rand(s);
+		float wx = r.random(0, world.unitWidth());
+		float wy = r.random(0, world.unitHeight());
 
-        AtomicReference<BlockFlag> flag = new AtomicReference<>(BlockFlag.core);
-        WeightedRandom.random(
-                new WeightedOption(w1.numf(), () -> flag.set(BlockFlag.turret)),
-                new WeightedOption(w2.numf(), () -> flag.set(BlockFlag.generator)),
-                new WeightedOption(w3.numf(), () -> flag.set(BlockFlag.factory)),
-                new WeightedOption(w4.numf(), () -> flag.set(BlockFlag.core))
-        );
+		AtomicReference<BlockFlag> flag = new AtomicReference<>(BlockFlag.core);
+		WeightedRandom.random(
+				new WeightedOption(w1.numf(), () -> flag.set(BlockFlag.turret)),
+				new WeightedOption(w2.numf(), () -> flag.set(BlockFlag.generator)),
+				new WeightedOption(w3.numf(), () -> flag.set(BlockFlag.factory)),
+				new WeightedOption(w4.numf(), () -> flag.set(BlockFlag.core))
+		);
 
-        Building b = Geometry.findClosest(wx, wy, indexer.getEnemy(wave, flag.get()));
-        if (b == null) b = Geometry.findClosest(wx, wy, indexer.getFlagged(player, flag.get()));
-        if (b == null) b = player.core();
-        if (b == null) return;
+		Building b = Geometry.findClosest(wx, wy, indexer.getEnemy(wave, flag.get()));
+		if (b == null) b = Geometry.findClosest(wx, wy, indexer.getFlagged(player, flag.get()));
+		if (b == null) b = player.core();
+		if (b == null) return;
 
-        x.setnum(b.tileX());
-        y.setnum(b.tileY());
-    }
+		x.setnum(b.tileX());
+		y.setnum(b.tileY());
+	}
 }

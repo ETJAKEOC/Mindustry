@@ -23,14 +23,13 @@ import mindustry.world.blocks.environment.Floor;
 
 @Component
 abstract class WaterMoveComp implements Posc, Velc, Hitboxc, Unitc {
+	private final transient Trail tleft = new Trail(1);
+	private final transient Trail tright = new Trail(1);
+	private final transient Color trailColor = Blocks.water.mapColor.cpy().mul(1.5f);
 	@Import
 	float x, y, rotation, speedMultiplier;
 	@Import
 	UnitType type;
-
-	private final transient Trail tleft = new Trail(1);
-	private final transient Trail tright = new Trail(1);
-	private final transient Color trailColor = Blocks.water.mapColor.cpy().mul(1.5f);
 
 	@Override
 	public void update() {

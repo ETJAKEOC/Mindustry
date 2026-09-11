@@ -18,76 +18,76 @@ import static mindustry.Vars.player;
 import static mindustry.Vars.tilesize;
 
 public class GravityWell extends Block {
-    public static Rand rand = new Rand();
-    public final int effect = timers++;
-    public float gravityRange = 80f;
+	public static Rand rand = new Rand();
+	public final int effect = timers++;
+	public float gravityRange = 80f;
 
-    public GravityWell(String name) {
-        super(name);
-        update = true;
-    }
+	public GravityWell(String name) {
+		super(name);
+		update = true;
+	}
 
-    @Override
-    public void init() {
-        super.init();
-        clipSize += gravityRange * 2;
-    }
+	@Override
+	public void init() {
+		super.init();
+		clipSize += gravityRange * 2;
+	}
 
-    public void drawRangeRect(float x, float y, float range) {
-        Lines.stroke(3, Pal.gray);
-        Lines.square(x, y, range + 1);
+	public void drawRangeRect(float x, float y, float range) {
+		Lines.stroke(3, Pal.gray);
+		Lines.square(x, y, range + 1);
 
-        Color color = player == null ? Pal.techBlue : Vars.player.team().color;
-        Lines.stroke(1, color);
-        Lines.square(x, y, range);
+		Color color = player == null ? Pal.techBlue : Vars.player.team().color;
+		Lines.stroke(1, color);
+		Lines.square(x, y, range);
 
-        Draw.reset();
-    }
+		Draw.reset();
+	}
 
-    @Override
-    public void setStats() {
-        super.setStats();
-        stats.add(NHStats.gravityRange, gravityRange / tilesize, StatUnit.blocks);
-    }
+	@Override
+	public void setStats() {
+		super.setStats();
+		stats.add(NHStats.gravityRange, gravityRange / tilesize, StatUnit.blocks);
+	}
 
-    public class GravityWellBuild extends Building {
-        public transient GravityTrapField field;
+	public class GravityWellBuild extends Building {
+		public transient GravityTrapField field;
 
-        @Override
-        public void created() {
-            super.created();
-            field = new GravityTrapField(this, gravityRange);
-        }
+		@Override
+		public void created() {
+			super.created();
+			field = new GravityTrapField(this, gravityRange);
+		}
 
-        @Override
-        public boolean canPickup() {
-            return false;
-        }
+		@Override
+		public boolean canPickup() {
+			return false;
+		}
 
-        public void update() {
-            if (field == null) field = new GravityTrapField(this, gravityRange);
-            field.update(this);
-        }
+		public void update() {
+			if (field == null) field = new GravityTrapField(this, gravityRange);
+			field.update(this);
+		}
 
-        @Override
-        public void draw() {
-            super.draw();
-            Draw.z(NHContent.GRAVITY_TRAP_LAYER);
-            Draw.color(team.color);
-            Draw.alpha(0.25f);
-            Fill.rect(field.rect);
-        }
+		@Override
+		public void draw() {
+			super.draw();
+			Draw.z(NHContent.GRAVITY_TRAP_LAYER);
+			Draw.color(team.color);
+			Draw.alpha(0.25f);
+			Fill.rect(field.rect);
+		}
 
-        @Override
-        public void drawSelect() {
-            super.drawSelect();
-            drawRangeRect(x, y, gravityRange);
-        }
+		@Override
+		public void drawSelect() {
+			super.drawSelect();
+			drawRangeRect(x, y, gravityRange);
+		}
 
-        @Override
-        public void remove() {
-            super.remove();
-            field.remove();
-        }
-    }
+		@Override
+		public void remove() {
+			super.remove();
+			field.remove();
+		}
+	}
 }

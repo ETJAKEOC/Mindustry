@@ -9,161 +9,161 @@ import arc.scene.Scene;
 import arc.scene.ui.layout.WidgetGroup;
 import arc.util.viewport.Viewport;
 
-public class FxWidgetGroup extends WidgetGroup{
-    private final FxProcessor fxProcessor;
-    private boolean initialized = false;
-    private boolean resizePending = false;
-    private boolean matchWidgetSize = false;
+public class FxWidgetGroup extends WidgetGroup {
+	private final FxProcessor fxProcessor;
+	private boolean initialized = false;
+	private boolean resizePending = false;
+	private boolean matchWidgetSize = false;
 
-    public FxWidgetGroup(){
-        fxProcessor = new FxProcessor();
-        super.setTransform(false);
-    }
+	public FxWidgetGroup() {
+		fxProcessor = new FxProcessor();
+		super.setTransform(false);
+	}
 
-    public FxProcessor getFxProcessor(){
-        return fxProcessor;
-    }
+	public FxProcessor getFxProcessor() {
+		return fxProcessor;
+	}
 
-    public boolean isMatchWidgetSize(){
-        return matchWidgetSize;
-    }
+	public boolean isMatchWidgetSize() {
+		return matchWidgetSize;
+	}
 
-    /**
-     * @param matchWidgetSize if true, the internal {@link FxProcessor} will be resized
-     * to match {@link FxWidgetGroup}'s size (stage units and not screen pixels).
-     */
-    public void setMatchWidgetSize(boolean matchWidgetSize){
-        if(this.matchWidgetSize == matchWidgetSize) return;
+	/**
+	 * @param matchWidgetSize if true, the internal {@link FxProcessor} will be resized
+	 *                        to match {@link FxWidgetGroup}'s size (stage units and not screen pixels).
+	 */
+	public void setMatchWidgetSize(boolean matchWidgetSize) {
+		if (this.matchWidgetSize == matchWidgetSize) return;
 
-        this.matchWidgetSize = matchWidgetSize;
-        resizePending = true;
-    }
+		this.matchWidgetSize = matchWidgetSize;
+		resizePending = true;
+	}
 
-    @Override
-    protected void setScene(Scene stage){
-        super.setScene(stage);
+	@Override
+	protected void setScene(Scene stage) {
+		super.setScene(stage);
 
-        if(stage != null){
-            initialize();
-        }else{
-            reset();
-        }
-    }
+		if (stage != null) {
+			initialize();
+		} else {
+			reset();
+		}
+	}
 
-    @Override
-    protected void sizeChanged(){
-        super.sizeChanged();
-        resizePending = true;
-    }
+	@Override
+	protected void sizeChanged() {
+		super.sizeChanged();
+		resizePending = true;
+	}
 
-    @Override
-    public void draw(){
-        Draw.flush();
+	@Override
+	public void draw() {
+		Draw.flush();
 
-        performPendingResize();
+		performPendingResize();
 
-        fxProcessor.clear();
-        fxProcessor.begin();
+		fxProcessor.clear();
+		fxProcessor.begin();
 
-        validate();
-        drawChildren();
+		validate();
+		drawChildren();
 
-        Draw.flush();
+		Draw.flush();
 
-        fxProcessor.end();
-        fxProcessor.applyEffects();
+		fxProcessor.end();
+		fxProcessor.applyEffects();
 
-        // If something was captured, render result to the screen.
-        if(fxProcessor.hasResult()){
-            Color color = this.color;
-            Draw.color(color.r, color.g, color.b, color.a * parentAlpha);
-            Draw.rect(Draw.wrap(fxProcessor.getResultBuffer().getTexture()), x + width / 2f, y + height / 2f, width, height);
-        }
-    }
+		// If something was captured, render result to the screen.
+		if (fxProcessor.hasResult()) {
+			Color color = this.color;
+			Draw.color(color.r, color.g, color.b, color.a * parentAlpha);
+			Draw.rect(Draw.wrap(fxProcessor.getResultBuffer().getTexture()), x + width / 2f, y + height / 2f, width, height);
+		}
+	}
 
-    @Override
-    protected void drawChildren(){
-        boolean capturing = fxProcessor.isCapturing();
+	@Override
+	protected void drawChildren() {
+		boolean capturing = fxProcessor.isCapturing();
 
-        if(capturing){
-            // Imitate "transform" child drawing for when capturing into VfxManager.
-            super.setTransform(true);
-        }
-        if(!capturing){
-            // Clip children to VfxWidget area when not capturing into FBO.
-            clipBegin();
-        }
+		if (capturing) {
+			// Imitate "transform" child drawing for when capturing into VfxManager.
+			super.setTransform(true);
+		}
+		if (!capturing) {
+			// Clip children to VfxWidget area when not capturing into FBO.
+			clipBegin();
+		}
 
-        super.drawChildren();
-        Draw.flush();
+		super.drawChildren();
+		Draw.flush();
 
-        if(capturing){
-            super.setTransform(false);
-        }
+		if (capturing) {
+			super.setTransform(false);
+		}
 
-        if(!capturing){
-            clipEnd();
-        }
-    }
+		if (!capturing) {
+			clipEnd();
+		}
+	}
 
-    @Deprecated
-    @Override
-    public void setCullingArea(Rect cullingArea){
-        throw new UnsupportedOperationException("VfxWidgetGroup doesn't support culling area.");
-    }
+	@Deprecated
+	@Override
+	public void setCullingArea(Rect cullingArea) {
+		throw new UnsupportedOperationException("VfxWidgetGroup doesn't support culling area.");
+	}
 
-    @Deprecated
-    @Override
-    public void setTransform(boolean transform){
-        throw new UnsupportedOperationException("VfxWidgetGroup doesn't support transform.");
-    }
+	@Deprecated
+	@Override
+	public void setTransform(boolean transform) {
+		throw new UnsupportedOperationException("VfxWidgetGroup doesn't support transform.");
+	}
 
-    private void initialize(){
-        if(initialized) return;
+	private void initialize() {
+		if (initialized) return;
 
-        performPendingResize();
+		performPendingResize();
 
-        resizePending = false;
-        initialized = true;
-    }
+		resizePending = false;
+		initialized = true;
+	}
 
-    private void reset(){
-        if(!initialized) return;
+	private void reset() {
+		if (!initialized) return;
 
-        fxProcessor.dispose();
+		fxProcessor.dispose();
 
-        resizePending = false;
-        initialized = false;
-    }
+		resizePending = false;
+		initialized = false;
+	}
 
-    private void performPendingResize(){
-        if(!resizePending) return;
+	private void performPendingResize() {
+		if (!resizePending) return;
 
-        final int width;
-        final int height;
+		final int width;
+		final int height;
 
-        // Size may be zero if the widget wasn't laid out yet.
-        if((int)getWidth() == 0 || (int)getHeight() == 0){
-            // If the size of the widget is not defined,
-            // just resize to a small buffer to keep the memory footprint low.
-            width = 16;
-            height = 16;
+		// Size may be zero if the widget wasn't laid out yet.
+		if ((int) getWidth() == 0 || (int) getHeight() == 0) {
+			// If the size of the widget is not defined,
+			// just resize to a small buffer to keep the memory footprint low.
+			width = 16;
+			height = 16;
 
-        }else if(matchWidgetSize){
-            // Set buffer to match the size of the widget.
-            width = Mathf.floor(getWidth());
-            height = Mathf.floor(getHeight());
+		} else if (matchWidgetSize) {
+			// Set buffer to match the size of the widget.
+			width = Mathf.floor(getWidth());
+			height = Mathf.floor(getHeight());
 
-        }else{
-            // Set buffer to match the screen pixel density.
-            Viewport viewport = getScene().getViewport();
-            float ppu = viewport.getScreenWidth() / viewport.getWorldWidth();
-            width = Mathf.floor(getWidth() * ppu);
-            height = Mathf.floor(getHeight() * ppu);
-        }
+		} else {
+			// Set buffer to match the screen pixel density.
+			Viewport viewport = getScene().getViewport();
+			float ppu = viewport.getScreenWidth() / viewport.getWorldWidth();
+			width = Mathf.floor(getWidth() * ppu);
+			height = Mathf.floor(getHeight() * ppu);
+		}
 
-        fxProcessor.resize(width, height);
+		fxProcessor.resize(width, height);
 
-        resizePending = false;
-    }
+		resizePending = false;
+	}
 }

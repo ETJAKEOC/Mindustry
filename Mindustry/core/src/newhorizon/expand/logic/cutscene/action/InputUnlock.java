@@ -8,32 +8,32 @@ import newhorizon.expand.logic.ActionLStatement;
 
 public class InputUnlock extends ActionLStatement {
 
-    public InputUnlock(String[] token) {
-    }
+	public InputUnlock(String[] token) {
+	}
 
-    public InputUnlock() {
-    }
+	public InputUnlock() {
+	}
 
-    @Override
-    public String getLStatementName() {
-        return "inputunlock";
-    }
+	@Override
+	public String getLStatementName() {
+		return "inputunlock";
+	}
 
-    @Override
-    public LCategory category() {
-        return NHLogic.actionInputControl;
-    }
+	@Override
+	public LCategory category() {
+		return NHLogic.actionInputControl;
+	}
 
-    @Override
-    public LExecutor.LInstruction build(LAssembler builder) {
-        return new InputUnlockI();
-    }
+	@Override
+	public LExecutor.LInstruction build(LAssembler builder) {
+		return new InputUnlockI();
+	}
 
-    public class InputUnlockI extends ActionInstruction {
-        @Override
-        public void run(LExecutor exec) {
-            startExec(exec, "input_unlock");
-            endExec(exec);
-        }
-    }
+	public class InputUnlockI extends ActionInstruction {
+		@Override
+		public void run(LExecutor exec) {
+			startExec(exec, "input_unlock");
+			endExec(exec);
+		}
+	}
 }

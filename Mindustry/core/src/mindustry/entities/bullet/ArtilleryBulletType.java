@@ -4,27 +4,27 @@ import arc.math.Interp;
 import mindustry.content.Fx;
 import mindustry.gen.*;
 
-public class ArtilleryBulletType extends BasicBulletType{
-    public float trailMult = 1f, trailSize = 4f;
+public class ArtilleryBulletType extends BasicBulletType {
+	public float trailMult = 1f, trailSize = 4f;
 
-    public ArtilleryBulletType(float speed, float damage, String bulletSprite){
-        super(speed, damage, bulletSprite);
-        collidesTiles = false;
-        collides = false;
-        collidesAir = false;
-        scaleLife = true;
-        hitShake = 1f;
-        hitSound = Sounds.explosionArtillery;
-        hitEffect = Fx.flakExplosion;
-        shootEffect = Fx.shootBig;
-        trailEffect = Fx.artilleryTrail;
+	public ArtilleryBulletType(float speed, float damage, String bulletSprite) {
+		super(speed, damage, bulletSprite);
+		collidesTiles = false;
+		collides = false;
+		collidesAir = false;
+		scaleLife = true;
+		hitShake = 1f;
+		hitSound = Sounds.explosionArtillery;
+		hitEffect = Fx.flakExplosion;
+		shootEffect = Fx.shootBig;
+		trailEffect = Fx.artilleryTrail;
 
-        //default settings:
-        shrinkX = 0.15f;
-        shrinkY = 0.5f;
-        shrinkInterp = Interp.slope;
+		//default settings:
+		shrinkX = 0.15f;
+		shrinkY = 0.5f;
+		shrinkInterp = Interp.slope;
 
-        //for trail:
+		//for trail:
 
         /*
         trailLength = 27;
@@ -37,22 +37,22 @@ public class ArtilleryBulletType extends BasicBulletType{
         shrinkX = 0.8f;
         shrinkY = 0.3f;
         */
-    }
+	}
 
-    public ArtilleryBulletType(float speed, float damage){
-        this(speed, damage, "shell");
-    }
+	public ArtilleryBulletType(float speed, float damage) {
+		this(speed, damage, "shell");
+	}
 
-    public ArtilleryBulletType(){
-        this(1f, 1f, "shell");
-    }
+	public ArtilleryBulletType() {
+		this(1f, 1f, "shell");
+	}
 
-    @Override
-    public void update(Bullet b){
-        super.update(b);
+	@Override
+	public void update(Bullet b) {
+		super.update(b);
 
-        if(b.timer(0, (3 + b.fslope() * 2f) * trailMult)){
-            trailEffect.at(b.x, b.y, trailRotation ? b.rotation() : b.fslope() * trailSize, backColor);
-        }
-    }
+		if (b.timer(0, (3 + b.fslope() * 2f) * trailMult)) {
+			trailEffect.at(b.x, b.y, trailRotation ? b.rotation() : b.fslope() * trailSize, backColor);
+		}
+	}
 }

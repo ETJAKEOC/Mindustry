@@ -1,5 +1,5 @@
 package arc.func;
 
-public interface Func<P, R>{
-    R get(P param);
+public interface Func<P, R> {
+	R get(P param);
 }

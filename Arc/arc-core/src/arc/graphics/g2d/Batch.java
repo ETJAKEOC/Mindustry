@@ -7,121 +7,124 @@ import arc.graphics.gl.Shader;
 import arc.math.Mat;
 import arc.util.Disposable;
 
-/** Base batch class. Provides a mesh, texture, shader, and other state. */
-public abstract class Batch implements Disposable{
-    protected float z;
-    protected int idx = 0;
-    protected Texture lastTexture = null;
+/**
+ * Base batch class. Provides a mesh, texture, shader, and other state.
+ */
+public abstract class Batch implements Disposable {
+	protected final Mat transformMatrix = new Mat();
+	protected final Mat projectionMatrix = new Mat();
+	protected final Mat combinedMatrix = new Mat();
+	protected float z;
+	protected int idx = 0;
+	protected Texture lastTexture = null;
+	protected boolean apply;
+	protected Blending blending = Blending.normal;
 
-    protected boolean apply;
+	protected Shader shader, customShader = null;
+	protected boolean ownsShader;
 
-    protected final Mat transformMatrix = new Mat();
-    protected final Mat projectionMatrix = new Mat();
-    protected final Mat combinedMatrix = new Mat();
+	protected float colorPacked = Color.whiteFloatBits;
+	protected float mixColorPacked = Color.clearFloatBits;
 
-    protected Blending blending = Blending.normal;
+	protected void z(float z) {
+		this.z = z;
+	}
 
-    protected Shader shader, customShader = null;
-    protected boolean ownsShader;
+	/**
+	 * Enables or disables Z-sorting. Flushes the batch. Only does something on supported batches.
+	 */
+	protected void setSort(boolean sort) {
 
-    protected float colorPacked = Color.whiteFloatBits;
-    protected float mixColorPacked = Color.clearFloatBits;
+	}
 
-    protected void z(float z){
-        this.z = z;
-    }
+	protected float getPackedColor() {
+		return colorPacked;
+	}
 
-    /** Enables or disables Z-sorting. Flushes the batch. Only does something on supported batches. */
-    protected void setSort(boolean sort){
+	protected void setPackedColor(float packedColor) {
+		this.colorPacked = packedColor;
+	}
 
-    }
+	protected float getPackedMixColor() {
+		return mixColorPacked;
+	}
 
-    protected void setPackedColor(float packedColor){
-        this.colorPacked = packedColor;
-    }
+	protected void setPackedMixColor(float packedColor) {
+		this.mixColorPacked = packedColor;
+	}
 
-    protected float getPackedColor(){
-        return colorPacked;
-    }
+	protected abstract void draw(Texture texture, float[] spriteVertices, int offset, int count);
 
-    protected void setPackedMixColor(float packedColor){
-        this.mixColorPacked = packedColor;
-    }
+	protected abstract void draw(TextureRegion region, float x, float y, float originX, float originY, float width, float height, float rotation);
 
-    protected float getPackedMixColor(){
-        return mixColorPacked;
-    }
+	protected void draw(Runnable request) {
+		request.run();
+	}
 
-    protected abstract void draw(Texture texture, float[] spriteVertices, int offset, int count);
+	protected abstract void flush();
 
-    protected abstract void draw(TextureRegion region, float x, float y, float originX, float originY, float width, float height, float rotation);
+	/**
+	 * Discards any pending sprites.
+	 */
+	protected void discard() {
+		idx = 0;
+	}
 
-    protected void draw(Runnable request){
-        request.run();
-    }
+	protected Blending getBlending() {
+		return blending;
+	}
 
-    protected abstract void flush();
+	protected void setBlending(Blending blending) {
+		if (this.blending != blending) {
+			flush();
+		}
+		this.blending = blending;
+	}
 
-    /** Discards any pending sprites. */
-    protected void discard(){
-        idx = 0;
-    }
+	@Override
+	public void dispose() {
+		if (ownsShader && shader != null) shader.dispose();
+	}
 
-    protected void setBlending(Blending blending){
-        if(this.blending != blending){
-            flush();
-        }
-        this.blending = blending;
-    }
+	protected Mat getProjection() {
+		return projectionMatrix;
+	}
 
-    protected Blending getBlending(){
-        return blending;
-    }
+	protected void setProjection(Mat projection) {
+		flush();
+		projectionMatrix.set(projection);
+	}
 
-    @Override
-    public void dispose(){
-        if(ownsShader && shader != null) shader.dispose();
-    }
+	protected Mat getTransform() {
+		return transformMatrix;
+	}
 
-    protected Mat getProjection(){
-        return projectionMatrix;
-    }
+	protected void setTransform(Mat transform) {
+		flush();
+		transformMatrix.set(transform);
+	}
 
-    protected Mat getTransform(){
-        return transformMatrix;
-    }
+	protected void setupMatrices() {
+		combinedMatrix.set(projectionMatrix).mul(transformMatrix);
+		getShader().setUniformMatrix4("u_projTrans", combinedMatrix);
+	}
 
-    protected void setProjection(Mat projection){
-        flush();
-        projectionMatrix.set(projection);
-    }
+	protected void switchTexture(Texture texture) {
+		flush();
+		lastTexture = texture;
+	}
 
-    protected void setTransform(Mat transform){
-        flush();
-        transformMatrix.set(transform);
-    }
+	protected void setShader(Shader shader, boolean apply) {
+		flush();
+		customShader = shader;
+		this.apply = apply;
+	}
 
-    protected void setupMatrices(){
-        combinedMatrix.set(projectionMatrix).mul(transformMatrix);
-        getShader().setUniformMatrix4("u_projTrans", combinedMatrix);
-    }
+	protected Shader getShader() {
+		return customShader == null ? shader : customShader;
+	}
 
-    protected void switchTexture(Texture texture){
-        flush();
-        lastTexture = texture;
-    }
-
-    protected void setShader(Shader shader){
-        setShader(shader, true);
-    }
-
-    protected void setShader(Shader shader, boolean apply){
-        flush();
-        customShader = shader;
-        this.apply = apply;
-    }
-
-    protected Shader getShader(){
-        return customShader == null ? shader : customShader;
-    }
+	protected void setShader(Shader shader) {
+		setShader(shader, true);
+	}
 }

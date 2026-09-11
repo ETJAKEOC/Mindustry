@@ -8,220 +8,244 @@ import arc.graphics.gl.Shader;
 
 /**
  * Requires bloom shaders in 'bloomshaders' folder.
+ *
  * @author kalle_h
  * @author Anuke
  */
-public class Bloom{
-    public int blurPasses = 1;
-    public boolean blending = false;
+public class Bloom {
+	public int blurPasses = 1;
+	public boolean blending = false;
 
-    private Shader thresholdShader, bloomShader, blurShader;
-    private FrameBuffer buffer, pingPong1, pingPong2;
+	private Shader thresholdShader, bloomShader, blurShader;
+	private FrameBuffer buffer, pingPong1, pingPong2;
 
-    private float bloomIntensity, originalIntensity, threshold;
-    private boolean capturing = false;
-    private float r, g, b, a;
+	private float bloomIntensity, originalIntensity, threshold;
+	private boolean capturing = false;
+	private float r, g, b, a;
 
-    /** Rebinds the context. Necessary on Android/IOS. TODO or is it? */
-    public void resume(){
-        bloomShader.bind();
-        bloomShader.setUniformi("u_texture1", 1);
+	/**
+	 * Creates a bloom instance with no blending, no depth and 1/4 the screen size.
+	 */
+	public Bloom() {
+		init(Core.graphics.getWidth() / 4, Core.graphics.getHeight() / 4, false, false);
+	}
 
-        setSize(pingPong1.getWidth(), pingPong1.getHeight());
-        setThreshold(threshold);
-        setBloomIntensity(bloomIntensity);
-        setOriginalIntensity(originalIntensity);
-    }
+	public Bloom(boolean useBlending) {
+		init(Core.graphics.getWidth() / 4, Core.graphics.getHeight() / 4, false, useBlending);
+	}
 
-    /** Creates a bloom instance with no blending, no depth and 1/4 the screen size. */
-    public Bloom(){
-        init(Core.graphics.getWidth() / 4, Core.graphics.getHeight() / 4, false, false);
-    }
+	/**
+	 * Initializes bloom class that encapsulates original scene capturate, thresholding, gaussian blurring and blending.
+	 *
+	 * @param hasDepth    Enables depth buffer.
+	 * @param useBlending Enables alpha blending, allowing combining background graphics and only doing blooming on certain objects.
+	 */
+	public Bloom(int width, int height, boolean hasDepth, boolean useBlending) {
+		init(width, height, hasDepth, useBlending);
+	}
 
-    public Bloom(boolean useBlending){
-        init(Core.graphics.getWidth() / 4, Core.graphics.getHeight() / 4, false, useBlending);
-    }
+	private static Shader createShader(String vertexName, String fragmentName) {
+		return new Shader(Core.files.internal("bloomshaders/" + vertexName + ".vert"), Core.files.internal("bloomshaders/" + fragmentName + ".frag"));
+	}
 
-    /**
-     * Initializes bloom class that encapsulates original scene capturate, thresholding, gaussian blurring and blending.
-     * @param hasDepth Enables depth buffer.
-     * @param useBlending Enables alpha blending, allowing combining background graphics and only doing blooming on certain objects.
-     */
-    public Bloom(int width, int height, boolean hasDepth, boolean useBlending){
-        init(width, height, hasDepth, useBlending);
-    }
+	/**
+	 * Rebinds the context. Necessary on Android/IOS. TODO or is it?
+	 */
+	public void resume() {
+		bloomShader.bind();
+		bloomShader.setUniformi("u_texture1", 1);
 
-    public void resize(int width, int height){
-        resize(width, height, 4);
-    }
+		setSize(pingPong1.getWidth(), pingPong1.getHeight());
+		setThreshold(threshold);
+		setBloomIntensity(bloomIntensity);
+		setOriginalIntensity(originalIntensity);
+	}
 
-    public void resize(int width, int height, int scaling){
-        boolean changed = (pingPong1.getWidth() != width / scaling || pingPong1.getHeight() != height / scaling);
+	public void resize(int width, int height) {
+		resize(width, height, 4);
+	}
 
-        if(changed){
-            pingPong1.resize(width / scaling, height / scaling);
-            pingPong2.resize(width / scaling, height / scaling);
-            buffer.resize(width, height);
-            setSize(width / scaling, height / scaling);
-        }
-    }
+	public void resize(int width, int height, int scaling) {
+		boolean changed = (pingPong1.getWidth() != width / scaling || pingPong1.getHeight() != height / scaling);
 
-    private void init(int width, int height, boolean hasDepth, boolean useBlending){
-        blending = useBlending;
-        //rgba8888 is generally well-supported, rgb888 may be slower
-        Format format = Format.rgba8888;
+		if (changed) {
+			pingPong1.resize(width / scaling, height / scaling);
+			pingPong2.resize(width / scaling, height / scaling);
+			buffer.resize(width, height);
+			setSize(width / scaling, height / scaling);
+		}
+	}
 
-        buffer = new FrameBuffer(format, Core.graphics.getWidth(), Core.graphics.getHeight(), hasDepth);
-        pingPong1 = new FrameBuffer(format, width, height, false);
-        pingPong2 = new FrameBuffer(format, width, height, false);
+	private void init(int width, int height, boolean hasDepth, boolean useBlending) {
+		blending = useBlending;
+		//rgba8888 is generally well-supported, rgb888 may be slower
+		Format format = Format.rgba8888;
 
-        final String alpha = useBlending ? "alpha_" : "";
+		buffer = new FrameBuffer(format, Core.graphics.getWidth(), Core.graphics.getHeight(), hasDepth);
+		pingPong1 = new FrameBuffer(format, width, height, false);
+		pingPong2 = new FrameBuffer(format, width, height, false);
 
-        bloomShader = createShader("screenspace", alpha + "bloom");
-        thresholdShader = createShader("screenspace", alpha + "threshold");
+		final String alpha = useBlending ? "alpha_" : "";
 
-        blurShader = createShader("blurspace", alpha + "gaussian");
+		bloomShader = createShader("screenspace", alpha + "bloom");
+		thresholdShader = createShader("screenspace", alpha + "threshold");
 
-        setSize(width, height);
-        setBloomIntensity(2.5f);
-        setOriginalIntensity(1f);
-        setThreshold(0.5f);
+		blurShader = createShader("blurspace", alpha + "gaussian");
 
-        bloomShader.bind();
-        bloomShader.setUniformi("u_texture1", 1);
-    }
+		setSize(width, height);
+		setBloomIntensity(2.5f);
+		setOriginalIntensity(1f);
+		setThreshold(0.5f);
 
-    /** Set clearing color for capturing buffer. */
-    public void setClearColor(float r, float g, float b, float a){
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
-    }
+		bloomShader.bind();
+		bloomShader.setUniformi("u_texture1", 1);
+	}
 
-    /** Call this before rendering scene. */
-    public void capture(){
-        if(!capturing){
-            capturing = true;
-            buffer.begin();
-            Gl.clearColor(r, g, b, a);
-            Gl.clear(Gl.colorBufferBit | Gl.depthBufferBit);
-        }
-    }
+	/**
+	 * Set clearing color for capturing buffer.
+	 */
+	public void setClearColor(float r, float g, float b, float a) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		this.a = a;
+	}
 
-    /** Pause capturing to the buffer. */
-    public void capturePause(){
-        if(capturing){
-            capturing = false;
-            buffer.end();
-        }
-    }
+	/**
+	 * Call this before rendering scene.
+	 */
+	public void capture() {
+		if (!capturing) {
+			capturing = true;
+			buffer.begin();
+			Gl.clearColor(r, g, b, a);
+			Gl.clear(Gl.colorBufferBit | Gl.depthBufferBit);
+		}
+	}
 
-    /** Start capturing again after pause, no clearing is done to the buffer. */
-    public void captureContinue(){
-        if(!capturing){
-            capturing = true;
-            buffer.begin();
-        }
-    }
+	/**
+	 * Pause capturing to the buffer.
+	 */
+	public void capturePause() {
+		if (capturing) {
+			capturing = false;
+			buffer.end();
+		}
+	}
 
-    /** Renders the bloomed scene. */
-    public void render(){
-        if(capturing){
-            capturing = false;
-            buffer.end();
-        }
+	/**
+	 * Start capturing again after pause, no clearing is done to the buffer.
+	 */
+	public void captureContinue() {
+		if (!capturing) {
+			capturing = true;
+			buffer.begin();
+		}
+	}
 
-        Gl.disable(Gl.blend);
-        Gl.disable(Gl.depthTest);
-        Gl.depthMask(false);
+	/**
+	 * Renders the bloomed scene.
+	 */
+	public void render() {
+		if (capturing) {
+			capturing = false;
+			buffer.end();
+		}
 
-        //cut bright areas of the picture and blit to smaller fbo
+		Gl.disable(Gl.blend);
+		Gl.disable(Gl.depthTest);
+		Gl.depthMask(false);
 
-        pingPong1.begin();
-        buffer.blit(thresholdShader);
-        pingPong1.end();
+		//cut bright areas of the picture and blit to smaller fbo
 
-        //blur
-        for(int i = 0; i < blurPasses; i++){
-            // horizontal
-            pingPong2.begin();
-            blurShader.bind();
-            blurShader.setUniformf("dir", 1f, 0f);
-            pingPong1.blit(blurShader);
-            pingPong2.end();
+		pingPong1.begin();
+		buffer.blit(thresholdShader);
+		pingPong1.end();
 
-            // vertical
-            pingPong1.begin();
-            blurShader.bind();
-            blurShader.setUniformf("dir", 0f, 1f);
-            pingPong2.blit(blurShader);
-            pingPong1.end();
-        }
+		//blur
+		for (int i = 0; i < blurPasses; i++) {
+			// horizontal
+			pingPong2.begin();
+			blurShader.bind();
+			blurShader.setUniformf("dir", 1f, 0f);
+			pingPong1.blit(blurShader);
+			pingPong2.end();
 
-        if(blending){
-            Gl.enable(Gl.blend);
-            Gl.blendFunc(Gl.srcAlpha, Gl.oneMinusSrcAlpha);
-        }
+			// vertical
+			pingPong1.begin();
+			blurShader.bind();
+			blurShader.setUniformf("dir", 0f, 1f);
+			pingPong2.blit(blurShader);
+			pingPong1.end();
+		}
 
-        pingPong1.getTexture().bind(1);
-        buffer.blit(bloomShader);
-    }
+		if (blending) {
+			Gl.enable(Gl.blend);
+			Gl.blendFunc(Gl.srcAlpha, Gl.oneMinusSrcAlpha);
+		}
 
-    /**
-     * Set intensity for bloom. Higher means more brightening for spots that are over threshold.
-     * @param intensity Multiplier for blurred texture in combining phase. Must be positive.
-     */
-    public void setBloomIntensity(float intensity){
-        bloomIntensity = intensity;
-        bloomShader.bind();
-        bloomShader.setUniformf("BloomIntensity", intensity);
-    }
+		pingPong1.getTexture().bind(1);
+		buffer.blit(bloomShader);
+	}
 
-    /**
-     * Set intensity for original scene. Under 1 means darkening and over 1 means lightening.
-     * @param intensity Multiplier for captured texture in combining phase. Must be positive.
-     */
-    public void setOriginalIntensity(float intensity){
-        originalIntensity = intensity;
-        bloomShader.bind();
-        bloomShader.setUniformf("OriginalIntensity", intensity);
-    }
+	/**
+	 * Set intensity for bloom. Higher means more brightening for spots that are over threshold.
+	 *
+	 * @param intensity Multiplier for blurred texture in combining phase. Must be positive.
+	 */
+	public void setBloomIntensity(float intensity) {
+		bloomIntensity = intensity;
+		bloomShader.bind();
+		bloomShader.setUniformf("BloomIntensity", intensity);
+	}
 
-    /**
-     * Threshold for bright parts. Everything under threshold is set to 0.
-     * @param threshold Must be in range [0..1].
-     */
-    public void setThreshold(float threshold){
-        this.threshold = threshold;
-        thresholdShader.bind();
-        thresholdShader.setUniformf("threshold", threshold, 1f / (1 - threshold));
-    }
+	/**
+	 * Set intensity for original scene. Under 1 means darkening and over 1 means lightening.
+	 *
+	 * @param intensity Multiplier for captured texture in combining phase. Must be positive.
+	 */
+	public void setOriginalIntensity(float intensity) {
+		originalIntensity = intensity;
+		bloomShader.bind();
+		bloomShader.setUniformf("OriginalIntensity", intensity);
+	}
 
-    private void setSize(int width, int height){
-        blurShader.bind();
-        blurShader.setUniformf("size", width, height);
-    }
+	/**
+	 * Threshold for bright parts. Everything under threshold is set to 0.
+	 *
+	 * @param threshold Must be in range [0..1].
+	 */
+	public void setThreshold(float threshold) {
+		this.threshold = threshold;
+		thresholdShader.bind();
+		thresholdShader.setUniformf("threshold", threshold, 1f / (1 - threshold));
+	}
 
-    /** @return The unprocessed frame buffer this bloom captures. Advanced uses only. */
-    public FrameBuffer buffer(){
-        return buffer;
-    }
+	private void setSize(int width, int height) {
+		blurShader.bind();
+		blurShader.setUniformf("size", width, height);
+	}
 
-    /** Disposes all resources. */
-    public void dispose(){
-        try{
-            buffer.dispose();
-            pingPong1.dispose();
-            pingPong2.dispose();
+	/**
+	 * @return The unprocessed frame buffer this bloom captures. Advanced uses only.
+	 */
+	public FrameBuffer buffer() {
+		return buffer;
+	}
 
-            blurShader.dispose();
-            bloomShader.dispose();
-            thresholdShader.dispose();
-        }catch(Throwable ignored){}
-    }
+	/**
+	 * Disposes all resources.
+	 */
+	public void dispose() {
+		try {
+			buffer.dispose();
+			pingPong1.dispose();
+			pingPong2.dispose();
 
-    private static Shader createShader(String vertexName, String fragmentName){
-        return new Shader(Core.files.internal("bloomshaders/" + vertexName + ".vert"), Core.files.internal("bloomshaders/" + fragmentName + ".frag"));
-    }
+			blurShader.dispose();
+			bloomShader.dispose();
+			thresholdShader.dispose();
+		} catch (Throwable ignored) {
+		}
+	}
 }

@@ -7,11 +7,11 @@ import mindustry.world.blocks.power.PowerGraph;
 
 @EntityDef(value = PowerGraphUpdaterc.class, serialize = false, genio = false)
 @Component
-abstract class PowerGraphUpdaterComp implements Entityc{
-    public transient PowerGraph graph;
+abstract class PowerGraphUpdaterComp implements Entityc {
+	public transient PowerGraph graph;
 
-    @Override
-    public void update(){
-        graph.update();
-    }
+	@Override
+	public void update() {
+		graph.update();
+	}
 }

@@ -8,12 +8,16 @@ import java.net.InetSocketAddress;
 
 import arc.struct.Seq;
 
-public interface NameserverProvider{
-    /** Returns all located servers, which may be empty. */
-    Seq<InetSocketAddress> getNameservers();
+public interface NameserverProvider {
+	/**
+	 * Returns all located servers, which may be empty.
+	 */
+	Seq<InetSocketAddress> getNameservers();
 
-    /** Determines if this provider is enabled. */
-    default boolean isEnabled(){
-        return true;
-    }
+	/**
+	 * Determines if this provider is enabled.
+	 */
+	default boolean isEnabled() {
+		return true;
+	}
 }

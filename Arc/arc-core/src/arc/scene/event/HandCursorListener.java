@@ -6,39 +6,39 @@ import arc.func.Boolp;
 import arc.scene.Element;
 import arc.scene.utils.Disableable;
 
-public class HandCursorListener extends ClickListener{
-    public Boolp enabled = () -> true;
-    public boolean checkEnabled = true;
+public class HandCursorListener extends ClickListener {
+	public Boolp enabled = () -> true;
+	public boolean checkEnabled = true;
 
-    public HandCursorListener(Boolp enabled, boolean check){
-        this.enabled = enabled;
-        this.checkEnabled = check;
-    }
+	public HandCursorListener(Boolp enabled, boolean check) {
+		this.enabled = enabled;
+		this.checkEnabled = check;
+	}
 
-    public HandCursorListener(){
-    }
+	public HandCursorListener() {
+	}
 
-    @Override
-    public void enter(InputEvent event, float x, float y, int pointer, Element fromActor){
-        super.enter(event, x, y, pointer, fromActor);
+	static boolean isDisabled(Element element) {
+		return element != null && (((element instanceof Disableable && ((Disableable) element).isDisabled()) || !element.visible) || isDisabled(element.parent));
+	}
 
-        if(pointer != -1 || !enabled.get() || (checkEnabled && (isDisabled(event.targetActor) || isDisabled(fromActor)))){
-            return;
-        }
+	@Override
+	public void enter(InputEvent event, float x, float y, int pointer, Element fromActor) {
+		super.enter(event, x, y, pointer, fromActor);
 
-        Core.graphics.cursor(SystemCursor.hand);
-    }
+		if (pointer != -1 || !enabled.get() || (checkEnabled && (isDisabled(event.targetActor) || isDisabled(fromActor)))) {
+			return;
+		}
 
-    @Override
-    public void exit(InputEvent event, float x, float y, int pointer, Element toActor){
-        super.exit(event, x, y, pointer, toActor);
+		Core.graphics.cursor(SystemCursor.hand);
+	}
 
-        if(pointer == -1){
-            Core.graphics.restoreCursor();
-        }
-    }
+	@Override
+	public void exit(InputEvent event, float x, float y, int pointer, Element toActor) {
+		super.exit(event, x, y, pointer, toActor);
 
-    static boolean isDisabled(Element element){
-        return element != null && (((element instanceof Disableable && ((Disableable)element).isDisabled()) || !element.visible) || isDisabled(element.parent));
-    }
+		if (pointer == -1) {
+			Core.graphics.restoreCursor();
+		}
+	}
 }

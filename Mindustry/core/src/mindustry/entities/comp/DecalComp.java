@@ -13,25 +13,26 @@ import mindustry.graphics.Layer;
 
 @EntityDef(value = {Decalc.class}, pooled = true, serialize = false)
 @Component(base = true)
-abstract class DecalComp implements Drawc, Timedc, Rotc, Posc{
-    @Import float x, y, rotation;
+abstract class DecalComp implements Drawc, Timedc, Rotc, Posc {
+	@Import
+	float x, y, rotation;
 
-    Color color = new Color(1, 1, 1, 1);
-    TextureRegion region;
+	Color color = new Color(1, 1, 1, 1);
+	TextureRegion region;
 
-    @Override
-    public void draw(){
-        Draw.z(Layer.scorch);
+	@Override
+	public void draw() {
+		Draw.z(Layer.scorch);
 
-        Draw.mixcol(color, color.a);
-        Draw.alpha(1f - Mathf.curve(fin(), 0.98f));
-        Draw.rect(region, x, y, rotation);
-        Draw.reset();
-    }
+		Draw.mixcol(color, color.a);
+		Draw.alpha(1f - Mathf.curve(fin(), 0.98f));
+		Draw.rect(region, x, y, rotation);
+		Draw.reset();
+	}
 
-    @Replace
-    public float clipSize(){
-        return region.width *2;
-    }
+	@Replace
+	public float clipSize() {
+		return region.width * 2;
+	}
 
 }

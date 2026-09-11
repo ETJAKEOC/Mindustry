@@ -71,6 +71,7 @@ public class ExpandUnitCore extends UnitType {
 
     /** 注册设置到游戏设置菜单 - 参考 MindustryOptiFine 的方式 */
     private void registerSettings() {
+        if (Core.app == null || Vars.headless) return;
         // 延迟注册，确保 ui 已初始化
         Time.runTask(5f, () -> {
             if (ui == null || ui.settings == null) return;

@@ -3,13 +3,13 @@ package newhorizon.expand.block.turrets;
 import mindustry.entities.pattern.ShootPattern;
 
 public interface AdaptTurret {
-    ShootPattern pattern();
+	ShootPattern pattern();
 
-    float reloadModifier();
+	float reloadModifier();
 
-    float kineticModifier();
+	float kineticModifier();
 
-    float energyModifier();
+	float energyModifier();
 
-    float rangeModifier();
+	float rangeModifier();
 }

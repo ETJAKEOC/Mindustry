@@ -5,93 +5,97 @@ import mindustry.entities.Damage;
 import mindustry.entities.Effect;
 import mindustry.gen.*;
 
-/** Basic continuous (line) bullet type that does not draw itself. Essentially abstract. */
-public class ContinuousBulletType extends BulletType{
-    public float length = 220f;
-    public float shake = 0f;
-    public float damageInterval = 5f;
-    public boolean largeHit = false;
-    public boolean continuous = true;
-    /** If a building fired this, whether to multiply damage by its timescale. */
-    public boolean timescaleDamage = false;
+/**
+ * Basic continuous (line) bullet type that does not draw itself. Essentially abstract.
+ */
+public class ContinuousBulletType extends BulletType {
+	public float length = 220f;
+	public float shake = 0f;
+	public float damageInterval = 5f;
+	public boolean largeHit = false;
+	public boolean continuous = true;
+	/**
+	 * If a building fired this, whether to multiply damage by its timescale.
+	 */
+	public boolean timescaleDamage = false;
 
-    {
-        removeAfterPierce = false;
-        pierceCap = -1;
-        speed = 0f;
-        despawnEffect = Fx.none;
-        shootEffect = Fx.none;
-        lifetime = 16f;
-        impact = true;
-        keepVelocity = false;
-        collides = false;
-        pierce = true;
-        hittable = false;
-        absorbable = false;
-    }
+	{
+		removeAfterPierce = false;
+		pierceCap = -1;
+		speed = 0f;
+		despawnEffect = Fx.none;
+		shootEffect = Fx.none;
+		lifetime = 16f;
+		impact = true;
+		keepVelocity = false;
+		collides = false;
+		pierce = true;
+		hittable = false;
+		absorbable = false;
+	}
 
-    @Override
-    public float continuousDamage(){
-        if(!continuous) return -1f;
-        return damage / damageInterval * 60f;
-    }
+	@Override
+	public float continuousDamage() {
+		if (!continuous) return -1f;
+		return damage / damageInterval * 60f;
+	}
 
-    @Override
-    public float estimateDPS(){
-        if(!continuous) return super.estimateDPS();
-        //assume firing duration is about 100 by default, may not be accurate there's no way of knowing in this method
-        //assume it pierces 3 blocks/units
-        return damage * 100f / damageInterval * 3f;
-    }
+	@Override
+	public float estimateDPS() {
+		if (!continuous) return super.estimateDPS();
+		//assume firing duration is about 100 by default, may not be accurate there's no way of knowing in this method
+		//assume it pierces 3 blocks/units
+		return damage * 100f / damageInterval * 3f;
+	}
 
-    @Override
-    protected float calculateRange(){
-        return Math.max(length, maxRange);
-    }
+	@Override
+	protected float calculateRange() {
+		return Math.max(length, maxRange);
+	}
 
-    @Override
-    public void init(){
-        super.init();
+	@Override
+	public void init() {
+		super.init();
 
-        drawSize = Math.max(drawSize, length*2f);
-    }
+		drawSize = Math.max(drawSize, length * 2f);
+	}
 
-    @Override
-    public void init(Bullet b){
-        super.init(b);
+	@Override
+	public void init(Bullet b) {
+		super.init(b);
 
-        if(!continuous){
-            applyDamage(b);
-        }
-    }
+		if (!continuous) {
+			applyDamage(b);
+		}
+	}
 
-    @Override
-    public void update(Bullet b){
-        if(!continuous) return;
+	@Override
+	public void update(Bullet b) {
+		if (!continuous) return;
 
-        //damage every 5 ticks
-        if(b.timer(1, damageInterval)){
-            applyDamage(b);
-        }
+		//damage every 5 ticks
+		if (b.timer(1, damageInterval)) {
+			applyDamage(b);
+		}
 
-        if(shake > 0){
-            Effect.shake(shake, shake, b);
-        }
+		if (shake > 0) {
+			Effect.shake(shake, shake, b);
+		}
 
-        updateBulletInterval(b);
-    }
+		updateBulletInterval(b);
+	}
 
-    public void applyDamage(Bullet b){
-        float damage = b.damage;
-        if(timescaleDamage && b.owner instanceof Building build){
-             b.damage *= build.timeScale();
-        }
-        Damage.collideLine(b, b.team, b.x, b.y, b.rotation(), currentLength(b), largeHit, laserAbsorb, pierceCap);
-        b.damage = damage;
-    }
+	public void applyDamage(Bullet b) {
+		float damage = b.damage;
+		if (timescaleDamage && b.owner instanceof Building build) {
+			b.damage *= build.timeScale();
+		}
+		Damage.collideLine(b, b.team, b.x, b.y, b.rotation(), currentLength(b), largeHit, laserAbsorb, pierceCap);
+		b.damage = damage;
+	}
 
-    public float currentLength(Bullet b){
-        return length;
-    }
+	public float currentLength(Bullet b) {
+		return length;
+	}
 
 }

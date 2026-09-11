@@ -9,53 +9,53 @@ import arc.scene.ui.layout.Table;
 import mindustry.gen.*;
 import mindustry.net.Administration.PlayerInfo;
 
-public class AdminsDialog extends BaseDialog{
+public class AdminsDialog extends BaseDialog {
 
-    public AdminsDialog(){
-        super("@server.admins");
+	public AdminsDialog() {
+		super("@server.admins");
 
-        addCloseButton();
+		addCloseButton();
 
-        setup();
-        shown(this::setup);
-    }
+		setup();
+		shown(this::setup);
+	}
 
-    private void setup(){
-        cont.clear();
+	private void setup() {
+		cont.clear();
 
-        float w = 400f, h = 80f;
+		float w = 400f, h = 80f;
 
-        Table table = new Table();
+		Table table = new Table();
 
-        ScrollPane pane = new ScrollPane(table);
-        pane.setFadeScrollBars(false);
+		ScrollPane pane = new ScrollPane(table);
+		pane.setFadeScrollBars(false);
 
-        if(netServer.admins.getAdmins().size == 0){
-            table.add("@server.admins.none");
-        }
+		if (netServer.admins.getAdmins().size == 0) {
+			table.add("@server.admins.none");
+		}
 
-        for(PlayerInfo info : netServer.admins.getAdmins()){
-            Table res = new Table(Tex.button);
-            res.margin(14f);
+		for (PlayerInfo info : netServer.admins.getAdmins()) {
+			Table res = new Table(Tex.button);
+			res.margin(14f);
 
-            res.labelWrap("[lightgray]" + info.lastName).width(w - h - 24f);
-            res.add().growX();
-            res.button(Icon.cancel, () -> {
-                ui.showConfirm("@confirm", Core.bundle.format("@confirmunadmin", info.lastName), () -> {
-                    netServer.admins.unAdminPlayer(info.id);
-                    Groups.player.each(player -> {
-                        if(player != null && !player.isLocal() && player.uuid().equals(info.id)){
-                            player.admin(false);
-                        }
-                    });
-                    setup();
-                });
-            }).size(h).pad(-14f);
+			res.labelWrap("[lightgray]" + info.lastName).width(w - h - 24f);
+			res.add().growX();
+			res.button(Icon.cancel, () -> {
+				ui.showConfirm("@confirm", Core.bundle.format("@confirmunadmin", info.lastName), () -> {
+					netServer.admins.unAdminPlayer(info.id);
+					Groups.player.each(player -> {
+						if (player != null && !player.isLocal() && player.uuid().equals(info.id)) {
+							player.admin(false);
+						}
+					});
+					setup();
+				});
+			}).size(h).pad(-14f);
 
-            table.add(res).width(w).height(h);
-            table.row();
-        }
+			table.add(res).width(w).height(h);
+			table.row();
+		}
 
-        cont.add(pane);
-    }
+		cont.add(pane);
+	}
 }

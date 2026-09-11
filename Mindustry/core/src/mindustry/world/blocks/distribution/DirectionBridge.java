@@ -32,13 +32,6 @@ import mindustry.world.meta.Env;
 
 public class DirectionBridge extends Block {
 	private static BuildPlan currentPlan, otherPlan;
-	public @Load("@-bridge") TextureRegion bridgeRegion;
-	public @Load("@-bridge-bottom") TextureRegion bridgeBotRegion;
-	public @Load("@-bridge-liquid") TextureRegion bridgeLiquidRegion;
-	public @Load("@-arrow") TextureRegion arrowRegion;
-	public @Load("@-dir") TextureRegion dirRegion;
-
-	public int range = 4;
 	private int otherDst = 0;
 	private final Boolf<BuildPlan> planFinder = other -> {
 		if (other.block == this && currentPlan != other && Mathf.clamp(other.x - currentPlan.x, -1, 1) == Geometry.d4x(currentPlan.rotation) && Mathf.clamp(other.y - currentPlan.y, -1, 1) == Geometry.d4y(currentPlan.rotation)) {
@@ -50,6 +43,12 @@ public class DirectionBridge extends Block {
 		}
 		return false;
 	};
+	public @Load("@-bridge") TextureRegion bridgeRegion;
+	public @Load("@-bridge-bottom") TextureRegion bridgeBotRegion;
+	public @Load("@-bridge-liquid") TextureRegion bridgeLiquidRegion;
+	public @Load("@-arrow") TextureRegion arrowRegion;
+	public @Load("@-dir") TextureRegion dirRegion;
+	public int range = 4;
 
 	public DirectionBridge(String name) {
 		super(name);

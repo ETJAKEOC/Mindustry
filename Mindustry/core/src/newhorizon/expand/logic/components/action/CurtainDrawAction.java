@@ -10,20 +10,20 @@ import static newhorizon.NHVars.cutsceneUI;
 
 
 public class CurtainDrawAction extends Action {
-    @Override
-    public String actionName() {
-        return "curtain_draw";
-    }
+	@Override
+	public String actionName() {
+		return "curtain_draw";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+	}
 
-    @Override
-    public void act() {
-        if (headless) return;
+	@Override
+	public void act() {
+		if (headless) return;
 
-        cutsceneUI.curtainProgress = Interp.linear.apply(progress());
-    }
+		cutsceneUI.curtainProgress = Interp.linear.apply(progress());
+	}
 }

@@ -22,6 +22,8 @@ import mindustry.world.blocks.environment.Floor;
 
 @Component
 abstract class StatusComp implements Posc {
+	private final Seq<StatusEntry> statuses = new Seq<>(4);
+	private final transient Bits applied = new Bits(content.getBy(ContentType.status).size);
 	//these are considered read-only
 	//note: armor is a special case; it is an override when >= 0, otherwise ignored
 	transient float speedMultiplier = 1, damageMultiplier = 1, healthMultiplier = 1, reloadMultiplier = 1, buildSpeedMultiplier = 1, dragMultiplier = 1, armorOverride = -1f;
@@ -30,8 +32,6 @@ abstract class StatusComp implements Posc {
 	UnitType type;
 	@Import
 	float maxHealth;
-	private final Seq<StatusEntry> statuses = new Seq<>(4);
-	private final transient Bits applied = new Bits(content.getBy(ContentType.status).size);
 
 	/**
 	 * Apply a status effect for 1 tick (for permanent effects)

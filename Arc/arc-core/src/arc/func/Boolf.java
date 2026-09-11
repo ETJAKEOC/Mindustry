@@ -1,5 +1,5 @@
 package arc.func;
 
-public interface Boolf<T>{
-    boolean get(T t);
+public interface Boolf<T> {
+	boolean get(T t);
 }

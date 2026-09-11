@@ -5,13 +5,13 @@ import newhorizon.expand.logic.ParseUtil;
 import newhorizon.expand.logic.components.Action;
 
 public class WaitAction extends Action {
-    @Override
-    public String actionName() {
-        return "wait";
-    }
+	@Override
+	public String actionName() {
+		return "wait";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+	}
 }

@@ -12,77 +12,77 @@ import mindustry.logic.LVar;
  */
 public class ActionLStatement extends LStatement {
 
-    public ActionLStatement(String[] tokens) {
-    }
+	public ActionLStatement(String[] tokens) {
+	}
 
-    public ActionLStatement() {
-    }
+	public ActionLStatement() {
+	}
 
-    public String getLStatementName() {
-        return "statement";
-    }
+	public String getLStatementName() {
+		return "statement";
+	}
 
-    @Override
-    public boolean privileged() {
-        return true;
-    }
+	@Override
+	public boolean privileged() {
+		return true;
+	}
 
-    @Override
-    public void build(Table table) {
-    }
+	@Override
+	public void build(Table table) {
+	}
 
-    @Override
-    public LExecutor.LInstruction build(LAssembler builder) {
-        return null;
-    }
+	@Override
+	public LExecutor.LInstruction build(LAssembler builder) {
+		return null;
+	}
 
-    @Override
-    public void write(StringBuilder builder) {
-        builder.append(getLStatementName());
-    }
+	@Override
+	public void write(StringBuilder builder) {
+		builder.append(getLStatementName());
+	}
 
-    public void writeTokens(StringBuilder builder, String... tokens) {
-        for (String token : tokens) {
-            builder.append(" ").append(token);
-        }
-    }
+	public void writeTokens(StringBuilder builder, String... tokens) {
+		for (String token : tokens) {
+			builder.append(" ").append(token);
+		}
+	}
 
-    public void buildRowTable(Table table, Cons<Table> cons) {
-        table.table(cons).expand().left().row();
-    }
+	public void buildRowTable(Table table, Cons<Table> cons) {
+		table.table(cons).expand().left().row();
+	}
 
-    @SuppressWarnings("InnerClassMayBeStatic")
-    public class ActionInstruction implements LExecutor.LInstruction {
-        public ActionInstruction() {
-        }
+	@SuppressWarnings("InnerClassMayBeStatic")
+	public class ActionInstruction implements LExecutor.LInstruction {
+		public ActionInstruction() {
+		}
 
-        @Override
-        public void run(LExecutor exec) {
-        }
+		@Override
+		public void run(LExecutor exec) {
+		}
 
-        public void startExec(LExecutor exec, String actionName) {
-            exec.textBuffer.append(actionName);
-        }
+		public void startExec(LExecutor exec, String actionName) {
+			exec.textBuffer.append(actionName);
+		}
 
-        public void appendExec(LExecutor exec, String value) {
-            exec.textBuffer.append(" ").append(value);
-        }
+		public void appendExec(LExecutor exec, String value) {
+			exec.textBuffer.append(" ").append(value);
+		}
 
-        public void appendExec(LExecutor exec, LVar... vars) {
-            for (LVar var : vars) {
-                exec.textBuffer.append(" ").append(var.isobj ? var.name : var.numf());
-            }
-        }
+		public void appendExec(LExecutor exec, LVar... vars) {
+			for (LVar var : vars) {
+				exec.textBuffer.append(" ").append(var.isobj ? var.name : var.numf());
+			}
+		}
 
-        public void writeExec(LExecutor exec, LVar... vars) {
-            for (LVar var : vars) {
-                exec.textBuffer.append(" ").append(var.isobj ? var.name : var.numf());
-            }
-            exec.textBuffer.append("\n");
-        }
+		public void writeExec(LExecutor exec, LVar... vars) {
+			for (LVar var : vars) {
+				exec.textBuffer.append(" ").append(var.isobj ? var.name : var.numf());
+			}
+			exec.textBuffer.append("\n");
+		}
 
-        public void endExec(LExecutor exec) {
-            exec.textBuffer.append("\n");
-        }
-    }
+		public void endExec(LExecutor exec) {
+			exec.textBuffer.append("\n");
+		}
+	}
 }

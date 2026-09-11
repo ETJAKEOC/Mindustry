@@ -77,11 +77,13 @@ public class EntityGroup<T extends Entityc> implements Iterable<T> {
 	public Seq<T> checkIDCollisions() {
 		Seq<T> out = new Seq<>();
 		IntSet ints = new IntSet();
-		each(u -> {
+		T[] items = array.items;
+		for (int i = 0, n = array.size; i < n; i++) {
+			T u = items[i];
 			if (!ints.add(u.id())) {
 				out.add(u);
 			}
-		});
+		}
 		return out;
 	}
 

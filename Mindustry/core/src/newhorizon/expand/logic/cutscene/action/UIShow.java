@@ -8,32 +8,32 @@ import newhorizon.expand.logic.ActionLStatement;
 
 public class UIShow extends ActionLStatement {
 
-    public UIShow(String[] token) {
-    }
+	public UIShow(String[] token) {
+	}
 
-    public UIShow() {
-    }
+	public UIShow() {
+	}
 
-    @Override
-    public String getLStatementName() {
-        return "uishow";
-    }
+	@Override
+	public String getLStatementName() {
+		return "uishow";
+	}
 
-    @Override
-    public LCategory category() {
-        return NHLogic.actionInputControl;
-    }
+	@Override
+	public LCategory category() {
+		return NHLogic.actionInputControl;
+	}
 
-    @Override
-    public LExecutor.LInstruction build(LAssembler builder) {
-        return new UIShowI();
-    }
+	@Override
+	public LExecutor.LInstruction build(LAssembler builder) {
+		return new UIShowI();
+	}
 
-    public class UIShowI extends ActionInstruction {
-        @Override
-        public void run(LExecutor exec) {
-            startExec(exec, "ui_show");
-            endExec(exec);
-        }
-    }
+	public class UIShowI extends ActionInstruction {
+		@Override
+		public void run(LExecutor exec) {
+			startExec(exec, "ui_show");
+			endExec(exec);
+		}
+	}
 }

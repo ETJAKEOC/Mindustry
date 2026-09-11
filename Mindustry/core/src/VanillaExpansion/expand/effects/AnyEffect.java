@@ -15,51 +15,48 @@ import mindustry.gen.*;
 import mindustry.entities.bullet.BulletType;
 
 public class AnyEffect extends Effect {
-    public Sound sound = Sounds.none;
-    public float minPitch = 1.0f;
-    public float maxPitch = 1.0f;
-    public float minVolume = 1f;
-    public float maxVolume = 1f;
-    public @Nullable Bullet bullet;
-    public float shake = 0f;
-    public float shakeDuration = 0f;
-    public Effect effect;
+	public Sound sound = Sounds.none;
+	public float minPitch = 1.0f;
+	public float maxPitch = 1.0f;
+	public float minVolume = 1f;
+	public float maxVolume = 1f;
+	public @Nullable Bullet bullet;
+	public float shake = 0f;
+	public float shakeDuration = 0f;
+	public Effect effect;
 
-    public AnyEffect(){
-        startDelay = -1;
-    }
-
-
-
-    @Override
-    public void init(){
-        if(startDelay < 0){
-            startDelay = effect.startDelay;
-        }
-        if(shakeDuration <= 0){
-            shakeDuration = shake;
-        }
-    }
+	public AnyEffect() {
+		startDelay = -1;
+	}
 
 
+	@Override
+	public void init() {
+		if (startDelay < 0) {
+			startDelay = effect.startDelay;
+		}
+		if (shakeDuration <= 0) {
+			shakeDuration = shake;
+		}
+	}
 
 
-    @Override
-    public void create(float x, float y, float rotation, Color color, Object data){
-        if(!shouldCreate()) return;
+	@Override
+	public void create(float x, float y, float rotation, Color color, Object data) {
+		if (!shouldCreate()) return;
 
-        if(startDelay > 0){
-            Time.run(startDelay, () ->
-                    sound.at(x, y, Mathf.random(minPitch, maxPitch), Mathf.random(minVolume, maxVolume))
-            );
-        }else{
-            sound.at(x, y, Mathf.random(minPitch, maxPitch), Mathf.random(minVolume, maxVolume));
-            if(bullet != null){
-                //TODO add bullet spawning
-            }
-        }
+		if (startDelay > 0) {
+			Time.run(startDelay, () ->
+					sound.at(x, y, Mathf.random(minPitch, maxPitch), Mathf.random(minVolume, maxVolume))
+			);
+		} else {
+			sound.at(x, y, Mathf.random(minPitch, maxPitch), Mathf.random(minVolume, maxVolume));
+			if (bullet != null) {
+				//TODO add bullet spawning
+			}
+		}
 
-        effect.create(x, y, rotation, color, data);
-    }
+		effect.create(x, y, rotation, color, data);
+	}
 
 }

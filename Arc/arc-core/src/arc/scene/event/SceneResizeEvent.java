@@ -1,5 +1,5 @@
 package arc.scene.event;
 
-public class SceneResizeEvent extends SceneEvent{
+public class SceneResizeEvent extends SceneEvent {
 
 }

@@ -7,17 +7,17 @@ import newhorizon.expand.game.RaidLogic;
 import newhorizon.expand.game.RaidSync;
 
 public class RaidClearPacket extends Packet {
-    @Override
-    public void write(Writes write) {
-    }
+	@Override
+	public void write(Writes write) {
+	}
 
-    @Override
-    public void read(Reads read, int length) {
-    }
+	@Override
+	public void read(Reads read, int length) {
+	}
 
-    @Override
-    public void handleClient() {
-        if (RaidLogic.isLogicSide()) return;
-        RaidSync.clearClientRaid();
-    }
+	@Override
+	public void handleClient() {
+		if (RaidLogic.isLogicSide()) return;
+		RaidSync.clearClientRaid();
+	}
 }

@@ -7,28 +7,28 @@ import newhorizon.expand.game.RaidLogic;
 import newhorizon.expand.game.RaidState;
 
 public class RaidScalePacket extends Packet {
-    public float scale;
-    private byte[] data = NODATA;
+	public float scale;
+	private byte[] data = NODATA;
 
-    @Override
-    public void write(Writes write) {
-        write.f(scale);
-    }
+	@Override
+	public void write(Writes write) {
+		write.f(scale);
+	}
 
-    @Override
-    public void read(Reads read, int length) {
-        data = read.b(length);
-    }
+	@Override
+	public void read(Reads read, int length) {
+		data = read.b(length);
+	}
 
-    @Override
-    public void handled() {
-        BAIS.setBytes(data);
-        scale = READ.f();
-    }
+	@Override
+	public void handled() {
+		BAIS.setBytes(data);
+		scale = READ.f();
+	}
 
-    @Override
-    public void handleClient() {
-        if (RaidLogic.isLogicSide()) return;
-        RaidState.setScale(scale);
-    }
+	@Override
+	public void handleClient() {
+		if (RaidLogic.isLogicSide()) return;
+		RaidState.setScale(scale);
+	}
 }

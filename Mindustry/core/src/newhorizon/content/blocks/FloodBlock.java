@@ -7,12 +7,12 @@ import mindustry.world.meta.BuildVisibility;
 import newhorizon.expand.block.flood.FloodFluidBlock;
 
 public class FloodBlock {
-    public static Block floodPipe;
+	public static Block floodPipe;
 
-    public static void load() {
-        floodPipe = new FloodFluidBlock("flood-pipe") {{
-            requirements(Category.effect, BuildVisibility.sandboxOnly, ItemStack.with());
-            health = 1000;
-        }};
-    }
+	public static void load() {
+		floodPipe = new FloodFluidBlock("flood-pipe") {{
+			requirements(Category.effect, BuildVisibility.sandboxOnly, ItemStack.with());
+			health = 1000;
+		}};
+	}
 }

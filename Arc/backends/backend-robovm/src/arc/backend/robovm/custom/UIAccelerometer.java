@@ -38,43 +38,43 @@ import org.robovm.rt.bro.ptr.Ptr;
 @Library("UIKit")
 @NativeClass/*</annotations>*/
 /*<visibility>*/ public/*</visibility>*/ class /*<name>*/UIAccelerometer/*</name>*/
-extends /*<extends>*/NSObject/*</extends>*/
-/*<implements>*//*</implements>*/{
+		extends /*<extends>*/NSObject/*</extends>*/
+		/*<implements>*//*</implements>*/ {
 
-    /*<bind>*/static{
-        ObjCRuntime.bind(UIAccelerometer.class);
-    }/*</bind>*/
+	/*<bind>*/static {
+		ObjCRuntime.bind(UIAccelerometer.class);
+	}/*</bind>*/
 
-    /*<constants>*//*</constants>*/
-    /*<constructors>*/
-    public UIAccelerometer(){
-    }
+	/*<constants>*//*</constants>*/
+	/*<constructors>*/
+	public UIAccelerometer() {
+	}
 
-    protected UIAccelerometer(SkipInit skipInit){
-        super(skipInit);
-    }
+	protected UIAccelerometer(SkipInit skipInit) {
+		super(skipInit);
+	}
 
-    /*</properties>*/
-    /*<members>*//*</members>*/
-    /*<methods>*/
-    @Method(selector = "sharedAccelerometer")
-    public static native UIAccelerometer getSharedAccelerometer();
+	/*</properties>*/
+	/*<members>*//*</members>*/
+	/*<methods>*/
+	@Method(selector = "sharedAccelerometer")
+	public static native UIAccelerometer getSharedAccelerometer();
 
-    /*</constructors>*/
-    /*<properties>*/
-    @Property(selector = "updateInterval")
-    public native double getUpdateInterval();
+	/*</constructors>*/
+	/*<properties>*/
+	@Property(selector = "updateInterval")
+	public native double getUpdateInterval();
 
-    @Property(selector = "setUpdateInterval:")
-    public native void setUpdateInterval(double v);
+	@Property(selector = "setUpdateInterval:")
+	public native void setUpdateInterval(double v);
 
-    @Property(selector = "delegate")
-    public native UIAccelerometerDelegate getDelegate();
+	@Property(selector = "delegate")
+	public native UIAccelerometerDelegate getDelegate();
 
-    @Property(selector = "setDelegate:", strongRef = true)
-    public native void setDelegate(UIAccelerometerDelegate v);
+	@Property(selector = "setDelegate:", strongRef = true)
+	public native void setDelegate(UIAccelerometerDelegate v);
 
-    /*<ptr>*/public static class UIAccelerometerPtr extends Ptr<UIAccelerometer, UIAccelerometerPtr>{
-    }/*</ptr>*/
-    /*</methods>*/
+	/*<ptr>*/public static class UIAccelerometerPtr extends Ptr<UIAccelerometer, UIAccelerometerPtr> {
+	}/*</ptr>*/
+	/*</methods>*/
 }

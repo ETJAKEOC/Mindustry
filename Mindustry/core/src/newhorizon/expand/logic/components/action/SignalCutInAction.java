@@ -10,19 +10,19 @@ import static mindustry.Vars.headless;
 import static newhorizon.NHVars.cutsceneUI;
 
 public class SignalCutInAction extends Action {
-    @Override
-    public String actionName() {
-        return "signal_cut_in";
-    }
+	@Override
+	public String actionName() {
+		return "signal_cut_in";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+	}
 
-    @Override
-    public void begin() {
-        if (headless) return;
-        cutsceneUI.textTable.actions(Actions.fadeIn(duration / Time.toSeconds, NHInterp.bounce5Out));
-    }
+	@Override
+	public void begin() {
+		if (headless) return;
+		cutsceneUI.textTable.actions(Actions.fadeIn(duration / Time.toSeconds, NHInterp.bounce5Out));
+	}
 }

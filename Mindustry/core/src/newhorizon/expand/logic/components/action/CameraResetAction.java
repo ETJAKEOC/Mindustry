@@ -12,33 +12,33 @@ import static mindustry.Vars.player;
 import static newhorizon.NHVars.cutsceneUI;
 
 public class CameraResetAction extends Action {
-    @Override
-    public String actionName() {
-        return "camera_reset";
-    }
+	@Override
+	public String actionName() {
+		return "camera_reset";
+	}
 
-    @Override
-    public void parseTokens(String[] tokens) {
-        duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
-    }
+	@Override
+	public void parseTokens(String[] tokens) {
+		duration = ParseUtil.getFirstFloat(tokens) * Time.toSeconds;
+	}
 
-    @Override
-    public void act() {
-        if (headless) return;
+	@Override
+	public void act() {
+		if (headless) return;
 
-        Tmp.v1.set(Core.camera.position).lerpDelta(player, progress());
-        control.input.logicCamSpeed = 1000f;
-        control.input.logicCamPan.set(Tmp.v1);
-    }
+		Tmp.v1.set(Core.camera.position).lerpDelta(player, progress());
+		control.input.logicCamSpeed = 1000f;
+		control.input.logicCamPan.set(Tmp.v1);
+	}
 
-    @Override
-    public void end() {
-        skip();
-    }
+	@Override
+	public void end() {
+		skip();
+	}
 
-    @Override
-    public void skip() {
-        control.input.logicCutscene = false;
-        if (cutsceneUI != null) cutsceneUI.clearForcedCameraZoom();
-    }
+	@Override
+	public void skip() {
+		control.input.logicCutscene = false;
+		if (cutsceneUI != null) cutsceneUI.clearForcedCameraZoom();
+	}
 }

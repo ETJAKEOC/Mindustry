@@ -14,190 +14,191 @@ import arc.util.ArcRuntimeException;
 import arc.util.Log;
 import arc.util.Nullable;
 
-/** A FileHandle meant for easily representing and reading the contents of a zip/jar file.*/
-public class ZipFi extends Fi{
-    private @Nullable ZipFi[] children;
-    private @Nullable ZipFi parent;
-    private String path;
+/**
+ * A FileHandle meant for easily representing and reading the contents of a zip/jar file.
+ */
+public class ZipFi extends Fi {
+	private final @Nullable ZipEntry entry;
+	private final ZipFile zip;
+	private @Nullable ZipFi[] children;
+	private @Nullable ZipFi parent;
+	private final String path;
+	private final Seq<ZipFi> allFiles;
+	private final Seq<ZipFi> allDirectories;
 
-    private Seq<ZipFi> allFiles, allDirectories;
+	public ZipFi(Fi zipFileLoc) {
+		super(new File(""), FileType.absolute);
+		entry = null;
 
-    private final @Nullable ZipEntry entry;
-    private final ZipFile zip;
+		try {
+			zip = new ZipFile(zipFileLoc.file());
+			path = "";
 
-    public ZipFi(Fi zipFileLoc){
-        super(new File(""), FileType.absolute);
-        entry = null;
+			Seq<ZipEntry> entries = Seq.with(zip.stream().toArray(ZipEntry[]::new));
+			ObjectMap<String, ZipEntry> byName = new ObjectMap<>();
+			entries.each(e -> byName.put(e.getName(), e));
 
-        try{
-            zip = new ZipFile(zipFileLoc.file());
-            path = "";
+			Seq<String> names = entries.map(z -> z.getName().replace('\\', '/'));
+			ObjectSet<String> paths = new ObjectSet<>();
 
-            Seq<ZipEntry> entries = Seq.with(zip.stream().toArray(ZipEntry[]::new));
-            ObjectMap<String, ZipEntry> byName = new ObjectMap<>();
-            entries.each(e -> byName.put(e.getName(), e));
+			for (String path : names) {
+				paths.add(path);
+				while (path.contains("/") && !path.equals("/") && path.substring(0, path.length() - 1).contains("/")) {
+					int index = path.endsWith("/") ? path.substring(0, path.length() - 1).lastIndexOf('/') : path.lastIndexOf('/');
+					path = path.substring(0, index);
+					paths.add(path.endsWith("/") ? path : path + "/");
+				}
+			}
 
-            Seq<String> names = entries.map(z -> z.getName().replace('\\', '/'));
-            ObjectSet<String> paths = new ObjectSet<>();
+			if (paths.contains("/")) {
+				file = new File("/");
+				paths.remove("/");
+			}
 
-            for(String path : names){
-                paths.add(path);
-                while(path.contains("/") && !path.equals("/") && path.substring(0, path.length() - 1).contains("/")){
-                    int index = path.endsWith("/") ? path.substring(0, path.length() - 1).lastIndexOf('/') : path.lastIndexOf('/');
-                    path = path.substring(0, index);
-                    paths.add(path.endsWith("/") ? path : path + "/");
-                }
-            }
+			allFiles = new Seq<>();
+			allDirectories = new Seq<>();
 
-            if(paths.contains("/")){
-                file = new File("/");
-                paths.remove("/");
-            }
+			for (String s : paths) {
+				ZipEntry entry = byName.get(s);
 
-            allFiles = new Seq<>();
-            allDirectories = new Seq<>();
+				ZipFi file = entry != null ? new ZipFi(entry, zip, allFiles, allDirectories) : new ZipFi(s, zip, allFiles, allDirectories);
+				allFiles.add(file);
 
-            for(String s : paths){
-                ZipEntry entry = byName.get(s);
+				if (file.isDirectory()) {
+					allDirectories.add(file);
+				}
+			}
 
-                ZipFi file =  entry != null ? new ZipFi(entry, zip, allFiles, allDirectories) : new ZipFi(s, zip, allFiles, allDirectories);
-                allFiles.add(file);
+			allFiles.add(this);
+			allDirectories.add(this);
 
-                if(file.isDirectory()){
-                    allDirectories.add(file);
-                }
-            }
+			parent = null;
+		} catch (IOException e) {
+			throw new ArcRuntimeException(e);
+		}
+	}
 
-            allFiles.add(this);
-            allDirectories.add(this);
+	private ZipFi(ZipEntry entry, ZipFile file, Seq<ZipFi> allFiles, Seq<ZipFi> allDirectories) {
+		super(new File(entry.getName()), FileType.absolute);
+		this.allDirectories = allDirectories;
+		this.allFiles = allFiles;
+		this.path = entry.getName().replace('\\', '/');
+		this.entry = entry;
+		this.zip = file;
+	}
 
-            parent = null;
-        }catch(IOException e){
-            throw new ArcRuntimeException(e);
-        }
-    }
+	private ZipFi(String path, ZipFile file, Seq<ZipFi> allFiles, Seq<ZipFi> allDirectories) {
+		super(new File(path), FileType.absolute);
+		this.allDirectories = allDirectories;
+		this.allFiles = allFiles;
+		this.path = path.replace('\\', '/');
+		this.entry = null;
+		this.zip = file;
+	}
 
-    private static int countSlashes(String str){
-        int sum = 0;
-        for(int i = 0; i < str.length(); i++){
-            if(str.charAt(i) == '/') sum ++;
-        }
-        return sum;
-    }
+	private static int countSlashes(String str) {
+		int sum = 0;
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) == '/') sum++;
+		}
+		return sum;
+	}
 
-    private ZipFi(ZipEntry entry, ZipFile file, Seq<ZipFi> allFiles, Seq<ZipFi> allDirectories){
-        super(new File(entry.getName()), FileType.absolute);
-        this.allDirectories = allDirectories;
-        this.allFiles = allFiles;
-        this.path = entry.getName().replace('\\', '/');
-        this.entry = entry;
-        this.zip = file;
-    }
+	private static boolean isChild(ZipFi file, ZipFi dir) {
+		return dir != file
+				&& file.path().startsWith(dir.path())
+				&& (file.path().substring(1 + dir.path().length()).indexOf('/') == -1 || //do not allow extra slashes in the path
+				(file.path().endsWith("/") && countSlashes(file.path().substring(1 + dir.path().length())) == 1));
+	}
 
-    private ZipFi(String path, ZipFile file, Seq<ZipFi> allFiles, Seq<ZipFi> allDirectories){
-        super(new File(path), FileType.absolute);
-        this.allDirectories = allDirectories;
-        this.allFiles = allFiles;
-        this.path = path.replace('\\', '/');
-        this.entry = null;
-        this.zip = file;
-    }
+	@Override
+	public boolean delete() {
+		try {
+			zip.close();
+			return true;
+		} catch (IOException e) {
+			Log.err(e);
+			return false;
+		}
+	}
 
-    @Override
-    public boolean delete(){
-        try{
-            zip.close();
-            return true;
-        }catch(IOException e){
-            Log.err(e);
-            return false;
-        }
-    }
+	@Override
+	public boolean exists() {
+		return true;
+	}
 
-    @Override
-    public boolean exists(){
-        return true;
-    }
+	@Override
+	public Fi child(String name) {
+		//trigger cache
+		list();
 
-    @Override
-    public Fi child(String name){
-        //trigger cache
-        list();
+		for (ZipFi child : children) {
+			if (child.name().equals(name)) {
+				return child;
+			}
+		}
 
-        for(ZipFi child : children){
-            if(child.name().equals(name)){
-                return child;
-            }
-        }
+		return new Fi(new File(file, name)) {
+			@Override
+			public boolean exists() {
+				return false;
+			}
+		};
+	}
 
-        return new Fi(new File(file, name)){
-            @Override
-            public boolean exists(){
-                return false;
-            }
-        };
-    }
+	@Override
+	public String name() {
+		return file.getName();
+	}
 
-    @Override
-    public String name(){
-        return file.getName();
-    }
+	@Override
+	public String path() {
+		return path;
+	}
 
-    @Override
-    public String path(){
-        return path;
-    }
+	@Override
+	public Fi parent() {
+		//root
+		if (path.length() == 0) return null;
 
-    private static boolean isChild(ZipFi file, ZipFi dir){
-        return dir != file
-            && file.path().startsWith(dir.path())
-            && (file.path().substring(1 + dir.path().length()).indexOf('/') == -1 || //do not allow extra slashes in the path
-            (file.path().endsWith("/") && countSlashes(file.path().substring(1 + dir.path().length())) == 1));
-    }
+		if (parent == null) {
+			parent = allDirectories.find(other -> isChild(this, other));
+		}
 
-    @Override
-    public Fi parent(){
-        //root
-        if(path.length() == 0) return null;
+		return parent;
+	}
 
-        if(parent == null){
-            parent = allDirectories.find(other -> isChild(this, other));
-        }
+	@Override
+	public Fi[] list() {
+		if (children == null) {
+			children = allFiles.select(f -> f.parent == this || isChild(f, this)).toArray(ZipFi.class);
+		}
 
-        return parent;
-    }
+		return children;
+	}
 
-    @Override
-    public Fi[] list(){
-        if(children == null){
-            children = allFiles.select(f -> f.parent == this || isChild(f, this)).toArray(ZipFi.class);
-        }
+	@Override
+	public boolean isDirectory() {
+		return entry == null || entry.isDirectory();
+	}
 
-        return children;
-    }
+	@Override
+	public InputStream read() {
+		if (entry == null) throw new RuntimeException("Not permitted.");
+		try {
+			return zip.getInputStream(entry);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    @Override
-    public boolean isDirectory(){
-        return entry == null || entry.isDirectory();
-    }
+	@Override
+	public long length() {
+		return isDirectory() ? 0 : entry.getSize();
+	}
 
-    @Override
-    public InputStream read(){
-        if(entry == null) throw new RuntimeException("Not permitted.");
-        try{
-            return zip.getInputStream(entry);
-        }catch(IOException e){
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public long length(){
-        return isDirectory() ? 0 : entry.getSize();
-    }
-
-    @Override
-    public String toString(){
-        return path();
-    }
+	@Override
+	public String toString() {
+		return path();
+	}
 }

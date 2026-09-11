@@ -12,83 +12,83 @@ import arc.util.ArcNativesLoader;
 import arc.util.Log;
 import arc.util.Time;
 
-public class PixmapTest{
+public class PixmapTest {
 
-    @Test
-    public void pixmapCreate(){
+	static Rect rect = new Rect();
+	static Vec2 v1 = new Vec2(), v2 = new Vec2();
 
-        //test with no natives
-        Pixmap pix = new Pixmap(100, 100);
-        pix.fillCircle(50, 50, 30, Color.red.rgba());
+	static void randomize() {
+		rect.set(Mathf.random(30f), Mathf.random(30f), 8f, 8f);
+		v1.set(Mathf.random(30f), Mathf.random(30f));
+		v2.set(Mathf.random(30f), Mathf.random(30f));
+	}
 
-        assertEquals(Color.red.rgba(), pix.get(50, 50));
-        assertEquals(Color.red.rgba(), pix.get(54, 54));
-        assertEquals(0, pix.get(0, 0));
+	@Test
+	public void pixmapCreate() {
 
-        ArcNativesLoader.load();
+		//test with no natives
+		Pixmap pix = new Pixmap(100, 100);
+		pix.fillCircle(50, 50, 30, Color.red.rgba());
 
-        pix = new Pixmap(100, 100);
-        pix.fillCircle(50, 50, 30, Color.red.rgba());
+		assertEquals(Color.red.rgba(), pix.get(50, 50));
+		assertEquals(Color.red.rgba(), pix.get(54, 54));
+		assertEquals(0, pix.get(0, 0));
 
-        assertEquals(Color.red.rgba(), pix.get(50, 50));
-        assertEquals(Color.red.rgba(), pix.get(54, 54));
-        assertEquals(0, pix.get(0, 0));
-    }
+		ArcNativesLoader.load();
 
-    @Test
-    public void pixmapBounds(){
-        int x = 176;
+		pix = new Pixmap(100, 100);
+		pix.fillCircle(50, 50, 30, Color.red.rgba());
 
-        Pixmap base = new Pixmap(176, 269);
-        Pixmap crop = new Pixmap(176, 176);
+		assertEquals(Color.red.rgba(), pix.get(50, 50));
+		assertEquals(Color.red.rgba(), pix.get(54, 54));
+		assertEquals(0, pix.get(0, 0));
+	}
 
-        crop.draw(base, 0, 176, x, x, 0, 0, x, x, true);
-    }
+	@Test
+	public void pixmapBounds() {
+		int x = 176;
 
-    static  Rect rect = new Rect();
-    static Vec2 v1 = new Vec2(), v2 = new Vec2();
+		Pixmap base = new Pixmap(176, 269);
+		Pixmap crop = new Pixmap(176, 176);
 
-    static void randomize(){
-        rect.set(Mathf.random(30f), Mathf.random(30f), 8f, 8f);
-        v1.set(Mathf.random(30f), Mathf.random(30f));
-        v2.set(Mathf.random(30f), Mathf.random(30f));
-    }
+		crop.draw(base, 0, 176, x, x, 0, 0, x, x, true);
+	}
 
-    @Test
-    public void testPixmapDraw(){
-        ArcNativesLoader.load();
-        Pixmap src = new Pixmap(500, 500);
-        Pixmap dst = src.copy();
+	@Test
+	public void testPixmapDraw() {
+		ArcNativesLoader.load();
+		Pixmap src = new Pixmap(500, 500);
+		Pixmap dst = src.copy();
 
-        for(int x = 0; x < src.width; x++){
-            for(int y = 0; y < src.height; y++){
-                src.setRaw(x, y, Mathf.rand.nextInt());
-            }
-        }
+		for (int x = 0; x < src.width; x++) {
+			for (int y = 0; y < src.height; y++) {
+				src.setRaw(x, y, Mathf.rand.nextInt());
+			}
+		}
 
-        for(int i = 0; i < 50; i++){
-            dst.draw(src, Mathf.random(src.width), Mathf.random(src.height));
-        }
-    }
+		for (int i = 0; i < 50; i++) {
+			dst.draw(src, Mathf.random(src.width), Mathf.random(src.height));
+		}
+	}
 
-    @Test
-    public void raycasts(){
+	@Test
+	public void raycasts() {
 
-        Vec2 hole = new Vec2();
-        int[] results = {0};
+		Vec2 hole = new Vec2();
+		int[] results = {0};
 
-        bench(() -> {
-            randomize();
+		bench(() -> {
+			randomize();
 
-            results[0] += Intersector.intersectSegmentRectangle(v1, v2, rect) ? 1 : 0;
-        }, () -> {
-            randomize();
+			results[0] += Intersector.intersectSegmentRectangle(v1, v2, rect) ? 1 : 0;
+		}, () -> {
+			randomize();
 
-            results[0] +=  Intersector.intersectSegmentRectangleFast(v1.x, v1.y, v2.x, v2.y, rect.x, rect.y, rect.width, rect.height) ? 1 : 0;
-        }, 100_000_000);
+			results[0] += Intersector.intersectSegmentRectangleFast(v1.x, v1.y, v2.x, v2.y, rect.x, rect.y, rect.width, rect.height) ? 1 : 0;
+		}, 100_000_000);
 
-        Log.info(results[0]);
-    }
+		Log.info(results[0]);
+	}
 
     /*
     @Test
@@ -109,27 +109,27 @@ public class PixmapTest{
         new Fi("/home/anuke/clouds.png").writePng(clouds);
     }*/
 
-    void bench(Runnable a, Runnable b, int amount){
-        for(int i = 0; i < amount/3; i++){
-            a.run();
-            b.run();
-        }
+	void bench(Runnable a, Runnable b, int amount) {
+		for (int i = 0; i < amount / 3; i++) {
+			a.run();
+			b.run();
+		}
 
-        Time.mark();
+		Time.mark();
 
-        for(int i = 0; i < amount; i++){
-            a.run();
-        }
+		for (int i = 0; i < amount; i++) {
+			a.run();
+		}
 
-        Log.info("Time for A: " + Time.elapsed());
+		Log.info("Time for A: " + Time.elapsed());
 
-        Time.mark();
+		Time.mark();
 
-        for(int i = 0; i < amount; i++){
-            b.run();
-        }
+		for (int i = 0; i < amount; i++) {
+			b.run();
+		}
 
-        Log.info("Time for B: " + Time.elapsed());
-    }
+		Log.info("Time for B: " + Time.elapsed());
+	}
 
 }

@@ -1,5 +1,5 @@
 package arc.func;
 
-public interface Floatp{
-    float get();
+public interface Floatp {
+	float get();
 }

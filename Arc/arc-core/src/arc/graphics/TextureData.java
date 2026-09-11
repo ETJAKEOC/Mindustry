@@ -18,59 +18,75 @@ import arc.graphics.gl.FileTextureData;
  * texture.</p>
  * <p>
  * Look at {@link FileTextureData} for example implementations of this interface.
+ *
  * @author mzechner
  */
-public interface TextureData{
+public interface TextureData {
 
-    /** @return whether to use #consumeCustomData */
-    boolean isCustom();
+	static TextureData load(Fi file, boolean useMipMaps) {
+		return new FileTextureData(file, new Pixmap(file), useMipMaps);
+	}
 
-    /** @return whether the TextureData is prepared or not. */
-    boolean isPrepared();
+	/**
+	 * @return whether to use #consumeCustomData
+	 */
+	boolean isCustom();
 
-    /**
-     * Prepares the TextureData for a call to {@link #consumePixmap()} or {@link #consumeCustomData(int)}. This method can be
-     * called from a non OpenGL thread and should thus not interact with OpenGL.
-     */
-    void prepare();
+	/**
+	 * @return whether the TextureData is prepared or not.
+	 */
+	boolean isPrepared();
 
-    /**
-     * Returns the {@link Pixmap} for upload by Texture. A call to {@link #prepare()} must precede a call to this method. Any
-     * internal data structures created in {@link #prepare()} should be disposed of here.
-     * @return the pixmap.
-     */
-    Pixmap consumePixmap();
+	/**
+	 * Prepares the TextureData for a call to {@link #consumePixmap()} or {@link #consumeCustomData(int)}. This method can be
+	 * called from a non OpenGL thread and should thus not interact with OpenGL.
+	 */
+	void prepare();
 
-    default Pixmap getPixmap(){
-        if(!isPrepared()){
-            prepare();
-        }
-        return consumePixmap();
-    }
+	/**
+	 * Returns the {@link Pixmap} for upload by Texture. A call to {@link #prepare()} must precede a call to this method. Any
+	 * internal data structures created in {@link #prepare()} should be disposed of here.
+	 *
+	 * @return the pixmap.
+	 */
+	Pixmap consumePixmap();
 
-    /** @return whether the caller of {@link #consumePixmap()} should dispose the Pixmap returned by {@link #consumePixmap()} */
-    boolean disposePixmap();
+	default Pixmap getPixmap() {
+		if (!isPrepared()) {
+			prepare();
+		}
+		return consumePixmap();
+	}
 
-    /**
-     * Uploads the pixel data to the OpenGL ES texture. The caller must bind an OpenGL ES texture. A call to {@link #prepare()}
-     * must precede a call to this method. Any internal data structures created in {@link #prepare()} should be disposed of here.
-     */
-    void consumeCustomData(int target);
+	/**
+	 * @return whether the caller of {@link #consumePixmap()} should dispose the Pixmap returned by {@link #consumePixmap()}
+	 */
+	boolean disposePixmap();
 
-    /** @return the width of the pixel data */
-    int getWidth();
+	/**
+	 * Uploads the pixel data to the OpenGL ES texture. The caller must bind an OpenGL ES texture. A call to {@link #prepare()}
+	 * must precede a call to this method. Any internal data structures created in {@link #prepare()} should be disposed of here.
+	 */
+	void consumeCustomData(int target);
 
-    /** @return the height of the pixel data */
-    int getHeight();
+	/**
+	 * @return the width of the pixel data
+	 */
+	int getWidth();
 
-    /** @return the {@link Format} of the pixel data */
-    Format getFormat();
+	/**
+	 * @return the height of the pixel data
+	 */
+	int getHeight();
 
-    /** @return whether to generate mipmaps or not. */
-    boolean useMipMaps();
+	/**
+	 * @return the {@link Format} of the pixel data
+	 */
+	Format getFormat();
 
-    static TextureData load(Fi file, boolean useMipMaps){
-        return new FileTextureData(file, new Pixmap(file), useMipMaps);
-    }
+	/**
+	 * @return whether to generate mipmaps or not.
+	 */
+	boolean useMipMaps();
 
 }

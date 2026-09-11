@@ -34,144 +34,161 @@ import static mindustry.Vars.*;
  */
 public class RBMKCooler extends RBMKBase {
 
-    /** 冷冻液储罐容量 */
-    public float tankCapacity = 400f;
-    /** 每次结算的耗液量 */
-    public static final float RATE = 4f;
-    /** 每次结算对每个 5×5 内柱体的降温量（°C） */
-    public static final float COOL = 100f;
-    /** 工作温度阈值：本柱体热达到 750°C 后才开始消耗冷却液工作（应急散热激活点） */
-    public static final float ACTIVATION_HEAT = 750f;
+	/**
+	 * 每次结算的耗液量
+	 */
+	public static final float RATE = 4f;
+	/**
+	 * 每次结算对每个 5×5 内柱体的降温量（°C）
+	 */
+	public static final float COOL = 100f;
+	/**
+	 * 工作温度阈值：本柱体热达到 750°C 后才开始消耗冷却液工作（应急散热激活点）
+	 */
+	public static final float ACTIVATION_HEAT = 750f;
+	/**
+	 * 冷冻液储罐容量
+	 */
+	public float tankCapacity = 400f;
 
-    public RBMKCooler(String name) {
-        super(name);
-        hasLiquids = true;
-        liquidCapacity = tankCapacity;
-        consoleType = ColumnType.COOLER;
-        buildType = RBMKCoolerBuild::new;
-    }
+	public RBMKCooler(String name) {
+		super(name);
+		hasLiquids = true;
+		liquidCapacity = tankCapacity;
+		consoleType = ColumnType.COOLER;
+		buildType = RBMKCoolerBuild::new;
+	}
 
-    @Override
-    public void setBars() {
-        super.setBars();
-        addBar("coolant", (RBMKCoolerBuild entity) -> new Bar(
-            () -> Core.bundle.format("rbmk.bar.coolant", (int) entity.liquids.get(Liquids.cryofluid)),
-            () -> Pal.water,
-            () -> Math.min(1f, entity.liquids.get(Liquids.cryofluid) / tankCapacity)
-        ));
-    }
+	@Override
+	public void setBars() {
+		super.setBars();
+		addBar("coolant", (RBMKCoolerBuild entity) -> new Bar(
+				() -> Core.bundle.format("rbmk.bar.coolant", (int) entity.liquids.get(Liquids.cryofluid)),
+				() -> Pal.water,
+				() -> Math.min(1f, entity.liquids.get(Liquids.cryofluid) / tankCapacity)
+		));
+	}
 
-    public class RBMKCoolerBuild extends RBMKBaseBuild {
-        /** 火焰喷发间隔计数（避免每结算 tick 都喷导致粒子过密） */
-        public int flameTimer;
+	public class RBMKCoolerBuild extends RBMKBaseBuild {
+		/**
+		 * 火焰喷发间隔计数（避免每结算 tick 都喷导致粒子过密）
+		 */
+		public int flameTimer;
 
-        @Override
-        public void updateTile() {
-            if (!net.client()) {
-                if (flameTimer > 0) flameTimer--;
-                if (shouldSimulate()) {
-                    cool();
-                }
-                // 喷火（工作中）期间，正上方单位每帧受到 10 点伤害
-                if (active()) {
-                    damageUnitsAbove(10f);
-                }
-            }
-            super.updateTile();
-        }
+		@Override
+		public void updateTile() {
+			if (!net.client()) {
+				if (flameTimer > 0) flameTimer--;
+				if (shouldSimulate()) {
+					cool();
+				}
+				// 喷火（工作中）期间，正上方单位每帧受到 10 点伤害
+				if (active()) {
+					damageUnitsAbove(10f);
+				}
+			}
+			super.updateTile();
+		}
 
-        /** 工作状态：本柱体热达到阈值且有冷却液 */
-        protected boolean active() {
-            return heat >= ACTIVATION_HEAT && liquids.get(Liquids.cryofluid) >= RATE;
-        }
+		/**
+		 * 工作状态：本柱体热达到阈值且有冷却液
+		 */
+		protected boolean active() {
+			return heat >= ACTIVATION_HEAT && liquids.get(Liquids.cryofluid) >= RATE;
+		}
 
-        /** 对正上方（重叠本柱占地 2×2 格区域）的单位造成伤害 */
-        protected void damageUnitsAbove(float amount) {
-            Damage.damageUnits(null, x, y, block.size * tilesize / 2f, amount, u -> true, u -> {});
-        }
+		/**
+		 * 对正上方（重叠本柱占地 2×2 格区域）的单位造成伤害
+		 */
+		protected void damageUnitsAbove(float amount) {
+			Damage.damageUnits(null, x, y, block.size * tilesize / 2f, amount, u -> true, u -> {
+			});
+		}
 
-        /** 一次结算：耗冷冻液，并把 5×5 列范围内所有柱体降温 200°C（下限 20°C） */
-        protected void cool() {
-            Liquid coolant = Liquids.cryofluid;
+		/**
+		 * 一次结算：耗冷冻液，并把 5×5 列范围内所有柱体降温 200°C（下限 20°C）
+		 */
+		protected void cool() {
+			Liquid coolant = Liquids.cryofluid;
 
-            // 应急激活条件：本柱体热达到 750°C 才开始工作
-            if (heat < ACTIVATION_HEAT) return;
-            if (liquids.get(coolant) < RATE) return;
+			// 应急激活条件：本柱体热达到 750°C 才开始工作
+			if (heat < ACTIVATION_HEAT) return;
+			if (liquids.get(coolant) < RATE) return;
 
-            liquids.remove(coolant, RATE);
+			liquids.remove(coolant, RATE);
 
-            // 5×5 列区域：本柱 ±4 格、步长 2（对应控制台网格 STEP=2）
-            for (int dx = -2; dx <= 2; dx++) {
-                for (int dz = -2; dz <= 2; dz++) {
-                    Building b = world.build(tileX() + dx * 2, tileY() + dz * 2);
-                    if (b instanceof RBMKBaseBuild rb) {
-                        rb.heat -= COOL;
-                        if (rb.heat < 20) rb.heat = 20f;
-                    }
-                }
-            }
+			// 5×5 列区域：本柱 ±4 格、步长 2（对应控制台网格 STEP=2）
+			for (int dx = -2; dx <= 2; dx++) {
+				for (int dz = -2; dz <= 2; dz++) {
+					Building b = world.build(tileX() + dx * 2, tileY() + dz * 2);
+					if (b instanceof RBMKBaseBuild rb) {
+						rb.heat -= COOL;
+						if (rb.heat < 20) rb.heat = 20f;
+					}
+				}
+			}
 
-            // 工作期间顶部喷火焰粒子（间隔喷发）
-            if (flameTimer <= 0) {
-                flameTimer = 12;
-                Fx.fire.at(x, y, block.size);
-            }
-        }
+			// 工作期间顶部喷火焰粒子（间隔喷发）
+			if (flameTimer <= 0) {
+				flameTimer = 12;
+				Fx.fire.at(x, y, block.size);
+			}
+		}
 
-        // ---------- 流体 I/O ----------
+		// ---------- 流体 I/O ----------
 
-        @Override
-        public boolean acceptLiquid(Building source, Liquid liquid) {
-            return liquid == Liquids.cryofluid
-                && liquids.get(Liquids.cryofluid) < tankCapacity;
-        }
+		@Override
+		public boolean acceptLiquid(Building source, Liquid liquid) {
+			return liquid == Liquids.cryofluid
+					&& liquids.get(Liquids.cryofluid) < tankCapacity;
+		}
 
-        @Override
-        public void handleLiquid(Building source, Liquid liquid, float amount) {
-            if (liquid == Liquids.cryofluid) {
-                liquids.add(Liquids.cryofluid, Math.min(amount, tankCapacity - liquids.get(Liquids.cryofluid)));
-            }
-        }
+		@Override
+		public void handleLiquid(Building source, Liquid liquid, float amount) {
+			if (liquid == Liquids.cryofluid) {
+				liquids.add(Liquids.cryofluid, Math.min(amount, tankCapacity - liquids.get(Liquids.cryofluid)));
+			}
+		}
 
-        // ---------- 控制台 API ----------
+		// ---------- 控制台 API ----------
 
-        @Override
-        public ColumnType getConsoleType() {
-            return ColumnType.COOLER;
-        }
+		@Override
+		public ColumnType getConsoleType() {
+			return ColumnType.COOLER;
+		}
 
-        @Override
-        public ObjectMap<String, Object> getConsoleData() {
-            ObjectMap<String, Object> data = super.getConsoleData();
-            if (data == null) data = new ObjectMap<>();
-            data.put("coolant", (int) liquids.get(Liquids.cryofluid));
-            data.put("maxCoolant", (int) tankCapacity);
-            return data;
-        }
+		@Override
+		public ObjectMap<String, Object> getConsoleData() {
+			ObjectMap<String, Object> data = super.getConsoleData();
+			if (data == null) data = new ObjectMap<>();
+			data.put("coolant", (int) liquids.get(Liquids.cryofluid));
+			data.put("maxCoolant", (int) tankCapacity);
+			return data;
+		}
 
-        // ---------- 熔毁（对应 HBM onMelt：1+rand(2) 块 BLANK 碎片） ----------
+		// ---------- 熔毁（对应 HBM onMelt：1+rand(2) 块 BLANK 碎片） ----------
 
-        @Override
-        public void onMelt(int reduce) {
-            int count = 1 + Mathf.random(2);
-            for (int i = 0; i < count; i++) {
-                spawnDebris(DebrisType.BLANK);
-            }
-            kill();
-        }
+		@Override
+		public void onMelt(int reduce) {
+			int count = 1 + Mathf.random(2);
+			for (int i = 0; i < count; i++) {
+				spawnDebris(DebrisType.BLANK);
+			}
+			kill();
+		}
 
-        // ---------- 序列化 ----------
+		// ---------- 序列化 ----------
 
-        @Override
-        public void write(Writes write) {
-            super.write(write);
-            write.i(flameTimer);
-        }
+		@Override
+		public void write(Writes write) {
+			super.write(write);
+			write.i(flameTimer);
+		}
 
-        @Override
-        public void read(Reads read, byte revision) {
-            super.read(read, revision);
-            flameTimer = read.i();
-        }
-    }
+		@Override
+		public void read(Reads read, byte revision) {
+			super.read(read, revision);
+			flameTimer = read.i();
+		}
+	}
 }

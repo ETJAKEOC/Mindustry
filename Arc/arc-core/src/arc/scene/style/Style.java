@@ -1,5 +1,5 @@
 package arc.scene.style;
 
-public abstract class Style{
+public abstract class Style {
 
 }

@@ -12,37 +12,39 @@ import mindustry.world.blocks.defense.turrets.Turret.*;
 import mindustry.world.draw.*;
 
 public class DrawRainbow extends DrawBlock {
-    public float shiftSpeed = 2f;
-    public int size = 6;
-    public TextureRegion[] rainbowRegions = new TextureRegion[6];
+	public float shiftSpeed = 2f;
+	public int size = 6;
+	public TextureRegion[] rainbowRegions = new TextureRegion[6];
 
-    public DrawRainbow(float shiftSpeed, int size){
-        this.shiftSpeed = shiftSpeed;
-        this.size = size;
-        this.rainbowRegions = new TextureRegion[size];
-    }
-    public DrawRainbow(){
-    }
+	public DrawRainbow(float shiftSpeed, int size) {
+		this.shiftSpeed = shiftSpeed;
+		this.size = size;
+		this.rainbowRegions = new TextureRegion[size];
+	}
 
-    @Override
-    public void draw(Building build) {
-        TurretBuild b = (TurretBuild) build;
-        drawRainbow(b);
-    }
-    public void drawRainbow(TurretBuild build){
-        Draw.blend(Blending.additive);
-        for(int h = 0; h < size; h++){
-            Draw.color(EUGet.EC5.set(EUGet.rainBowRed).shiftHue((Time.time * shiftSpeed) + (h * (360f / size))));
-            Draw.rect(rainbowRegions[h], build.x + build.recoilOffset.x, build.y + build.recoilOffset.y, build.rotation - 90);
-        }
-        Draw.blend();
-        Draw.color();
-    }
+	public DrawRainbow() {
+	}
 
-    @Override
-    public void load(Block block) {
-        for (int i = 0; i < size; i++){
-            rainbowRegions[i] = Core.atlas.find(block.name + "-rainbow-" + (i + 1));
-        }
-    }
+	@Override
+	public void draw(Building build) {
+		TurretBuild b = (TurretBuild) build;
+		drawRainbow(b);
+	}
+
+	public void drawRainbow(TurretBuild build) {
+		Draw.blend(Blending.additive);
+		for (int h = 0; h < size; h++) {
+			Draw.color(EUGet.EC5.set(EUGet.rainBowRed).shiftHue((Time.time * shiftSpeed) + (h * (360f / size))));
+			Draw.rect(rainbowRegions[h], build.x + build.recoilOffset.x, build.y + build.recoilOffset.y, build.rotation - 90);
+		}
+		Draw.blend();
+		Draw.color();
+	}
+
+	@Override
+	public void load(Block block) {
+		for (int i = 0; i < size; i++) {
+			rainbowRegions[i] = Core.atlas.find(block.name + "-rainbow-" + (i + 1));
+		}
+	}
 }

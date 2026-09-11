@@ -8,32 +8,32 @@ import newhorizon.expand.logic.ActionLStatement;
 
 public class UIHide extends ActionLStatement {
 
-    public UIHide(String[] token) {
-    }
+	public UIHide(String[] token) {
+	}
 
-    public UIHide() {
-    }
+	public UIHide() {
+	}
 
-    @Override
-    public String getLStatementName() {
-        return "uihide";
-    }
+	@Override
+	public String getLStatementName() {
+		return "uihide";
+	}
 
-    @Override
-    public LCategory category() {
-        return NHLogic.actionInputControl;
-    }
+	@Override
+	public LCategory category() {
+		return NHLogic.actionInputControl;
+	}
 
-    @Override
-    public LExecutor.LInstruction build(LAssembler builder) {
-        return new UIHideI();
-    }
+	@Override
+	public LExecutor.LInstruction build(LAssembler builder) {
+		return new UIHideI();
+	}
 
-    public class UIHideI extends ActionInstruction {
-        @Override
-        public void run(LExecutor exec) {
-            startExec(exec, "ui_hide");
-            endExec(exec);
-        }
-    }
+	public class UIHideI extends ActionInstruction {
+		@Override
+		public void run(LExecutor exec) {
+			startExec(exec, "ui_hide");
+			endExec(exec);
+		}
+	}
 }

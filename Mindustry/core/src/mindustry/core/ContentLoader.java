@@ -264,7 +264,7 @@ public class ContentLoader {
 				try {
 					callable.get(content);
 				} catch (Throwable e) {
-					if (content.minfo.mod != null) {
+					if (content.minfo.mod != null && mods != null) {
 						Log.err(e);
 						mods.handleContentError(content, e);
 					} else {

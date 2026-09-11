@@ -17,33 +17,33 @@ import arc.math.*;
  */
 public class RBMKReflector extends RBMKBase {
 
-    public RBMKReflector(String name) {
-        super(name);
-        consoleType = ColumnType.REFLECTOR;
-        buildType = RBMKReflectorBuild::new;
-    }
+	public RBMKReflector(String name) {
+		super(name);
+		consoleType = ColumnType.REFLECTOR;
+		buildType = RBMKReflectorBuild::new;
+	}
 
-    public class RBMKReflectorBuild extends RBMKBaseBuild {
+	public class RBMKReflectorBuild extends RBMKBaseBuild {
 
-        @Override
-        public RBMKType getRBMKType() {
-            return RBMKType.REFLECTOR;
-        }
+		@Override
+		public RBMKType getRBMKType() {
+			return RBMKType.REFLECTOR;
+		}
 
-        @Override
-        public ColumnType getConsoleType() {
-            return ColumnType.REFLECTOR;
-        }
+		@Override
+		public ColumnType getConsoleType() {
+			return ColumnType.REFLECTOR;
+		}
 
-        // ---------- 熔毁（对应 HBM onMelt：1 + rand(2) 块 BLANK 碎片） ----------
+		// ---------- 熔毁（对应 HBM onMelt：1 + rand(2) 块 BLANK 碎片） ----------
 
-        @Override
-        public void onMelt(int reduce) {
-            int count = 1 + Mathf.random(2);
-            for (int i = 0; i < count; i++) {
-                spawnDebris(DebrisType.BLANK);
-            }
-            super.onMelt(reduce);
-        }
-    }
+		@Override
+		public void onMelt(int reduce) {
+			int count = 1 + Mathf.random(2);
+			for (int i = 0; i < count; i++) {
+				spawnDebris(DebrisType.BLANK);
+			}
+			super.onMelt(reduce);
+		}
+	}
 }

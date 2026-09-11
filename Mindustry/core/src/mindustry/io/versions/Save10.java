@@ -2,10 +2,12 @@ package mindustry.io.versions;
 
 import mindustry.io.SaveVersion;
 
-/** Removes short entity chunks, switching to 4 byte lengths for all chunks. */
-public class Save10 extends SaveVersion{
+/**
+ * Removes short entity chunks, switching to 4 byte lengths for all chunks.
+ */
+public class Save10 extends SaveVersion {
 
-    public Save10(){
-        super(10);
-    }
+	public Save10() {
+		super(10);
+	}
 }

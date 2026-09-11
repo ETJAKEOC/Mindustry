@@ -13,12 +13,10 @@ import arc.util.Strings;
 public class EaseEffect extends FEffect {
 	private static final float defaultDistance = 0.15f;
 	private static final float defaultIntensity = 0.075f;
-
+	private final IntFloatMap timePassedByGlyphIndex = new IntFloatMap();
 	public float distance = 1; // How much of their height they should move
 	public float intensity = 1; // How fast the glyphs should move
 	public boolean elastic = false; // Whether or not the glyphs have an elastic movement
-
-	private final IntFloatMap timePassedByGlyphIndex = new IntFloatMap();
 
 	@Override
 	public void applyParams(String[] params) {

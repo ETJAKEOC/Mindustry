@@ -9,30 +9,38 @@ public final class Mathf {
 	public static final int[] zeroOne = {0, 1};
 	public static final boolean[] booleans = {true, false};
 	public static final float FLOAT_ROUNDING_ERROR = 0.000001f; // 32 bits
-	public static final float E = 2.7182818f;	public static final float PI = 3.1415927f, pi = PI, halfPi = PI / 2;
-	public static final float sqrt2 = Mathf.sqrt(2f);	public static final float PI2 = PI * 2;
+	public static final float E = 2.7182818f;
+	public static final float PI = 3.1415927f, pi = PI, halfPi = PI / 2;
+	public static final float sqrt2 = Mathf.sqrt(2f);
+	public static final float PI2 = PI * 2;
 	public static final float sqrt3 = Mathf.sqrt(3f);
 	public static final double doubleDegRad = 0.017453292519943295;
 	public static final double doubleRadDeg = 57.29577951308232;
-	private static final int sinBits = 14; // 16KB. Adjust for accuracy.	/**
+	private static final int sinBits = 14; // 16KB. Adjust for accuracy.
+	/**
 	 * multiply by this to convert from radians to degrees
 	 */
 	public static final float radiansToDegrees = 180f / PI;
-	private static final int sinMask = ~(-1 << sinBits);	public static final float radDeg = radiansToDegrees;
-	private static final int sinCount = sinMask + 1;	/**
+	private static final int sinMask = ~(-1 << sinBits);
+	public static final float radDeg = radiansToDegrees;
+	private static final int sinCount = sinMask + 1;
+	/**
 	 * multiply by this to convert from degrees to radians
 	 */
 	public static final float degreesToRadians = PI / 180;
-	private static final float[] sinTable = new float[sinCount];	public static final float degRad = degreesToRadians;
+	private static final float[] sinTable = new float[sinCount];
+	public static final float degRad = degreesToRadians;
 	private static final float degFull = 360;
 	private static final float degToIndex = sinCount / degFull;
 	private static final int BIG_ENOUGH_INT = 16 * 1024;
 	private static final double BIG_ENOUGH_FLOOR = BIG_ENOUGH_INT;
 	private static final double CEIL = 0.9999999;
 	private static final double BIG_ENOUGH_ROUND = BIG_ENOUGH_INT + 0.5f;
-	private static final Rand seedr = new Rand();	private static final float radFull = PI * 2;
+	private static final Rand seedr = new Rand();
+	private static final float radFull = PI * 2;
 	private static final Vec2 v1 = new Vec2(), v2 = new Vec2(), v3 = new Vec2();
-	public static Rand rand = new Rand();	private static final float radToIndex = sinCount / radFull;
+	public static Rand rand = new Rand();
+	private static final float radToIndex = sinCount / radFull;
 
 	static {
 		for (int i = 0; i < sinCount; i++)

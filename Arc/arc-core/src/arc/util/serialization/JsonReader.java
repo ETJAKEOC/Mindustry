@@ -22,6 +22,7 @@ import arc.util.serialization.JsonValue.ValueType;
  *
  * @author Nathan Sweet
  */
+@SuppressWarnings("fallthrough")
 public class JsonReader implements BaseJsonReader {
 	static final int json_start = 1;
 	static final int json_first_final = 35;

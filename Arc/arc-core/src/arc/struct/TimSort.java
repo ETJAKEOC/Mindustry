@@ -39,6 +39,7 @@ import java.util.Comparator;
  * state of an ongoing sort, assuming the input array is large enough to warrant the full-blown TimSort. Small arrays are sorted
  * in place, using a binary insertion sort.
  */
+@SuppressWarnings("unchecked")
 class TimSort<T> {
 	/**
 	 * This is the minimum sized sequence that will be merged. Shorter sequences will be lengthened by calling binarySort. If the
@@ -474,7 +475,7 @@ class TimSort<T> {
 		if (toIndex > arrayLen) throw new ArrayIndexOutOfBoundsException(toIndex);
 	}
 
-	public void doSort(T[] a, Comparator<T> c, int lo, int hi) {
+	public void doSort(T[] a, Comparator<? super T> c, int lo, int hi) {
 		stackSize = 0;
 		rangeCheck(a.length, lo, hi);
 		int nRemaining = hi - lo;

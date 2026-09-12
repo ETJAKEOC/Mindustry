@@ -65,7 +65,10 @@ public class VertexAttribute {
 	 * @param alias      The alias used in a shader for this attribute. Can be changed after construction.
 	 */
 	public VertexAttribute(int components, int type, boolean normalized, String alias) {
-		this(components, normalized, type, alias, realSize);
+		this.components = components;
+		this.type = type;
+		this.normalized = normalized;
+		this.alias = alias;
 
 		//calculate final size based on components & type
 		int realSize = 0;

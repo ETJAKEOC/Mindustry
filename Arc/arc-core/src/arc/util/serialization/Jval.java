@@ -451,6 +451,13 @@ public class Jval {
 	 * Alias class of whatever is used to store json maps (objects).
 	 */
 	public static class JsonMap extends ArrayMap<String, Jval> {
+		public JsonMap() {
+			super(true, 16, String.class, Jval.class);
+		}
+
+		public JsonMap(int capacity) {
+			super(true, capacity, String.class, Jval.class);
+		}
 
 		/**
 		 * Puts a value without checking if it's in the map first. This is unsafe, but prevents O(n) put.
@@ -458,8 +465,8 @@ public class Jval {
 		protected void putAdd(String key, Jval value) {
 			if (size == keys.length) resize(Math.max(8, (int) (size * 1.75f)));
 			int index = size++;
-			((Object[]) keys)[index] = key;
-			((Object[]) values)[index] = value;
+			keys[index] = key;
+			values[index] = value;
 		}
 	}
 

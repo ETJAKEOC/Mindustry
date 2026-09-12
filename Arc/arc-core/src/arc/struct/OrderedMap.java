@@ -94,10 +94,10 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 
 	public <T extends K> void putAll(OrderedMap<T, ? extends V> map) {
 		ensureCapacity(map.size);
-		K[] keys = map.keys.items;
+		T[] keys = map.keys.items;
 		for (int i = 0, n = map.keys.size; i < n; i++) {
-			K key = keys[i];
-			put(key, map.get((T) key));
+			T key = keys[i];
+			put(key, map.get(key));
 		}
 	}
 
@@ -341,11 +341,11 @@ public class OrderedMap<K, V> extends ObjectMap<K, V> {
 	}
 
 	public static class OrderedMapValues<V> extends Values<V> {
-		private final Seq<V> keys;
+		private final Seq<?> keys;
 
 		public OrderedMapValues(OrderedMap<?, V> map) {
 			super(map);
-			keys = (Seq<V>) map.keys;
+			keys = map.keys;
 		}
 
 		@Override

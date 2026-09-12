@@ -19,22 +19,22 @@ public class OrderedSet<T> extends ObjectSet<T> {
 	transient OrderedSetIterator iterator1, iterator2;
 
 	public OrderedSet() {
-		items = new Seq();
+		items = new Seq<>();
 	}
 
 	public OrderedSet(int initialCapacity, float loadFactor) {
 		super(initialCapacity, loadFactor);
-		items = new Seq(initialCapacity);
+		items = new Seq<>(initialCapacity);
 	}
 
 	public OrderedSet(int initialCapacity) {
 		super(initialCapacity);
-		items = new Seq(initialCapacity);
+		items = new Seq<>(initialCapacity);
 	}
 
 	public OrderedSet(OrderedSet<? extends T> set) {
 		super(set);
-		items = new Seq(set.items);
+		items = new Seq<>(set.items);
 	}
 
 	@SafeVarargs
@@ -151,6 +151,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
 		return h;
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ObjectSet other)) return false;
 		if (other.size != size) return false;
@@ -233,7 +234,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
 		}
 
 		public Seq<K> toSeq() {
-			return toSeq(new Seq(true, set.size - nextIndex));
+			return toSeq(new Seq<>(true, set.size - nextIndex));
 		}
 	}
 }

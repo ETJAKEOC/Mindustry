@@ -21,6 +21,7 @@ public class Structs {
 		return Objects.equals(a, b);
 	}
 
+	@SafeVarargs
 	public static <T> T[] arr(T... array) {
 		return array;
 	}
@@ -48,11 +49,13 @@ public class Structs {
 		}
 	}
 
+	@SafeVarargs
 	public static <T> T random(T... array) {
 		if (array.length == 0) return null;
 		return array[Mathf.random(array.length - 1)];
 	}
 
+	@SafeVarargs
 	public static <T> T random(Rand rand, T... array) {
 		if (array.length == 0) return null;
 		return array[rand.random(array.length - 1)];

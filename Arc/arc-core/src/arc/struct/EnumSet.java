@@ -33,6 +33,7 @@ public class EnumSet<T extends Enum<T>> {
 	/**
 	 * @return a new set with the specified enum, or itself if this flag is already present.
 	 */
+	@SuppressWarnings("unchecked")
 	public EnumSet<T> with(T add) {
 		if (!contains(add)) {
 			T[] copy = (T[]) Array.newInstance(array.getClass().getComponentType(), array.length + 1);

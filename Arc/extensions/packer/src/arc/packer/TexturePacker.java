@@ -153,6 +153,7 @@ public class TexturePacker {
 		return false;
 	}
 
+	@SuppressWarnings("fallthrough")
 	static void main(String[] args) throws Exception {
         /*
         //for testing locally

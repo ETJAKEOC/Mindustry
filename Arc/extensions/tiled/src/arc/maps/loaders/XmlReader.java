@@ -27,7 +27,7 @@ import arc.util.serialization.SerializationException;
  *
  * @author Nathan Sweet
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "fallthrough"})
 public class XmlReader {
 	static final int xml_start = 1;
 	private static final byte[] _xml_actions = init__xml_actions_0();

@@ -63,6 +63,7 @@ public class Animation<T> {
 	 * @param frameDuration the time between frames in seconds.
 	 * @param keyFrames     the objects representing the frames.
 	 */
+	@SafeVarargs
 	public Animation(float frameDuration, T... keyFrames) {
 		this.frameDuration = frameDuration;
 		setKeyFrames(keyFrames);

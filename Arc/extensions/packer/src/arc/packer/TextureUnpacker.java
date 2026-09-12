@@ -22,6 +22,7 @@ public class TextureUnpacker {
 	private static final String HELP = "Usage: atlasFile [imageDir] [outputDir]";
 	private static final String ATLAS_FILE_EXTENSION = ".aatls";
 
+	@SuppressWarnings("fallthrough")
 	static void main(String[] args) {
 		TextureUnpacker unpacker = new TextureUnpacker();
 

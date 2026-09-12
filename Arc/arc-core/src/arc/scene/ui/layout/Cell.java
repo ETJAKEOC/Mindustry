@@ -92,6 +92,7 @@ public class Cell<T extends Element> implements Poolable {
 	/**
 	 * Sets the element in this cell and adds the element to the cell's table. If null, removes any current element.
 	 */
+	@SuppressWarnings("unchecked")
 	public <A extends Element> Cell<A> setElement(A newElement) {
 		if (element != newElement) {
 			if (element != null) element.remove();
@@ -109,6 +110,7 @@ public class Cell<T extends Element> implements Poolable {
 		return this;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Cell<T> with(Cons<T> c) {
 		c.get((T) element);
 		return this;
@@ -122,6 +124,7 @@ public class Cell<T extends Element> implements Poolable {
 	/**
 	 * getElement shortcut
 	 */
+	@SuppressWarnings("unchecked")
 	public T get() {
 		return (T) element;
 	}

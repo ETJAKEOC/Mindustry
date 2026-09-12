@@ -18,6 +18,7 @@ public class Bezier<T extends Vector<T>> implements Path<T> {
 	public Bezier() {
 	}
 
+	@SafeVarargs
 	public Bezier(final T... points) {
 		set(points);
 	}

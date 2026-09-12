@@ -46,11 +46,11 @@ public class QuadTree<T extends QuadTreeObject> {
 		}
 		leaf = false;
 
-		Object[] items = objects.items;
+		T[] items = objects.items;
 
 		// Transfer objects to children if they fit entirely in one
 		for (int i = 0; i < objects.size; i++) {
-			T obj = (T) items[i];
+			T obj = items[i];
 			hitbox(obj);
 			QuadTree<T> child = getFittingChild(tmp);
 			if (child != null) {
@@ -139,12 +139,12 @@ public class QuadTree<T extends QuadTreeObject> {
 		fillTL.clear();
 		fillTR.clear();
 
-		Object[] items = list.items;
+		T[] items = list.items;
 		int size = list.size;
 
 		//single partitioning pass instead of one split()-check per insert
 		for (int i = 0; i < size; i++) {
-			T obj = (T) items[i];
+			T obj = items[i];
 			hitbox(obj);
 			QuadTree<T> child = getFittingChild(tmp);
 
@@ -249,10 +249,10 @@ public class QuadTree<T extends QuadTreeObject> {
 				botRight.intersect(x, y, width, height, out);
 		}
 
-		Seq<?> objects = this.objects;
+		Seq<T> objects = this.objects;
 
 		for (int i = 0; i < objects.size; i++) {
-			T item = (T) objects.items[i];
+			T item = objects.items[i];
 			hitbox(item);
 			if (tmp.overlaps(x, y, width, height)) {
 				out.get(item);
@@ -277,10 +277,10 @@ public class QuadTree<T extends QuadTreeObject> {
 				return true;
 		}
 
-		Seq<?> objects = this.objects;
+		Seq<T> objects = this.objects;
 
 		for (int i = 0; i < objects.size; i++) {
-			T item = (T) objects.items[i];
+			T item = objects.items[i];
 			hitbox(item);
 			if (tmp.overlaps(x, y, width, height) && out.get(item)) {
 				return true;
@@ -307,10 +307,10 @@ public class QuadTree<T extends QuadTreeObject> {
 				return result;
 		}
 
-		Seq<?> objects = this.objects;
+		Seq<T> objects = this.objects;
 
 		for (int i = 0; i < objects.size; i++) {
-			T item = (T) objects.items[i];
+			T item = objects.items[i];
 			hitbox(item);
 			if (tmp.overlaps(x, y, width, height) && out.get(item)) {
 				return item;
@@ -335,10 +335,10 @@ public class QuadTree<T extends QuadTreeObject> {
 				return true;
 		}
 
-		Seq<?> objects = this.objects;
+		Seq<T> objects = this.objects;
 
 		for (int i = 0; i < objects.size; i++) {
-			T item = (T) objects.items[i];
+			T item = objects.items[i];
 			hitbox(item);
 			if (tmp.overlaps(x, y, width, height)) {
 				return true;
@@ -380,10 +380,10 @@ public class QuadTree<T extends QuadTreeObject> {
 				botRight.intersect(x, y, width, height, out);
 		}
 
-		Seq<?> objects = this.objects;
+		Seq<T> objects = this.objects;
 
 		for (int i = 0; i < objects.size; i++) {
-			T item = (T) objects.items[i];
+			T item = objects.items[i];
 			hitbox(item);
 			if (tmp.overlaps(x, y, width, height)) {
 				out.add(item);

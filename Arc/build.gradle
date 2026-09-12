@@ -86,7 +86,7 @@ allprojects {
 			sourceCompatibility = JavaVersion.VERSION_25
 			targetCompatibility = JavaVersion.VERSION_25
 		}
-		options.compilerArgs.addAll(['--release', '25', '-Xlint:deprecation', '-Xlint:unchecked'])
+		options.compilerArgs.addAll(['--release', '25', '-Xlint:deprecation', '-Xlint:unchecked', '-Xlint:fallthrough', '-parameters'])
 		options.encoding = "UTF-8"
 	}
 

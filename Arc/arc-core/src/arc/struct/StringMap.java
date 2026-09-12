@@ -15,6 +15,7 @@ public class StringMap extends ObjectMap<String, String> {
 		super(map);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static StringMap of(Object... values) {
 		StringMap map = new StringMap();
 

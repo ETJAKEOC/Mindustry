@@ -892,6 +892,7 @@ public class Fi implements Comparable<Fi> {
 	 * Returns true if the file exists. On Android, a {@link FileType#classpath} or {@link FileType#internal} handle to a
 	 * directory will always return false. Note that this can be very slow for internal files on Android!
 	 */
+	@SuppressWarnings("fallthrough")
 	public boolean exists() {
 		switch (type) {
 			case internal:

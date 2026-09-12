@@ -21,6 +21,7 @@ public class ButtonGroup<T extends Button> {
 		minCheckCount = 1;
 	}
 
+	@SafeVarargs
 	public ButtonGroup(T... buttons) {
 		minCheckCount = 0;
 		add(buttons);

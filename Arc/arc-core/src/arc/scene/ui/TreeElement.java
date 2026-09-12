@@ -424,11 +424,11 @@ public class TreeElement extends WidgetGroup {
 		return prefHeight;
 	}
 
-	public void findExpandedObjects(Seq objects) {
+	public void findExpandedObjects(Seq<Object> objects) {
 		findExpandedObjects(rootNodes, objects);
 	}
 
-	public void restoreExpandedObjects(Seq objects) {
+	public void restoreExpandedObjects(Seq<Object> objects) {
 		for (int i = 0, n = objects.size; i < n; i++) {
 			TreeElementNode node = findNode(objects.get(i));
 			if (node != null) {
